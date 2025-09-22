@@ -243,47 +243,47 @@ export default {
     login() {
       this.loadingStatus = true;
       // 将账号密码传递后台，判断密码是否正确
-      const param = {
-        userCode: this.userCode,
-        userPassword: this.userPassword
-      };
-      HttpUtil.post('/login/login', param)
-        .then((res) => {
-          if (res.data) {
-            remote.getGlobal('sharedObject').userInfo = res.data;
-            setTimeout(() => {
-              this.loadingStatus = false;
-              // 跳转主页
-              this.$nextTick(() => {
-                this.$router.replace({
-                  path: '/homePage/welcomPage'
-                });
-              });
-            }, 2000);
-          } else {
-            this.$message.error(res.message);
-            this.loadingStatus = false;
-          }
-        })
-        .catch((err) => {
-          this.$message.error(err);
-          this.loadingStatus = false;
-        });
-      // 本地测试时，注释掉上面代码，使用下面代码
-      // remote.getGlobal('sharedObject').userInfo = {
+      // const param = {
       //   userCode: this.userCode,
-      //   userPassword: this.userPassword,
-      //   userName: '测试'
+      //   userPassword: this.userPassword
       // };
-      // setTimeout(() => {
-      //   this.loadingStatus = false;
-      //   // 跳转主页
-      //   this.$nextTick(() => {
-      //     this.$router.replace({
-      //       path: '/homePage/welcomPage'
-      //     });
+      // HttpUtil.post('/login/login', param)
+      //   .then((res) => {
+      //     if (res.data) {
+      //       remote.getGlobal('sharedObject').userInfo = res.data;
+      //       setTimeout(() => {
+      //         this.loadingStatus = false;
+      //         // 跳转主页
+      //         this.$nextTick(() => {
+      //           this.$router.replace({
+      //             path: '/homePage/welcomPage'
+      //           });
+      //         });
+      //       }, 2000);
+      //     } else {
+      //       this.$message.error(res.message);
+      //       this.loadingStatus = false;
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     this.$message.error(err);
+      //     this.loadingStatus = false;
       //   });
-      // }, 2000);
+      // 本地测试时，注释掉上面代码，使用下面代码
+      remote.getGlobal('sharedObject').userInfo = {
+        userCode: this.userCode,
+        userPassword: this.userPassword,
+        userName: '测试'
+      };
+      setTimeout(() => {
+        this.loadingStatus = false;
+        // 跳转主页
+        this.$nextTick(() => {
+          this.$router.replace({
+            path: '/homePage/welcomPage'
+          });
+        });
+      }, 2000);
     },
     closewindow() {
       ipcRenderer.send('close-window');

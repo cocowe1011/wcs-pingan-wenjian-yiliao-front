@@ -19,7 +19,7 @@ module.exports = defineConfig({
     electronBuilder: {
       nodeIntegration: true,
       builderOptions: {
-        productName: 'wcs-agv-changzhou', //生成exe的名字
+        productName: 'wcs-pingan-wenjian-yiliao-front', //生成exe的名字
         appId: 'com.wl.wcs', //包名
         copyright: 'wl', //版权信息,
         nsis: {
