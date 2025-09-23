@@ -167,19 +167,19 @@
           <!-- 左侧区域 -->
           <div class="floor-left">
             <div class="floor-title">
-              <i class="el-icon-office-building"></i> 一楼区域
+              <i class="el-icon-office-building"></i> 作业区域
             </div>
             <div class="floor-image-container">
               <div class="image-wrapper">
                 <img
-                  src="@/assets/pingan-wenjian-img/image.webp"
+                  src="@/assets/pingan-wenjian-img/image.png"
                   alt="一楼平面图"
                   class="floor-image"
                   @load="updateMarkerPositions"
                 />
                 <!-- 修改队列标识 -->
                 <div
-                  v-for="marker in queueMarkers.filter((m) => m.id !== 15)"
+                  v-for="marker in queueMarkers"
                   :key="marker.id"
                   class="queue-marker"
                   :data-x="marker.x"
@@ -187,12 +187,25 @@
                   @click="handleQueueMarkerClick(marker.queueId)"
                 >
                   <div class="queue-marker-content">
-                    <span class="queue-marker-count">{{
-                      queues.find((q) => q.id === marker.queueId)?.trayInfo
-                        ?.length || 0
-                    }}</span>
                     <span class="queue-marker-name">{{ marker.name }}</span>
+                    <span class="queue-marker-count"
+                      >({{
+                        queues.find((q) => q.id === marker.queueId)?.trayInfo
+                          ?.length || 0
+                      }})</span
+                    >
                   </div>
+                </div>
+                <!-- 修改小车元素 -->
+                <div
+                  v-for="cart in carts"
+                  :key="cart.name"
+                  class="cart-container"
+                  :data-x="cart.x"
+                  :data-y="cart.y"
+                  :data-width="cart.width"
+                >
+                  <img :src="cart.image" :alt="cart.name" class="cart-image" />
                 </div>
               </div>
             </div>
@@ -388,6 +401,57 @@
                 <div v-else class="empty-state">
                   <i class="el-icon-box"></i>
                   <p>暂无托盘信息</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 测试面板 -->
+    <div class="test-panel-container">
+      <!-- 测试按钮 -->
+      <div class="test-toggle-btn" @click="showTestPanel = !showTestPanel">
+        <i class="el-icon-setting"></i>
+      </div>
+      <!-- 测试面板 -->
+      <div class="test-panel" :class="{ collapsed: !showTestPanel }">
+        <div class="test-panel-header">
+          <span>测试面板</span>
+          <i class="el-icon-close" @click.stop="showTestPanel = false"></i>
+        </div>
+        <div class="test-panel-content">
+          <div class="test-section">
+            <span class="test-label">小车位置测试:</span>
+            <div class="cart-position-test-container">
+              <div class="cart-position-group">
+                <div class="cart-position-label">
+                  <span>小车1 (0-1010):</span>
+                  <span class="cart-value">{{ cartPositionValues.cart1 }}</span>
+                </div>
+                <div class="cart-position-slider-container">
+                  <el-slider
+                    v-model="cartPositionValues.cart1"
+                    :min="0"
+                    :max="1010"
+                    :step="1"
+                    class="cart-position-slider"
+                  ></el-slider>
+                </div>
+              </div>
+              <div class="cart-position-group">
+                <div class="cart-position-label">
+                  <span>小车2 (0-1010):</span>
+                  <span class="cart-value">{{ cartPositionValues.cart2 }}</span>
+                </div>
+                <div class="cart-position-slider-container">
+                  <el-slider
+                    v-model="cartPositionValues.cart2"
+                    :min="0"
+                    :max="1010"
+                    :step="1"
+                    class="cart-position-slider"
+                  ></el-slider>
                 </div>
               </div>
             </div>
@@ -624,24 +688,24 @@ export default {
       alarmLogs: [], // 修改为空数组
       // 小车y轴范围配置
       cartYRanges: {
-        cart1: { min: 615, max: 1230 }, // y轴范围615-1230
-        cart2: { min: 647, max: 1067 } // y轴范围647-1067
+        cart1: { min: 312, max: 618 }, // y轴范围615-618
+        cart2: { min: 310, max: 620 } // y轴范围310-620
       },
       carts: [
         {
           id: 1,
           name: '小车1',
-          x: 790,
-          y: 615, // 对应PLC值0的位置（y轴最小值）
-          width: 72,
+          x: 615,
+          y: 312, // 对应PLC值0的位置（y轴最小值）
+          width: 60,
           image: require('@/assets/pingan-wenjian-img/cart1.png')
         },
         {
           id: 2,
           name: '小车2',
-          x: 1375,
-          y: 647, // 对应PLC值0的位置（y轴最小值）
-          width: 68,
+          x: 900,
+          y: 310, // 对应PLC值0的位置（y轴最小值）
+          width: 50,
           image: require('@/assets/pingan-wenjian-img/cart2.png')
         }
       ],
@@ -683,109 +747,307 @@ export default {
       queues: [
         {
           id: 1,
-          queueName: '上货区',
+          queueName: 'A1-2',
           trayInfo: []
         },
         {
           id: 2,
-          queueName: '分发区',
+          queueName: 'A1-3',
           trayInfo: []
         },
         {
           id: 3,
-          queueName: '缓存区',
+          queueName: 'A2-1',
           trayInfo: []
         },
         {
           id: 4,
-          queueName: 'A1',
+          queueName: 'A3-1',
           trayInfo: []
         },
         {
           id: 5,
-          queueName: 'B1',
+          queueName: 'A3-2',
           trayInfo: []
         },
         {
           id: 6,
-          queueName: 'C1',
+          queueName: 'A1-5',
           trayInfo: []
         },
         {
           id: 7,
-          queueName: 'A2',
+          queueName: 'A1-6',
           trayInfo: []
         },
         {
           id: 8,
-          queueName: 'B2',
+          queueName: 'A2-2',
           trayInfo: []
         },
         {
           id: 9,
-          queueName: 'C2',
+          queueName: 'A3-4',
           trayInfo: []
         },
         {
           id: 10,
-          queueName: 'A3',
+          queueName: 'A3-5',
           trayInfo: []
         },
         {
           id: 11,
-          queueName: 'B3',
+          queueName: 'B1-2',
           trayInfo: []
         },
         {
           id: 12,
-          queueName: 'C3',
+          queueName: 'B1-3',
           trayInfo: []
         },
         {
           id: 13,
-          queueName: 'D进货',
+          queueName: 'B2-1',
           trayInfo: []
         },
         {
           id: 14,
-          queueName: 'E进货',
+          queueName: 'B3-1',
           trayInfo: []
         },
         {
           id: 15,
-          queueName: '非灭菌缓存区',
+          queueName: 'B3-2',
           trayInfo: []
         },
         {
           id: 16,
-          queueName: 'D出货',
+          queueName: 'B1-5',
           trayInfo: []
         },
         {
           id: 17,
-          queueName: 'E出货',
+          queueName: 'B1-6',
+          trayInfo: []
+        },
+        {
+          id: 18,
+          queueName: 'B2-2',
+          trayInfo: []
+        },
+        {
+          id: 19,
+          queueName: 'B3-4',
+          trayInfo: []
+        },
+        {
+          id: 20,
+          queueName: 'B3-5',
+          trayInfo: []
+        },
+        {
+          id: 21,
+          queueName: 'C1-2',
+          trayInfo: []
+        },
+        {
+          id: 22,
+          queueName: 'C1-3',
+          trayInfo: []
+        },
+        {
+          id: 23,
+          queueName: 'C2-1',
+          trayInfo: []
+        },
+        {
+          id: 24,
+          queueName: 'C3-1',
+          trayInfo: []
+        },
+        {
+          id: 25,
+          queueName: 'C3-2',
+          trayInfo: []
+        },
+        {
+          id: 26,
+          queueName: 'C1-5',
+          trayInfo: []
+        },
+        {
+          id: 27,
+          queueName: 'C1-6',
+          trayInfo: []
+        },
+        {
+          id: 28,
+          queueName: 'C2-2',
+          trayInfo: []
+        },
+        {
+          id: 29,
+          queueName: 'C3-4',
+          trayInfo: []
+        },
+        {
+          id: 30,
+          queueName: 'C3-5',
+          trayInfo: []
+        },
+        {
+          id: 31,
+          queueName: 'D1-2',
+          trayInfo: []
+        },
+        {
+          id: 32,
+          queueName: 'D1-3',
+          trayInfo: []
+        },
+        {
+          id: 33,
+          queueName: 'D2-1',
+          trayInfo: []
+        },
+        {
+          id: 34,
+          queueName: 'D3-1',
+          trayInfo: []
+        },
+        {
+          id: 35,
+          queueName: 'D3-2',
+          trayInfo: []
+        },
+        {
+          id: 36,
+          queueName: 'D1-5',
+          trayInfo: []
+        },
+        {
+          id: 37,
+          queueName: 'D1-6',
+          trayInfo: []
+        },
+        {
+          id: 38,
+          queueName: 'D2-2',
+          trayInfo: []
+        },
+        {
+          id: 39,
+          queueName: 'D3-4',
+          trayInfo: []
+        },
+        {
+          id: 40,
+          queueName: 'D3-5',
+          trayInfo: []
+        },
+        {
+          id: 41,
+          queueName: 'E1-2',
+          trayInfo: []
+        },
+        {
+          id: 42,
+          queueName: 'E1-3',
+          trayInfo: []
+        },
+        {
+          id: 43,
+          queueName: 'E2-1',
+          trayInfo: []
+        },
+        {
+          id: 44,
+          queueName: 'E3-1',
+          trayInfo: []
+        },
+        {
+          id: 45,
+          queueName: 'E3-2',
+          trayInfo: []
+        },
+        {
+          id: 46,
+          queueName: 'E1-5',
+          trayInfo: []
+        },
+        {
+          id: 47,
+          queueName: 'E1-6',
+          trayInfo: []
+        },
+        {
+          id: 48,
+          queueName: 'E2-2',
+          trayInfo: []
+        },
+        {
+          id: 49,
+          queueName: 'E3-4',
+          trayInfo: []
+        },
+        {
+          id: 50,
+          queueName: 'E3-5',
           trayInfo: []
         }
       ],
       // 添加队列位置标识数据
       queueMarkers: [
-        { id: 1, name: '上货区', queueId: 1, x: 1325, y: 1350 },
-        { id: 2, name: '分发区', queueId: 2, x: 2500, y: 1530 },
-        { id: 3, name: '缓冲区', queueId: 3, x: 1325, y: 1230 },
-        { id: 4, name: 'A1', queueId: 4, x: 1050, y: 1065 },
-        { id: 5, name: 'B1', queueId: 5, x: 1050, y: 845 },
-        { id: 6, name: 'C1', queueId: 6, x: 1050, y: 645 },
-        { id: 7, name: 'A2', queueId: 7, x: 1610, y: 1065 },
-        { id: 8, name: 'B2', queueId: 8, x: 1610, y: 845 },
-        { id: 9, name: 'C2', queueId: 9, x: 1610, y: 645 },
-        { id: 10, name: 'A3', queueId: 10, x: 2190, y: 1065 },
-        { id: 11, name: 'B3', queueId: 11, x: 2190, y: 845 },
-        { id: 12, name: 'C3', queueId: 12, x: 2190, y: 645 },
-        { id: 13, name: 'D进货', queueId: 13, x: 2070, y: 480 },
-        { id: 14, name: 'E进货', queueId: 14, x: 2070, y: 320 },
-        { id: 15, name: '非灭菌缓存区', queueId: 15, x: 2630, y: 1280 },
-        { id: 16, name: 'D出货', queueId: 16, x: 2210, y: 480 },
-        { id: 17, name: 'E出货', queueId: 17, x: 2210, y: 320 }
+        // { id: 1, name: 'A1-2', queueId: 1, x: 550, y: 180 },
+        // { id: 2, name: 'A1-3', queueId: 2, x: 1200, y: 180 },
+        // { id: 3, name: 'A2-1', queueId: 3, x: 2100, y: 180 },
+        // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
+        // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
+        { id: 6, name: 'A1-5', queueId: 6, x: 200, y: 325 },
+        { id: 7, name: 'A1-6', queueId: 7, x: 440, y: 325 },
+        { id: 8, name: 'A2-2', queueId: 8, x: 780, y: 325 },
+        { id: 9, name: 'A3-4', queueId: 9, x: 1050, y: 325 },
+        { id: 10, name: 'A3-5', queueId: 10, x: 1290, y: 325 },
+        { id: 11, name: 'B1-2', queueId: 11, x: 200, y: 375 },
+        { id: 12, name: 'B1-3', queueId: 12, x: 440, y: 375 },
+        { id: 13, name: 'B2-1', queueId: 13, x: 780, y: 375 },
+        { id: 14, name: 'B3-1', queueId: 14, x: 1050, y: 375 },
+        { id: 15, name: 'B3-2', queueId: 15, x: 1290, y: 375 },
+        { id: 16, name: 'B1-5', queueId: 16, x: 200, y: 405 },
+        { id: 17, name: 'B1-6', queueId: 17, x: 440, y: 405 },
+        { id: 18, name: 'B2-2', queueId: 18, x: 780, y: 405 },
+        { id: 19, name: 'B3-4', queueId: 19, x: 1050, y: 405 },
+        { id: 20, name: 'B3-5', queueId: 20, x: 1290, y: 405 },
+        { id: 21, name: 'C1-2', queueId: 21, x: 200, y: 450 },
+        { id: 22, name: 'C1-3', queueId: 22, x: 440, y: 450 },
+        { id: 23, name: 'C2-1', queueId: 23, x: 780, y: 450 },
+        { id: 24, name: 'C3-1', queueId: 24, x: 1050, y: 450 },
+        { id: 25, name: 'C3-2', queueId: 25, x: 1290, y: 450 },
+        { id: 26, name: 'C1-5', queueId: 26, x: 200, y: 480 },
+        { id: 27, name: 'C1-6', queueId: 27, x: 440, y: 480 },
+        { id: 28, name: 'C2-2', queueId: 28, x: 780, y: 480 },
+        { id: 29, name: 'C3-4', queueId: 29, x: 1050, y: 480 },
+        { id: 30, name: 'C3-5', queueId: 30, x: 1290, y: 480 },
+        { id: 31, name: 'D1-2', queueId: 31, x: 200, y: 525 },
+        { id: 32, name: 'D1-3', queueId: 32, x: 440, y: 525 },
+        { id: 33, name: 'D2-1', queueId: 33, x: 780, y: 525 },
+        { id: 34, name: 'D3-1', queueId: 34, x: 1050, y: 525 },
+        { id: 35, name: 'D3-2', queueId: 35, x: 1290, y: 525 },
+        { id: 36, name: 'D1-5', queueId: 36, x: 200, y: 555 },
+        { id: 37, name: 'D1-6', queueId: 37, x: 440, y: 555 },
+        { id: 38, name: 'D2-2', queueId: 38, x: 780, y: 555 },
+        { id: 39, name: 'D3-4', queueId: 39, x: 1050, y: 555 },
+        { id: 40, name: 'D3-5', queueId: 40, x: 1290, y: 555 },
+        { id: 41, name: 'E1-2', queueId: 41, x: 200, y: 602 },
+        { id: 42, name: 'E1-3', queueId: 42, x: 440, y: 602 },
+        { id: 43, name: 'E2-1', queueId: 43, x: 780, y: 602 },
+        { id: 44, name: 'E3-1', queueId: 44, x: 1050, y: 602 },
+        { id: 45, name: 'E3-2', queueId: 45, x: 1290, y: 602 },
+        { id: 46, name: 'E1-5', queueId: 46, x: 200, y: 632 },
+        { id: 47, name: 'E1-6', queueId: 47, x: 440, y: 632 },
+        { id: 48, name: 'E2-2', queueId: 48, x: 780, y: 632 },
+        { id: 49, name: 'E3-4', queueId: 49, x: 1050, y: 632 },
+        { id: 50, name: 'E3-5', queueId: 50, x: 1290, y: 632 }
       ],
       logId: 1000, // 添加一个日志ID计数器=
       // 输送线当前运行状态-读取PLC
@@ -921,7 +1183,7 @@ export default {
       },
       // 小车位置数值-读取PLC
       cartPositionValues: {
-        cart1: 0, // DBW88, 范围0-1450
+        cart1: 0, // DBW88, 范围0-1010
         cart2: 0 // DBW90, 范围0-1010
       }
     };
@@ -959,117 +1221,12 @@ export default {
         this.updateQueueInfo(1);
       }
     },
-    'queues.1.trayInfo': {
-      // 监听分发区 (ID: 2)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(2);
-      }
+    // ---- 新增：监听小车位置数值变化 ----
+    'cartPositionValues.cart1'(newVal) {
+      this.updateCartPositionByValue(1, newVal);
     },
-    'queues.2.trayInfo': {
-      // 监听缓存区 (ID: 3)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(3);
-      }
-    },
-    'queues.3.trayInfo': {
-      // 监听 A1 (ID: 4)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(4);
-      }
-    },
-    'queues.4.trayInfo': {
-      // 监听 B1 (ID: 5)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(5);
-      }
-    },
-    'queues.5.trayInfo': {
-      // 监听 C1 (ID: 6)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(6);
-      }
-    },
-    'queues.6.trayInfo': {
-      // 监听 A2 (ID: 7)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(7);
-      }
-    },
-    'queues.7.trayInfo': {
-      // 监听 B2 (ID: 8)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(8);
-      }
-    },
-    'queues.8.trayInfo': {
-      // 监听 C2 (ID: 9)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(9);
-      }
-    },
-    'queues.9.trayInfo': {
-      // 监听 A3 (ID: 10)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(10);
-      }
-    },
-    'queues.10.trayInfo': {
-      // 监听 B3 (ID: 11)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(11);
-      }
-    },
-    'queues.11.trayInfo': {
-      // 监听 C3 (ID: 12)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(12);
-      }
-    },
-    'queues.12.trayInfo': {
-      // 监听 D (ID: 13)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(13);
-      }
-    },
-    'queues.13.trayInfo': {
-      // 监听 E (ID: 14)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(14);
-      }
-    },
-    'queues.14.trayInfo': {
-      // 监听非灭菌缓存区 (ID: 15)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(15);
-      }
-    },
-    'queues.15.trayInfo': {
-      // 监听 D出货 (ID: 16)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(16);
-      }
-    },
-    'queues.16.trayInfo': {
-      // 监听 E出货 (ID: 17)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(17);
-      }
+    'cartPositionValues.cart2'(newVal) {
+      this.updateCartPositionByValue(2, newVal);
     }
   },
   methods: {
@@ -1274,7 +1431,7 @@ export default {
 
       // 获取PLC数值范围
       const plcRanges = {
-        cart1: { min: 0, max: 1450 },
+        cart1: { min: 0, max: 1010 },
         cart2: { min: 0, max: 1010 }
       };
 
@@ -1282,14 +1439,7 @@ export default {
       if (!plcRange) return;
 
       // 计算比例（基于新的范围起点）
-      let ratio;
-      if (cartId === 4) {
-        // 小车4特殊处理：979为起点，2873为终点
-        ratio = (value - plcRange.min) / (plcRange.max - plcRange.min);
-        ratio = Math.max(0, Math.min(1, ratio)); // 确保比例在0-1范围内
-      } else {
-        ratio = value / plcRange.max;
-      }
+      const ratio = value / plcRange.max;
 
       // 根据比例计算y轴位置（PLC原点对应y轴最小值，PLC终点对应y轴最大值）
       const yPosition = yRange.min + (yRange.max - yRange.min) * ratio;
@@ -1933,7 +2083,7 @@ export default {
     min-height: 0;
     overflow: hidden;
     .side-info-panel {
-      width: 420px;
+      width: 400px;
       display: flex;
       flex-direction: column;
       gap: 5px;
@@ -1989,7 +2139,7 @@ export default {
             .data-card {
               box-sizing: border-box;
               height: 65px;
-              width: 185px;
+              width: 180px;
             }
 
             .data-card-border {
@@ -2672,22 +2822,21 @@ export default {
                 border-radius: 4px;
                 border: 1px solid rgba(64, 158, 255, 0.5);
                 transition: all 0.3s ease;
-                min-width: 40px;
                 text-align: center;
                 box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
                 color: #ffffff;
                 .queue-marker-content {
                   display: flex;
-                  flex-direction: column;
+                  flex-direction: row;
                   align-items: center;
                   color: #fff;
                   font-size: 12px;
+                  gap: 4px;
                   .queue-marker-name {
                     color: #fff;
                   }
 
                   .queue-marker-count {
-                    font-size: 14px;
                     font-weight: bold;
                     color: #409eff;
                   }
