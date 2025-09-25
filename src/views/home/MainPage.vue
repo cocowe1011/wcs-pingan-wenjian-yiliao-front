@@ -207,6 +207,34 @@
                 >
                   <img :src="cart.image" :alt="cart.name" class="cart-image" />
                 </div>
+                <!-- A线电机运行信号 -->
+                <div
+                  class="motor-marker marker-show-label label-right"
+                  :class="{ running: aLineMotorRunning.bit3 === '1' }"
+                  data-x="150"
+                  data-y="98"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit3')"
+                >
+                  <div class="marker-label">A1-4#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-right"
+                  :class="{ running: aLineMotorRunning.bit4 === '1' }"
+                  data-x="150"
+                  data-y="98"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit3')"
+                >
+                  <div class="marker-label">A1-5#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-right"
+                  :class="{ running: aLineMotorRunning.bit5 === '1' }"
+                  data-x="150"
+                  data-y="98"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit3')"
+                >
+                  <div class="marker-label">A1-6#</div>
+                </div>
               </div>
             </div>
           </div>
@@ -2033,6 +2061,9 @@ export default {
       const logTypeText = type === 'running' ? '运行日志' : '报警日志';
       const logMessage = `[${logTypeText}] ${message}`;
       ipcRenderer.send('writeLogToLocal', logMessage);
+    },
+    toggleBitValue(obj, bit) {
+      obj[bit] = obj[bit] === '1' ? '0' : '1';
     },
     convertToWord(value) {
       if (value < 0) {
