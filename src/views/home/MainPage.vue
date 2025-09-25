@@ -209,7 +209,7 @@
                 </div>
                 <!-- A线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit3 === '1' }"
                   data-x="73"
                   data-y="327"
@@ -254,7 +254,7 @@
                   <div class="marker-label">A3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-right"
                   :class="{ running: aLineMotorRunning.bit11 === '1' }"
                   data-x="1415"
                   data-y="327"
@@ -337,13 +337,257 @@
                 </div>
                 <!-- B线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit0 === '1' }"
                   data-x="73"
-                  data-y="327"
+                  data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit0')"
                 >
                   <div class="marker-label">B1-1#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit1 === '1' }"
+                  data-x="182"
+                  data-y="378"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit1')"
+                >
+                  <div class="marker-label">B1-2#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit2 === '1' }"
+                  data-x="420"
+                  data-y="378"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit2')"
+                >
+                  <div class="marker-label">B1-3#</div>
+                </div>
+                <div
+                  class="motor-marker label-left"
+                  :class="{ running: bLineMotorRunning.bit3 === '1' }"
+                  data-x="73"
+                  data-y="402"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit3')"
+                >
+                  <div class="marker-label">B1-4#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit4 === '1' }"
+                  data-x="182"
+                  data-y="402"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit4')"
+                >
+                  <div class="marker-label">B1-5#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit5 === '1' }"
+                  data-x="420"
+                  data-y="402"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit5')"
+                >
+                  <div class="marker-label">B1-6#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit6 === '1' }"
+                  data-x="1030"
+                  data-y="378"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit6')"
+                >
+                  <div class="marker-label">B3-1#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit7 === '1' }"
+                  data-x="1270"
+                  data-y="378"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit7')"
+                >
+                  <div class="marker-label">B3-2#</div>
+                </div>
+                <div
+                  class="motor-marker label-right"
+                  :class="{ running: bLineMotorRunning.bit8 === '1' }"
+                  data-x="1415"
+                  data-y="378"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit8')"
+                >
+                  <div class="marker-label">B3-3#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit9 === '1' }"
+                  data-x="1030"
+                  data-y="402"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit9')"
+                >
+                  <div class="marker-label">B3-4#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: bLineMotorRunning.bit10 === '1' }"
+                  data-x="1270"
+                  data-y="402"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit10')"
+                >
+                  <div class="marker-label">B3-5#</div>
+                </div>
+                <div
+                  class="motor-marker label-right"
+                  :class="{ running: bLineMotorRunning.bit11 === '1' }"
+                  data-x="1415"
+                  data-y="402"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit11')"
+                >
+                  <div class="marker-label">B3-6#</div>
+                </div>
+                <!-- B线光电检测信号 -->
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit0 === '1' }"
+                  data-x="73"
+                  data-y="362"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit0')"
+                >
+                  <div class="marker-label">B1-1#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit1 === '1' }"
+                  data-x="100"
+                  data-y="372"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit1')"
+                >
+                  <div class="marker-label">B1-2#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit2 === '1' }"
+                  data-x="310"
+                  data-y="372"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit2')"
+                >
+                  <div class="marker-label">B1-3#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit3 === '1' }"
+                  data-x="555"
+                  data-y="372"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit3')"
+                >
+                  <div class="marker-label">B1-4#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit4 === '1' }"
+                  data-x="73"
+                  data-y="415"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit4')"
+                >
+                  <div class="marker-label">B1-5#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit5 === '1' }"
+                  data-x="100"
+                  data-y="404"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit5')"
+                >
+                  <div class="marker-label">B1-6#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit6 === '1' }"
+                  data-x="310"
+                  data-y="404"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit6')"
+                >
+                  <div class="marker-label">B1-7#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit7 === '1' }"
+                  data-x="555"
+                  data-y="404"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit7')"
+                >
+                  <div class="marker-label">B1-8#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit8 === '1' }"
+                  data-x="935"
+                  data-y="372"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit8')"
+                >
+                  <div class="marker-label">B3-1#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit9 === '1' }"
+                  data-x="1178"
+                  data-y="372"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit9')"
+                >
+                  <div class="marker-label">B3-2#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit10 === '1' }"
+                  data-x="1390"
+                  data-y="372"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit10')"
+                >
+                  <div class="marker-label">B3-3#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit11 === '1' }"
+                  data-x="1415"
+                  data-y="363"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit11')"
+                >
+                  <div class="marker-label">B3-4#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit12 === '1' }"
+                  data-x="935"
+                  data-y="404"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit12')"
+                >
+                  <div class="marker-label">B3-5#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit13 === '1' }"
+                  data-x="1178"
+                  data-y="404"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit13')"
+                >
+                  <div class="marker-label">B3-6#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit14 === '1' }"
+                  data-x="1390"
+                  data-y="404"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit14')"
+                >
+                  <div class="marker-label">B3-7#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: bLinePhotoelectricSignal.bit15 === '1' }"
+                  data-x="1415"
+                  data-y="416"
+                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit15')"
+                >
+                  <div class="marker-label">B3-8#</div>
                 </div>
               </div>
             </div>
