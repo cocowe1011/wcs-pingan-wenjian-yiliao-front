@@ -209,31 +209,141 @@
                 </div>
                 <!-- A线电机运行信号 -->
                 <div
-                  class="motor-marker marker-show-label label-right"
+                  class="motor-marker label-top"
                   :class="{ running: aLineMotorRunning.bit3 === '1' }"
-                  data-x="150"
-                  data-y="98"
+                  data-x="73"
+                  data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit3')"
                 >
                   <div class="marker-label">A1-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-right"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit4 === '1' }"
-                  data-x="150"
-                  data-y="98"
-                  @click="toggleBitValue(aLineMotorRunning, 'bit3')"
+                  data-x="182"
+                  data-y="327"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label">A1-5#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-right"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit5 === '1' }"
-                  data-x="150"
-                  data-y="98"
-                  @click="toggleBitValue(aLineMotorRunning, 'bit3')"
+                  data-x="420"
+                  data-y="327"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label">A1-6#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: aLineMotorRunning.bit9 === '1' }"
+                  data-x="1030"
+                  data-y="327"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit9')"
+                >
+                  <div class="marker-label">A3-4#</div>
+                </div>
+                <div
+                  class="motor-marker marker-show-label label-left"
+                  :class="{ running: aLineMotorRunning.bit10 === '1' }"
+                  data-x="1270"
+                  data-y="327"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit10')"
+                >
+                  <div class="marker-label">A3-5#</div>
+                </div>
+                <div
+                  class="motor-marker label-top"
+                  :class="{ running: aLineMotorRunning.bit11 === '1' }"
+                  data-x="1415"
+                  data-y="327"
+                  @click="toggleBitValue(aLineMotorRunning, 'bit11')"
+                >
+                  <div class="marker-label">A3-6#</div>
+                </div>
+                <!-- A线光电检测信号 -->
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit4 === '1' }"
+                  data-x="73"
+                  data-y="310"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit4')"
+                >
+                  <div class="marker-label">A1-5#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit5 === '1' }"
+                  data-x="100"
+                  data-y="320"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit5')"
+                >
+                  <div class="marker-label">A1-6#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit6 === '1' }"
+                  data-x="310"
+                  data-y="320"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit6')"
+                >
+                  <div class="marker-label">A1-7#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit7 === '1' }"
+                  data-x="555"
+                  data-y="320"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit7')"
+                >
+                  <div class="marker-label">A1-8#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit12 === '1' }"
+                  data-x="935"
+                  data-y="320"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit12')"
+                >
+                  <div class="marker-label">A3-5#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit13 === '1' }"
+                  data-x="1178"
+                  data-y="320"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit13')"
+                >
+                  <div class="marker-label">A3-6#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit14 === '1' }"
+                  data-x="1390"
+                  data-y="320"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit14')"
+                >
+                  <div class="marker-label">A3-7#</div>
+                </div>
+                <div
+                  class="marker label-top"
+                  :class="{ scanning: aLinePhotoelectricSignal.bit15 === '1' }"
+                  data-x="1415"
+                  data-y="310"
+                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit15')"
+                >
+                  <div class="marker-label">A3-8#</div>
+                </div>
+                <!-- B线电机运行信号 -->
+                <div
+                  class="motor-marker label-top"
+                  :class="{ running: bLineMotorRunning.bit0 === '1' }"
+                  data-x="73"
+                  data-y="327"
+                  @click="toggleBitValue(bLineMotorRunning, 'bit0')"
+                >
+                  <div class="marker-label">B1-1#</div>
                 </div>
               </div>
             </div>
@@ -1031,51 +1141,51 @@ export default {
         // { id: 3, name: 'A2-1', queueId: 3, x: 2100, y: 180 },
         // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
         // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
-        { id: 6, name: 'A1-5', queueId: 6, x: 200, y: 325 },
-        { id: 7, name: 'A1-6', queueId: 7, x: 440, y: 325 },
-        { id: 8, name: 'A2-2', queueId: 8, x: 780, y: 325 },
-        { id: 9, name: 'A3-4', queueId: 9, x: 1050, y: 325 },
-        { id: 10, name: 'A3-5', queueId: 10, x: 1290, y: 325 },
-        { id: 11, name: 'B1-2', queueId: 11, x: 200, y: 375 },
-        { id: 12, name: 'B1-3', queueId: 12, x: 440, y: 375 },
-        { id: 13, name: 'B2-1', queueId: 13, x: 780, y: 375 },
-        { id: 14, name: 'B3-1', queueId: 14, x: 1050, y: 375 },
-        { id: 15, name: 'B3-2', queueId: 15, x: 1290, y: 375 },
-        { id: 16, name: 'B1-5', queueId: 16, x: 200, y: 405 },
-        { id: 17, name: 'B1-6', queueId: 17, x: 440, y: 405 },
-        { id: 18, name: 'B2-2', queueId: 18, x: 780, y: 405 },
-        { id: 19, name: 'B3-4', queueId: 19, x: 1050, y: 405 },
-        { id: 20, name: 'B3-5', queueId: 20, x: 1290, y: 405 },
-        { id: 21, name: 'C1-2', queueId: 21, x: 200, y: 450 },
-        { id: 22, name: 'C1-3', queueId: 22, x: 440, y: 450 },
-        { id: 23, name: 'C2-1', queueId: 23, x: 780, y: 450 },
-        { id: 24, name: 'C3-1', queueId: 24, x: 1050, y: 450 },
-        { id: 25, name: 'C3-2', queueId: 25, x: 1290, y: 450 },
-        { id: 26, name: 'C1-5', queueId: 26, x: 200, y: 480 },
-        { id: 27, name: 'C1-6', queueId: 27, x: 440, y: 480 },
-        { id: 28, name: 'C2-2', queueId: 28, x: 780, y: 480 },
-        { id: 29, name: 'C3-4', queueId: 29, x: 1050, y: 480 },
-        { id: 30, name: 'C3-5', queueId: 30, x: 1290, y: 480 },
-        { id: 31, name: 'D1-2', queueId: 31, x: 200, y: 525 },
-        { id: 32, name: 'D1-3', queueId: 32, x: 440, y: 525 },
-        { id: 33, name: 'D2-1', queueId: 33, x: 780, y: 525 },
-        { id: 34, name: 'D3-1', queueId: 34, x: 1050, y: 525 },
-        { id: 35, name: 'D3-2', queueId: 35, x: 1290, y: 525 },
-        { id: 36, name: 'D1-5', queueId: 36, x: 200, y: 555 },
-        { id: 37, name: 'D1-6', queueId: 37, x: 440, y: 555 },
-        { id: 38, name: 'D2-2', queueId: 38, x: 780, y: 555 },
-        { id: 39, name: 'D3-4', queueId: 39, x: 1050, y: 555 },
-        { id: 40, name: 'D3-5', queueId: 40, x: 1290, y: 555 },
-        { id: 41, name: 'E1-2', queueId: 41, x: 200, y: 602 },
-        { id: 42, name: 'E1-3', queueId: 42, x: 440, y: 602 },
-        { id: 43, name: 'E2-1', queueId: 43, x: 780, y: 602 },
-        { id: 44, name: 'E3-1', queueId: 44, x: 1050, y: 602 },
-        { id: 45, name: 'E3-2', queueId: 45, x: 1290, y: 602 },
-        { id: 46, name: 'E1-5', queueId: 46, x: 200, y: 632 },
-        { id: 47, name: 'E1-6', queueId: 47, x: 440, y: 632 },
-        { id: 48, name: 'E2-2', queueId: 48, x: 780, y: 632 },
-        { id: 49, name: 'E3-4', queueId: 49, x: 1050, y: 632 },
-        { id: 50, name: 'E3-5', queueId: 50, x: 1290, y: 632 }
+        { id: 6, name: 'A1-5', queueId: 6, x: 260, y: 325 },
+        { id: 7, name: 'A1-6', queueId: 7, x: 500, y: 325 },
+        { id: 8, name: 'A2-2', queueId: 8, x: 765, y: 325 },
+        { id: 9, name: 'A3-4', queueId: 9, x: 1105, y: 325 },
+        { id: 10, name: 'A3-5', queueId: 10, x: 1345, y: 325 },
+        { id: 11, name: 'B1-2', queueId: 11, x: 260, y: 375 },
+        { id: 12, name: 'B1-3', queueId: 12, x: 500, y: 375 },
+        { id: 13, name: 'B2-1', queueId: 13, x: 765, y: 375 },
+        { id: 14, name: 'B3-1', queueId: 14, x: 1105, y: 375 },
+        { id: 15, name: 'B3-2', queueId: 15, x: 1345, y: 375 },
+        { id: 16, name: 'B1-5', queueId: 16, x: 260, y: 405 },
+        { id: 17, name: 'B1-6', queueId: 17, x: 500, y: 405 },
+        { id: 18, name: 'B2-2', queueId: 18, x: 765, y: 405 },
+        { id: 19, name: 'B3-4', queueId: 19, x: 1105, y: 405 },
+        { id: 20, name: 'B3-5', queueId: 20, x: 1345, y: 405 },
+        { id: 21, name: 'C1-2', queueId: 21, x: 260, y: 450 },
+        { id: 22, name: 'C1-3', queueId: 22, x: 500, y: 450 },
+        { id: 23, name: 'C2-1', queueId: 23, x: 765, y: 450 },
+        { id: 24, name: 'C3-1', queueId: 24, x: 1105, y: 450 },
+        { id: 25, name: 'C3-2', queueId: 25, x: 1345, y: 450 },
+        { id: 26, name: 'C1-5', queueId: 26, x: 260, y: 480 },
+        { id: 27, name: 'C1-6', queueId: 27, x: 500, y: 480 },
+        { id: 28, name: 'C2-2', queueId: 28, x: 765, y: 480 },
+        { id: 29, name: 'C3-4', queueId: 29, x: 1105, y: 480 },
+        { id: 30, name: 'C3-5', queueId: 30, x: 1345, y: 480 },
+        { id: 31, name: 'D1-2', queueId: 31, x: 260, y: 525 },
+        { id: 32, name: 'D1-3', queueId: 32, x: 500, y: 525 },
+        { id: 33, name: 'D2-1', queueId: 33, x: 765, y: 525 },
+        { id: 34, name: 'D3-1', queueId: 34, x: 1105, y: 525 },
+        { id: 35, name: 'D3-2', queueId: 35, x: 1345, y: 525 },
+        { id: 36, name: 'D1-5', queueId: 36, x: 260, y: 555 },
+        { id: 37, name: 'D1-6', queueId: 37, x: 500, y: 555 },
+        { id: 38, name: 'D2-2', queueId: 38, x: 765, y: 555 },
+        { id: 39, name: 'D3-4', queueId: 39, x: 1105, y: 555 },
+        { id: 40, name: 'D3-5', queueId: 40, x: 1345, y: 555 },
+        { id: 41, name: 'E1-2', queueId: 41, x: 260, y: 602 },
+        { id: 42, name: 'E1-3', queueId: 42, x: 500, y: 602 },
+        { id: 43, name: 'E2-1', queueId: 43, x: 765, y: 602 },
+        { id: 44, name: 'E3-1', queueId: 44, x: 1105, y: 602 },
+        { id: 45, name: 'E3-2', queueId: 45, x: 1345, y: 602 },
+        { id: 46, name: 'E1-5', queueId: 46, x: 260, y: 632 },
+        { id: 47, name: 'E1-6', queueId: 47, x: 500, y: 632 },
+        { id: 48, name: 'E2-2', queueId: 48, x: 765, y: 632 },
+        { id: 49, name: 'E3-4', queueId: 49, x: 1105, y: 632 },
+        { id: 50, name: 'E3-5', queueId: 50, x: 1345, y: 632 }
       ],
       logId: 1000, // 添加一个日志ID计数器=
       // 输送线当前运行状态-读取PLC
