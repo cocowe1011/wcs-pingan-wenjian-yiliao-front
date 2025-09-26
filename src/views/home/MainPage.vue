@@ -182,6 +182,7 @@
                   v-for="marker in queueMarkers"
                   :key="marker.id"
                   class="queue-marker"
+                  style="width: 53px"
                   :data-x="marker.x"
                   :data-y="marker.y"
                   @click="handleQueueMarkerClick(marker.queueId)"
@@ -189,10 +190,7 @@
                   <div class="queue-marker-content">
                     <span class="queue-marker-name">{{ marker.name }}</span>
                     <span class="queue-marker-count"
-                      >({{
-                        queues.find((q) => q.id === marker.queueId)?.trayInfo
-                          ?.length || 0
-                      }})</span
+                      >({{ quantityByQueueId[marker.queueId] || 0 }})</span
                     >
                   </div>
                 </div>
@@ -215,7 +213,7 @@
                   data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit3')"
                 >
-                  <div class="marker-label">A1-4#</div>
+                  <div class="marker-label" style="width: 36px">A1-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -224,7 +222,7 @@
                   data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit4')"
                 >
-                  <div class="marker-label">A1-5#</div>
+                  <div class="marker-label" style="width: 36px">A1-5#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -233,7 +231,7 @@
                   data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit5')"
                 >
-                  <div class="marker-label">A1-6#</div>
+                  <div class="marker-label" style="width: 36px">A1-6#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -242,7 +240,7 @@
                   data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit9')"
                 >
-                  <div class="marker-label">A3-4#</div>
+                  <div class="marker-label" style="width: 36px">A3-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -251,7 +249,7 @@
                   data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit10')"
                 >
-                  <div class="marker-label">A3-5#</div>
+                  <div class="marker-label" style="width: 36px">A3-5#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -260,7 +258,7 @@
                   data-y="327"
                   @click="toggleBitValue(aLineMotorRunning, 'bit11')"
                 >
-                  <div class="marker-label">A3-6#</div>
+                  <div class="marker-label" style="width: 36px">A3-6#</div>
                 </div>
                 <!-- A线光电检测信号 -->
                 <div
@@ -343,7 +341,7 @@
                   data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit0')"
                 >
-                  <div class="marker-label">B1-1#</div>
+                  <div class="marker-label" style="width: 36px">B1-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -352,7 +350,7 @@
                   data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit1')"
                 >
-                  <div class="marker-label">B1-2#</div>
+                  <div class="marker-label" style="width: 36px">B1-2#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -361,7 +359,7 @@
                   data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit2')"
                 >
-                  <div class="marker-label">B1-3#</div>
+                  <div class="marker-label" style="width: 36px">B1-3#</div>
                 </div>
                 <div
                   class="motor-marker label-left"
@@ -370,7 +368,7 @@
                   data-y="402"
                   @click="toggleBitValue(bLineMotorRunning, 'bit3')"
                 >
-                  <div class="marker-label">B1-4#</div>
+                  <div class="marker-label" style="width: 36px">B1-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -379,7 +377,7 @@
                   data-y="402"
                   @click="toggleBitValue(bLineMotorRunning, 'bit4')"
                 >
-                  <div class="marker-label">B1-5#</div>
+                  <div class="marker-label" style="width: 36px">B1-5#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -388,7 +386,7 @@
                   data-y="402"
                   @click="toggleBitValue(bLineMotorRunning, 'bit5')"
                 >
-                  <div class="marker-label">B1-6#</div>
+                  <div class="marker-label" style="width: 36px">B1-6#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -397,7 +395,7 @@
                   data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit6')"
                 >
-                  <div class="marker-label">B3-1#</div>
+                  <div class="marker-label" style="width: 36px">B3-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -406,7 +404,7 @@
                   data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit7')"
                 >
-                  <div class="marker-label">B3-2#</div>
+                  <div class="marker-label" style="width: 36px">B3-2#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -415,7 +413,7 @@
                   data-y="378"
                   @click="toggleBitValue(bLineMotorRunning, 'bit8')"
                 >
-                  <div class="marker-label">B3-3#</div>
+                  <div class="marker-label" style="width: 36px">B3-3#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -424,7 +422,7 @@
                   data-y="402"
                   @click="toggleBitValue(bLineMotorRunning, 'bit9')"
                 >
-                  <div class="marker-label">B3-4#</div>
+                  <div class="marker-label" style="width: 36px">B3-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -433,7 +431,7 @@
                   data-y="402"
                   @click="toggleBitValue(bLineMotorRunning, 'bit10')"
                 >
-                  <div class="marker-label">B3-5#</div>
+                  <div class="marker-label" style="width: 36px">B3-5#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -442,7 +440,7 @@
                   data-y="402"
                   @click="toggleBitValue(bLineMotorRunning, 'bit11')"
                 >
-                  <div class="marker-label">B3-6#</div>
+                  <div class="marker-label" style="width: 36px">B3-6#</div>
                 </div>
                 <!-- B线光电检测信号 -->
                 <div
@@ -597,7 +595,7 @@
                   data-y="453"
                   @click="toggleBitValue(cLineMotorRunning, 'bit0')"
                 >
-                  <div class="marker-label">C1-1#</div>
+                  <div class="marker-label" style="width: 36px">C1-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -606,7 +604,7 @@
                   data-y="453"
                   @click="toggleBitValue(cLineMotorRunning, 'bit1')"
                 >
-                  <div class="marker-label">C1-2#</div>
+                  <div class="marker-label" style="width: 36px">C1-2#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -615,7 +613,7 @@
                   data-y="453"
                   @click="toggleBitValue(cLineMotorRunning, 'bit2')"
                 >
-                  <div class="marker-label">C1-3#</div>
+                  <div class="marker-label" style="width: 36px">C1-3#</div>
                 </div>
                 <div
                   class="motor-marker label-left"
@@ -624,7 +622,7 @@
                   data-y="476"
                   @click="toggleBitValue(cLineMotorRunning, 'bit3')"
                 >
-                  <div class="marker-label">C1-4#</div>
+                  <div class="marker-label" style="width: 36px">C1-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -633,7 +631,7 @@
                   data-y="477"
                   @click="toggleBitValue(cLineMotorRunning, 'bit4')"
                 >
-                  <div class="marker-label">C1-5#</div>
+                  <div class="marker-label" style="width: 36px">C1-5#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -642,7 +640,7 @@
                   data-y="477"
                   @click="toggleBitValue(cLineMotorRunning, 'bit5')"
                 >
-                  <div class="marker-label">C1-6#</div>
+                  <div class="marker-label" style="width: 36px">C1-6#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -651,7 +649,7 @@
                   data-y="453"
                   @click="toggleBitValue(cLineMotorRunning, 'bit6')"
                 >
-                  <div class="marker-label">C3-1#</div>
+                  <div class="marker-label" style="width: 36px">C3-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -660,7 +658,7 @@
                   data-y="453"
                   @click="toggleBitValue(cLineMotorRunning, 'bit7')"
                 >
-                  <div class="marker-label">C3-2#</div>
+                  <div class="marker-label" style="width: 36px">C3-2#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -669,7 +667,7 @@
                   data-y="453"
                   @click="toggleBitValue(cLineMotorRunning, 'bit8')"
                 >
-                  <div class="marker-label">C3-3#</div>
+                  <div class="marker-label" style="width: 36px">C3-3#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -678,7 +676,7 @@
                   data-y="477"
                   @click="toggleBitValue(cLineMotorRunning, 'bit9')"
                 >
-                  <div class="marker-label">C3-4#</div>
+                  <div class="marker-label" style="width: 36px">C3-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -687,7 +685,7 @@
                   data-y="477"
                   @click="toggleBitValue(cLineMotorRunning, 'bit10')"
                 >
-                  <div class="marker-label">C3-5#</div>
+                  <div class="marker-label" style="width: 36px">C3-5#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -696,7 +694,7 @@
                   data-y="477"
                   @click="toggleBitValue(cLineMotorRunning, 'bit11')"
                 >
-                  <div class="marker-label">C3-6#</div>
+                  <div class="marker-label" style="width: 36px">C3-6#</div>
                 </div>
                 <!-- C线光电检测信号 -->
                 <div
@@ -851,7 +849,7 @@
                   data-y="528"
                   @click="toggleBitValue(dLineMotorRunning, 'bit0')"
                 >
-                  <div class="marker-label">D1-1#</div>
+                  <div class="marker-label" style="width: 36px">D1-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -860,7 +858,7 @@
                   data-y="528"
                   @click="toggleBitValue(dLineMotorRunning, 'bit1')"
                 >
-                  <div class="marker-label">D1-2#</div>
+                  <div class="marker-label" style="width: 36px">D1-2#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -869,7 +867,7 @@
                   data-y="528"
                   @click="toggleBitValue(dLineMotorRunning, 'bit2')"
                 >
-                  <div class="marker-label">D1-3#</div>
+                  <div class="marker-label" style="width: 36px">D1-3#</div>
                 </div>
                 <div
                   class="motor-marker label-left"
@@ -878,7 +876,7 @@
                   data-y="552"
                   @click="toggleBitValue(dLineMotorRunning, 'bit3')"
                 >
-                  <div class="marker-label">D1-4#</div>
+                  <div class="marker-label" style="width: 36px">D1-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -887,7 +885,7 @@
                   data-y="552"
                   @click="toggleBitValue(dLineMotorRunning, 'bit4')"
                 >
-                  <div class="marker-label">D1-5#</div>
+                  <div class="marker-label" style="width: 36px">D1-5#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -896,7 +894,7 @@
                   data-y="552"
                   @click="toggleBitValue(dLineMotorRunning, 'bit5')"
                 >
-                  <div class="marker-label">D1-6#</div>
+                  <div class="marker-label" style="width: 36px">D1-6#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -905,7 +903,7 @@
                   data-y="528"
                   @click="toggleBitValue(dLineMotorRunning, 'bit6')"
                 >
-                  <div class="marker-label">D3-1#</div>
+                  <div class="marker-label" style="width: 36px">D3-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -914,7 +912,7 @@
                   data-y="528"
                   @click="toggleBitValue(dLineMotorRunning, 'bit7')"
                 >
-                  <div class="marker-label">D3-2#</div>
+                  <div class="marker-label" style="width: 36px">D3-2#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -923,7 +921,7 @@
                   data-y="528"
                   @click="toggleBitValue(dLineMotorRunning, 'bit8')"
                 >
-                  <div class="marker-label">D3-3#</div>
+                  <div class="marker-label" style="width: 36px">D3-3#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -932,7 +930,7 @@
                   data-y="552"
                   @click="toggleBitValue(dLineMotorRunning, 'bit9')"
                 >
-                  <div class="marker-label">D3-4#</div>
+                  <div class="marker-label" style="width: 36px">D3-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -941,7 +939,7 @@
                   data-y="552"
                   @click="toggleBitValue(dLineMotorRunning, 'bit10')"
                 >
-                  <div class="marker-label">D3-5#</div>
+                  <div class="marker-label" style="width: 36px">D3-5#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -950,7 +948,7 @@
                   data-y="552"
                   @click="toggleBitValue(dLineMotorRunning, 'bit11')"
                 >
-                  <div class="marker-label">D3-6#</div>
+                  <div class="marker-label" style="width: 36px">D3-6#</div>
                 </div>
                 <!-- D线光电检测信号 -->
                 <div
@@ -1105,7 +1103,7 @@
                   data-y="604"
                   @click="toggleBitValue(eLineMotorRunning, 'bit0')"
                 >
-                  <div class="marker-label">E1-1#</div>
+                  <div class="marker-label" style="width: 36px">E1-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1114,7 +1112,7 @@
                   data-y="604"
                   @click="toggleBitValue(eLineMotorRunning, 'bit1')"
                 >
-                  <div class="marker-label">E1-2#</div>
+                  <div class="marker-label" style="width: 36px">E1-2#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1123,7 +1121,7 @@
                   data-y="604"
                   @click="toggleBitValue(eLineMotorRunning, 'bit2')"
                 >
-                  <div class="marker-label">E1-3#</div>
+                  <div class="marker-label" style="width: 36px">E1-3#</div>
                 </div>
                 <div
                   class="motor-marker label-left"
@@ -1132,7 +1130,7 @@
                   data-y="628"
                   @click="toggleBitValue(eLineMotorRunning, 'bit3')"
                 >
-                  <div class="marker-label">E1-4#</div>
+                  <div class="marker-label" style="width: 36px">E1-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1141,7 +1139,7 @@
                   data-y="628"
                   @click="toggleBitValue(eLineMotorRunning, 'bit4')"
                 >
-                  <div class="marker-label">E1-5#</div>
+                  <div class="marker-label" style="width: 36px">E1-5#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1150,7 +1148,7 @@
                   data-y="628"
                   @click="toggleBitValue(eLineMotorRunning, 'bit5')"
                 >
-                  <div class="marker-label">E1-6#</div>
+                  <div class="marker-label" style="width: 36px">E1-6#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1159,7 +1157,7 @@
                   data-y="604"
                   @click="toggleBitValue(eLineMotorRunning, 'bit6')"
                 >
-                  <div class="marker-label">E3-1#</div>
+                  <div class="marker-label" style="width: 36px">E3-1#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1168,7 +1166,7 @@
                   data-y="604"
                   @click="toggleBitValue(eLineMotorRunning, 'bit7')"
                 >
-                  <div class="marker-label">E3-2#</div>
+                  <div class="marker-label" style="width: 36px">E3-2#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -1177,7 +1175,7 @@
                   data-y="604"
                   @click="toggleBitValue(eLineMotorRunning, 'bit8')"
                 >
-                  <div class="marker-label">E3-3#</div>
+                  <div class="marker-label" style="width: 36px">E3-3#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1186,7 +1184,7 @@
                   data-y="628"
                   @click="toggleBitValue(eLineMotorRunning, 'bit9')"
                 >
-                  <div class="marker-label">E3-4#</div>
+                  <div class="marker-label" style="width: 36px">E3-4#</div>
                 </div>
                 <div
                   class="motor-marker marker-show-label label-left"
@@ -1195,7 +1193,7 @@
                   data-y="628"
                   @click="toggleBitValue(eLineMotorRunning, 'bit10')"
                 >
-                  <div class="marker-label">E3-5#</div>
+                  <div class="marker-label" style="width: 36px">E3-5#</div>
                 </div>
                 <div
                   class="motor-marker label-right"
@@ -1204,7 +1202,7 @@
                   data-y="628"
                   @click="toggleBitValue(eLineMotorRunning, 'bit11')"
                 >
-                  <div class="marker-label">E3-6#</div>
+                  <div class="marker-label" style="width: 36px">E3-6#</div>
                 </div>
                 <!-- E线光电检测信号 -->
                 <div
@@ -2387,21 +2385,68 @@ export default {
       },
       // A线数量-读取PLC
       aLineQuantity: {
-        a1: 0,
-        a2: 0,
-        a3: 0
+        a12: 0, // 预热房-1，序号1
+        a13: 0, // 预热房-1，序号2
+        a21: 0, // 灭菌柜-1，序号3
+        a31: 0, // 解析房-1，序号4
+        a32: 0, // 解析房-1，序号5
+        a15: 0, // 预热房-2，序号1
+        a16: 0, // 预热房-2，序号2
+        a22: 0, // 灭菌柜-2，序号3
+        a34: 0, // 解析房-2，序号4
+        a35: 0 // 解析房-2，序号5
       },
       // B线数量-读取PLC
       bLineQuantity: {
-        b1: 0,
-        b2: 0,
-        b3: 0
+        b12: 0, // 预热房-1，序号1
+        b13: 0, // 预热房-1，序号2
+        b21: 0, // 灭菌柜-1，序号3
+        b31: 0, // 解析房-1，序号4
+        b32: 0, // 解析房-1，序号5
+        b15: 0, // 预热房-2，序号1
+        b16: 0, // 预热房-2，序号2
+        b22: 0, // 灭菌柜-2，序号3
+        b34: 0, // 解析房-2，序号4
+        b35: 0 // 解析房-2，序号5
       },
       // C线数量-读取PLC
       cLineQuantity: {
-        c1: 0,
-        c2: 0,
-        c3: 0
+        c12: 0, // 预热房-1，序号1
+        c13: 0, // 预热房-1，序号2
+        c21: 0, // 灭菌柜-1，序号3
+        c31: 0, // 解析房-1，序号4
+        c32: 0, // 解析房-1，序号5
+        c15: 0, // 预热房-2，序号1
+        c16: 0, // 预热房-2，序号2
+        c22: 0, // 灭菌柜-2，序号3
+        c34: 0, // 解析房-2，序号4
+        c35: 0 // 解析房-2，序号5
+      },
+      // D线数量-读取PLC
+      dLineQuantity: {
+        d12: 0, // 预热房-1，序号1
+        d13: 0, // 预热房-1，序号2
+        d21: 0, // 灭菌柜-1，序号3
+        d31: 0, // 解析房-1，序号4
+        d32: 0, // 解析房-1，序号5
+        d15: 0, // 预热房-2，序号1
+        d16: 0, // 预热房-2，序号2
+        d22: 0, // 灭菌柜-2，序号3
+        d34: 0, // 解析房-2，序号4
+        d35: 0 // 解析房-2，序号5
+      },
+      // E线数量-读取PLC
+      eLineQuantity: {
+        e12: 0, // 预热房-1，序号1
+        e13: 0, // 预热房-1，序号2
+        e21: 0, // 灭菌柜-1，序号3
+        e31: 0, // 解析房-1，序号4
+        e32: 0, // 解析房-1，序号5
+        e15: 0, // 预热房-2，序号1
+        e16: 0, // 预热房-2，序号2
+        e22: 0, // 灭菌柜-2，序号3
+        e34: 0, // 解析房-2，序号4
+        e35: 0 // 解析房-2，序号5
       },
       // 小车位置数值-读取PLC
       cartPositionValues: {
@@ -2424,6 +2469,56 @@ export default {
     },
     selectedQueue() {
       return this.queues[this.selectedQueueIndex];
+    },
+    // 超简单的数量映射
+    quantityByQueueId() {
+      return {
+        6: this.aLineQuantity.a15, // A1-5
+        7: this.aLineQuantity.a16, // A1-6
+        8: this.aLineQuantity.a22, // A2-2
+        9: this.aLineQuantity.a34, // A3-4
+        10: this.aLineQuantity.a35, // A3-5
+        11: this.bLineQuantity.b12, // B1-2
+        12: this.bLineQuantity.b13, // B1-3
+        13: this.bLineQuantity.b21, // B2-1
+        14: this.bLineQuantity.b31, // B3-1
+        15: this.bLineQuantity.b32, // B3-2
+        16: this.bLineQuantity.b15, // B1-5
+        17: this.bLineQuantity.b16, // B1-6
+        18: this.bLineQuantity.b22, // B2-2
+        19: this.bLineQuantity.b34, // B3-4
+        20: this.bLineQuantity.b35, // B3-5
+        21: this.cLineQuantity.c12, // C1-2
+        22: this.cLineQuantity.c13, // C1-3
+        23: this.cLineQuantity.c21, // C2-1
+        24: this.cLineQuantity.c31, // C3-1
+        25: this.cLineQuantity.c32, // C3-2
+        26: this.cLineQuantity.c15, // C1-5
+        27: this.cLineQuantity.c16, // C1-6
+        28: this.cLineQuantity.c22, // C2-2
+        29: this.cLineQuantity.c34, // C3-4
+        30: this.cLineQuantity.c35, // C3-5
+        31: this.dLineQuantity.d12, // D1-2
+        32: this.dLineQuantity.d13, // D1-3
+        33: this.dLineQuantity.d21, // D2-1
+        34: this.dLineQuantity.d31, // D3-1
+        35: this.dLineQuantity.d32, // D3-2
+        36: this.dLineQuantity.d15, // D1-5
+        37: this.dLineQuantity.d16, // D1-6
+        38: this.dLineQuantity.d22, // D2-2
+        39: this.dLineQuantity.d34, // D3-4
+        40: this.dLineQuantity.d35, // D3-5
+        41: this.eLineQuantity.e12, // E1-2
+        42: this.eLineQuantity.e13, // E1-3
+        43: this.eLineQuantity.e21, // E2-1
+        44: this.eLineQuantity.e31, // E3-1
+        45: this.eLineQuantity.e32, // E3-2
+        46: this.eLineQuantity.e15, // E1-5
+        47: this.eLineQuantity.e16, // E1-6
+        48: this.eLineQuantity.e22, // E2-2
+        49: this.eLineQuantity.e34, // E3-4
+        50: this.eLineQuantity.e35 // E3-5
+      };
     }
   },
   mounted() {
@@ -4054,6 +4149,7 @@ export default {
                   display: flex;
                   flex-direction: row;
                   align-items: center;
+                  justify-content: center;
                   color: #fff;
                   font-size: 12px;
                   gap: 4px;
