@@ -182,7 +182,7 @@
                   v-for="marker in queueMarkers"
                   :key="marker.id"
                   class="queue-marker"
-                  style="width: 53px"
+                  style="width: 60px"
                   :data-x="marker.x"
                   :data-y="marker.y"
                   @click="handleQueueMarkerClick(marker.queueId)"
@@ -1594,6 +1594,157 @@
                     :step="1"
                     class="cart-position-slider"
                   ></el-slider>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 手动数量控制模块 -->
+          <div class="test-section">
+            <span class="test-label">手动数量控制:</span>
+            <div class="quantity-control-container">
+              <!-- A线数量控制 -->
+              <div class="quantity-line-group">
+                <div class="quantity-list">
+                  <div
+                    class="quantity-item"
+                    v-for="(value, key) in aLineQuantity"
+                    :key="key"
+                  >
+                    <span class="quantity-label">{{
+                      getSimpleLabel('A', key)
+                    }}</span>
+                    <div class="quantity-controls">
+                      <button
+                        class="quantity-btn minus"
+                        @click="decreaseQuantity('aLineQuantity', key)"
+                      >
+                        -
+                      </button>
+                      <span class="quantity-value">{{ value }}</span>
+                      <button
+                        class="quantity-btn plus"
+                        @click="increaseQuantity('aLineQuantity', key)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- B线数量控制 -->
+              <div class="quantity-line-group">
+                <div class="quantity-list">
+                  <div
+                    class="quantity-item"
+                    v-for="(value, key) in bLineQuantity"
+                    :key="key"
+                  >
+                    <span class="quantity-label">{{
+                      getSimpleLabel('B', key)
+                    }}</span>
+                    <div class="quantity-controls">
+                      <button
+                        class="quantity-btn minus"
+                        @click="decreaseQuantity('bLineQuantity', key)"
+                      >
+                        -
+                      </button>
+                      <span class="quantity-value">{{ value }}</span>
+                      <button
+                        class="quantity-btn plus"
+                        @click="increaseQuantity('bLineQuantity', key)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- C线数量控制 -->
+              <div class="quantity-line-group">
+                <div class="quantity-list">
+                  <div
+                    class="quantity-item"
+                    v-for="(value, key) in cLineQuantity"
+                    :key="key"
+                  >
+                    <span class="quantity-label">{{
+                      getSimpleLabel('C', key)
+                    }}</span>
+                    <div class="quantity-controls">
+                      <button
+                        class="quantity-btn minus"
+                        @click="decreaseQuantity('cLineQuantity', key)"
+                      >
+                        -
+                      </button>
+                      <span class="quantity-value">{{ value }}</span>
+                      <button
+                        class="quantity-btn plus"
+                        @click="increaseQuantity('cLineQuantity', key)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- D线数量控制 -->
+              <div class="quantity-line-group">
+                <div class="quantity-list">
+                  <div
+                    class="quantity-item"
+                    v-for="(value, key) in dLineQuantity"
+                    :key="key"
+                  >
+                    <span class="quantity-label">{{
+                      getSimpleLabel('D', key)
+                    }}</span>
+                    <div class="quantity-controls">
+                      <button
+                        class="quantity-btn minus"
+                        @click="decreaseQuantity('dLineQuantity', key)"
+                      >
+                        -
+                      </button>
+                      <span class="quantity-value">{{ value }}</span>
+                      <button
+                        class="quantity-btn plus"
+                        @click="increaseQuantity('dLineQuantity', key)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- E线数量控制 -->
+              <div class="quantity-line-group">
+                <div class="quantity-list">
+                  <div
+                    class="quantity-item"
+                    v-for="(value, key) in eLineQuantity"
+                    :key="key"
+                  >
+                    <span class="quantity-label">{{
+                      getSimpleLabel('E', key)
+                    }}</span>
+                    <div class="quantity-controls">
+                      <button
+                        class="quantity-btn minus"
+                        @click="decreaseQuantity('eLineQuantity', key)"
+                      >
+                        -
+                      </button>
+                      <span class="quantity-value">{{ value }}</span>
+                      <button
+                        class="quantity-btn plus"
+                        @click="increaseQuantity('eLineQuantity', key)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -3344,6 +3495,22 @@ export default {
       this.alarmLogs.forEach((log) => {
         log.unread = false;
       });
+    },
+    // 获取简化标签
+    getSimpleLabel(line, key) {
+      return `${line}${key.substring(1)}`;
+    },
+    // 增加数量
+    increaseQuantity(lineType, key) {
+      if (this[lineType][key] < 999) {
+        this[lineType][key]++;
+      }
+    },
+    // 减少数量
+    decreaseQuantity(lineType, key) {
+      if (this[lineType][key] > 0) {
+        this[lineType][key]--;
+      }
     }
   }
 };
@@ -4807,71 +4974,76 @@ export default {
   box-shadow: 0 0 5px rgba(10, 197, 168, 0.5);
 }
 
+/* 数量控制模块样式 */
+.quantity-control-container {
+  margin-top: 10px;
+
+  .quantity-line-group {
+    margin-bottom: 8px;
+    padding: 3px;
+    border: 1px solid #333;
+
+    .quantity-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+
+      .quantity-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2px 5px;
+        border: 1px solid #444;
+
+        .quantity-label {
+          font-size: 11px;
+          color: #ccc;
+          min-width: 30px;
+        }
+
+        .quantity-controls {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+
+          .quantity-btn {
+            width: 18px;
+            height: 18px;
+            border: 1px solid #666;
+            background: #333;
+            color: #fff;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+              background: #555;
+            }
+
+            &.minus {
+              color: #ff6b6b;
+            }
+
+            &.plus {
+              color: #0ac5a8;
+            }
+          }
+
+          .quantity-value {
+            min-width: 20px;
+            text-align: center;
+            font-size: 11px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
 /* 测试添加结束 */
-
-.qrcode-test-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-
-.qrcode-input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.qrcode-label {
-  width: 80px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
-  text-align: right;
-}
-
-.send-label {
-  width: 60px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
-  text-align: right;
-}
-
-.qrcode-input {
-  flex: 1;
-}
-
-.qrcode-input :deep(.el-input__inner) {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(10, 197, 168, 0.3);
-  color: #fff;
-}
-
-.qrcode-input :deep(.el-input__inner:hover),
-.qrcode-input :deep(.el-input__inner:focus) {
-  border-color: #0ac5a8;
-}
-
-.qrcode-actions {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 8px;
-}
-
-.qrcode-actions .el-button {
-  background: rgba(10, 197, 168, 0.2);
-  border: 1px solid rgba(10, 197, 168, 0.3);
-  color: #0ac5a8;
-}
-
-.qrcode-actions .el-button:hover {
-  background: rgba(10, 197, 168, 0.3);
-  border-color: rgba(10, 197, 168, 0.5);
-  color: #fff;
-}
 
 /* 添加队列移动相关样式 */
 .queue-move-container {
@@ -4930,100 +5102,6 @@ export default {
   border-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.4);
   cursor: not-allowed;
-}
-
-.quantity-test-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-
-.quantity-group {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.quantity-title {
-  font-size: 14px;
-  color: #0ac5a8;
-  font-weight: bold;
-}
-
-.quantity-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.quantity-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(30, 42, 56, 0.8);
-  border-radius: 4px;
-  padding: 8px;
-  border: 1px solid rgba(10, 197, 168, 0.1);
-  margin-bottom: 5px;
-
-  .quantity-label {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.8);
-    min-width: 30px;
-  }
-
-  .quantity-value {
-    font-size: 14px;
-    color: #0ac5a8;
-    font-weight: bold;
-    min-width: 30px;
-    text-align: center;
-  }
-
-  .quantity-buttons {
-    display: flex;
-    gap: 5px;
-
-    .quantity-btn {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      background: rgba(10, 197, 168, 0.3);
-      border: none;
-      border-radius: 4px;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-
-      &.plus {
-        background: rgba(10, 197, 168, 0.5);
-        &:hover {
-          background: rgba(10, 197, 168, 0.7);
-        }
-      }
-
-      &.minus {
-        background: rgba(245, 108, 108, 0.3);
-        &:hover {
-          background: rgba(245, 108, 108, 0.5);
-        }
-      }
-    }
-  }
 }
 
 /* 添加新的测试面板样式 */
