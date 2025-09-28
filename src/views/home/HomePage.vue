@@ -2,7 +2,7 @@
   <div class="homePage">
     <div class="maskDiv">
       <div class="maskDiv-top">
-        <div class="maskDiv-top-left">
+        <div class="maskDiv-top-left" @dblclick="maxWindow">
           <img
             src="../../../build/icons/64x64.png"
             style="width: 38px; height: 38px"

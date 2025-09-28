@@ -202,6 +202,7 @@
                   :data-x="cart.x"
                   :data-y="cart.y"
                   :data-width="cart.width"
+                  v-show="false"
                 >
                   <img :src="cart.image" :alt="cart.name" class="cart-image" />
                 </div>
@@ -209,8 +210,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit3 === '1' }"
-                  data-x="73"
-                  data-y="327"
+                  data-x="180"
+                  data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit3')"
                 >
                   <div class="marker-label" style="width: 36px">A1-4#</div>
@@ -218,8 +219,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit4 === '1' }"
-                  data-x="182"
-                  data-y="327"
+                  data-x="400"
+                  data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">A1-5#</div>
@@ -227,8 +228,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit5 === '1' }"
-                  data-x="420"
-                  data-y="327"
+                  data-x="860"
+                  data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">A1-6#</div>
@@ -236,8 +237,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit9 === '1' }"
-                  data-x="1030"
-                  data-y="327"
+                  data-x="2070"
+                  data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">A3-4#</div>
@@ -245,17 +246,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit10 === '1' }"
-                  data-x="1270"
-                  data-y="327"
+                  data-x="2530"
+                  data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit10')"
                 >
                   <div class="marker-label" style="width: 36px">A3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="327"
+                  data-x="2750"
+                  data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit11')"
                 >
                   <div class="marker-label" style="width: 36px">A3-6#</div>
@@ -264,8 +265,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit4 === '1' }"
-                  data-x="73"
-                  data-y="310"
+                  data-x="150"
+                  data-y="423"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">A1-5#</div>
@@ -273,8 +274,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit5 === '1' }"
-                  data-x="100"
-                  data-y="320"
+                  data-x="180"
+                  data-y="385"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">A1-6#</div>
@@ -282,8 +283,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit6 === '1' }"
-                  data-x="310"
-                  data-y="320"
+                  data-x="620"
+                  data-y="423"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">A1-7#</div>
@@ -291,8 +292,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit7 === '1' }"
-                  data-x="555"
-                  data-y="320"
+                  data-x="1100"
+                  data-y="423"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">A1-8#</div>
@@ -300,8 +301,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit12 === '1' }"
-                  data-x="935"
-                  data-y="320"
+                  data-x="1830"
+                  data-y="423"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit12')"
                 >
                   <div class="marker-label">A3-5#</div>
@@ -309,8 +310,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit13 === '1' }"
-                  data-x="1178"
-                  data-y="320"
+                  data-x="2310"
+                  data-y="423"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit13')"
                 >
                   <div class="marker-label">A3-6#</div>
@@ -318,8 +319,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit14 === '1' }"
-                  data-x="1390"
-                  data-y="320"
+                  data-x="2750"
+                  data-y="385"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit14')"
                 >
                   <div class="marker-label">A3-7#</div>
@@ -327,8 +328,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: aLinePhotoelectricSignal.bit15 === '1' }"
-                  data-x="1415"
-                  data-y="310"
+                  data-x="2785"
+                  data-y="423"
                   @click="toggleBitValue(aLinePhotoelectricSignal, 'bit15')"
                 >
                   <div class="marker-label">A3-8#</div>
@@ -337,8 +338,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit0 === '1' }"
-                  data-x="73"
-                  data-y="378"
+                  data-x="180"
+                  data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit0')"
                 >
                   <div class="marker-label" style="width: 36px">B1-1#</div>
@@ -346,8 +347,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit1 === '1' }"
-                  data-x="182"
-                  data-y="378"
+                  data-x="400"
+                  data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">B1-2#</div>
@@ -355,8 +356,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit2 === '1' }"
-                  data-x="420"
-                  data-y="378"
+                  data-x="860"
+                  data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">B1-3#</div>
@@ -364,8 +365,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit3 === '1' }"
-                  data-x="73"
-                  data-y="402"
+                  data-x="180"
+                  data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit3')"
                 >
                   <div class="marker-label" style="width: 36px">B1-4#</div>
@@ -373,8 +374,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit4 === '1' }"
-                  data-x="182"
-                  data-y="402"
+                  data-x="400"
+                  data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">B1-5#</div>
@@ -382,8 +383,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit5 === '1' }"
-                  data-x="420"
-                  data-y="402"
+                  data-x="860"
+                  data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">B1-6#</div>
@@ -391,8 +392,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit6 === '1' }"
-                  data-x="1030"
-                  data-y="378"
+                  data-x="2070"
+                  data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">B3-1#</div>
@@ -400,17 +401,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit7 === '1' }"
-                  data-x="1270"
-                  data-y="378"
+                  data-x="2530"
+                  data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit7')"
                 >
                   <div class="marker-label" style="width: 36px">B3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit8 === '1' }"
-                  data-x="1415"
-                  data-y="378"
+                  data-x="2750"
+                  data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit8')"
                 >
                   <div class="marker-label" style="width: 36px">B3-3#</div>
@@ -418,8 +419,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit9 === '1' }"
-                  data-x="1030"
-                  data-y="402"
+                  data-x="2070"
+                  data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">B3-4#</div>
@@ -427,17 +428,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit10 === '1' }"
-                  data-x="1270"
-                  data-y="402"
+                  data-x="2530"
+                  data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit10')"
                 >
                   <div class="marker-label" style="width: 36px">B3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="402"
+                  data-x="2750"
+                  data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit11')"
                 >
                   <div class="marker-label" style="width: 36px">B3-6#</div>
@@ -446,8 +447,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit0 === '1' }"
-                  data-x="73"
-                  data-y="362"
+                  data-x="150"
+                  data-y="525"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit0')"
                 >
                   <div class="marker-label">B1-1#</div>
@@ -455,8 +456,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit1 === '1' }"
-                  data-x="100"
-                  data-y="372"
+                  data-x="180"
+                  data-y="490"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit1')"
                 >
                   <div class="marker-label">B1-2#</div>
@@ -464,8 +465,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit2 === '1' }"
-                  data-x="310"
-                  data-y="372"
+                  data-x="620"
+                  data-y="525"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit2')"
                 >
                   <div class="marker-label">B1-3#</div>
@@ -473,8 +474,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit3 === '1' }"
-                  data-x="555"
-                  data-y="372"
+                  data-x="1100"
+                  data-y="525"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit3')"
                 >
                   <div class="marker-label">B1-4#</div>
@@ -482,8 +483,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit4 === '1' }"
-                  data-x="73"
-                  data-y="415"
+                  data-x="150"
+                  data-y="572"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">B1-5#</div>
@@ -491,8 +492,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit5 === '1' }"
-                  data-x="100"
-                  data-y="404"
+                  data-x="180"
+                  data-y="605"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">B1-6#</div>
@@ -500,8 +501,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit6 === '1' }"
-                  data-x="310"
-                  data-y="404"
+                  data-x="620"
+                  data-y="572"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">B1-7#</div>
@@ -509,8 +510,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit7 === '1' }"
-                  data-x="555"
-                  data-y="404"
+                  data-x="1100"
+                  data-y="572"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">B1-8#</div>
@@ -518,8 +519,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit8 === '1' }"
-                  data-x="935"
-                  data-y="372"
+                  data-x="1830"
+                  data-y="525"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit8')"
                 >
                   <div class="marker-label">B3-1#</div>
@@ -527,8 +528,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit9 === '1' }"
-                  data-x="1178"
-                  data-y="372"
+                  data-x="2310"
+                  data-y="525"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit9')"
                 >
                   <div class="marker-label">B3-2#</div>
@@ -536,8 +537,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit10 === '1' }"
-                  data-x="1390"
-                  data-y="372"
+                  data-x="2750"
+                  data-y="490"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit10')"
                 >
                   <div class="marker-label">B3-3#</div>
@@ -545,8 +546,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="363"
+                  data-x="2785"
+                  data-y="525"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit11')"
                 >
                   <div class="marker-label">B3-4#</div>
@@ -554,8 +555,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit12 === '1' }"
-                  data-x="935"
-                  data-y="404"
+                  data-x="1830"
+                  data-y="572"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit12')"
                 >
                   <div class="marker-label">B3-5#</div>
@@ -563,8 +564,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit13 === '1' }"
-                  data-x="1178"
-                  data-y="404"
+                  data-x="2310"
+                  data-y="572"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit13')"
                 >
                   <div class="marker-label">B3-6#</div>
@@ -572,8 +573,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit14 === '1' }"
-                  data-x="1390"
-                  data-y="404"
+                  data-x="2750"
+                  data-y="605"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit14')"
                 >
                   <div class="marker-label">B3-7#</div>
@@ -581,8 +582,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: bLinePhotoelectricSignal.bit15 === '1' }"
-                  data-x="1415"
-                  data-y="416"
+                  data-x="2785"
+                  data-y="572"
                   @click="toggleBitValue(bLinePhotoelectricSignal, 'bit15')"
                 >
                   <div class="marker-label">B3-8#</div>
@@ -591,8 +592,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit0 === '1' }"
-                  data-x="73"
-                  data-y="453"
+                  data-x="180"
+                  data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit0')"
                 >
                   <div class="marker-label" style="width: 36px">C1-1#</div>
@@ -600,8 +601,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit1 === '1' }"
-                  data-x="182"
-                  data-y="453"
+                  data-x="400"
+                  data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">C1-2#</div>
@@ -609,8 +610,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit2 === '1' }"
-                  data-x="420"
-                  data-y="453"
+                  data-x="860"
+                  data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">C1-3#</div>
@@ -618,8 +619,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit3 === '1' }"
-                  data-x="73"
-                  data-y="476"
+                  data-x="180"
+                  data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit3')"
                 >
                   <div class="marker-label" style="width: 36px">C1-4#</div>
@@ -627,8 +628,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit4 === '1' }"
-                  data-x="182"
-                  data-y="477"
+                  data-x="400"
+                  data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">C1-5#</div>
@@ -636,8 +637,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit5 === '1' }"
-                  data-x="420"
-                  data-y="477"
+                  data-x="860"
+                  data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">C1-6#</div>
@@ -645,8 +646,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit6 === '1' }"
-                  data-x="1030"
-                  data-y="453"
+                  data-x="2070"
+                  data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">C3-1#</div>
@@ -654,17 +655,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit7 === '1' }"
-                  data-x="1270"
-                  data-y="453"
+                  data-x="2530"
+                  data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit7')"
                 >
                   <div class="marker-label" style="width: 36px">C3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit8 === '1' }"
-                  data-x="1415"
-                  data-y="453"
+                  data-x="2750"
+                  data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit8')"
                 >
                   <div class="marker-label" style="width: 36px">C3-3#</div>
@@ -672,8 +673,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit9 === '1' }"
-                  data-x="1030"
-                  data-y="477"
+                  data-x="2070"
+                  data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">C3-4#</div>
@@ -681,17 +682,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit10 === '1' }"
-                  data-x="1270"
-                  data-y="477"
+                  data-x="2530"
+                  data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit10')"
                 >
                   <div class="marker-label" style="width: 36px">C3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="477"
+                  data-x="2750"
+                  data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit11')"
                 >
                   <div class="marker-label" style="width: 36px">C3-6#</div>
@@ -700,8 +701,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit0 === '1' }"
-                  data-x="73"
-                  data-y="438"
+                  data-x="150"
+                  data-y="673"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit0')"
                 >
                   <div class="marker-label">C1-1#</div>
@@ -709,8 +710,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit1 === '1' }"
-                  data-x="100"
-                  data-y="448"
+                  data-x="180"
+                  data-y="640"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit1')"
                 >
                   <div class="marker-label">C1-2#</div>
@@ -718,8 +719,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit2 === '1' }"
-                  data-x="310"
-                  data-y="448"
+                  data-x="620"
+                  data-y="673"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit2')"
                 >
                   <div class="marker-label">C1-3#</div>
@@ -727,8 +728,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit3 === '1' }"
-                  data-x="555"
-                  data-y="448"
+                  data-x="1100"
+                  data-y="673"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit3')"
                 >
                   <div class="marker-label">C1-4#</div>
@@ -736,8 +737,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit4 === '1' }"
-                  data-x="73"
-                  data-y="490"
+                  data-x="150"
+                  data-y="718"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">C1-5#</div>
@@ -745,8 +746,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit5 === '1' }"
-                  data-x="100"
-                  data-y="482"
+                  data-x="180"
+                  data-y="753"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">C1-6#</div>
@@ -754,8 +755,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit6 === '1' }"
-                  data-x="310"
-                  data-y="482"
+                  data-x="620"
+                  data-y="718"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">C1-7#</div>
@@ -763,8 +764,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit7 === '1' }"
-                  data-x="555"
-                  data-y="482"
+                  data-x="1100"
+                  data-y="718"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">C1-8#</div>
@@ -772,8 +773,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit8 === '1' }"
-                  data-x="935"
-                  data-y="448"
+                  data-x="1830"
+                  data-y="673"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit8')"
                 >
                   <div class="marker-label">C3-1#</div>
@@ -781,8 +782,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit9 === '1' }"
-                  data-x="1178"
-                  data-y="448"
+                  data-x="2310"
+                  data-y="673"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit9')"
                 >
                   <div class="marker-label">C3-2#</div>
@@ -790,8 +791,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit10 === '1' }"
-                  data-x="1390"
-                  data-y="448"
+                  data-x="2750"
+                  data-y="640"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit10')"
                 >
                   <div class="marker-label">C3-3#</div>
@@ -799,8 +800,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="438"
+                  data-x="2785"
+                  data-y="673"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit11')"
                 >
                   <div class="marker-label">C3-4#</div>
@@ -808,8 +809,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit12 === '1' }"
-                  data-x="935"
-                  data-y="482"
+                  data-x="1830"
+                  data-y="718"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit12')"
                 >
                   <div class="marker-label">C3-5#</div>
@@ -817,8 +818,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit13 === '1' }"
-                  data-x="1178"
-                  data-y="482"
+                  data-x="2310"
+                  data-y="718"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit13')"
                 >
                   <div class="marker-label">C3-6#</div>
@@ -826,8 +827,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit14 === '1' }"
-                  data-x="1390"
-                  data-y="482"
+                  data-x="2750"
+                  data-y="753"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit14')"
                 >
                   <div class="marker-label">C3-7#</div>
@@ -835,8 +836,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: cLinePhotoelectricSignal.bit15 === '1' }"
-                  data-x="1415"
-                  data-y="492"
+                  data-x="2785"
+                  data-y="718"
                   @click="toggleBitValue(cLinePhotoelectricSignal, 'bit15')"
                 >
                   <div class="marker-label">C3-8#</div>
@@ -845,8 +846,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit0 === '1' }"
-                  data-x="73"
-                  data-y="528"
+                  data-x="180"
+                  data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit0')"
                 >
                   <div class="marker-label" style="width: 36px">D1-1#</div>
@@ -854,8 +855,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit1 === '1' }"
-                  data-x="182"
-                  data-y="528"
+                  data-x="400"
+                  data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">D1-2#</div>
@@ -863,8 +864,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit2 === '1' }"
-                  data-x="420"
-                  data-y="528"
+                  data-x="860"
+                  data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">D1-3#</div>
@@ -872,8 +873,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit3 === '1' }"
-                  data-x="73"
-                  data-y="552"
+                  data-x="180"
+                  data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit3')"
                 >
                   <div class="marker-label" style="width: 36px">D1-4#</div>
@@ -881,8 +882,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit4 === '1' }"
-                  data-x="182"
-                  data-y="552"
+                  data-x="400"
+                  data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">D1-5#</div>
@@ -890,8 +891,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit5 === '1' }"
-                  data-x="420"
-                  data-y="552"
+                  data-x="860"
+                  data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">D1-6#</div>
@@ -899,8 +900,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit6 === '1' }"
-                  data-x="1030"
-                  data-y="528"
+                  data-x="2070"
+                  data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">D3-1#</div>
@@ -908,17 +909,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit7 === '1' }"
-                  data-x="1270"
-                  data-y="528"
+                  data-x="2530"
+                  data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit7')"
                 >
                   <div class="marker-label" style="width: 36px">D3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit8 === '1' }"
-                  data-x="1415"
-                  data-y="528"
+                  data-x="2750"
+                  data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit8')"
                 >
                   <div class="marker-label" style="width: 36px">D3-3#</div>
@@ -926,8 +927,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit9 === '1' }"
-                  data-x="1030"
-                  data-y="552"
+                  data-x="2070"
+                  data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">D3-4#</div>
@@ -935,17 +936,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit10 === '1' }"
-                  data-x="1270"
-                  data-y="552"
+                  data-x="2530"
+                  data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit10')"
                 >
                   <div class="marker-label" style="width: 36px">D3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="552"
+                  data-x="2750"
+                  data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit11')"
                 >
                   <div class="marker-label" style="width: 36px">D3-6#</div>
@@ -954,8 +955,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit0 === '1' }"
-                  data-x="73"
-                  data-y="513"
+                  data-x="150"
+                  data-y="820"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit0')"
                 >
                   <div class="marker-label">D1-1#</div>
@@ -963,8 +964,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit1 === '1' }"
-                  data-x="100"
-                  data-y="526"
+                  data-x="180"
+                  data-y="790"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit1')"
                 >
                   <div class="marker-label">D1-2#</div>
@@ -972,8 +973,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit2 === '1' }"
-                  data-x="310"
-                  data-y="526"
+                  data-x="620"
+                  data-y="820"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit2')"
                 >
                   <div class="marker-label">D1-3#</div>
@@ -981,8 +982,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit3 === '1' }"
-                  data-x="555"
-                  data-y="526"
+                  data-x="1100"
+                  data-y="820"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit3')"
                 >
                   <div class="marker-label">D1-4#</div>
@@ -990,8 +991,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit4 === '1' }"
-                  data-x="73"
-                  data-y="568"
+                  data-x="150"
+                  data-y="867"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">D1-5#</div>
@@ -999,8 +1000,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit5 === '1' }"
-                  data-x="100"
-                  data-y="556"
+                  data-x="180"
+                  data-y="900"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">D1-6#</div>
@@ -1008,8 +1009,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit6 === '1' }"
-                  data-x="310"
-                  data-y="556"
+                  data-x="620"
+                  data-y="867"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">D1-7#</div>
@@ -1017,8 +1018,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit7 === '1' }"
-                  data-x="555"
-                  data-y="556"
+                  data-x="1100"
+                  data-y="867"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">D1-8#</div>
@@ -1026,8 +1027,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit8 === '1' }"
-                  data-x="935"
-                  data-y="526"
+                  data-x="1830"
+                  data-y="820"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit8')"
                 >
                   <div class="marker-label">D3-1#</div>
@@ -1035,8 +1036,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit9 === '1' }"
-                  data-x="1178"
-                  data-y="526"
+                  data-x="2310"
+                  data-y="820"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit9')"
                 >
                   <div class="marker-label">D3-2#</div>
@@ -1044,8 +1045,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit10 === '1' }"
-                  data-x="1390"
-                  data-y="526"
+                  data-x="2750"
+                  data-y="790"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit10')"
                 >
                   <div class="marker-label">D3-3#</div>
@@ -1053,8 +1054,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="513"
+                  data-x="2785"
+                  data-y="820"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit11')"
                 >
                   <div class="marker-label">D3-4#</div>
@@ -1062,8 +1063,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit12 === '1' }"
-                  data-x="935"
-                  data-y="556"
+                  data-x="1830"
+                  data-y="867"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit12')"
                 >
                   <div class="marker-label">D3-5#</div>
@@ -1071,8 +1072,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit13 === '1' }"
-                  data-x="1178"
-                  data-y="556"
+                  data-x="2310"
+                  data-y="867"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit13')"
                 >
                   <div class="marker-label">D3-6#</div>
@@ -1080,8 +1081,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit14 === '1' }"
-                  data-x="1390"
-                  data-y="556"
+                  data-x="2750"
+                  data-y="900"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit14')"
                 >
                   <div class="marker-label">D3-7#</div>
@@ -1089,8 +1090,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: dLinePhotoelectricSignal.bit15 === '1' }"
-                  data-x="1415"
-                  data-y="567"
+                  data-x="2785"
+                  data-y="867"
                   @click="toggleBitValue(dLinePhotoelectricSignal, 'bit15')"
                 >
                   <div class="marker-label">D3-8#</div>
@@ -1099,8 +1100,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit0 === '1' }"
-                  data-x="73"
-                  data-y="604"
+                  data-x="180"
+                  data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit0')"
                 >
                   <div class="marker-label" style="width: 36px">E1-1#</div>
@@ -1108,8 +1109,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit1 === '1' }"
-                  data-x="182"
-                  data-y="604"
+                  data-x="400"
+                  data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">E1-2#</div>
@@ -1117,8 +1118,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit2 === '1' }"
-                  data-x="420"
-                  data-y="604"
+                  data-x="860"
+                  data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">E1-3#</div>
@@ -1126,8 +1127,8 @@
                 <div
                   class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit3 === '1' }"
-                  data-x="73"
-                  data-y="628"
+                  data-x="180"
+                  data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit3')"
                 >
                   <div class="marker-label" style="width: 36px">E1-4#</div>
@@ -1135,8 +1136,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit4 === '1' }"
-                  data-x="182"
-                  data-y="628"
+                  data-x="400"
+                  data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">E1-5#</div>
@@ -1144,8 +1145,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit5 === '1' }"
-                  data-x="420"
-                  data-y="628"
+                  data-x="860"
+                  data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">E1-6#</div>
@@ -1153,8 +1154,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit6 === '1' }"
-                  data-x="1030"
-                  data-y="604"
+                  data-x="2070"
+                  data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">E3-1#</div>
@@ -1162,17 +1163,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit7 === '1' }"
-                  data-x="1270"
-                  data-y="604"
+                  data-x="2530"
+                  data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit7')"
                 >
                   <div class="marker-label" style="width: 36px">E3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit8 === '1' }"
-                  data-x="1415"
-                  data-y="604"
+                  data-x="2750"
+                  data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit8')"
                 >
                   <div class="marker-label" style="width: 36px">E3-3#</div>
@@ -1180,8 +1181,8 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit9 === '1' }"
-                  data-x="1030"
-                  data-y="628"
+                  data-x="2070"
+                  data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">E3-4#</div>
@@ -1189,17 +1190,17 @@
                 <div
                   class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit10 === '1' }"
-                  data-x="1270"
-                  data-y="628"
+                  data-x="2530"
+                  data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit10')"
                 >
                   <div class="marker-label" style="width: 36px">E3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-right"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="628"
+                  data-x="2750"
+                  data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit11')"
                 >
                   <div class="marker-label" style="width: 36px">E3-6#</div>
@@ -1208,8 +1209,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit0 === '1' }"
-                  data-x="73"
-                  data-y="590"
+                  data-x="150"
+                  data-y="970"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit0')"
                 >
                   <div class="marker-label">E1-1#</div>
@@ -1217,8 +1218,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit1 === '1' }"
-                  data-x="100"
-                  data-y="603"
+                  data-x="180"
+                  data-y="938"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit1')"
                 >
                   <div class="marker-label">E1-2#</div>
@@ -1226,8 +1227,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit2 === '1' }"
-                  data-x="310"
-                  data-y="603"
+                  data-x="620"
+                  data-y="970"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit2')"
                 >
                   <div class="marker-label">E1-3#</div>
@@ -1235,8 +1236,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit3 === '1' }"
-                  data-x="555"
-                  data-y="603"
+                  data-x="1100"
+                  data-y="970"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit3')"
                 >
                   <div class="marker-label">E1-4#</div>
@@ -1244,8 +1245,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit4 === '1' }"
-                  data-x="73"
-                  data-y="643"
+                  data-x="150"
+                  data-y="1015"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">E1-5#</div>
@@ -1253,8 +1254,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit5 === '1' }"
-                  data-x="100"
-                  data-y="630"
+                  data-x="180"
+                  data-y="1050"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">E1-6#</div>
@@ -1262,8 +1263,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit6 === '1' }"
-                  data-x="310"
-                  data-y="630"
+                  data-x="620"
+                  data-y="1015"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">E1-7#</div>
@@ -1271,8 +1272,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit7 === '1' }"
-                  data-x="555"
-                  data-y="630"
+                  data-x="1100"
+                  data-y="1015"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">E1-8#</div>
@@ -1280,8 +1281,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit8 === '1' }"
-                  data-x="935"
-                  data-y="603"
+                  data-x="1830"
+                  data-y="970"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit8')"
                 >
                   <div class="marker-label">E3-1#</div>
@@ -1289,8 +1290,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit9 === '1' }"
-                  data-x="1178"
-                  data-y="603"
+                  data-x="2310"
+                  data-y="970"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit9')"
                 >
                   <div class="marker-label">E3-2#</div>
@@ -1298,8 +1299,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit10 === '1' }"
-                  data-x="1390"
-                  data-y="603"
+                  data-x="2750"
+                  data-y="938"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit10')"
                 >
                   <div class="marker-label">E3-3#</div>
@@ -1307,8 +1308,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit11 === '1' }"
-                  data-x="1415"
-                  data-y="589"
+                  data-x="2785"
+                  data-y="970"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit11')"
                 >
                   <div class="marker-label">E3-4#</div>
@@ -1316,8 +1317,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit12 === '1' }"
-                  data-x="935"
-                  data-y="630"
+                  data-x="1830"
+                  data-y="1015"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit12')"
                 >
                   <div class="marker-label">E3-5#</div>
@@ -1325,8 +1326,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit13 === '1' }"
-                  data-x="1178"
-                  data-y="630"
+                  data-x="2310"
+                  data-y="1015"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit13')"
                 >
                   <div class="marker-label">E3-6#</div>
@@ -1334,8 +1335,8 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit14 === '1' }"
-                  data-x="1390"
-                  data-y="630"
+                  data-x="2750"
+                  data-y="1050"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit14')"
                 >
                   <div class="marker-label">E3-7#</div>
@@ -1343,11 +1344,504 @@
                 <div
                   class="marker label-top"
                   :class="{ scanning: eLinePhotoelectricSignal.bit15 === '1' }"
-                  data-x="1415"
-                  data-y="643"
+                  data-x="2785"
+                  data-y="1015"
                   @click="toggleBitValue(eLinePhotoelectricSignal, 'bit15')"
                 >
                   <div class="marker-label">E3-8#</div>
+                </div>
+                <!-- 箭头指示器 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit1 === '1' }"
+                  data-x="95"
+                  data-y="423"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit1')"
+                >
+                  <div class="marker-label">A1-4#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit2 === '1' }"
+                  data-x="95"
+                  data-y="520"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit2')"
+                >
+                  <div class="marker-label">B1-1#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit3 === '1' }"
+                  data-x="95"
+                  data-y="575"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit3')"
+                >
+                  <div class="marker-label">B1-4#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit4 === '1' }"
+                  data-x="95"
+                  data-y="671"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit4')"
+                >
+                  <div class="marker-label">C1-1#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit5 === '1' }"
+                  data-x="95"
+                  data-y="723"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit5')"
+                >
+                  <div class="marker-label">C1-4#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit6 === '1' }"
+                  data-x="95"
+                  data-y="820"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit6')"
+                >
+                  <div class="marker-label">D1-1#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit7 === '1' }"
+                  data-x="95"
+                  data-y="872"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit7')"
+                >
+                  <div class="marker-label">D1-4#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit8 === '1' }"
+                  data-x="95"
+                  data-y="969"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit8')"
+                >
+                  <div class="marker-label">E1-1#进货</div>
+                </div>
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: scanPhotoelectricSignal.bit9 === '1' }"
+                  data-x="95"
+                  data-y="1020"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit9')"
+                >
+                  <div class="marker-label">E1-4#进货</div>
+                </div>
+                <!-- 扫码区域1 -->
+                <div class="marker-with-panel" data-x="270" data-y="1300">
+                  <div
+                    class="data-panel"
+                    :class="['position-top', { 'always-show': true }]"
+                    style="width: 230px"
+                  >
+                    <div class="data-panel-header">A线扫码</div>
+                    <div class="data-panel-content">
+                      <!-- 扫码信息行 -->
+                      <!-- <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">A1-1扫码：</span>
+                          <span>{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div> -->
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">A1-4扫码：</span>
+                          <span class="scan-value-right">88888888888</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 扫码区域2 -->
+                <div class="marker-with-panel" data-x="270" data-y="1520">
+                  <div
+                    class="data-panel"
+                    :class="['position-top', { 'always-show': true }]"
+                    style="width: 230px"
+                  >
+                    <div class="data-panel-header">B线扫码</div>
+                    <div class="data-panel-content">
+                      <!-- 扫码信息行 -->
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">B1-1扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">B1-4扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 扫码区域3 -->
+                <div class="marker-with-panel" data-x="800" data-y="1520">
+                  <div
+                    class="data-panel"
+                    :class="['position-top', { 'always-show': true }]"
+                    style="width: 230px"
+                  >
+                    <div class="data-panel-header">C线扫码</div>
+                    <div class="data-panel-content">
+                      <!-- 扫码信息行 -->
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">C1-1扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">C1-4扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 扫码区域4 -->
+                <div class="marker-with-panel" data-x="270" data-y="1800">
+                  <div
+                    class="data-panel"
+                    :class="['position-top', { 'always-show': true }]"
+                    style="width: 230px"
+                  >
+                    <div class="data-panel-header">D线扫码</div>
+                    <div class="data-panel-content">
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">D1-1扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">D1-4扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 扫码区域5 -->
+                <div class="marker-with-panel" data-x="474" data-y="800">
+                  <div
+                    class="data-panel"
+                    :class="['position-top', { 'always-show': true }]"
+                    style="width: 230px"
+                  >
+                    <div class="data-panel-header">E线扫码</div>
+                    <div class="data-panel-content">
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">E1-1扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                      <div class="data-panel-row scan-row">
+                        <div class="scan-info">
+                          <span class="data-panel-label">E1-4扫码：</span>
+                          <span class="scan-value-right">{{ '--' }}</span>
+                        </div>
+                        <el-checkbox class="scan-checkbox">
+                          允许上货
+                        </el-checkbox>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 下货信息展示 -->
+                <div
+                  class="marker-with-panel"
+                  data-x="1450"
+                  data-y="723"
+                  v-show="false"
+                >
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                  >
+                    <div class="data-panel-header">下货信息</div>
+                    <div class="data-panel-content">
+                      <div class="data-panel-row">
+                        <span class="data-panel-label">产品名称：</span>
+                        <span>{{ '--' }}</span>
+                      </div>
+                      <div class="data-panel-row">
+                        <span class="data-panel-label">托盘号：</span>
+                        <span>{{ '--' }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="preheating-room-marker"
+                  data-x="650"
+                  data-y="195"
+                  style="width: 160px"
+                >
+                  <div class="preheating-room-content">
+                    <div class="preheating-room-header">预热房到灭菌柜选择</div>
+                    <div class="preheating-room-body">
+                      <div style="display: flex; align-items: center">
+                        <el-select
+                          v-model="disinfectionRoomSelectedFrom"
+                          placeholder="预热"
+                          size="mini"
+                        >
+                          <el-option label="不执行" :value="null"></el-option>
+                          <el-option label="A" value="A"></el-option>
+                          <el-option label="B" value="B"></el-option>
+                          <el-option label="C" value="C"></el-option>
+                          <el-option label="D" value="D"></el-option>
+                          <el-option label="E" value="E"></el-option>
+                        </el-select>
+                        <span
+                          style="font-size: 12px; color: #fff; margin-left: 5px"
+                          >到：</span
+                        >
+                        <el-select
+                          v-model="disinfectionRoomSelectedTo"
+                          placeholder="灭菌"
+                          size="mini"
+                        >
+                          <el-option label="不执行" :value="null"></el-option>
+                          <el-option label="A" value="A"></el-option>
+                          <el-option label="B" value="B"></el-option>
+                          <el-option label="C" value="C"></el-option>
+                          <el-option label="D" value="D"></el-option>
+                          <el-option label="E" value="E"></el-option>
+                        </el-select>
+                      </div>
+                      <el-button
+                        type="primary"
+                        size="mini"
+                        @click="sendToDisinfectionRoom"
+                        :loading="disinfectionRoomLoading"
+                        style="width: 100%"
+                        >执行</el-button
+                      >
+                      <el-button
+                        v-if="disinfectionExecuting"
+                        type="danger"
+                        size="mini"
+                        @click="cancelDisinfectionRoom"
+                        style="width: 100%; margin-left: 0px"
+                        >取消</el-button
+                      >
+                      <div
+                        style="display: flex; align-items: center"
+                        v-if="disinfectionTrayCode"
+                      >
+                        <span
+                          style="
+                            font-size: 12px;
+                            color: #fff;
+                            color: greenyellow;
+                          "
+                          v-if="disinfectionTrayCode"
+                          >执行中：{{ disinfectionTrayCode }}</span
+                        >
+                      </div>
+                      <div style="font-size: 12px; color: #9fe3d3">
+                        需进货：<b>{{ disinfectionNeedQty }}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="preheating-room-marker"
+                  data-x="1480"
+                  data-y="195"
+                  style="width: 160px"
+                >
+                  <div class="preheating-room-content">
+                    <div class="preheating-room-header">灭菌柜到解析房选择</div>
+                    <div class="preheating-room-body">
+                      <div style="display: flex; align-items: center">
+                        <el-select
+                          v-model="warehouseSelectedFrom"
+                          placeholder="灭菌"
+                          size="mini"
+                        >
+                          <el-option label="不执行" :value="null"></el-option>
+                          <el-option label="A" value="A"></el-option>
+                          <el-option label="B" value="B"></el-option>
+                          <el-option label="C" value="C"></el-option>
+                          <el-option label="D" value="D"></el-option>
+                          <el-option label="E" value="E"></el-option>
+                        </el-select>
+                        <span
+                          style="font-size: 12px; color: #fff; margin-left: 5px"
+                          >到：</span
+                        >
+                        <el-select
+                          v-model="warehouseSelectedTo"
+                          placeholder="解析"
+                          size="mini"
+                        >
+                          <el-option label="不执行" :value="null"></el-option>
+                          <el-option label="A" value="A"></el-option>
+                          <el-option label="B" value="B"></el-option>
+                          <el-option label="C" value="C"></el-option>
+                          <el-option label="D" value="D"></el-option>
+                          <el-option label="E" value="E"></el-option>
+                        </el-select>
+                      </div>
+                      <el-button
+                        type="primary"
+                        size="mini"
+                        @click="sendDisinfectionRoomToWarehouse"
+                        :loading="analysisRoomLoading"
+                        style="width: 100%"
+                        >执行</el-button
+                      >
+                      <el-button
+                        v-if="analysisExecuting"
+                        type="danger"
+                        size="mini"
+                        @click="cancelAnalysisRoom"
+                        style="width: 100%; margin-left: 0px"
+                        >取消</el-button
+                      >
+                      <div
+                        style="display: flex; align-items: center"
+                        v-if="analysisTrayCode"
+                      >
+                        <span
+                          style="
+                            font-size: 12px;
+                            color: #fff;
+                            color: greenyellow;
+                          "
+                          v-if="analysisTrayCode"
+                          >执行中：{{ analysisTrayCode }}</span
+                        >
+                      </div>
+                      <div style="font-size: 12px; color: #9fe3d3">
+                        需进货：<b>{{ analysisNeedQty }}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="preheating-room-marker" data-x="2300" data-y="195">
+                  <div class="preheating-room-content">
+                    <div class="preheating-room-header">出库选择</div>
+                    <div class="preheating-room-body">
+                      <el-select
+                        v-model="outWarehouseSelected"
+                        placeholder="选择"
+                        size="mini"
+                      >
+                        <el-option label="不执行" :value="null"></el-option>
+                        <el-option label="A" value="A"></el-option>
+                        <el-option label="B" value="B"></el-option>
+                        <el-option label="C" value="C"></el-option>
+                        <el-option label="D" value="D"></el-option>
+                        <el-option label="E" value="E"></el-option>
+                      </el-select>
+                      <el-button
+                        type="primary"
+                        size="mini"
+                        @click="sendToWarehouse"
+                        :loading="outWarehouseLoading"
+                        style="width: 100%"
+                        >执行</el-button
+                      >
+                      <el-button
+                        v-if="outWarehouseExecuting"
+                        type="danger"
+                        size="mini"
+                        @click="cancelOutWarehouse"
+                        style="width: 100%; margin-left: 0px"
+                        >取消</el-button
+                      >
+                      <span
+                        style="font-size: 12px; color: #fff; color: greenyellow"
+                        v-if="outWarehouseTrayCode"
+                        >执行中：{{ outWarehouseTrayCode }}</span
+                      >
+                      <div
+                        style="margin-top: 4px; font-size: 12px; color: #9fe3d3"
+                      >
+                        需进货：<b>{{ outNeedQty }}</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 无码上货按钮 -->
+                <div
+                  class="marker-with-button"
+                  data-x="450"
+                  data-y="1750"
+                  v-show="false"
+                >
+                  <div style="display: flex; align-items: center">
+                    <el-button
+                      :type="noCodeUpload ? 'success' : 'primary'"
+                      size="mini"
+                      @click="toggleNoCodeUpload"
+                      :icon="
+                        noCodeUpload ? 'el-icon-loading' : 'el-icon-setting'
+                      "
+                    >
+                      {{
+                        noCodeUpload
+                          ? '正在使用无码上货模式'
+                          : '设置为无码上货模式'
+                      }}
+                    </el-button>
+                    <!-- 当前运行模式状态显示 -->
+                    <div
+                      class="mode-status-display"
+                      style="
+                        margin-left: 10px;
+                        font-weight: bold;
+                        color: #f56c6c;
+                        font-size: 20px;
+                        white-space: nowrap;
+                      "
+                    >
+                      <span style="color: #606266">当前运行模式：</span
+                      >{{ noCodeUpload ? '无码模式' : '有码模式' }}
+                      <!-- 深灰标签 + 红色状态 -->
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1754,6 +2248,46 @@
     </div>
     <!-- 订单查询对话框 -->
     <OrderQueryDialog :visible.sync="orderQueryDialogVisible" />
+
+    <!-- 管理员密码验证对话框 -->
+    <el-dialog
+      title="管理员权限验证"
+      :visible.sync="adminPasswordDialogVisible"
+      width="400px"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :show-close="false"
+      append-to-body
+    >
+      <div class="admin-password-content">
+        <el-form
+          :model="adminPasswordForm"
+          :rules="adminPasswordRules"
+          ref="adminPasswordForm"
+        >
+          <el-form-item label="管理员密码" prop="password" label-width="100px">
+            <el-input
+              v-model="adminPasswordForm.password"
+              type="password"
+              placeholder="请输入管理员密码"
+              show-password
+              @keyup.enter.native="verifyAdminPassword"
+            ></el-input>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAdminPassword">取消</el-button>
+        <el-button
+          type="primary"
+          @click="verifyAdminPassword"
+          :loading="adminPasswordLoading"
+        >
+          验证
+        </el-button>
+      </div>
+    </el-dialog>
+
     <!-- 托盘检索弹窗 -->
     <el-dialog
       title="托盘检索"
@@ -2296,51 +2830,51 @@ export default {
         // { id: 3, name: 'A2-1', queueId: 3, x: 2100, y: 180 },
         // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
         // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
-        { id: 6, name: 'A1-5', queueId: 6, x: 260, y: 325 },
-        { id: 7, name: 'A1-6', queueId: 7, x: 500, y: 325 },
-        { id: 8, name: 'A2-2', queueId: 8, x: 765, y: 325 },
-        { id: 9, name: 'A3-4', queueId: 9, x: 1105, y: 325 },
-        { id: 10, name: 'A3-5', queueId: 10, x: 1345, y: 325 },
-        { id: 11, name: 'B1-2', queueId: 11, x: 260, y: 375 },
-        { id: 12, name: 'B1-3', queueId: 12, x: 500, y: 375 },
-        { id: 13, name: 'B2-1', queueId: 13, x: 765, y: 375 },
-        { id: 14, name: 'B3-1', queueId: 14, x: 1105, y: 375 },
-        { id: 15, name: 'B3-2', queueId: 15, x: 1345, y: 375 },
-        { id: 16, name: 'B1-5', queueId: 16, x: 260, y: 405 },
-        { id: 17, name: 'B1-6', queueId: 17, x: 500, y: 405 },
-        { id: 18, name: 'B2-2', queueId: 18, x: 765, y: 405 },
-        { id: 19, name: 'B3-4', queueId: 19, x: 1105, y: 405 },
-        { id: 20, name: 'B3-5', queueId: 20, x: 1345, y: 405 },
-        { id: 21, name: 'C1-2', queueId: 21, x: 260, y: 450 },
-        { id: 22, name: 'C1-3', queueId: 22, x: 500, y: 450 },
-        { id: 23, name: 'C2-1', queueId: 23, x: 765, y: 450 },
-        { id: 24, name: 'C3-1', queueId: 24, x: 1105, y: 450 },
-        { id: 25, name: 'C3-2', queueId: 25, x: 1345, y: 450 },
-        { id: 26, name: 'C1-5', queueId: 26, x: 260, y: 480 },
-        { id: 27, name: 'C1-6', queueId: 27, x: 500, y: 480 },
-        { id: 28, name: 'C2-2', queueId: 28, x: 765, y: 480 },
-        { id: 29, name: 'C3-4', queueId: 29, x: 1105, y: 480 },
-        { id: 30, name: 'C3-5', queueId: 30, x: 1345, y: 480 },
-        { id: 31, name: 'D1-2', queueId: 31, x: 260, y: 525 },
-        { id: 32, name: 'D1-3', queueId: 32, x: 500, y: 525 },
-        { id: 33, name: 'D2-1', queueId: 33, x: 765, y: 525 },
-        { id: 34, name: 'D3-1', queueId: 34, x: 1105, y: 525 },
-        { id: 35, name: 'D3-2', queueId: 35, x: 1345, y: 525 },
-        { id: 36, name: 'D1-5', queueId: 36, x: 260, y: 555 },
-        { id: 37, name: 'D1-6', queueId: 37, x: 500, y: 555 },
-        { id: 38, name: 'D2-2', queueId: 38, x: 765, y: 555 },
-        { id: 39, name: 'D3-4', queueId: 39, x: 1105, y: 555 },
-        { id: 40, name: 'D3-5', queueId: 40, x: 1345, y: 555 },
-        { id: 41, name: 'E1-2', queueId: 41, x: 260, y: 602 },
-        { id: 42, name: 'E1-3', queueId: 42, x: 500, y: 602 },
-        { id: 43, name: 'E2-1', queueId: 43, x: 765, y: 602 },
-        { id: 44, name: 'E3-1', queueId: 44, x: 1105, y: 602 },
-        { id: 45, name: 'E3-2', queueId: 45, x: 1345, y: 602 },
-        { id: 46, name: 'E1-5', queueId: 46, x: 260, y: 632 },
-        { id: 47, name: 'E1-6', queueId: 47, x: 500, y: 632 },
-        { id: 48, name: 'E2-2', queueId: 48, x: 765, y: 632 },
-        { id: 49, name: 'E3-4', queueId: 49, x: 1105, y: 632 },
-        { id: 50, name: 'E3-5', queueId: 50, x: 1345, y: 632 }
+        { id: 6, name: 'A1-5', queueId: 6, x: 520, y: 420 },
+        { id: 7, name: 'A1-6', queueId: 7, x: 990, y: 420 },
+        { id: 8, name: 'A2-2', queueId: 8, x: 1500, y: 420 },
+        { id: 9, name: 'A3-4', queueId: 9, x: 2170, y: 420 },
+        { id: 10, name: 'A3-5', queueId: 10, x: 2640, y: 420 },
+        { id: 11, name: 'B1-2', queueId: 11, x: 520, y: 518 },
+        { id: 12, name: 'B1-3', queueId: 12, x: 990, y: 518 },
+        { id: 13, name: 'B2-1', queueId: 13, x: 1500, y: 518 },
+        { id: 14, name: 'B3-1', queueId: 14, x: 2170, y: 518 },
+        { id: 15, name: 'B3-2', queueId: 15, x: 2640, y: 518 },
+        { id: 16, name: 'B1-5', queueId: 16, x: 520, y: 578 },
+        { id: 17, name: 'B1-6', queueId: 17, x: 990, y: 578 },
+        { id: 18, name: 'B2-2', queueId: 18, x: 1500, y: 578 },
+        { id: 19, name: 'B3-4', queueId: 19, x: 2170, y: 578 },
+        { id: 20, name: 'B3-5', queueId: 20, x: 2640, y: 578 },
+        { id: 21, name: 'C1-2', queueId: 21, x: 520, y: 670 },
+        { id: 22, name: 'C1-3', queueId: 22, x: 990, y: 670 },
+        { id: 23, name: 'C2-1', queueId: 23, x: 1500, y: 670 },
+        { id: 24, name: 'C3-1', queueId: 24, x: 2170, y: 670 },
+        { id: 25, name: 'C3-2', queueId: 25, x: 2640, y: 670 },
+        { id: 26, name: 'C1-5', queueId: 26, x: 520, y: 730 },
+        { id: 27, name: 'C1-6', queueId: 27, x: 990, y: 730 },
+        { id: 28, name: 'C2-2', queueId: 28, x: 1500, y: 730 },
+        { id: 29, name: 'C3-4', queueId: 29, x: 2170, y: 730 },
+        { id: 30, name: 'C3-5', queueId: 30, x: 2640, y: 730 },
+        { id: 31, name: 'D1-2', queueId: 31, x: 520, y: 820 },
+        { id: 32, name: 'D1-3', queueId: 32, x: 990, y: 820 },
+        { id: 33, name: 'D2-1', queueId: 33, x: 1500, y: 820 },
+        { id: 34, name: 'D3-1', queueId: 34, x: 2170, y: 820 },
+        { id: 35, name: 'D3-2', queueId: 35, x: 2640, y: 820 },
+        { id: 36, name: 'D1-5', queueId: 36, x: 520, y: 880 },
+        { id: 37, name: 'D1-6', queueId: 37, x: 990, y: 880 },
+        { id: 38, name: 'D2-2', queueId: 38, x: 1500, y: 880 },
+        { id: 39, name: 'D3-4', queueId: 39, x: 2170, y: 880 },
+        { id: 40, name: 'D3-5', queueId: 40, x: 2640, y: 880 },
+        { id: 41, name: 'E1-2', queueId: 41, x: 520, y: 970 },
+        { id: 42, name: 'E1-3', queueId: 42, x: 990, y: 970 },
+        { id: 43, name: 'E2-1', queueId: 43, x: 1500, y: 970 },
+        { id: 44, name: 'E3-1', queueId: 44, x: 2170, y: 970 },
+        { id: 45, name: 'E3-2', queueId: 45, x: 2640, y: 970 },
+        { id: 46, name: 'E1-5', queueId: 46, x: 520, y: 1030 },
+        { id: 47, name: 'E1-6', queueId: 47, x: 990, y: 1030 },
+        { id: 48, name: 'E2-2', queueId: 48, x: 1500, y: 1030 },
+        { id: 49, name: 'E3-4', queueId: 49, x: 2170, y: 1030 },
+        { id: 50, name: 'E3-5', queueId: 50, x: 2640, y: 1030 }
       ],
       logId: 1000, // 添加一个日志ID计数器=
       // 输送线当前运行状态-读取PLC
@@ -2378,6 +2912,25 @@ export default {
         bit13: '0', // A3-6#光电信号
         bit14: '0', // A3-7#光电信号
         bit15: '0' // A3-8#光电信号
+      },
+      // 箭头指示器信号-读取PLC
+      arrowIndicatorSignal: {
+        bit0: '0', // 箭头1#指示信号
+        bit1: '0', // 箭头2#指示信号
+        bit2: '0', // 箭头3#指示信号
+        bit3: '0', // 箭头4#指示信号
+        bit4: '0', // 箭头5#指示信号
+        bit5: '0', // 箭头6#指示信号
+        bit6: '0', // 箭头7#指示信号
+        bit7: '0', // 箭头8#指示信号
+        bit8: '0', // 箭头9#指示信号
+        bit9: '0', // 箭头10#指示信号
+        bit10: '0', // 箭头11#指示信号
+        bit11: '0', // 箭头12#指示信号
+        bit12: '0', // 箭头13#指示信号
+        bit13: '0', // 箭头14#指示信号
+        bit14: '0', // 箭头15#指示信号
+        bit15: '0' // 箭头16#指示信号
       },
       // B线电机运行信号-读取PLC
       bLineMotorRunning: {
@@ -2603,6 +3156,34 @@ export default {
       cartPositionValues: {
         cart1: 0, // DBW88, 范围0-1010
         cart2: 0 // DBW90, 范围0-1010
+      },
+      // 扫码枪处光电信号-读取PLC
+      scanPhotoelectricSignal: {
+        bit0: '0', // A1-1#请求进货信号
+        bit1: '0', // A1-4#请求进货信号
+        bit2: '0', // B1-1#请求进货信号
+        bit3: '0', // B1-4#请求进货信号
+        bit4: '0', // C1-1#请求进货信号
+        bit5: '0', // C1-4#请求进货信号
+        bit6: '0', // D1-1#请求进货信号
+        bit7: '0', // D1-4#请求进货信号
+        bit8: '0', // E1-1#请求进货信号
+        bit9: '0' // E1-4#请求进货信号
+      },
+      // 无码上货模式开关
+      noCodeUpload: false,
+      // 当前操作类型
+      currentOperation: null,
+      // 管理员密码验证相关
+      adminPasswordDialogVisible: false,
+      adminPasswordLoading: false,
+      adminPasswordForm: {
+        password: ''
+      },
+      adminPasswordRules: {
+        password: [
+          { required: true, message: '请输入管理员密码', trigger: 'blur' }
+        ]
       }
     };
   },
@@ -2846,7 +3427,7 @@ export default {
         if (!imageWrapper) return;
 
         const markers = imageWrapper.querySelectorAll(
-          '.marker, .marker-with-panel, .marker-with-button, .queue-marker, .motor-marker, .preheating-room-marker, .analysis-status-marker'
+          '.marker, .marker-with-panel, .marker-with-button, .queue-marker, .motor-marker, .preheating-room-marker, .analysis-status-marker, .arrow-marker'
         );
         const carts = imageWrapper.querySelectorAll('.cart-container');
         const wrapperRect = imageWrapper.getBoundingClientRect();
@@ -3511,6 +4092,97 @@ export default {
       if (this[lineType][key] > 0) {
         this[lineType][key]--;
       }
+    },
+    // 切换无码上货状态
+    toggleNoCodeUpload() {
+      // 显示管理员密码验证对话框
+      this.currentOperation = 'toggleNoCodeUpload';
+      this.adminPasswordDialogVisible = true;
+      this.adminPasswordForm.password = '';
+
+      // 聚焦到密码输入框
+      this.$nextTick(() => {
+        this.$refs.adminPasswordForm.$el
+          .querySelector('input[type="password"]')
+          .focus();
+      });
+    },
+
+    // 验证管理员密码
+    verifyAdminPassword() {
+      this.$refs.adminPasswordForm.validate((valid) => {
+        if (valid) {
+          this.adminPasswordLoading = true;
+
+          // 使用登录接口验证管理员账号密码
+          const param = {
+            userCode: 'admin',
+            userPassword: this.adminPasswordForm.password
+          };
+
+          // 调用登录接口进行验证
+          HttpUtil.post('/login/login', param)
+            .then((res) => {
+              if (res.data) {
+                // 登录成功，允许修改
+
+                // 处理无码模式切换
+                if (this.currentOperation === 'toggleNoCodeUpload') {
+                  this.noCodeUpload = !this.noCodeUpload;
+                  if (this.noCodeUpload) {
+                    this.$message.success(
+                      '已启用无码上货模式，触发光电信号将直接添加托盘'
+                    );
+                    this.addLog('无码上货模式已启用，已给PLC，DBW562发送2');
+                    // 无码模式发2
+                    ipcRenderer.send('writeValuesToPLC', 'DBW562', 2);
+                  } else {
+                    this.$message.info(
+                      '已关闭无码上货模式，已给PLC，DBW562发送1'
+                    );
+                    this.addLog('无码上货模式已关闭');
+                    // 有码模式发1
+                    ipcRenderer.send('writeValuesToPLC', 'DBW562', 1);
+                  }
+                }
+
+                // 关闭对话框
+                this.adminPasswordDialogVisible = false;
+                this.currentOperation = null;
+              } else {
+                // 登录失败
+                if (this.currentOperation === 'toggleNoCodeUpload') {
+                  this.$message.error(
+                    '管理员账号或密码错误，无法切换无码上货模式'
+                  );
+                  this.addLog('管理员权限验证失败，无码上货模式切换被拒绝');
+                }
+              }
+            })
+            .catch((err) => {
+              // 接口调用失败
+              this.$message.error('验证失败，请检查网络连接');
+              if (this.currentOperation === 'toggleNoCodeUpload') {
+                this.addLog(
+                  '管理员权限验证接口调用失败，无码上货模式切换被拒绝'
+                );
+              }
+            })
+            .finally(() => {
+              this.adminPasswordLoading = false;
+            });
+        }
+      });
+    },
+
+    // 取消管理员密码验证
+    cancelAdminPassword() {
+      this.adminPasswordDialogVisible = false;
+      this.currentOperation = null;
+      this.adminPasswordForm.password = '';
+      if (this.currentOperation === 'toggleNoCodeUpload') {
+        this.$message.info('已取消无码上货模式切换');
+      }
     }
   }
 };
@@ -3981,6 +4653,84 @@ export default {
               }
               /* --- 光电点位样式结束 --- */
 
+              /* --- 箭头指示器样式开始 --- */
+              .arrow-marker {
+                position: absolute;
+                width: 28px;
+                height: 18px;
+                transform: translate(-50%, -50%);
+                cursor: pointer;
+                z-index: 2;
+                pointer-events: none;
+                .marker-label {
+                  position: absolute;
+                  white-space: nowrap;
+                  background: #0ac5a8;
+                  color: #fff;
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                  font-size: 12px;
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                  pointer-events: none;
+                  /* 默认标签在右侧 */
+                  top: 50%;
+                  left: calc(100% + 5px);
+                  transform: translateY(-50%);
+                }
+              }
+
+              .arrow-marker::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 19px;
+                height: 3px;
+                background: rgba(128, 128, 128, 0.8);
+                pointer-events: auto;
+                cursor: pointer;
+              }
+
+              .arrow-marker::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 0;
+                height: 0;
+                border-left: 9px solid rgba(128, 128, 128, 0.8);
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+                pointer-events: auto;
+                cursor: pointer;
+              }
+
+              /* 箭头激活状态 (红色) */
+              .arrow-marker.active::before {
+                background: rgba(255, 0, 0, 0.8);
+              }
+
+              .arrow-marker.active::after {
+                border-left-color: rgba(255, 0, 0, 0.8);
+              }
+
+              /* 默认隐藏标签，hover时显示 */
+              .arrow-marker:hover .marker-label {
+                opacity: 1;
+              }
+
+              /* 控制标签位置的样式 */
+              .arrow-marker.label-top .marker-label {
+                top: auto;
+                bottom: calc(100% + 5px);
+                left: 50%;
+                transform: translateX(-50%);
+              }
+              /* --- 箭头指示器样式结束 --- */
+
               /* --- 新增电机点位样式 --- */
               .motor-marker {
                 position: absolute;
@@ -3989,7 +4739,7 @@ export default {
                 transform: translate(-50%, -50%);
                 cursor: pointer;
                 z-index: 2;
-                pointer-events: auto;
+                pointer-events: none;
                 .marker-label {
                   position: absolute;
                   white-space: nowrap;
@@ -3998,6 +4748,7 @@ export default {
                   padding: 4px 8px;
                   border-radius: 4px;
                   font-size: 12px;
+                  pointer-events: none;
                   /* 默认定位在下方 */
                   top: calc(100% + 5px);
                   left: 50%;
@@ -4014,6 +4765,8 @@ export default {
                 height: 100%;
                 background: rgba(128, 128, 128, 0.8); /* 默认灰色方块 */
                 /* 无 border-radius，保持方形 */
+                pointer-events: auto;
+                cursor: pointer;
               }
 
               .motor-marker.running::before {
@@ -4052,8 +4805,6 @@ export default {
               /* 带数据面板的标识点样式 */
               .marker-with-panel {
                 position: absolute;
-                width: 16px;
-                height: 16px;
                 transform: translate(-50%, -50%);
                 cursor: pointer;
                 z-index: 2;
@@ -4086,7 +4837,42 @@ export default {
                         font-size: 12px;
                       }
                     }
-                    /* 新增：复选框组样式 */
+                    /* 新增：扫码信息行样式 */
+                    .scan-row {
+                      display: flex !important;
+                      justify-content: space-between !important;
+                      align-items: center !important;
+
+                      .scan-info {
+                        display: flex;
+                        align-items: center;
+                        flex: 1;
+                      }
+
+                      .scan-value-right {
+                        margin-left: auto;
+                        text-align: right;
+                      }
+
+                      .scan-checkbox {
+                        flex-shrink: 0;
+                        margin-left: 10px;
+                      }
+
+                      .scan-checkbox :deep(.el-checkbox__label) {
+                        color: rgba(255, 255, 255, 0.8) !important;
+                        font-size: 12px !important;
+                      }
+
+                      .scan-checkbox
+                        :deep(
+                          .el-checkbox__input.is-checked + .el-checkbox__label
+                        ) {
+                        color: #0ac5a8 !important;
+                      }
+                    }
+
+                    /* 原有复选框组样式 */
                     .checkbox-group {
                       display: flex;
                       justify-content: space-between; /* 或 space-between */
