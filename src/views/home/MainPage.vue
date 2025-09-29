@@ -261,7 +261,11 @@
                   v-for="marker in queueMarkers"
                   :key="marker.id"
                   class="queue-marker"
-                  style="width: 60px"
+                  :style="
+                    marker.name.includes('进') || marker.name.includes('出')
+                      ? 'width: 75px'
+                      : 'width: 60px'
+                  "
                   :data-x="marker.x"
                   :data-y="marker.y"
                   @click="handleQueueMarkerClick(marker.queueId)"
@@ -1511,179 +1515,186 @@
                 >
                   <div class="marker-label">E1-4#进货</div>
                 </div>
-                <!-- 扫码区域1 -->
-                <div class="marker-with-panel" data-x="270" data-y="1300">
+                <!-- 扫码信息汇总卡片 -->
+                <div class="marker-with-panel" data-x="1150" data-y="1400">
                   <div
-                    class="data-panel"
-                    :class="['position-top', { 'always-show': true }]"
-                    style="width: 230px"
-                  >
-                    <div class="data-panel-header">A线扫码</div>
-                    <div class="data-panel-content">
-                      <!-- 扫码信息行 -->
-                      <!-- <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">A1-1扫码：</span>
-                          <span>{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div> -->
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">A1-4扫码：</span>
-                          <span class="scan-value-right">88888888888</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 扫码区域2 -->
-                <div class="marker-with-panel" data-x="270" data-y="1520">
-                  <div
-                    class="data-panel"
-                    :class="['position-top', { 'always-show': true }]"
-                    style="width: 230px"
-                  >
-                    <div class="data-panel-header">B线扫码</div>
-                    <div class="data-panel-content">
-                      <!-- 扫码信息行 -->
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">B1-1扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">B1-4扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 扫码区域3 -->
-                <div class="marker-with-panel" data-x="800" data-y="1520">
-                  <div
-                    class="data-panel"
-                    :class="['position-top', { 'always-show': true }]"
-                    style="width: 230px"
-                  >
-                    <div class="data-panel-header">C线扫码</div>
-                    <div class="data-panel-content">
-                      <!-- 扫码信息行 -->
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">C1-1扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">C1-4扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 扫码区域4 -->
-                <div class="marker-with-panel" data-x="270" data-y="1800">
-                  <div
-                    class="data-panel"
-                    :class="['position-top', { 'always-show': true }]"
-                    style="width: 230px"
-                  >
-                    <div class="data-panel-header">D线扫码</div>
-                    <div class="data-panel-content">
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">D1-1扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">D1-4扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 扫码区域5 -->
-                <div class="marker-with-panel" data-x="474" data-y="800">
-                  <div
-                    class="data-panel"
-                    :class="['position-top', { 'always-show': true }]"
-                    style="width: 230px"
-                  >
-                    <div class="data-panel-header">E线扫码</div>
-                    <div class="data-panel-content">
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">E1-1扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                      <div class="data-panel-row scan-row">
-                        <div class="scan-info">
-                          <span class="data-panel-label">E1-4扫码：</span>
-                          <span class="scan-value-right">{{ '--' }}</span>
-                        </div>
-                        <el-checkbox class="scan-checkbox">
-                          允许上货
-                        </el-checkbox>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- 下货信息展示 -->
-                <div
-                  class="marker-with-panel"
-                  data-x="1450"
-                  data-y="723"
-                  v-show="false"
-                >
-                  <div
-                    class="data-panel"
+                    class="data-panel modern-card upload-panel"
                     :class="['position-left', { 'always-show': true }]"
+                    style="width: 500px"
                   >
-                    <div class="data-panel-header">下货信息</div>
+                    <div class="data-panel-header">
+                      <i class="el-icon-upload2" style="margin-right: 5px"></i
+                      >上货扫码信息监控面板
+                    </div>
                     <div class="data-panel-content">
-                      <div class="data-panel-row">
-                        <span class="data-panel-label">产品名称：</span>
-                        <span>{{ '--' }}</span>
+                      <!-- 按ABCDE分组显示，每行3个分组，两行布局 -->
+                      <div class="scan-groups-grid">
+                        <!-- 第一行：A B C -->
+                        <div class="scan-group-row">
+                          <!-- A组 -->
+                          <div class="scan-group">
+                            <div class="group-header">A线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">A1-4：</span>
+                                <span class="scan-value">88888888888</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- B组 -->
+                          <div class="scan-group">
+                            <div class="group-header">B线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">B1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">B1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- C组 -->
+                          <div class="scan-group">
+                            <div class="group-header">C线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">C1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">C1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 第二行：D E -->
+                        <div class="scan-group-row">
+                          <!-- D组 -->
+                          <div class="scan-group">
+                            <div class="group-header">D线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">D1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">D1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- E组 -->
+                          <div class="scan-group">
+                            <div class="group-header">E线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">E1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">E1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 占位符保持布局 -->
+                          <div class="scan-group placeholder"></div>
+                        </div>
                       </div>
-                      <div class="data-panel-row">
-                        <span class="data-panel-label">托盘号：</span>
-                        <span>{{ '--' }}</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- 出库信息卡片 -->
+                <div class="marker-with-panel" data-x="2880" data-y="1400">
+                  <div
+                    class="data-panel modern-card download-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="width: 500px"
+                  >
+                    <div class="data-panel-header">
+                      <i class="el-icon-download" style="margin-right: 5px"></i
+                      >下货扫码信息监控面板
+                    </div>
+                    <div class="data-panel-content">
+                      <!-- 按ABCDE分组显示，每行3个分组，两行布局 -->
+                      <div class="scan-groups-grid">
+                        <!-- 第一行：A B C -->
+                        <div class="scan-group-row">
+                          <!-- A组 -->
+                          <div class="scan-group">
+                            <div class="group-header">A线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">A1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- B组 -->
+                          <div class="scan-group">
+                            <div class="group-header">B线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">B1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">B1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- C组 -->
+                          <div class="scan-group">
+                            <div class="group-header">C线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">C1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">C1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 第二行：D E -->
+                        <div class="scan-group-row">
+                          <!-- D组 -->
+                          <div class="scan-group">
+                            <div class="group-header">D线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">D1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">D1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- E组 -->
+                          <div class="scan-group">
+                            <div class="group-header">E线</div>
+                            <div class="group-items">
+                              <div class="scan-item">
+                                <span class="scan-label">E1-1：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                              <div class="scan-item">
+                                <span class="scan-label">E1-4：</span>
+                                <span class="scan-value">{{ '--' }}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 占位符保持布局 -->
+                          <div class="scan-group placeholder"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1884,12 +1895,7 @@
                   </div>
                 </div>
                 <!-- 无码上货按钮 -->
-                <div
-                  class="marker-with-button"
-                  data-x="450"
-                  data-y="1750"
-                  v-show="false"
-                >
+                <div class="marker-with-button" data-x="480" data-y="1750">
                   <div style="display: flex; align-items: center">
                     <el-button
                       :type="noCodeUpload ? 'success' : 'primary'"
@@ -2810,7 +2816,7 @@ export default {
         },
         {
           id: 3,
-          queueName: 'A2-1',
+          queueName: 'A2-1-进',
           trayInfo: []
         },
         {
@@ -2835,7 +2841,7 @@ export default {
         },
         {
           id: 8,
-          queueName: 'A2-2',
+          queueName: 'A2-2-进',
           trayInfo: []
         },
         {
@@ -2860,7 +2866,7 @@ export default {
         },
         {
           id: 13,
-          queueName: 'B2-1',
+          queueName: 'B2-1-进',
           trayInfo: []
         },
         {
@@ -2885,7 +2891,7 @@ export default {
         },
         {
           id: 18,
-          queueName: 'B2-2',
+          queueName: 'B2-2-进',
           trayInfo: []
         },
         {
@@ -2910,7 +2916,7 @@ export default {
         },
         {
           id: 23,
-          queueName: 'C2-1',
+          queueName: 'C2-1-进',
           trayInfo: []
         },
         {
@@ -2935,7 +2941,7 @@ export default {
         },
         {
           id: 28,
-          queueName: 'C2-2',
+          queueName: 'C2-2-进',
           trayInfo: []
         },
         {
@@ -2960,7 +2966,7 @@ export default {
         },
         {
           id: 33,
-          queueName: 'D2-1',
+          queueName: 'D2-1-进',
           trayInfo: []
         },
         {
@@ -2985,7 +2991,7 @@ export default {
         },
         {
           id: 38,
-          queueName: 'D2-2',
+          queueName: 'D2-2-进',
           trayInfo: []
         },
         {
@@ -3010,7 +3016,7 @@ export default {
         },
         {
           id: 43,
-          queueName: 'E2-1',
+          queueName: 'E2-1-进',
           trayInfo: []
         },
         {
@@ -3035,7 +3041,7 @@ export default {
         },
         {
           id: 48,
-          queueName: 'E2-2',
+          queueName: 'E2-2-进',
           trayInfo: []
         },
         {
@@ -3047,60 +3053,120 @@ export default {
           id: 50,
           queueName: 'E3-5',
           trayInfo: []
+        },
+        {
+          id: 51,
+          queueName: 'A2-1-出',
+          trayInfo: []
+        },
+        {
+          id: 52,
+          queueName: 'A2-2-出',
+          trayInfo: []
+        },
+        {
+          id: 53,
+          queueName: 'B2-1-出',
+          trayInfo: []
+        },
+        {
+          id: 54,
+          queueName: 'B2-2-出',
+          trayInfo: []
+        },
+        {
+          id: 55,
+          queueName: 'C2-1-出',
+          trayInfo: []
+        },
+        {
+          id: 56,
+          queueName: 'C2-2-出',
+          trayInfo: []
+        },
+        {
+          id: 57,
+          queueName: 'D2-1-出',
+          trayInfo: []
+        },
+        {
+          id: 58,
+          queueName: 'D2-2-出',
+          trayInfo: []
+        },
+        {
+          id: 59,
+          queueName: 'E2-1-出',
+          trayInfo: []
+        },
+        {
+          id: 60,
+          queueName: 'E2-2-出',
+          trayInfo: []
         }
       ],
       // 添加队列位置标识数据
       queueMarkers: [
         // { id: 1, name: 'A1-2', queueId: 1, x: 550, y: 180 },
         // { id: 2, name: 'A1-3', queueId: 2, x: 1200, y: 180 },
-        // { id: 3, name: 'A2-1', queueId: 3, x: 2100, y: 180 },
+        // { id: 3, name: 'A2-1-进', queueId: 3, x: 2100, y: 180 },
         // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
         // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
         { id: 6, name: 'A1-5', queueId: 6, x: 520, y: 420 },
         { id: 7, name: 'A1-6', queueId: 7, x: 990, y: 420 },
-        { id: 8, name: 'A2-2', queueId: 8, x: 1500, y: 420 },
+        { id: 8, name: 'A2-2-进', queueId: 8, x: 1400, y: 420 },
         { id: 9, name: 'A3-4', queueId: 9, x: 2170, y: 420 },
         { id: 10, name: 'A3-5', queueId: 10, x: 2640, y: 420 },
         { id: 11, name: 'B1-2', queueId: 11, x: 520, y: 518 },
         { id: 12, name: 'B1-3', queueId: 12, x: 990, y: 518 },
-        { id: 13, name: 'B2-1', queueId: 13, x: 1500, y: 518 },
+        { id: 13, name: 'B2-1-进', queueId: 13, x: 1400, y: 518 },
         { id: 14, name: 'B3-1', queueId: 14, x: 2170, y: 518 },
         { id: 15, name: 'B3-2', queueId: 15, x: 2640, y: 518 },
         { id: 16, name: 'B1-5', queueId: 16, x: 520, y: 578 },
         { id: 17, name: 'B1-6', queueId: 17, x: 990, y: 578 },
-        { id: 18, name: 'B2-2', queueId: 18, x: 1500, y: 578 },
+        { id: 18, name: 'B2-2-进', queueId: 18, x: 1400, y: 578 },
         { id: 19, name: 'B3-4', queueId: 19, x: 2170, y: 578 },
         { id: 20, name: 'B3-5', queueId: 20, x: 2640, y: 578 },
         { id: 21, name: 'C1-2', queueId: 21, x: 520, y: 670 },
         { id: 22, name: 'C1-3', queueId: 22, x: 990, y: 670 },
-        { id: 23, name: 'C2-1', queueId: 23, x: 1500, y: 670 },
+        { id: 23, name: 'C2-1-进', queueId: 23, x: 1400, y: 670 },
         { id: 24, name: 'C3-1', queueId: 24, x: 2170, y: 670 },
         { id: 25, name: 'C3-2', queueId: 25, x: 2640, y: 670 },
         { id: 26, name: 'C1-5', queueId: 26, x: 520, y: 730 },
         { id: 27, name: 'C1-6', queueId: 27, x: 990, y: 730 },
-        { id: 28, name: 'C2-2', queueId: 28, x: 1500, y: 730 },
+        { id: 28, name: 'C2-2-进', queueId: 28, x: 1400, y: 730 },
         { id: 29, name: 'C3-4', queueId: 29, x: 2170, y: 730 },
         { id: 30, name: 'C3-5', queueId: 30, x: 2640, y: 730 },
         { id: 31, name: 'D1-2', queueId: 31, x: 520, y: 820 },
         { id: 32, name: 'D1-3', queueId: 32, x: 990, y: 820 },
-        { id: 33, name: 'D2-1', queueId: 33, x: 1500, y: 820 },
+        { id: 33, name: 'D2-1-进', queueId: 33, x: 1400, y: 820 },
         { id: 34, name: 'D3-1', queueId: 34, x: 2170, y: 820 },
         { id: 35, name: 'D3-2', queueId: 35, x: 2640, y: 820 },
         { id: 36, name: 'D1-5', queueId: 36, x: 520, y: 880 },
         { id: 37, name: 'D1-6', queueId: 37, x: 990, y: 880 },
-        { id: 38, name: 'D2-2', queueId: 38, x: 1500, y: 880 },
+        { id: 38, name: 'D2-2-进', queueId: 38, x: 1400, y: 880 },
         { id: 39, name: 'D3-4', queueId: 39, x: 2170, y: 880 },
         { id: 40, name: 'D3-5', queueId: 40, x: 2640, y: 880 },
         { id: 41, name: 'E1-2', queueId: 41, x: 520, y: 970 },
         { id: 42, name: 'E1-3', queueId: 42, x: 990, y: 970 },
-        { id: 43, name: 'E2-1', queueId: 43, x: 1500, y: 970 },
+        { id: 43, name: 'E2-1-进', queueId: 43, x: 1400, y: 970 },
         { id: 44, name: 'E3-1', queueId: 44, x: 2170, y: 970 },
         { id: 45, name: 'E3-2', queueId: 45, x: 2640, y: 970 },
         { id: 46, name: 'E1-5', queueId: 46, x: 520, y: 1030 },
         { id: 47, name: 'E1-6', queueId: 47, x: 990, y: 1030 },
-        { id: 48, name: 'E2-2', queueId: 48, x: 1500, y: 1030 },
+        { id: 48, name: 'E2-2-进', queueId: 48, x: 1400, y: 1030 },
         { id: 49, name: 'E3-4', queueId: 49, x: 2170, y: 1030 },
-        { id: 50, name: 'E3-5', queueId: 50, x: 2640, y: 1030 }
+        { id: 50, name: 'E3-5', queueId: 50, x: 2640, y: 1030 },
+        // { id: 51, name: 'A2-1-进', queueId: 51, x: 520, y: 1120 },
+        { id: 52, name: 'A2-2-出', queueId: 52, x: 1600, y: 420 },
+        { id: 53, name: 'B2-1-出', queueId: 53, x: 1600, y: 518 },
+        { id: 54, name: 'B2-2-出', queueId: 54, x: 1600, y: 578 },
+        { id: 55, name: 'C2-1-出', queueId: 55, x: 1600, y: 670 },
+        { id: 56, name: 'C2-2-出', queueId: 56, x: 1600, y: 730 },
+        { id: 57, name: 'D2-1-出', queueId: 57, x: 1600, y: 820 },
+        { id: 58, name: 'D2-2-出', queueId: 58, x: 1600, y: 880 },
+        { id: 59, name: 'E2-1-出', queueId: 59, x: 1600, y: 970 },
+        { id: 60, name: 'E2-2-出', queueId: 60, x: 1600, y: 1030 }
       ],
       logId: 1000, // 添加一个日志ID计数器=
       // 输送线当前运行状态-读取PLC
@@ -3317,12 +3383,14 @@ export default {
       aLineQuantity: {
         a12: 0, // 预热房-1，序号1
         a13: 0, // 预热房-1，序号2
-        a21: 0, // 灭菌柜-1，序号3
+        a21in: 0, // 灭菌柜-1，序号3
+        a21out: 0, // 灭菌柜-2，序号3
         a31: 0, // 解析房-1，序号4
         a32: 0, // 解析房-1，序号5
         a15: 0, // 预热房-2，序号1
         a16: 0, // 预热房-2，序号2
-        a22: 0, // 灭菌柜-2，序号3
+        a22in: 0, // 灭菌柜-2，序号3
+        a22out: 0, // 解析房-2，序号4
         a34: 0, // 解析房-2，序号4
         a35: 0 // 解析房-2，序号5
       },
@@ -3330,12 +3398,14 @@ export default {
       bLineQuantity: {
         b12: 0, // 预热房-1，序号1
         b13: 0, // 预热房-1，序号2
-        b21: 0, // 灭菌柜-1，序号3
+        b21in: 0, // 灭菌柜-1，序号3
+        b21out: 0, // 灭菌柜-2，序号3
         b31: 0, // 解析房-1，序号4
         b32: 0, // 解析房-1，序号5
         b15: 0, // 预热房-2，序号1
         b16: 0, // 预热房-2，序号2
-        b22: 0, // 灭菌柜-2，序号3
+        b22in: 0, // 灭菌柜-2，序号3
+        b22out: 0, // 灭菌柜-2，序号3
         b34: 0, // 解析房-2，序号4
         b35: 0 // 解析房-2，序号5
       },
@@ -3343,12 +3413,14 @@ export default {
       cLineQuantity: {
         c12: 0, // 预热房-1，序号1
         c13: 0, // 预热房-1，序号2
-        c21: 0, // 灭菌柜-1，序号3
+        c21in: 0, // 灭菌柜-1，序号3
+        c21out: 0, // 灭菌柜-2，序号3
         c31: 0, // 解析房-1，序号4
         c32: 0, // 解析房-1，序号5
         c15: 0, // 预热房-2，序号1
         c16: 0, // 预热房-2，序号2
-        c22: 0, // 灭菌柜-2，序号3
+        c22in: 0, // 灭菌柜-2，序号3
+        c22out: 0, // 灭菌柜-2，序号3
         c34: 0, // 解析房-2，序号4
         c35: 0 // 解析房-2，序号5
       },
@@ -3356,12 +3428,14 @@ export default {
       dLineQuantity: {
         d12: 0, // 预热房-1，序号1
         d13: 0, // 预热房-1，序号2
-        d21: 0, // 灭菌柜-1，序号3
+        d21in: 0, // 灭菌柜-1，序号3
+        d21out: 0, // 灭菌柜-2，序号3
         d31: 0, // 解析房-1，序号4
         d32: 0, // 解析房-1，序号5
         d15: 0, // 预热房-2，序号1
         d16: 0, // 预热房-2，序号2
-        d22: 0, // 灭菌柜-2，序号3
+        d22in: 0, // 灭菌柜-2，序号3
+        d22out: 0, // 灭菌柜-2，序号3
         d34: 0, // 解析房-2，序号4
         d35: 0 // 解析房-2，序号5
       },
@@ -3369,12 +3443,14 @@ export default {
       eLineQuantity: {
         e12: 0, // 预热房-1，序号1
         e13: 0, // 预热房-1，序号2
-        e21: 0, // 灭菌柜-1，序号3
+        e21in: 0, // 灭菌柜-1，序号3
+        e21out: 0, // 灭菌柜-2，序号3
         e31: 0, // 解析房-1，序号4
         e32: 0, // 解析房-1，序号5
         e15: 0, // 预热房-2，序号1
         e16: 0, // 预热房-2，序号2
-        e22: 0, // 灭菌柜-2，序号3
+        e22in: 0, // 灭菌柜-2，序号3
+        e22out: 0, // 灭菌柜-2，序号3
         e34: 0, // 解析房-2，序号4
         e35: 0 // 解析房-2，序号5
       },
@@ -3433,49 +3509,59 @@ export default {
       return {
         6: this.aLineQuantity.a15, // A1-5
         7: this.aLineQuantity.a16, // A1-6
-        8: this.aLineQuantity.a22, // A2-2
+        8: this.aLineQuantity.a22in, // A2-2
         9: this.aLineQuantity.a34, // A3-4
         10: this.aLineQuantity.a35, // A3-5
         11: this.bLineQuantity.b12, // B1-2
         12: this.bLineQuantity.b13, // B1-3
-        13: this.bLineQuantity.b21, // B2-1
+        13: this.bLineQuantity.b21in, // B2-1
         14: this.bLineQuantity.b31, // B3-1
         15: this.bLineQuantity.b32, // B3-2
         16: this.bLineQuantity.b15, // B1-5
         17: this.bLineQuantity.b16, // B1-6
-        18: this.bLineQuantity.b22, // B2-2
+        18: this.bLineQuantity.b22in, // B2-2
         19: this.bLineQuantity.b34, // B3-4
         20: this.bLineQuantity.b35, // B3-5
         21: this.cLineQuantity.c12, // C1-2
         22: this.cLineQuantity.c13, // C1-3
-        23: this.cLineQuantity.c21, // C2-1
+        23: this.cLineQuantity.c21in, // C2-1
         24: this.cLineQuantity.c31, // C3-1
         25: this.cLineQuantity.c32, // C3-2
         26: this.cLineQuantity.c15, // C1-5
         27: this.cLineQuantity.c16, // C1-6
-        28: this.cLineQuantity.c22, // C2-2
+        28: this.cLineQuantity.c22in, // C2-2
         29: this.cLineQuantity.c34, // C3-4
         30: this.cLineQuantity.c35, // C3-5
         31: this.dLineQuantity.d12, // D1-2
         32: this.dLineQuantity.d13, // D1-3
-        33: this.dLineQuantity.d21, // D2-1
+        33: this.dLineQuantity.d21in, // D2-1
         34: this.dLineQuantity.d31, // D3-1
         35: this.dLineQuantity.d32, // D3-2
         36: this.dLineQuantity.d15, // D1-5
         37: this.dLineQuantity.d16, // D1-6
-        38: this.dLineQuantity.d22, // D2-2
+        38: this.dLineQuantity.d22in, // D2-2
         39: this.dLineQuantity.d34, // D3-4
         40: this.dLineQuantity.d35, // D3-5
         41: this.eLineQuantity.e12, // E1-2
         42: this.eLineQuantity.e13, // E1-3
-        43: this.eLineQuantity.e21, // E2-1
+        43: this.eLineQuantity.e21in, // E2-1
         44: this.eLineQuantity.e31, // E3-1
         45: this.eLineQuantity.e32, // E3-2
         46: this.eLineQuantity.e15, // E1-5
         47: this.eLineQuantity.e16, // E1-6
-        48: this.eLineQuantity.e22, // E2-2
+        48: this.eLineQuantity.e22in, // E2-2
         49: this.eLineQuantity.e34, // E3-4
-        50: this.eLineQuantity.e35 // E3-5
+        50: this.eLineQuantity.e35, // E3-5
+        51: this.aLineQuantity.a21out, // A2-1-出
+        52: this.aLineQuantity.a22out, // A2-1-出
+        53: this.bLineQuantity.b21out, // B2-1-出
+        54: this.bLineQuantity.b22out, // B2-1-出
+        55: this.cLineQuantity.c21out, // C2-1-出
+        56: this.cLineQuantity.c22out, // C2-1-出
+        57: this.dLineQuantity.d21out, // D2-1-出
+        58: this.dLineQuantity.d22out, // D2-1-出
+        59: this.eLineQuantity.e21out, // E2-1-出
+        60: this.eLineQuantity.e22out // E2-1-出
       };
     }
   },
@@ -5325,6 +5411,7 @@ export default {
                   opacity: 0;
                   transition: all 0.3s ease;
                   pointer-events: none;
+                  overflow: hidden;
                   .data-panel-header {
                     font-size: 14px;
                     color: #409eff;
@@ -5348,15 +5435,18 @@ export default {
                       display: flex !important;
                       justify-content: space-between !important;
                       align-items: center !important;
+                      margin-bottom: 8px;
 
                       .scan-info {
                         display: flex;
                         align-items: center;
-                        flex: 1;
+                        justify-content: space-between;
+                        width: 100%;
                       }
 
                       .scan-value-right {
-                        margin-left: auto;
+                        color: #0ac5a8;
+                        font-weight: 500;
                         text-align: right;
                       }
 
@@ -5376,6 +5466,98 @@ export default {
                         ) {
                         color: #0ac5a8 !important;
                       }
+                    }
+
+                    /* 现代化卡片样式 */
+                    .modern-card {
+                      background: linear-gradient(
+                        135deg,
+                        #1a2332 0%,
+                        #2d3748 50%,
+                        #1a2332 100%
+                      );
+                      border: 1px solid rgba(64, 158, 255, 0.3);
+                      border-radius: 12px;
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    }
+
+                    /* 扫码分组网格布局 */
+                    .scan-groups-grid {
+                      display: flex;
+                      flex-direction: column;
+                      gap: 16px;
+                    }
+
+                    .scan-group-row {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      gap: 12px;
+                    }
+
+                    .scan-group {
+                      background: linear-gradient(
+                        45deg,
+                        rgba(5, 24, 56, 0.9),
+                        rgba(64, 158, 255, 0.2)
+                      );
+                      border: 1px solid rgba(64, 158, 255, 0.4);
+                      border-radius: 8px;
+                      padding: 8px;
+                      transition: all 0.2s ease;
+                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                    }
+
+                    .scan-group:hover {
+                      background: linear-gradient(
+                        45deg,
+                        rgba(5, 24, 56, 0.95),
+                        rgba(64, 158, 255, 0.3)
+                      );
+                      border-color: rgba(64, 158, 255, 0.6);
+                      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+                    }
+
+                    .scan-group.placeholder {
+                      background: transparent;
+                      border: none;
+                      padding: 0;
+                    }
+
+                    .group-header {
+                      font-size: 12px;
+                      font-weight: 600;
+                      color: #409eff;
+                      margin-bottom: 6px;
+                      text-align: center;
+                      border-bottom: 1px solid rgba(64, 158, 255, 0.2);
+                      padding-bottom: 4px;
+                    }
+
+                    .group-items {
+                      display: flex;
+                      flex-direction: column;
+                      gap: 4px;
+                    }
+
+                    .scan-item {
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      padding: 2px 0;
+                    }
+
+                    .scan-label {
+                      font-size: 11px;
+                      color: rgba(255, 255, 255, 0.7);
+                      flex: 1;
+                    }
+
+                    .scan-value {
+                      font-size: 11px;
+                      color: #0ac5a8;
+                      font-weight: 500;
+                      text-align: right;
+                      flex: 1;
                     }
 
                     /* 原有复选框组样式 */
@@ -5463,6 +5645,34 @@ export default {
                 .data-panel.always-show {
                   opacity: 1;
                   pointer-events: auto; /* 重新启用指针事件 */
+                }
+                /* 上货面板背景文字 */
+                .data-panel.upload-panel::before {
+                  content: '上货信息';
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  font-size: 72px;
+                  font-weight: bold;
+                  color: rgba(255, 193, 7, 0.2);
+                  z-index: 0;
+                  pointer-events: none;
+                  white-space: nowrap;
+                }
+                /* 下货面板背景文字 */
+                .data-panel.download-panel::before {
+                  content: '下货信息';
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  font-size: 72px;
+                  font-weight: bold;
+                  color: rgba(40, 167, 69, 0.2);
+                  z-index: 0;
+                  pointer-events: none;
+                  white-space: nowrap;
                 }
                 /* 竖向布局样式 */
                 .data-panel.vertical-layout {
