@@ -1518,14 +1518,11 @@
                 <!-- 扫码信息汇总卡片 -->
                 <div class="marker-with-panel" data-x="1150" data-y="1400">
                   <div
-                    class="data-panel modern-card upload-panel"
+                    class="data-panel upload-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="width: 500px"
                   >
-                    <div class="data-panel-header">
-                      <i class="el-icon-upload2" style="margin-right: 5px"></i
-                      >上货扫码信息监控面板
-                    </div>
+                    <div class="data-panel-header">上货扫码信息面板</div>
                     <div class="data-panel-content">
                       <!-- 按ABCDE分组显示，每行3个分组，两行布局 -->
                       <div class="scan-groups-grid">
@@ -1600,8 +1597,6 @@
                               </div>
                             </div>
                           </div>
-                          <!-- 占位符保持布局 -->
-                          <div class="scan-group placeholder"></div>
                         </div>
                       </div>
                     </div>
@@ -1610,14 +1605,11 @@
                 <!-- 出库信息卡片 -->
                 <div class="marker-with-panel" data-x="2880" data-y="1400">
                   <div
-                    class="data-panel modern-card download-panel"
+                    class="data-panel download-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="width: 500px"
                   >
-                    <div class="data-panel-header">
-                      <i class="el-icon-download" style="margin-right: 5px"></i
-                      >下货扫码信息监控面板
-                    </div>
+                    <div class="data-panel-header">下货扫码信息面板</div>
                     <div class="data-panel-content">
                       <!-- 按ABCDE分组显示，每行3个分组，两行布局 -->
                       <div class="scan-groups-grid">
@@ -1692,8 +1684,6 @@
                               </div>
                             </div>
                           </div>
-                          <!-- 占位符保持布局 -->
-                          <div class="scan-group placeholder"></div>
                         </div>
                       </div>
                     </div>
@@ -5402,7 +5392,7 @@ export default {
                 z-index: 2;
                 .data-panel {
                   position: absolute;
-                  background: linear-gradient(135deg, #0e1a27, #3c4c63);
+                  background: #062438;
                   border: 1px solid rgba(64, 158, 255, 0.3);
                   border-radius: 8px;
                   padding: 12px;
@@ -5468,19 +5458,6 @@ export default {
                       }
                     }
 
-                    /* 现代化卡片样式 */
-                    .modern-card {
-                      background: linear-gradient(
-                        135deg,
-                        #1a2332 0%,
-                        #2d3748 50%,
-                        #1a2332 100%
-                      );
-                      border: 1px solid rgba(64, 158, 255, 0.3);
-                      border-radius: 12px;
-                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                    }
-
                     /* 扫码分组网格布局 */
                     .scan-groups-grid {
                       display: flex;
@@ -5495,32 +5472,12 @@ export default {
                     }
 
                     .scan-group {
-                      background: linear-gradient(
-                        45deg,
-                        rgba(5, 24, 56, 0.9),
-                        rgba(64, 158, 255, 0.2)
-                      );
-                      border: 1px solid rgba(64, 158, 255, 0.4);
+                      background: linear-gradient(#283b50, #052438);
+                      border: 1px solid rgba(64, 158, 255, 0.1);
+                      border-left: 4px solid #1890ff;
                       border-radius: 8px;
                       padding: 8px;
                       transition: all 0.2s ease;
-                      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-                    }
-
-                    .scan-group:hover {
-                      background: linear-gradient(
-                        45deg,
-                        rgba(5, 24, 56, 0.95),
-                        rgba(64, 158, 255, 0.3)
-                      );
-                      border-color: rgba(64, 158, 255, 0.6);
-                      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-                    }
-
-                    .scan-group.placeholder {
-                      background: transparent;
-                      border: none;
-                      padding: 0;
                     }
 
                     .group-header {
@@ -5548,13 +5505,13 @@ export default {
 
                     .scan-label {
                       font-size: 11px;
-                      color: rgba(255, 255, 255, 0.7);
+                      color: white;
                       flex: 1;
                     }
 
                     .scan-value {
                       font-size: 11px;
-                      color: #0ac5a8;
+                      color: white;
                       font-weight: 500;
                       text-align: right;
                       flex: 1;
