@@ -46,7 +46,7 @@
                   </div>
                 </div>
               </div>
-              <div class="data-card">
+              <!-- <div class="data-card">
                 <div class="data-card-border">
                   <div class="data-card-border-borderTop">物料编号</div>
                   <div class="data-card-border-borderDown">
@@ -61,6 +61,93 @@
                     {{ nowScanTrayInfo.batchNo || '--' }}
                   </div>
                 </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- 订单设置卡片区域 -->
+        <div class="production-cards-section">
+          <div class="section-header">
+            <span>订单设置</span>
+            <el-button
+              type="primary"
+              size="mini"
+              icon="el-icon-search"
+              @click="showOrderQueryDialog"
+            >
+              查询历史订单
+            </el-button>
+          </div>
+          <div class="production-cards">
+            <div
+              v-for="line in productionLines"
+              :key="line.id"
+              class="production-card"
+              :class="{ 'has-order': line.currentOrder }"
+            >
+              <!-- 左边：生产线标识 -->
+              <div class="line-identifier">
+                <span class="line-letter">{{ line.letter }}</span>
+              </div>
+
+              <!-- 中间：订单信息或设置按钮 -->
+              <div class="order-section">
+                <div v-if="line.currentOrder" class="order-info">
+                  <div class="order-header">
+                    <span class="order-id">{{
+                      line.currentOrder.orderId
+                    }}</span>
+                    <span class="order-status running">
+                      <i class="el-icon-loading"></i>
+                      执行中
+                    </span>
+                  </div>
+                  <div class="order-details">
+                    <div class="info-row">
+                      <div class="info-item">
+                        <span class="info-label">产品名称</span>
+                        <span class="info-value">{{
+                          line.currentOrder.productName
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="info-row">
+                      <div class="info-item">
+                        <span class="info-label">进货口</span>
+                        <span class="info-value">{{
+                          getInputText(line.currentOrder.inPut)
+                        }}</span>
+                      </div>
+                      <div class="info-item">
+                        <span class="info-label">出货口</span>
+                        <span class="info-value">{{
+                          getOutputText(line.currentOrder.isPrint3)
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-else class="no-order">
+                  <el-button
+                    type="primary"
+                    size="small"
+                    @click="showOrderDialog(line)"
+                    icon="el-icon-plus"
+                  >
+                    设置订单
+                  </el-button>
+                </div>
+              </div>
+
+              <!-- 右边：允许上货复选框 -->
+              <div class="allow-loading">
+                <el-checkbox
+                  v-model="line.allowLoading"
+                  @change="onAllowLoadingChange(line)"
+                >
+                  允许上货
+                </el-checkbox>
               </div>
             </div>
           </div>
@@ -70,14 +157,6 @@
         <div class="operation-panel">
           <div class="section-header">
             <span>操作区</span>
-            <el-button
-              type="primary"
-              size="mini"
-              icon="el-icon-search"
-              @click="showOrderQueryDialog"
-            >
-              查询历史订单
-            </el-button>
           </div>
           <div class="operation-buttons">
             <button
@@ -2249,6 +2328,99 @@
     <!-- 订单查询对话框 -->
     <OrderQueryDialog :visible.sync="orderQueryDialogVisible" />
 
+    <!-- 订单选择弹窗 -->
+    <el-dialog
+      title="选择订单"
+      :visible.sync="orderSelectDialogVisible"
+      width="800px"
+      append-to-body
+      :close-on-click-modal="false"
+    >
+      <div class="order-select-content">
+        <div class="order-table-container" v-if="availableOrders.length > 0">
+          <el-table
+            :data="availableOrders"
+            @row-click="selectOrder"
+            highlight-current-row
+            stripe
+            border
+            :current-row="getCurrentRow()"
+            style="width: 100%"
+            max-height="400"
+          >
+            <el-table-column
+              prop="orderId"
+              label="订单号"
+              width="120"
+              align="center"
+            >
+              <template slot-scope="{ row }">
+                <span class="order-id">{{ row.orderId }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="productName"
+              label="产品名称"
+              min-width="150"
+            >
+              <template slot-scope="{ row }">
+                <span>{{ row.productName }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="insertTime"
+              label="订单时间"
+              width="160"
+              align="center"
+            >
+              <template slot-scope="{ row }">
+                <span>{{ row.insertTime }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="inPut"
+              label="进货口"
+              width="100"
+              align="center"
+            >
+              <template slot-scope="{ row }">
+                <span>{{ getInputText(row.inPut) }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="isPrint3"
+              label="出货口"
+              width="100"
+              align="center"
+            >
+              <template slot-scope="{ row }">
+                <span>{{ getOutputText(row.isPrint3) }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column label="状态" width="100" align="center">
+              <template>
+                <el-tag type="warning" size="small">待执行</el-tag>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div v-else class="empty-state">
+          <i class="el-icon-document"></i>
+          <p>暂无可用订单</p>
+        </div>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="orderSelectDialogVisible = false">取消</el-button>
+        <el-button
+          type="primary"
+          @click="confirmOrderSelection"
+          :disabled="!selectedOrderId"
+        >
+          确认选择
+        </el-button>
+      </div>
+    </el-dialog>
+
     <!-- 管理员密码验证对话框 -->
     <el-dialog
       title="管理员权限验证"
@@ -2503,6 +2675,60 @@ export default {
       isDataReady: false, // 添加数据准备就绪标志位
       showTestPanel: false,
       orderQueryDialogVisible: false,
+      // 生产线卡片相关数据
+      productionLines: [
+        { id: 1, letter: 'A', currentOrder: null, allowLoading: false },
+        { id: 2, letter: 'B', currentOrder: null, allowLoading: false },
+        { id: 3, letter: 'C', currentOrder: null, allowLoading: false },
+        { id: 4, letter: 'D', currentOrder: null, allowLoading: false },
+        { id: 5, letter: 'E', currentOrder: null, allowLoading: false }
+      ],
+      // 订单选择弹窗相关
+      orderSelectDialogVisible: false,
+      selectedLine: null,
+      selectedOrderId: null,
+      availableOrders: [
+        {
+          orderId: 'ORD001',
+          productName: '医疗器械A',
+          insertTime: '2024-01-15 10:30:00',
+          inPut: '1',
+          isPrint3: '1',
+          orderStatus: '0'
+        },
+        {
+          orderId: 'ORD002',
+          productName: '医疗器械B',
+          insertTime: '2024-01-15 11:15:00',
+          inPut: '2',
+          isPrint3: '0',
+          orderStatus: '0'
+        },
+        {
+          orderId: 'ORD003',
+          productName: '医疗器械C',
+          insertTime: '2024-01-15 12:00:00',
+          inPut: '3',
+          isPrint3: '2',
+          orderStatus: '0'
+        },
+        {
+          orderId: 'ORD004',
+          productName: '医疗器械D',
+          insertTime: '2024-01-15 13:45:00',
+          inPut: '1',
+          isPrint3: '1',
+          orderStatus: '0'
+        },
+        {
+          orderId: 'ORD005',
+          productName: '医疗器械E',
+          insertTime: '2024-01-15 14:20:00',
+          inPut: '2',
+          isPrint3: '0',
+          orderStatus: '0'
+        }
+      ],
       buttonStates: {
         start: false,
         stop: false,
@@ -3289,6 +3515,72 @@ export default {
     // 显示订单查询对话框
     showOrderQueryDialog() {
       this.orderQueryDialogVisible = true;
+    },
+    // 显示订单选择弹窗
+    showOrderDialog(line) {
+      this.selectedLine = line;
+      this.selectedOrderId = null;
+      this.orderSelectDialogVisible = true;
+    },
+    // 选择订单
+    selectOrder(order) {
+      this.selectedOrderId = order.orderId;
+    },
+    // 获取当前选中的行（用于表格高亮）
+    getCurrentRow() {
+      if (!this.selectedOrderId) return null;
+      return this.availableOrders.find(
+        (order) => order.orderId === this.selectedOrderId
+      );
+    },
+    // 确认订单选择
+    confirmOrderSelection() {
+      if (!this.selectedOrderId || !this.selectedLine) return;
+
+      const selectedOrder = this.availableOrders.find(
+        (order) => order.orderId === this.selectedOrderId
+      );
+      if (selectedOrder) {
+        // 将订单分配给选中的生产线
+        this.selectedLine.currentOrder = { ...selectedOrder, orderStatus: '1' };
+        // 从可用订单列表中移除
+        this.availableOrders = this.availableOrders.filter(
+          (order) => order.orderId !== this.selectedOrderId
+        );
+        this.$message.success(
+          `订单 ${selectedOrder.orderId} 已分配给生产线 ${this.selectedLine.letter}`
+        );
+      }
+
+      this.orderSelectDialogVisible = false;
+      this.selectedLine = null;
+      this.selectedOrderId = null;
+    },
+    // 允许上货状态改变
+    onAllowLoadingChange(line) {
+      this.$message.info(
+        `生产线 ${line.letter} 允许上货状态已${
+          line.allowLoading ? '开启' : '关闭'
+        }`
+      );
+    },
+    // 获取进货口文本
+    getInputText(input) {
+      const inputMap = {
+        1: '一楼进货',
+        2: '二楼进货',
+        3: '三楼进货'
+      };
+      return inputMap[input] || '未知';
+    },
+    // 获取出货口文本
+    getOutputText(output) {
+      const outputMap = {
+        0: '不解析',
+        1: '解析库',
+        2: '立体库'
+      };
+      return outputMap[output] || '未知';
     },
     toggleButtonState(button) {
       if (button === 'start') {
@@ -4251,7 +4543,8 @@ export default {
       flex-shrink: 0;
       overflow: hidden;
       .plc-info-section,
-      .operation-panel {
+      .operation-panel,
+      .production-cards-section {
         background: #052438;
         padding: 10px;
         border-radius: 15px;
@@ -4539,6 +4832,219 @@ export default {
             background: linear-gradient(135deg, #4caf50, #2e8b57);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
             transform: scale(0.95);
+          }
+        }
+      }
+      .production-cards-section {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        overflow: auto;
+        .production-cards {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          overflow-y: auto;
+          padding-right: 5px;
+          /* 自定义滚动条样式 */
+          &::-webkit-scrollbar {
+            width: 4px;
+          }
+          &::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: rgba(10, 197, 168, 0.2);
+            border-radius: 2px;
+            &:hover {
+              background: rgba(10, 197, 168, 0.4);
+            }
+          }
+          .production-card {
+            width: 100%;
+            box-sizing: border-box;
+            background: linear-gradient(
+              90deg,
+              rgba(30, 42, 56, 0.95) 0%,
+              rgba(48, 65, 86, 0.85) 50%,
+              rgba(48, 65, 86, 0.75) 100%
+            );
+            border-radius: 6px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            height: 80px;
+            min-height: 80px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+
+            &:hover {
+              background: linear-gradient(
+                90deg,
+                rgba(30, 42, 56, 0.98) 0%,
+                rgba(48, 65, 86, 0.9) 50%,
+                rgba(48, 65, 86, 0.85) 100%
+              );
+              transform: translateX(4px);
+              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 3px;
+              height: 100%;
+              background: transparent;
+              transition: all 0.3s ease;
+            }
+
+            &.has-order::before {
+              background: #409eff;
+            }
+
+            .line-identifier {
+              width: 40px;
+              height: 40px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background: linear-gradient(135deg, #0ac5a8, #0f6b58);
+              border-radius: 50%;
+              flex-shrink: 0;
+              .line-letter {
+                font-size: 18px;
+                font-weight: bold;
+                color: #fff;
+              }
+            }
+
+            .order-section {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              gap: 4px;
+              min-width: 0;
+              padding-right: 100px;
+
+              .order-info {
+                .order-header {
+                  display: flex;
+                  align-items: center;
+                  gap: 12px;
+                  margin: 0;
+                  padding: 0;
+                  border: none;
+                  .order-id {
+                    font-weight: 600;
+                    color: #fff;
+                    font-size: 14px;
+                    letter-spacing: 0.5px;
+                    white-space: nowrap;
+                  }
+                  .order-status {
+                    font-size: 11px;
+                    padding: 2px 8px;
+                    border-radius: 4px;
+                    background: rgba(64, 158, 255, 0.15);
+                    color: #409eff;
+                    white-space: nowrap;
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    i {
+                      font-size: 12px;
+                    }
+                  }
+                }
+                .order-details {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 4px;
+                  padding: 0;
+                  .info-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                  }
+                  .info-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    flex: 1;
+                    min-width: 0;
+                    .info-label {
+                      color: rgba(255, 255, 255, 0.45);
+                      font-size: 12px;
+                      white-space: nowrap;
+                      width: 50px;
+                      flex-shrink: 0;
+                    }
+                    .info-value {
+                      color: rgba(255, 255, 255, 0.85);
+                      font-size: 12px;
+                      font-weight: 500;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      flex: 1;
+                      min-width: 0;
+                    }
+                  }
+                }
+              }
+
+              .no-order {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                .el-button {
+                  background: rgba(255, 255, 255, 0.06);
+                  border: 1px solid rgba(255, 255, 255, 0.1);
+                  color: rgba(255, 255, 255, 0.85);
+                  padding: 0 15px;
+                  border-radius: 4px;
+                  font-size: 12px;
+                  height: 28px;
+                  min-width: 85px;
+                  transition: all 0.3s ease;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 4px;
+                  cursor: pointer;
+                  &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-color: rgba(255, 255, 255, 0.2);
+                  }
+                }
+              }
+            }
+
+            .allow-loading {
+              position: absolute;
+              right: 15px;
+              top: 50%;
+              transform: translateY(-50%);
+              /deep/ .el-checkbox {
+                .el-checkbox__label {
+                  color: rgba(255, 255, 255, 0.85);
+                  font-size: 12px;
+                }
+                .el-checkbox__input.is-checked .el-checkbox__inner {
+                  background-color: #0ac5a8;
+                  border-color: #0ac5a8;
+                }
+              }
+            }
           }
         }
       }
