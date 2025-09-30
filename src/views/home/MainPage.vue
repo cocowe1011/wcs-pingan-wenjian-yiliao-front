@@ -1516,11 +1516,11 @@
                   <div class="marker-label">E1-4#进货</div>
                 </div>
                 <!-- 扫码信息汇总卡片 -->
-                <div class="marker-with-panel" data-x="1150" data-y="1400">
+                <div class="marker-with-panel" data-x="1350" data-y="1400">
                   <div
                     class="data-panel upload-panel"
                     :class="['position-left', { 'always-show': true }]"
-                    style="width: 500px"
+                    style="width: 600px"
                   >
                     <div class="data-panel-header">上货扫码信息面板</div>
                     <div class="data-panel-content">
@@ -1607,7 +1607,7 @@
                   <div
                     class="data-panel download-panel"
                     :class="['position-left', { 'always-show': true }]"
-                    style="width: 500px"
+                    style="width: 600px"
                   >
                     <div class="data-panel-header">下货扫码信息面板</div>
                     <div class="data-panel-content">
@@ -5392,69 +5392,33 @@ export default {
                 z-index: 2;
                 .data-panel {
                   position: absolute;
-                  background: #062438;
-                  border: 1px solid rgba(64, 158, 255, 0.3);
-                  border-radius: 8px;
+                  background: #ffffff;
+                  border: 1px solid #e8e8e8;
+                  border-radius: 12px;
                   padding: 12px;
                   width: 170px;
-                  // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
                   opacity: 0;
                   transition: all 0.3s ease;
                   pointer-events: none;
                   overflow: hidden;
                   .data-panel-header {
                     font-size: 14px;
-                    color: #409eff;
+                    color: #1a1a1a;
+                    font-weight: 600;
                     margin-bottom: 6px;
                     padding-bottom: 6px;
-                    border-bottom: 1px solid rgba(64, 158, 255, 0.2);
+                    border-bottom: 2px solid #f0f0f0;
                   }
                   .data-panel-content {
                     font-size: 12px;
                     .data-panel-row {
                       display: flex;
                       justify-content: space-between;
-                      color: rgba(255, 255, 255, 0.9);
+                      color: #333333;
                       .data-panel-label {
-                        color: rgba(255, 255, 255, 0.6);
+                        color: #666666;
                         font-size: 12px;
-                      }
-                    }
-                    /* 新增：扫码信息行样式 */
-                    .scan-row {
-                      display: flex !important;
-                      justify-content: space-between !important;
-                      align-items: center !important;
-                      margin-bottom: 8px;
-
-                      .scan-info {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        width: 100%;
-                      }
-
-                      .scan-value-right {
-                        color: #0ac5a8;
-                        font-weight: 500;
-                        text-align: right;
-                      }
-
-                      .scan-checkbox {
-                        flex-shrink: 0;
-                        margin-left: 10px;
-                      }
-
-                      .scan-checkbox :deep(.el-checkbox__label) {
-                        color: rgba(255, 255, 255, 0.8) !important;
-                        font-size: 12px !important;
-                      }
-
-                      .scan-checkbox
-                        :deep(
-                          .el-checkbox__input.is-checked + .el-checkbox__label
-                        ) {
-                        color: #0ac5a8 !important;
                       }
                     }
 
@@ -5472,22 +5436,31 @@ export default {
                     }
 
                     .scan-group {
-                      background: linear-gradient(#283b50, #052438);
-                      border: 1px solid rgba(64, 158, 255, 0.1);
-                      border-left: 4px solid #1890ff;
+                      background: linear-gradient(
+                        135deg,
+                        #e9f4ff 0%,
+                        #ffffff 100%
+                      );
+                      border: 1px solid #e8e8e8;
+                      border-left: 3px solid #4a90e2;
                       border-radius: 8px;
-                      padding: 8px;
+                      padding: 10px;
                       transition: all 0.2s ease;
+
+                      &:hover {
+                        border-left-color: #357abd;
+                        box-shadow: 0 2px 8px rgba(74, 144, 226, 0.12);
+                      }
                     }
 
                     .group-header {
                       font-size: 12px;
                       font-weight: 600;
-                      color: #409eff;
-                      margin-bottom: 6px;
+                      color: #4a90e2;
+                      margin-bottom: 8px;
                       text-align: center;
-                      border-bottom: 1px solid rgba(64, 158, 255, 0.2);
-                      padding-bottom: 4px;
+                      border-bottom: 1px solid #f0f0f0;
+                      padding-bottom: 6px;
                     }
 
                     .group-items {
@@ -5505,57 +5478,16 @@ export default {
 
                     .scan-label {
                       font-size: 11px;
-                      color: white;
+                      color: #666666;
                       flex: 1;
                     }
 
                     .scan-value {
                       font-size: 11px;
-                      color: white;
+                      color: #1a1a1a;
                       font-weight: 500;
                       text-align: right;
                       flex: 1;
-                    }
-
-                    /* 原有复选框组样式 */
-                    .checkbox-group {
-                      display: flex;
-                      justify-content: space-between; /* 或 space-between */
-                      align-items: center;
-                      padding-top: 5px; /* 增加一点顶部间距 */
-                    }
-
-                    .checkbox-group .el-checkbox {
-                      margin-right: 10px; /* 增加复选框之间的间距 */
-                    }
-
-                    /* 调整复选框标签颜色 */
-                    .checkbox-group :deep(.el-checkbox__label) {
-                      color: rgba(255, 255, 255, 0.8); /* 调整标签颜色 */
-                      font-size: 12px; /* 调整标签字体大小 */
-                    }
-
-                    /* 执行控制区域的特殊样式 */
-                    .exec-controls {
-                      display: flex;
-                      align-items: center;
-                      gap: 3px;
-                    }
-
-                    /* 调整选中状态下的颜色 */
-                    .checkbox-group
-                      :deep(
-                        .el-checkbox__input.is-checked + .el-checkbox__label
-                      ) {
-                      color: #0ac5a8; /* 选中时标签颜色 */
-                    }
-
-                    .checkbox-group
-                      :deep(
-                        .el-checkbox__input.is-checked .el-checkbox__inner
-                      ) {
-                      background-color: #0ac5a8; /* 选中时背景色 */
-                      border-color: #0ac5a8; /* 选中时边框色 */
                     }
                   }
                 }
@@ -5612,7 +5544,7 @@ export default {
                   transform: translate(-50%, -50%);
                   font-size: 72px;
                   font-weight: bold;
-                  color: rgba(255, 193, 7, 0.2);
+                  color: rgba(255, 193, 7, 0.15);
                   z-index: 0;
                   pointer-events: none;
                   white-space: nowrap;
@@ -5626,7 +5558,7 @@ export default {
                   transform: translate(-50%, -50%);
                   font-size: 72px;
                   font-weight: bold;
-                  color: rgba(40, 167, 69, 0.2);
+                  color: rgba(40, 167, 69, 0.15);
                   z-index: 0;
                   pointer-events: none;
                   white-space: nowrap;
@@ -5640,7 +5572,7 @@ export default {
                     gap: 4px;
                     margin-bottom: 8px;
                     padding-bottom: 8px;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: 1px solid #f0f0f0;
                   }
                   .data-panel-label {
                     margin-bottom: 2px;
