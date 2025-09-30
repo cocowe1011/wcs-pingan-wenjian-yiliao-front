@@ -1533,9 +1533,9 @@
                             <div class="group-items">
                               <div class="scan-item">
                                 <span class="scan-label">A1-4：</span>
-                                <span class="scan-value"
-                                  >一次性注射器/0.1ml</span
-                                >
+                                <span class="scan-value">{{
+                                  uploadScanInfo.A14
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1545,11 +1545,15 @@
                             <div class="group-items">
                               <div class="scan-item">
                                 <span class="scan-label">B1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.B11
+                                }}</span>
                               </div>
                               <div class="scan-item">
                                 <span class="scan-label">B1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.B14
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1559,11 +1563,15 @@
                             <div class="group-items">
                               <div class="scan-item">
                                 <span class="scan-label">C1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.C11
+                                }}</span>
                               </div>
                               <div class="scan-item">
                                 <span class="scan-label">C1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.C14
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1576,11 +1584,15 @@
                             <div class="group-items">
                               <div class="scan-item">
                                 <span class="scan-label">D1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.D11
+                                }}</span>
                               </div>
                               <div class="scan-item">
                                 <span class="scan-label">D1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.D14
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1590,11 +1602,15 @@
                             <div class="group-items">
                               <div class="scan-item">
                                 <span class="scan-label">E1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.E11
+                                }}</span>
                               </div>
                               <div class="scan-item">
                                 <span class="scan-label">E1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-value">{{
+                                  uploadScanInfo.E14
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -2672,6 +2688,18 @@ export default {
       isDataReady: false, // 添加数据准备就绪标志位
       showTestPanel: false,
       orderQueryDialogVisible: false,
+      // 上货扫码信息面板数据
+      uploadScanInfo: {
+        A14: '--', // A1-4
+        B11: '--', // B1-1
+        B14: '--', // B1-4
+        C11: '--', // C1-1
+        C14: '--', // C1-4
+        D11: '--', // D1-1
+        D14: '--', // D1-4
+        E11: '--', // E1-1
+        E14: '--' // E1-4
+      },
       // 生产线卡片相关数据
       productionLines: [
         { id: 1, letter: 'A', currentOrder: null, allowLoading: false },
@@ -3837,6 +3865,25 @@ export default {
         inPut: `${lineLetter}线`,
         isTerile: currentTray.isTerile === 1 ? '是' : '否'
       };
+
+      // 更新右侧上货扫码信息面板
+      const bitToFieldMap = {
+        0: 'A14', // A1-4 (实际不使用bit0)
+        1: 'A14', // A1-4
+        2: 'B11', // B1-1
+        3: 'B14', // B1-4
+        4: 'C11', // C1-1
+        5: 'C14', // C1-4
+        6: 'D11', // D1-1
+        7: 'D14', // D1-4
+        8: 'E11', // E1-1
+        9: 'E14' // E1-4
+      };
+
+      const fieldKey = bitToFieldMap[bitIndex];
+      if (fieldKey) {
+        this.uploadScanInfo[fieldKey] = currentTray.productName;
+      }
 
       // 更新订单的当前托盘索引
       line.currentOrder.currentTrayIndex = currentIndex + 1;
