@@ -1860,43 +1860,56 @@
                   <div class="preheating-room-content">
                     <div class="preheating-room-header">出库选择</div>
                     <div class="preheating-room-body">
-                      <el-select
-                        v-model="outWarehouseSelected"
-                        placeholder="选择"
-                        size="mini"
-                      >
-                        <el-option label="不执行" :value="null"></el-option>
-                        <el-option label="A" value="A"></el-option>
-                        <el-option label="B" value="B"></el-option>
-                        <el-option label="C" value="C"></el-option>
-                        <el-option label="D" value="D"></el-option>
-                        <el-option label="E" value="E"></el-option>
-                      </el-select>
-                      <el-button
-                        type="primary"
-                        size="mini"
-                        @click="sendToWarehouse"
-                        :loading="outWarehouseLoading"
-                        style="width: 100%"
-                        >执行</el-button
-                      >
-                      <el-button
-                        v-if="outWarehouseExecuting"
-                        type="danger"
-                        size="mini"
-                        @click="cancelOutWarehouse"
-                        style="width: 100%; margin-left: 0px"
-                        >取消</el-button
-                      >
-                      <span
-                        style="font-size: 12px; color: #fff; color: greenyellow"
-                        v-if="outWarehouseTrayCode"
-                        >执行中：{{ outWarehouseTrayCode }}</span
-                      >
-                      <div
-                        style="margin-top: 4px; font-size: 12px; color: #9fe3d3"
-                      >
-                        需进货：<b>{{ outNeedQty }}</b>
+                      <div class="line-container">
+                        <div
+                          class="line-item"
+                          v-for="line in ['A', 'B', 'C', 'D', 'E']"
+                          :key="line"
+                        >
+                          <div class="line-label">{{ line }}</div>
+                          <div class="line-buttons">
+                            <el-button
+                              type="primary"
+                              size="mini"
+                              @click="sendToWarehouse(line)"
+                              :loading="outWarehouseLoading[line]"
+                              style="width: 100%; margin-bottom: 4px"
+                            >
+                              执行
+                            </el-button>
+                            <el-button
+                              v-if="outWarehouseExecuting[line]"
+                              type="danger"
+                              size="mini"
+                              @click="cancelOutWarehouse(line)"
+                              style="width: 100%"
+                            >
+                              取消
+                            </el-button>
+                          </div>
+                          <div class="line-status">
+                            <span
+                              v-if="outWarehouseTrayCode[line]"
+                              style="
+                                font-size: 10px;
+                                color: greenyellow;
+                                display: block;
+                                margin-bottom: 2px;
+                              "
+                            >
+                              执行中：{{ outWarehouseTrayCode[line] }}
+                            </span>
+                            <div
+                              style="
+                                font-size: 12px;
+                                color: #9fe3d3;
+                                text-align: left;
+                              "
+                            >
+                              需进货：<b>{{ outNeedQty[line] || 0 }}</b>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -3651,6 +3664,36 @@ export default {
     // if (!this.isDataReady) {
     //   this.isDataReady = true;
     // }
+
+    // 出库选择多线体状态管理
+    this.outWarehouseLoading = {
+      A: false,
+      B: false,
+      C: false,
+      D: false,
+      E: false
+    };
+    this.outWarehouseExecuting = {
+      A: false,
+      B: false,
+      C: false,
+      D: false,
+      E: false
+    };
+    this.outWarehouseTrayCode = {
+      A: '',
+      B: '',
+      C: '',
+      D: '',
+      E: ''
+    };
+    this.outNeedQty = {
+      A: 0,
+      B: 0,
+      C: 0,
+      D: 0,
+      E: 0
+    };
   },
   watch: {
     // ---- 新增：监听指定队列的 trayInfo 变化 ----
@@ -3758,6 +3801,22 @@ export default {
       return this.availableOrders.find(
         (order) => order.orderId === this.selectedOrderId
       );
+    },
+    // 出库选择相关方法
+    sendToWarehouse(line) {
+      this.outWarehouseLoading[line] = true;
+      // 模拟执行出库操作
+      setTimeout(() => {
+        this.outWarehouseLoading[line] = false;
+        this.outWarehouseExecuting[line] = true;
+        this.outWarehouseTrayCode[line] = `TRAY-${line}-${Date.now()}`;
+        this.outNeedQty[line] = Math.floor(Math.random() * 10) + 1;
+      }, 1000);
+    },
+    cancelOutWarehouse(line) {
+      this.outWarehouseExecuting[line] = false;
+      this.outWarehouseTrayCode[line] = '';
+      this.outNeedQty[line] = 0;
     },
     // 确认订单选择
     confirmOrderSelection() {
@@ -5877,7 +5936,7 @@ export default {
                 border-radius: 5px;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
                 overflow: hidden;
-                width: 80px;
+                width: 500px;
                 .preheating-room-content {
                   display: flex;
                   flex-direction: column;
@@ -5892,11 +5951,48 @@ export default {
                     font-weight: bold;
                   }
                   .preheating-room-body {
-                    padding: 6px 8px;
+                    padding: 6px;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
                     gap: 6px;
+                  }
+
+                  .line-container {
+                    display: flex;
+                    width: 100%;
+                    gap: 0;
+                  }
+
+                  .line-item {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 4px 5px;
+                    border-right: 1px solid #666;
+                    min-width: 0;
+                  }
+
+                  .line-item:last-child {
+                    border-right: none;
+                  }
+
+                  .line-label {
+                    font-size: 12px;
+                    color: white;
+                    font-weight: bold;
+                    margin-bottom: 4px;
+                  }
+
+                  .line-buttons {
+                    width: 100%;
+                    margin-bottom: 4px;
+                  }
+
+                  .line-status {
+                    width: 100%;
+                    text-align: center;
                   }
                 }
               }
