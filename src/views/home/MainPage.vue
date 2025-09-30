@@ -1533,7 +1533,9 @@
                             <div class="group-items">
                               <div class="scan-item">
                                 <span class="scan-label">A1-4：</span>
-                                <span class="scan-value">88888888888</span>
+                                <span class="scan-value"
+                                  >一次性注射器/0.1ml</span
+                                >
                               </div>
                             </div>
                           </div>
@@ -2689,7 +2691,19 @@ export default {
           insertTime: '2024-01-15 10:30:00',
           inPut: '1',
           isPrint3: '1',
-          orderStatus: '0'
+          orderStatus: '0',
+          trays: Array.from({ length: 16 }, (_, i) => ({
+            id: `ORD001-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD001',
+            productName: '医疗器械A',
+            productCode: 'MC-A001',
+            batchNo: `BATCH-001-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 1,
+            time: '2024-01-15 10:30:00'
+          })),
+          currentTrayIndex: 0
         },
         {
           orderId: 'ORD002',
@@ -2697,7 +2711,19 @@ export default {
           insertTime: '2024-01-15 11:15:00',
           inPut: '2',
           isPrint3: '0',
-          orderStatus: '0'
+          orderStatus: '0',
+          trays: Array.from({ length: 16 }, (_, i) => ({
+            id: `ORD002-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD002',
+            productName: '医疗器械B',
+            productCode: 'MC-B002',
+            batchNo: `BATCH-002-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 0,
+            time: '2024-01-15 11:15:00'
+          })),
+          currentTrayIndex: 0
         },
         {
           orderId: 'ORD003',
@@ -2705,7 +2731,19 @@ export default {
           insertTime: '2024-01-15 12:00:00',
           inPut: '3',
           isPrint3: '2',
-          orderStatus: '0'
+          orderStatus: '0',
+          trays: Array.from({ length: 16 }, (_, i) => ({
+            id: `ORD003-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD003',
+            productName: '医疗器械C',
+            productCode: 'MC-C003',
+            batchNo: `BATCH-003-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 1,
+            time: '2024-01-15 12:00:00'
+          })),
+          currentTrayIndex: 0
         },
         {
           orderId: 'ORD004',
@@ -2713,7 +2751,19 @@ export default {
           insertTime: '2024-01-15 13:45:00',
           inPut: '1',
           isPrint3: '1',
-          orderStatus: '0'
+          orderStatus: '0',
+          trays: Array.from({ length: 16 }, (_, i) => ({
+            id: `ORD004-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD004',
+            productName: '医疗器械D',
+            productCode: 'MC-D004',
+            batchNo: `BATCH-004-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 0,
+            time: '2024-01-15 13:45:00'
+          })),
+          currentTrayIndex: 0
         },
         {
           orderId: 'ORD005',
@@ -2721,7 +2771,19 @@ export default {
           insertTime: '2024-01-15 14:20:00',
           inPut: '2',
           isPrint3: '0',
-          orderStatus: '0'
+          orderStatus: '0',
+          trays: Array.from({ length: 16 }, (_, i) => ({
+            id: `ORD005-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD005',
+            productName: '医疗器械E',
+            productCode: 'MC-E005',
+            batchNo: `BATCH-005-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 1,
+            time: '2024-01-15 14:20:00'
+          })),
+          currentTrayIndex: 0
         }
       ],
       buttonStates: {
@@ -2745,7 +2807,7 @@ export default {
           name: '小车1',
           x: 1211,
           y: 387, // 对应PLC值0的位置（y轴最小值）
-          width: 123,
+          width: 118,
           image: require('@/assets/pingan-wenjian-img/cart1.png')
         },
         {
@@ -2753,7 +2815,7 @@ export default {
           name: '小车2',
           x: 1773,
           y: 388, // 对应PLC值0的位置（y轴最小值）
-          width: 95,
+          width: 90,
           image: require('@/assets/pingan-wenjian-img/cart2.png')
         }
       ],
@@ -3577,6 +3639,67 @@ export default {
     },
     'cartPositionValues.cart2'(newVal) {
       this.updateCartPositionByValue(2, newVal);
+    },
+    // ---- 新增：监听各线体上货请求变量 ----
+    'scanPhotoelectricSignal.bit0'(newVal, oldVal) {
+      // A线上货请求 - bit0
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('A', 0);
+      }
+    },
+    'scanPhotoelectricSignal.bit1'(newVal, oldVal) {
+      // A线上货请求 - bit1
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('A', 1);
+      }
+    },
+    'scanPhotoelectricSignal.bit2'(newVal, oldVal) {
+      // B线上货请求 - bit2
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('B', 2);
+      }
+    },
+    'scanPhotoelectricSignal.bit3'(newVal, oldVal) {
+      // B线上货请求 - bit3
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('B', 3);
+      }
+    },
+    'scanPhotoelectricSignal.bit4'(newVal, oldVal) {
+      // C线上货请求 - bit4
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('C', 4);
+      }
+    },
+    'scanPhotoelectricSignal.bit5'(newVal, oldVal) {
+      // C线上货请求 - bit5
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('C', 5);
+      }
+    },
+    'scanPhotoelectricSignal.bit6'(newVal, oldVal) {
+      // D线上货请求 - bit6
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('D', 6);
+      }
+    },
+    'scanPhotoelectricSignal.bit7'(newVal, oldVal) {
+      // D线上货请求 - bit7
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('D', 7);
+      }
+    },
+    'scanPhotoelectricSignal.bit8'(newVal, oldVal) {
+      // E线上货请求 - bit8
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('E', 8);
+      }
+    },
+    'scanPhotoelectricSignal.bit9'(newVal, oldVal) {
+      // E线上货请求 - bit9
+      if (newVal === '1' && oldVal === '0') {
+        this.handleLoadingRequest('E', 9);
+      }
     }
   },
   methods: {
@@ -3637,6 +3760,100 @@ export default {
         `生产线 ${line.letter} 允许上货状态已${
           line.allowLoading ? '开启' : '关闭'
         }`
+      );
+    },
+    // 处理上货请求
+    handleLoadingRequest(lineLetter, bitIndex) {
+      console.log(`线体${lineLetter}触发上货请求，bit索引：${bitIndex}`);
+
+      // 找到对应的生产线
+      const line = this.productionLines.find((l) => l.letter === lineLetter);
+      if (!line) {
+        console.error(`未找到线体${lineLetter}`);
+        return;
+      }
+
+      // 检查是否有当前订单
+      if (!line.currentOrder) {
+        console.warn(`线体${lineLetter}没有设置订单`);
+        this.$message.warning(`线体${lineLetter}没有设置订单，无法上货`);
+        return;
+      }
+
+      // 检查订单是否有托盘数据
+      if (!line.currentOrder.trays || line.currentOrder.trays.length === 0) {
+        console.warn(`线体${lineLetter}的订单没有托盘数据`);
+        this.$message.warning(`线体${lineLetter}的订单没有托盘数据`);
+        return;
+      }
+
+      // 获取当前托盘索引
+      const currentIndex = line.currentOrder.currentTrayIndex || 0;
+
+      // 检查是否还有可用托盘
+      if (currentIndex >= line.currentOrder.trays.length) {
+        console.warn(`线体${lineLetter}的订单托盘已全部上货完毕`);
+        this.$message.warning(`线体${lineLetter}的订单托盘已全部上货完毕`);
+        return;
+      }
+
+      // 获取当前托盘
+      const currentTray = line.currentOrder.trays[currentIndex];
+
+      // 根据线体获取对应的第一个队列ID
+      // A-6, B-11, C-21, D-31, E-41
+      const firstQueueIdMap = {
+        A: 6, // A1-5
+        B: 11, // B1-2
+        C: 21, // C1-2
+        D: 31, // D1-2
+        E: 41 // E1-2
+      };
+
+      const queueId = firstQueueIdMap[lineLetter];
+      const queue = this.queues.find((q) => q.id === queueId);
+
+      if (!queue) {
+        console.error(`未找到队列ID：${queueId}`);
+        return;
+      }
+
+      // 创建托盘副本并添加到队列的第一个位置
+      const trayToAdd = {
+        ...currentTray,
+        inPut: lineLetter,
+        time: moment().format('YYYY-MM-DD HH:mm:ss')
+      };
+
+      // 添加到队列开头
+      queue.trayInfo.unshift(trayToAdd);
+
+      // 更新左上角卡片显示的当前扫码托盘信息
+      this.nowScanTrayInfo = {
+        orderId: currentTray.orderId,
+        productName: currentTray.productName,
+        productCode: currentTray.productCode,
+        batchNo: currentTray.batchNo,
+        inPut: `${lineLetter}线`,
+        isTerile: currentTray.isTerile === 1 ? '是' : '否'
+      };
+
+      // 更新订单的当前托盘索引
+      line.currentOrder.currentTrayIndex = currentIndex + 1;
+
+      // 添加日志
+      this.addLog(
+        `线体${lineLetter}上货：${currentTray.productName}，托盘号：${currentTray.name}`
+      );
+
+      // 显示成功消息
+      this.$message.success(
+        `线体${lineLetter}上货成功：${currentTray.productName} - ${currentTray.name}`
+      );
+
+      console.log(`线体${lineLetter}上货成功，托盘：`, trayToAdd);
+      console.log(
+        `剩余托盘数：${line.currentOrder.trays.length - (currentIndex + 1)}`
       );
     },
     // 获取进货口文本
@@ -5478,7 +5695,6 @@ export default {
                     .scan-label {
                       font-size: 11px;
                       color: #666666;
-                      flex: 1;
                     }
 
                     .scan-value {
