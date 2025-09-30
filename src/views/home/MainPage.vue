@@ -285,7 +285,6 @@
                   :data-x="cart.x"
                   :data-y="cart.y"
                   :data-width="cart.width"
-                  v-show="false"
                 >
                   <img :src="cart.image" :alt="cart.name" class="cart-image" />
                 </div>
@@ -2737,24 +2736,24 @@ export default {
       alarmLogs: [], // 修改为空数组
       // 小车y轴范围配置
       cartYRanges: {
-        cart1: { min: 312, max: 618 }, // y轴范围615-618
-        cart2: { min: 310, max: 620 } // y轴范围310-620
+        cart1: { min: 387, max: 992 }, // y轴范围615-618
+        cart2: { min: 388, max: 994 } // y轴范围310-620
       },
       carts: [
         {
           id: 1,
           name: '小车1',
-          x: 615,
-          y: 312, // 对应PLC值0的位置（y轴最小值）
-          width: 60,
+          x: 1211,
+          y: 387, // 对应PLC值0的位置（y轴最小值）
+          width: 123,
           image: require('@/assets/pingan-wenjian-img/cart1.png')
         },
         {
           id: 2,
           name: '小车2',
-          x: 900,
-          y: 310, // 对应PLC值0的位置（y轴最小值）
-          width: 50,
+          x: 1773,
+          y: 388, // 对应PLC值0的位置（y轴最小值）
+          width: 95,
           image: require('@/assets/pingan-wenjian-img/cart2.png')
         }
       ],
