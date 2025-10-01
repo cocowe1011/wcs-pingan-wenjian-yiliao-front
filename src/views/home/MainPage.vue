@@ -5276,7 +5276,7 @@ export default {
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             overflow: hidden;
             cursor: pointer;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
