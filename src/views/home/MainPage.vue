@@ -5276,7 +5276,7 @@ export default {
             flex-shrink: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             overflow: hidden;
             cursor: pointer;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
@@ -5329,7 +5329,7 @@ export default {
               flex-direction: column;
               gap: 4px;
               min-width: 0;
-              padding-right: 100px;
+              width: 223px;
 
               .order-info {
                 .order-header {
@@ -5428,19 +5428,42 @@ export default {
             }
 
             .allow-loading {
-              position: absolute;
-              right: 15px;
-              top: 50%;
-              transform: translateY(-50%);
+              height: 100%;
+              display: flex;
+              align-items: center;
+              padding: 0px 5px;
+              background: linear-gradient(135deg, #233445, #283b51);
+              border: 1px solid rgba(50, 75, 110, 0.4);
+              border-radius: 8px;
+              transition: all 0.3s ease;
+              box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
               /deep/ .el-checkbox {
+                display: flex;
+                flex-direction: column; // 文字在下
+                align-items: center; // 居中
+                gap: 4px; // 间距
+
+                .el-checkbox__input {
+                  margin-right: 0; // 移除默认右边距
+                }
+
                 .el-checkbox__label {
                   color: rgba(255, 255, 255, 0.85);
                   font-size: 12px;
+                  padding-left: 0; // 移除默认左内边距
                 }
                 .el-checkbox__input.is-checked .el-checkbox__inner {
                   background-color: #0ac5a8;
                   border-color: #0ac5a8;
                 }
+              }
+              &:hover {
+                background: linear-gradient(
+                  135deg,
+                  rgba(20, 60, 75, 0.9),
+                  rgba(40, 75, 95, 0.75)
+                );
+                border-color: rgba(70, 120, 140, 0.5);
               }
             }
           }
