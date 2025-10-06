@@ -1637,8 +1637,10 @@
                             <div class="group-header">A线</div>
                             <div class="group-items">
                               <div class="scan-item">
-                                <span class="scan-label">A1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">A3-5：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.A35 || '--'
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1647,12 +1649,16 @@
                             <div class="group-header">B线</div>
                             <div class="group-items">
                               <div class="scan-item">
-                                <span class="scan-label">B1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">B3-2：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.B32 || '--'
+                                }}</span>
                               </div>
                               <div class="scan-item">
-                                <span class="scan-label">B1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">B3-5：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.B35 || '--'
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1661,12 +1667,16 @@
                             <div class="group-header">C线</div>
                             <div class="group-items">
                               <div class="scan-item">
-                                <span class="scan-label">C1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">C3-2：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.C32 || '--'
+                                }}</span>
                               </div>
                               <div class="scan-item">
-                                <span class="scan-label">C1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">C3-5：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.C35 || '--'
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1678,12 +1688,16 @@
                             <div class="group-header">D线</div>
                             <div class="group-items">
                               <div class="scan-item">
-                                <span class="scan-label">D1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">D3-2：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.D32 || '--'
+                                }}</span>
                               </div>
                               <div class="scan-item">
-                                <span class="scan-label">D1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">D3-5：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.D35 || '--'
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1692,12 +1706,16 @@
                             <div class="group-header">E线</div>
                             <div class="group-items">
                               <div class="scan-item">
-                                <span class="scan-label">E1-1：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">E3-2：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.E32 || '--'
+                                }}</span>
                               </div>
                               <div class="scan-item">
-                                <span class="scan-label">E1-4：</span>
-                                <span class="scan-value">{{ '--' }}</span>
+                                <span class="scan-label">E3-5：</span>
+                                <span class="scan-value">{{
+                                  outWarehouseTrayCode.E35 || '--'
+                                }}</span>
                               </div>
                             </div>
                           </div>
@@ -1710,7 +1728,7 @@
                   class="preheating-room-marker"
                   data-x="650"
                   data-y="195"
-                  style="width: 160px"
+                  style="width: 180px"
                 >
                   <div class="preheating-room-content">
                     <div class="preheating-room-header">预热房到灭菌柜选择</div>
@@ -1785,7 +1803,7 @@
                   class="preheating-room-marker"
                   data-x="1480"
                   data-y="195"
-                  style="width: 160px"
+                  style="width: 180px"
                 >
                   <div class="preheating-room-content">
                     <div class="preheating-room-header">灭菌柜到解析房选择</div>
@@ -1889,7 +1907,7 @@
                           </div>
                           <div class="line-status">
                             <span
-                              v-if="outWarehouseTrayCode[line]"
+                              v-if="outWarehouseExecuting[line]"
                               style="
                                 font-size: 10px;
                                 color: greenyellow;
@@ -1897,7 +1915,7 @@
                                 margin-bottom: 2px;
                               "
                             >
-                              执行中：{{ outWarehouseTrayCode[line] }}
+                              执行中
                             </span>
                             <div
                               style="
@@ -1995,13 +2013,13 @@
             <!-- 左侧队列列表 -->
             <div class="queue-container-left">
               <div
-                v-for="(queue, filteredIndex) in filteredQueues"
-                :key="'queue-' + queue.id + '-' + filteredIndex"
+                v-for="(queue, index) in queues"
+                :key="'queue-' + queue.id + '-' + index"
                 class="queue"
-                :class="{ active: selectedQueueIndex === queue.id - 1 }"
-                @click="showTrays(queue.id - 1)"
+                :class="{ active: selectedQueueIndex === index }"
+                @click="showTrays(index)"
                 @dragover.prevent
-                @drop="handleDrop(queue.id - 1)"
+                @drop="handleDrop(index)"
               >
                 <span class="queue-name">{{ queue.queueName }}</span>
                 <span class="tray-count">{{
@@ -2742,7 +2760,17 @@ export default {
             batchNo: `BATCH-001-${i + 1}`,
             unit: '标准规格',
             isTerile: 1,
-            time: '2024-01-15 10:30:00'
+            time: '2024-01-15 10:30:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-001-${i + 1}`,
+            trayCode: `ORD001-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 10:30:00',
+            receiptOrderCode: 'REC-001',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
           })),
           currentTrayIndex: 0
         },
@@ -2762,7 +2790,17 @@ export default {
             batchNo: `BATCH-002-${i + 1}`,
             unit: '标准规格',
             isTerile: 0,
-            time: '2024-01-15 11:15:00'
+            time: '2024-01-15 11:15:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-002-${i + 1}`,
+            trayCode: `ORD002-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 11:15:00',
+            receiptOrderCode: 'REC-002',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
           })),
           currentTrayIndex: 0
         },
@@ -2782,7 +2820,17 @@ export default {
             batchNo: `BATCH-003-${i + 1}`,
             unit: '标准规格',
             isTerile: 1,
-            time: '2024-01-15 12:00:00'
+            time: '2024-01-15 12:00:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-003-${i + 1}`,
+            trayCode: `ORD003-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 12:00:00',
+            receiptOrderCode: 'REC-003',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
           })),
           currentTrayIndex: 0
         },
@@ -2802,7 +2850,17 @@ export default {
             batchNo: `BATCH-004-${i + 1}`,
             unit: '标准规格',
             isTerile: 0,
-            time: '2024-01-15 13:45:00'
+            time: '2024-01-15 13:45:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-004-${i + 1}`,
+            trayCode: `ORD004-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 13:45:00',
+            receiptOrderCode: 'REC-004',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
           })),
           currentTrayIndex: 0
         },
@@ -2822,7 +2880,17 @@ export default {
             batchNo: `BATCH-005-${i + 1}`,
             unit: '标准规格',
             isTerile: 1,
-            time: '2024-01-15 14:20:00'
+            time: '2024-01-15 14:20:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-005-${i + 1}`,
+            trayCode: `ORD005-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 14:20:00',
+            receiptOrderCode: 'REC-005',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
           })),
           currentTrayIndex: 0
         }
@@ -3578,6 +3646,53 @@ export default {
         password: [
           { required: true, message: '请输入管理员密码', trigger: 'blur' }
         ]
+      },
+      // 预热到灭菌柜相关
+      disinfectionRoomSelectedFrom: null, // 选择的预热房
+      disinfectionRoomSelectedTo: null, // 选择的灭菌柜
+      disinfectionRoomLoading: false,
+      disinfectionExecuting: false,
+      disinfectionTrayCode: '',
+      disinfectionNeedQty: 0,
+      // 灭菌柜到解析房相关
+      warehouseSelectedFrom: null, // 选择的灭菌柜
+      warehouseSelectedTo: null, // 选择的解析房
+      analysisRoomLoading: false,
+      analysisExecuting: false,
+      analysisTrayCode: '',
+      analysisNeedQty: 0,
+      // 出库相关 - 每条线独立管理
+      outWarehouseLoading: {
+        A: false,
+        B: false,
+        C: false,
+        D: false,
+        E: false
+      },
+      outWarehouseExecuting: {
+        A: false,
+        B: false,
+        C: false,
+        D: false,
+        E: false
+      },
+      outWarehouseTrayCode: {
+        A35: '', // A线只有1条出库线
+        B32: '', // B线第1条出库线
+        B35: '', // B线第2条出库线
+        C32: '', // C线第1条出库线
+        C35: '', // C线第2条出库线
+        D32: '', // D线第1条出库线
+        D35: '', // D线第2条出库线
+        E32: '', // E线第1条出库线
+        E35: '' // E线第2条出库线
+      },
+      outNeedQty: {
+        A: 0,
+        B: 0,
+        C: 0,
+        D: 0,
+        E: 0
       }
     };
   },
@@ -3589,9 +3704,6 @@ export default {
     },
     unreadAlarms() {
       return this.alarmLogs.filter((log) => log.unread).length;
-    },
-    filteredQueues() {
-      return this.queues.filter((q) => q.id !== 15);
     },
     selectedQueue() {
       return this.queues[this.selectedQueueIndex];
@@ -3657,43 +3769,292 @@ export default {
       };
     }
   },
+  created() {
+    this.queues.forEach((q) => {
+      q.trayInfo = new Proxy(q.trayInfo, {
+        set: (arr, idx, val) => {
+          const result = Reflect.set(arr, idx, val);
+          this.updateQueueInfo(q.id);
+          return result;
+        },
+        deleteProperty: (arr, idx) => {
+          const result = Reflect.deleteProperty(arr, idx);
+          this.updateQueueInfo(q.id);
+          return result;
+        }
+      });
+
+      // 包装常用数组方法
+      this.wrapArrayMethods(q.trayInfo, q.id);
+    });
+  },
   mounted() {
     this.initializeMarkers();
     this.loadQueueInfoFromDatabase();
+    ipcRenderer.on('receivedMsg', (event, values, values2) => {
+      // 使用位运算优化赋值
+      const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
+
+      // A线电机运行信号 (DBW6)
+      let word6 = this.convertToWord(values.DBW6);
+      this.aLineMotorRunning.bit0 = getBit(word6, 8);
+      this.aLineMotorRunning.bit1 = getBit(word6, 9);
+      this.aLineMotorRunning.bit2 = getBit(word6, 10);
+      this.aLineMotorRunning.bit3 = getBit(word6, 11);
+      this.aLineMotorRunning.bit4 = getBit(word6, 12);
+      this.aLineMotorRunning.bit5 = getBit(word6, 13);
+      this.aLineMotorRunning.bit6 = getBit(word6, 14);
+      this.aLineMotorRunning.bit7 = getBit(word6, 15);
+      this.aLineMotorRunning.bit8 = getBit(word6, 0);
+      this.aLineMotorRunning.bit9 = getBit(word6, 1);
+      this.aLineMotorRunning.bit10 = getBit(word6, 2);
+      this.aLineMotorRunning.bit11 = getBit(word6, 3);
+
+      // A线光电检测信号 (DBW8)
+      let word8 = this.convertToWord(values.DBW8);
+      this.aLinePhotoelectricSignal.bit0 = getBit(word8, 8);
+      this.aLinePhotoelectricSignal.bit1 = getBit(word8, 9);
+      this.aLinePhotoelectricSignal.bit2 = getBit(word8, 10);
+      this.aLinePhotoelectricSignal.bit3 = getBit(word8, 11);
+      this.aLinePhotoelectricSignal.bit4 = getBit(word8, 12);
+      this.aLinePhotoelectricSignal.bit5 = getBit(word8, 13);
+      this.aLinePhotoelectricSignal.bit6 = getBit(word8, 14);
+      this.aLinePhotoelectricSignal.bit7 = getBit(word8, 15);
+      this.aLinePhotoelectricSignal.bit8 = getBit(word8, 0);
+      this.aLinePhotoelectricSignal.bit9 = getBit(word8, 1);
+      this.aLinePhotoelectricSignal.bit10 = getBit(word8, 2);
+      this.aLinePhotoelectricSignal.bit11 = getBit(word8, 3);
+      this.aLinePhotoelectricSignal.bit12 = getBit(word8, 4);
+      this.aLinePhotoelectricSignal.bit13 = getBit(word8, 5);
+      this.aLinePhotoelectricSignal.bit14 = getBit(word8, 6);
+      this.aLinePhotoelectricSignal.bit15 = getBit(word8, 7);
+
+      // B线电机运行信号 (DBW10)
+      let word10 = this.convertToWord(values.DBW10);
+      this.bLineMotorRunning.bit0 = getBit(word10, 8);
+      this.bLineMotorRunning.bit1 = getBit(word10, 9);
+      this.bLineMotorRunning.bit2 = getBit(word10, 10);
+      this.bLineMotorRunning.bit3 = getBit(word10, 11);
+      this.bLineMotorRunning.bit4 = getBit(word10, 12);
+      this.bLineMotorRunning.bit5 = getBit(word10, 13);
+      this.bLineMotorRunning.bit6 = getBit(word10, 14);
+      this.bLineMotorRunning.bit7 = getBit(word10, 15);
+      this.bLineMotorRunning.bit8 = getBit(word10, 0);
+      this.bLineMotorRunning.bit9 = getBit(word10, 1);
+      this.bLineMotorRunning.bit10 = getBit(word10, 2);
+      this.bLineMotorRunning.bit11 = getBit(word10, 3);
+
+      // B线光电检测信号 (DBW12)
+      let word12 = this.convertToWord(values.DBW12);
+      this.bLinePhotoelectricSignal.bit0 = getBit(word12, 8);
+      this.bLinePhotoelectricSignal.bit1 = getBit(word12, 9);
+      this.bLinePhotoelectricSignal.bit2 = getBit(word12, 10);
+      this.bLinePhotoelectricSignal.bit3 = getBit(word12, 11);
+      this.bLinePhotoelectricSignal.bit4 = getBit(word12, 12);
+      this.bLinePhotoelectricSignal.bit5 = getBit(word12, 13);
+      this.bLinePhotoelectricSignal.bit6 = getBit(word12, 14);
+      this.bLinePhotoelectricSignal.bit7 = getBit(word12, 15);
+      this.bLinePhotoelectricSignal.bit8 = getBit(word12, 0);
+      this.bLinePhotoelectricSignal.bit9 = getBit(word12, 1);
+      this.bLinePhotoelectricSignal.bit10 = getBit(word12, 2);
+      this.bLinePhotoelectricSignal.bit11 = getBit(word12, 3);
+      this.bLinePhotoelectricSignal.bit12 = getBit(word12, 4);
+      this.bLinePhotoelectricSignal.bit13 = getBit(word12, 5);
+      this.bLinePhotoelectricSignal.bit14 = getBit(word12, 6);
+      this.bLinePhotoelectricSignal.bit15 = getBit(word12, 7);
+
+      // C线电机运行信号 (DBW14)
+      let word14 = this.convertToWord(values.DBW14);
+      this.cLineMotorRunning.bit0 = getBit(word14, 8);
+      this.cLineMotorRunning.bit1 = getBit(word14, 9);
+      this.cLineMotorRunning.bit2 = getBit(word14, 10);
+      this.cLineMotorRunning.bit3 = getBit(word14, 11);
+      this.cLineMotorRunning.bit4 = getBit(word14, 12);
+      this.cLineMotorRunning.bit5 = getBit(word14, 13);
+      this.cLineMotorRunning.bit6 = getBit(word14, 14);
+      this.cLineMotorRunning.bit7 = getBit(word14, 15);
+      this.cLineMotorRunning.bit8 = getBit(word14, 0);
+      this.cLineMotorRunning.bit9 = getBit(word14, 1);
+      this.cLineMotorRunning.bit10 = getBit(word14, 2);
+      this.cLineMotorRunning.bit11 = getBit(word14, 3);
+      // C线光电检测信号 (DBW16)
+      let word16 = this.convertToWord(values.DBW16);
+      this.cLinePhotoelectricSignal.bit0 = getBit(word16, 8);
+      this.cLinePhotoelectricSignal.bit1 = getBit(word16, 9);
+      this.cLinePhotoelectricSignal.bit2 = getBit(word16, 10);
+      this.cLinePhotoelectricSignal.bit3 = getBit(word16, 11);
+      this.cLinePhotoelectricSignal.bit4 = getBit(word16, 12);
+      this.cLinePhotoelectricSignal.bit5 = getBit(word16, 13);
+      this.cLinePhotoelectricSignal.bit6 = getBit(word16, 14);
+      this.cLinePhotoelectricSignal.bit7 = getBit(word16, 15);
+      this.cLinePhotoelectricSignal.bit8 = getBit(word16, 0);
+      this.cLinePhotoelectricSignal.bit9 = getBit(word16, 1);
+      this.cLinePhotoelectricSignal.bit10 = getBit(word16, 2);
+      this.cLinePhotoelectricSignal.bit11 = getBit(word16, 3);
+      this.cLinePhotoelectricSignal.bit12 = getBit(word16, 4);
+      this.cLinePhotoelectricSignal.bit13 = getBit(word16, 5);
+      this.cLinePhotoelectricSignal.bit14 = getBit(word16, 6);
+      this.cLinePhotoelectricSignal.bit15 = getBit(word16, 7);
+      // D线电机运行信号-读取PLC
+      let word18 = this.convertToWord(values.DBW18);
+      this.dLineMotorRunning.bit0 = getBit(word18, 8);
+      this.dLineMotorRunning.bit1 = getBit(word18, 9);
+      this.dLineMotorRunning.bit2 = getBit(word18, 10);
+      this.dLineMotorRunning.bit3 = getBit(word18, 11);
+      this.dLineMotorRunning.bit4 = getBit(word18, 12);
+      this.dLineMotorRunning.bit5 = getBit(word18, 13);
+      this.dLineMotorRunning.bit6 = getBit(word18, 14);
+      this.dLineMotorRunning.bit7 = getBit(word18, 15);
+      this.dLineMotorRunning.bit8 = getBit(word18, 0);
+      this.dLineMotorRunning.bit9 = getBit(word18, 1);
+      this.dLineMotorRunning.bit10 = getBit(word18, 2);
+      this.dLineMotorRunning.bit11 = getBit(word18, 3);
+      // D线光电检测信号-读取PLC
+      let word20 = this.convertToWord(values.DBW20);
+      this.dLinePhotoelectricSignal.bit1 = getBit(word20, 9);
+      this.dLinePhotoelectricSignal.bit2 = getBit(word20, 10);
+      this.dLinePhotoelectricSignal.bit3 = getBit(word20, 11);
+      this.dLinePhotoelectricSignal.bit4 = getBit(word20, 12);
+      this.dLinePhotoelectricSignal.bit5 = getBit(word20, 13);
+      this.dLinePhotoelectricSignal.bit6 = getBit(word20, 14);
+      this.dLinePhotoelectricSignal.bit7 = getBit(word20, 15);
+      this.dLinePhotoelectricSignal.bit8 = getBit(word20, 0);
+      this.dLinePhotoelectricSignal.bit9 = getBit(word20, 1);
+      this.dLinePhotoelectricSignal.bit10 = getBit(word20, 2);
+      this.dLinePhotoelectricSignal.bit11 = getBit(word20, 3);
+      this.dLinePhotoelectricSignal.bit12 = getBit(word20, 4);
+      this.dLinePhotoelectricSignal.bit13 = getBit(word20, 5);
+      this.dLinePhotoelectricSignal.bit14 = getBit(word20, 6);
+      this.dLinePhotoelectricSignal.bit15 = getBit(word20, 7);
+      // E线电机运行信号-读取PLC
+      let word22 = this.convertToWord(values.DBW22);
+      this.eLineMotorRunning.bit0 = getBit(word22, 8);
+      this.eLineMotorRunning.bit1 = getBit(word22, 9);
+      this.eLineMotorRunning.bit2 = getBit(word22, 10);
+      this.eLineMotorRunning.bit3 = getBit(word22, 11);
+      this.eLineMotorRunning.bit4 = getBit(word22, 12);
+      this.eLineMotorRunning.bit5 = getBit(word22, 13);
+      this.eLineMotorRunning.bit6 = getBit(word22, 14);
+      this.eLineMotorRunning.bit7 = getBit(word22, 15);
+      this.eLineMotorRunning.bit8 = getBit(word22, 0);
+      this.eLineMotorRunning.bit9 = getBit(word22, 1);
+      this.eLineMotorRunning.bit10 = getBit(word22, 2);
+      this.eLineMotorRunning.bit11 = getBit(word22, 3);
+      // E线光电检测信号-读取PLC
+      let word24 = this.convertToWord(values.DBW24);
+      this.eLinePhotoelectricSignal.bit1 = getBit(word24, 9);
+      this.eLinePhotoelectricSignal.bit2 = getBit(word24, 10);
+      this.eLinePhotoelectricSignal.bit3 = getBit(word24, 11);
+      this.eLinePhotoelectricSignal.bit4 = getBit(word24, 12);
+      this.eLinePhotoelectricSignal.bit5 = getBit(word24, 13);
+      this.eLinePhotoelectricSignal.bit6 = getBit(word24, 14);
+      this.eLinePhotoelectricSignal.bit7 = getBit(word24, 15);
+      this.eLinePhotoelectricSignal.bit8 = getBit(word24, 0);
+      this.eLinePhotoelectricSignal.bit9 = getBit(word24, 1);
+      this.eLinePhotoelectricSignal.bit10 = getBit(word24, 2);
+      this.eLinePhotoelectricSignal.bit11 = getBit(word24, 3);
+      this.eLinePhotoelectricSignal.bit12 = getBit(word24, 4);
+      this.eLinePhotoelectricSignal.bit13 = getBit(word24, 5);
+      this.eLinePhotoelectricSignal.bit14 = getBit(word24, 6);
+      this.eLinePhotoelectricSignal.bit15 = getBit(word24, 7);
+
+      // A线数量-读取PLC
+      this.aLineQuantity.a12 = Number(values.DBW28 ?? 0);
+      this.aLineQuantity.a13 = Number(values.DBW30 ?? 0);
+      this.aLineQuantity.a21in = Number(values.DBW32 ?? 0);
+      this.aLineQuantity.a21out = Number(values.DBW140 ?? 0);
+      this.aLineQuantity.a31 = Number(values.DBW34 ?? 0);
+      this.aLineQuantity.a32 = Number(values.DBW36 ?? 0);
+      this.aLineQuantity.a15 = Number(values.DBW38 ?? 0);
+      this.aLineQuantity.a16 = Number(values.DBW40 ?? 0);
+      this.aLineQuantity.a22in = Number(values.DBW42 ?? 0);
+      this.aLineQuantity.a22out = Number(values.DBW142 ?? 0);
+      this.aLineQuantity.a34 = Number(values.DBW44 ?? 0);
+      this.aLineQuantity.a35 = Number(values.DBW46 ?? 0);
+
+      // B线数量-读取PLC
+      this.bLineQuantity.b12 = Number(values.DBW48 ?? 0);
+      this.bLineQuantity.b13 = Number(values.DBW50 ?? 0);
+      this.bLineQuantity.b21in = Number(values.DBW52 ?? 0);
+      this.bLineQuantity.b21out = Number(values.DBW144 ?? 0);
+      this.bLineQuantity.b31 = Number(values.DBW54 ?? 0);
+      this.bLineQuantity.b32 = Number(values.DBW56 ?? 0);
+      this.bLineQuantity.b15 = Number(values.DBW58 ?? 0);
+      this.bLineQuantity.b16 = Number(values.DBW60 ?? 0);
+      this.bLineQuantity.b22in = Number(values.DBW62 ?? 0);
+      this.bLineQuantity.b22out = Number(values.DBW146 ?? 0);
+      this.bLineQuantity.b34 = Number(values.DBW64 ?? 0);
+      this.bLineQuantity.b35 = Number(values.DBW66 ?? 0);
+
+      // C线数量-读取PLC
+      this.cLineQuantity.c12 = Number(values.DBW68 ?? 0);
+      this.cLineQuantity.c13 = Number(values.DBW70 ?? 0);
+      this.cLineQuantity.c21in = Number(values.DBW72 ?? 0);
+      this.cLineQuantity.c21out = Number(values.DBW148 ?? 0);
+      this.cLineQuantity.c31 = Number(values.DBW74 ?? 0);
+      this.cLineQuantity.c32 = Number(values.DBW76 ?? 0);
+      this.cLineQuantity.c15 = Number(values.DBW78 ?? 0);
+      this.cLineQuantity.c16 = Number(values.DBW80 ?? 0);
+      this.cLineQuantity.c22in = Number(values.DBW82 ?? 0);
+      this.cLineQuantity.c22out = Number(values.DBW150 ?? 0);
+      this.cLineQuantity.c34 = Number(values.DBW84 ?? 0);
+      this.cLineQuantity.c35 = Number(values.DBW86 ?? 0);
+
+      // D线数量-读取PLC
+      this.dLineQuantity.d12 = Number(values.DBW88 ?? 0);
+      this.dLineQuantity.d13 = Number(values.DBW90 ?? 0);
+      this.dLineQuantity.d21in = Number(values.DBW92 ?? 0);
+      this.dLineQuantity.d21out = Number(values.DBW152 ?? 0);
+      this.dLineQuantity.d31 = Number(values.DBW94 ?? 0);
+      this.dLineQuantity.d32 = Number(values.DBW96 ?? 0);
+      this.dLineQuantity.d15 = Number(values.DBW98 ?? 0);
+      this.dLineQuantity.d16 = Number(values.DBW100 ?? 0);
+      this.dLineQuantity.d22in = Number(values.DBW102 ?? 0);
+      this.dLineQuantity.d22out = Number(values.DBW154 ?? 0);
+      this.dLineQuantity.d34 = Number(values.DBW104 ?? 0);
+      this.dLineQuantity.d35 = Number(values.DBW106 ?? 0);
+
+      // E线数量-读取PLC
+      this.eLineQuantity.e12 = Number(values.DBW108 ?? 0);
+      this.eLineQuantity.e13 = Number(values.DBW110 ?? 0);
+      this.eLineQuantity.e21in = Number(values.DBW112 ?? 0);
+      this.eLineQuantity.e21out = Number(values.DBW156 ?? 0);
+      this.eLineQuantity.e31 = Number(values.DBW114 ?? 0);
+      this.eLineQuantity.e32 = Number(values.DBW116 ?? 0);
+      this.eLineQuantity.e15 = Number(values.DBW118 ?? 0);
+      this.eLineQuantity.e16 = Number(values.DBW120 ?? 0);
+      this.eLineQuantity.e22in = Number(values.DBW122 ?? 0);
+      this.eLineQuantity.e22out = Number(values.DBW158 ?? 0);
+      this.eLineQuantity.e34 = Number(values.DBW124 ?? 0);
+      this.eLineQuantity.e35 = Number(values.DBW126 ?? 0);
+
+      // 上货区请求进货信号scanPhotoelectricSignal
+      let word128 = this.convertToWord(values.DBW128);
+      this.scanPhotoelectricSignal.bit0 = getBit(word128, 8);
+      this.scanPhotoelectricSignal.bit1 = getBit(word128, 9);
+      this.scanPhotoelectricSignal.bit2 = getBit(word128, 10);
+      this.scanPhotoelectricSignal.bit3 = getBit(word128, 11);
+      this.scanPhotoelectricSignal.bit4 = getBit(word128, 12);
+      this.scanPhotoelectricSignal.bit5 = getBit(word128, 13);
+      this.scanPhotoelectricSignal.bit6 = getBit(word128, 14);
+      this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
+      this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
+      this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
+
+      // 灭菌前1#小车位置值
+      this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
+      // 灭菌前2#小车位置值
+      this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
+
+      // 只在第一次接收到数据时设置标志位为 true
+      if (!this.isDataReady) {
+        this.isDataReady = true;
+      }
+    });
     // 测试模式下，把上边注释，下面打开
     // if (!this.isDataReady) {
     //   this.isDataReady = true;
     // }
-
-    // 出库选择多线体状态管理
-    this.outWarehouseLoading = {
-      A: false,
-      B: false,
-      C: false,
-      D: false,
-      E: false
-    };
-    this.outWarehouseExecuting = {
-      A: false,
-      B: false,
-      C: false,
-      D: false,
-      E: false
-    };
-    this.outWarehouseTrayCode = {
-      A: '',
-      B: '',
-      C: '',
-      D: '',
-      E: ''
-    };
-    this.outNeedQty = {
-      A: 0,
-      B: 0,
-      C: 0,
-      D: 0,
-      E: 0
-    };
   },
   watch: {
     // ---- 新增：监听指定队列的 trayInfo 变化 ----
@@ -3721,55 +4082,700 @@ export default {
     'scanPhotoelectricSignal.bit1'(newVal, oldVal) {
       // A线上货请求 - bit1
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('A', 1);
+        this.handleLoadingRequest('A', '1-5');
       }
     },
     'scanPhotoelectricSignal.bit2'(newVal, oldVal) {
       // B线上货请求 - bit2
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('B', 2);
+        this.handleLoadingRequest('B', '1-2');
       }
     },
     'scanPhotoelectricSignal.bit3'(newVal, oldVal) {
       // B线上货请求 - bit3
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('B', 3);
+        this.handleLoadingRequest('B', '1-5');
       }
     },
     'scanPhotoelectricSignal.bit4'(newVal, oldVal) {
       // C线上货请求 - bit4
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('C', 4);
+        this.handleLoadingRequest('C', '1-2');
       }
     },
     'scanPhotoelectricSignal.bit5'(newVal, oldVal) {
       // C线上货请求 - bit5
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('C', 5);
+        this.handleLoadingRequest('C', '1-5');
       }
     },
     'scanPhotoelectricSignal.bit6'(newVal, oldVal) {
       // D线上货请求 - bit6
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('D', 6);
+        this.handleLoadingRequest('D', '1-2');
       }
     },
     'scanPhotoelectricSignal.bit7'(newVal, oldVal) {
       // D线上货请求 - bit7
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('D', 7);
+        this.handleLoadingRequest('D', '1-5');
       }
     },
     'scanPhotoelectricSignal.bit8'(newVal, oldVal) {
       // E线上货请求 - bit8
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('E', 8);
+        this.handleLoadingRequest('E', '1-2');
       }
     },
     'scanPhotoelectricSignal.bit9'(newVal, oldVal) {
       // E线上货请求 - bit9
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('E', 9);
+        this.handleLoadingRequest('E', '1-5');
+      }
+    },
+    // 监听预热房数量变化 - A线
+    // a15增加：从上货线移动托盘到A1-5队列（不需要判断卡片）
+    'aLineQuantity.a15'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // a15对应队列索引5(A1-5)，从上货队列移动过来
+        // 这里需要从对应的上货队列移动，暂时不处理
+        // 因为上货是通过handleLoadingRequest处理的
+      }
+    },
+    // a16增加：从A1-5移动托盘到A1-6（不需要判断卡片，预热房内部）
+    'aLineQuantity.a16'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // 从队列索引5(A1-5)移动到队列索引6(A1-6)
+        this.moveTraysWithinRoom('A', 5, 6, increaseCount);
+      }
+    },
+    // 监听预热房数量变化 - B线
+    // b12增加：从上游移动托盘到B1-2（不需要判断卡片）
+    'bLineQuantity.b12'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    // b13增加：从B1-2移动托盘到B1-3（不需要判断卡片）
+    'bLineQuantity.b13'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('B', 10, 11, increaseCount);
+      }
+    },
+    // b15增加：从上游移动托盘到B1-5（不需要判断卡片）
+    'bLineQuantity.b15'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    // b16增加：从B1-5移动托盘到B1-6（不需要判断卡片）
+    'bLineQuantity.b16'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('B', 15, 16, increaseCount);
+      }
+    },
+    // 监听预热房数量变化 - C线
+    'cLineQuantity.c12'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    'cLineQuantity.c13'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('C', 20, 21, increaseCount);
+      }
+    },
+    'cLineQuantity.c15'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    'cLineQuantity.c16'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('C', 25, 26, increaseCount);
+      }
+    },
+    // 监听预热房数量变化 - D线
+    'dLineQuantity.d12'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    'dLineQuantity.d13'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('D', 30, 31, increaseCount);
+      }
+    },
+    'dLineQuantity.d15'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    'dLineQuantity.d16'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('D', 35, 36, increaseCount);
+      }
+    },
+    // 监听预热房数量变化 - E线
+    'eLineQuantity.e12'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    'eLineQuantity.e13'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('E', 40, 41, increaseCount);
+      }
+    },
+    'eLineQuantity.e15'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        // 上货由handleLoadingRequest处理
+      }
+    },
+    'eLineQuantity.e16'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('E', 45, 46, increaseCount);
+      }
+    },
+    // 监听灭菌柜入口数量变化 - 需要判断卡片（跨房间）
+    'aLineQuantity.a22in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'A' &&
+        this.disinfectionRoomSelectedTo === 'A'
+      ) {
+        this.moveTraysBetweenQueues(
+          'A',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'bLineQuantity.b21in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'B' &&
+        this.disinfectionRoomSelectedTo === 'B'
+      ) {
+        this.moveTraysBetweenQueues(
+          'B',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'bLineQuantity.b22in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'B' &&
+        this.disinfectionRoomSelectedTo === 'B'
+      ) {
+        this.moveTraysBetweenQueues(
+          'B',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'cLineQuantity.c21in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'C' &&
+        this.disinfectionRoomSelectedTo === 'C'
+      ) {
+        this.moveTraysBetweenQueues(
+          'C',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'cLineQuantity.c22in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'C' &&
+        this.disinfectionRoomSelectedTo === 'C'
+      ) {
+        this.moveTraysBetweenQueues(
+          'C',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'dLineQuantity.d21in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'D' &&
+        this.disinfectionRoomSelectedTo === 'D'
+      ) {
+        this.moveTraysBetweenQueues(
+          'D',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'dLineQuantity.d22in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'D' &&
+        this.disinfectionRoomSelectedTo === 'D'
+      ) {
+        this.moveTraysBetweenQueues(
+          'D',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'eLineQuantity.e21in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'E' &&
+        this.disinfectionRoomSelectedTo === 'E'
+      ) {
+        this.moveTraysBetweenQueues(
+          'E',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    'eLineQuantity.e22in'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.disinfectionExecuting &&
+        this.disinfectionRoomSelectedFrom === 'E' &&
+        this.disinfectionRoomSelectedTo === 'E'
+      ) {
+        this.moveTraysBetweenQueues(
+          'E',
+          'preheat',
+          'disinfection',
+          newVal - oldVal
+        );
+      }
+    },
+    // 监听灭菌柜出队列数量变化 - 类似DE队列规则
+    'aLineQuantity.a22out'(newVal, oldVal) {
+      // A灭菌柜出货数量从0增加，移动所有进货队列托盘到出货队列
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('A');
+      }
+    },
+    'bLineQuantity.b21out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('B');
+      }
+    },
+    'bLineQuantity.b22out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('B');
+      }
+    },
+    'cLineQuantity.c21out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('C');
+      }
+    },
+    'cLineQuantity.c22out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('C');
+      }
+    },
+    'dLineQuantity.d21out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('D');
+      }
+    },
+    'dLineQuantity.d22out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('D');
+      }
+    },
+    'eLineQuantity.e21out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('E');
+      }
+    },
+    'eLineQuantity.e22out'(newVal, oldVal) {
+      if (oldVal === 0 && newVal > 0) {
+        this.moveDisinfectionTraysToOut('E');
+      }
+    },
+    // 监听解析房数量变化 - A线
+    // a34增加：从A22-OUT移动托盘到A3-4（需要判断卡片，跨房间）
+    'aLineQuantity.a34'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedFrom === 'A' &&
+        this.warehouseSelectedTo === 'A'
+      ) {
+        this.moveTraysBetweenQueues(
+          'A',
+          'disinfection',
+          'analysis',
+          newVal - oldVal
+        );
+      }
+    },
+    // a35增加：从A3-4移动托盘到A3-5（不需要判断卡片）
+    // a35减少：出库（需要判断outWarehouseExecuting['A']）
+    'aLineQuantity.a35'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        this.moveTraysWithinRoom('A', 8, 9, increaseCount);
+      } else if (newVal < oldVal) {
+        // A线出库
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.A) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 9; // A3-5队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`A35托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.A35 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('A');
+            } else {
+              this.addLog('A3-5队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置A线出库，但A35却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    // 监听解析房数量变化 - B/C/D/E线
+    // b32减少：B线第一条出库线
+    'bLineQuantity.b32'(newVal, oldVal) {
+      if (newVal < oldVal) {
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.B) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 14; // B3-2队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`B32托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.B32 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('B');
+            } else {
+              this.addLog('B3-2队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置B线出库，但B32却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    'bLineQuantity.b34'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedFrom === 'B' &&
+        this.warehouseSelectedTo === 'B'
+      ) {
+        this.moveTraysBetweenQueues(
+          'B',
+          'disinfection',
+          'analysis',
+          newVal - oldVal
+        );
+      }
+    },
+    'bLineQuantity.b35'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // B3-4（索引18）→ B3-5（索引19）
+        this.moveTraysWithinRoom('B', 18, 19, increaseCount);
+      } else if (newVal < oldVal) {
+        // B线第二条出库线
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.B) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 19; // B3-5队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`B35托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.B35 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('B');
+            } else {
+              this.addLog('B3-5队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置B线出库，但B35却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    // c32减少：C线第一条出库线
+    'cLineQuantity.c32'(newVal, oldVal) {
+      if (newVal < oldVal) {
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.C) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 24; // C3-2队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`C32托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.C32 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('C');
+            } else {
+              this.addLog('C3-2队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置C线出库，但C32却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    'cLineQuantity.c34'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedFrom === 'C' &&
+        this.warehouseSelectedTo === 'C'
+      ) {
+        this.moveTraysBetweenQueues(
+          'C',
+          'disinfection',
+          'analysis',
+          newVal - oldVal
+        );
+      }
+    },
+    'cLineQuantity.c35'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // C3-4（索引28）→ C3-5（索引29）
+        this.moveTraysWithinRoom('C', 28, 29, increaseCount);
+      } else if (newVal < oldVal) {
+        // C线第二条出库线
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.C) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 29; // C3-5队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`C35托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.C35 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('C');
+            } else {
+              this.addLog('C3-5队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置C线出库，但C35却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    // d32减少：D线第一条出库线
+    'dLineQuantity.d32'(newVal, oldVal) {
+      if (newVal < oldVal) {
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.D) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 34; // D3-2队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`D32托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.D32 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('D');
+            } else {
+              this.addLog('D3-2队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置D线出库，但D32却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    'dLineQuantity.d34'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedFrom === 'D' &&
+        this.warehouseSelectedTo === 'D'
+      ) {
+        this.moveTraysBetweenQueues(
+          'D',
+          'disinfection',
+          'analysis',
+          newVal - oldVal
+        );
+      }
+    },
+    'dLineQuantity.d35'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // D3-4（索引38）→ D3-5（索引39）
+        this.moveTraysWithinRoom('D', 38, 39, increaseCount);
+      } else if (newVal < oldVal) {
+        // D线第二条出库线
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.D) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 39; // D3-5队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`D35托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.D35 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('D');
+            } else {
+              this.addLog('D3-5队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置D线出库，但D35却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    // e32减少：E线第一条出库线
+    'eLineQuantity.e32'(newVal, oldVal) {
+      if (newVal < oldVal) {
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.E) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 44; // E3-2队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`E32托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.E32 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('E');
+            } else {
+              this.addLog('E3-2队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置E线出库，但E32却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    'eLineQuantity.e34'(newVal, oldVal) {
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedFrom === 'E' &&
+        this.warehouseSelectedTo === 'E'
+      ) {
+        this.moveTraysBetweenQueues(
+          'E',
+          'disinfection',
+          'analysis',
+          newVal - oldVal
+        );
+      }
+    },
+    'eLineQuantity.e35'(newVal, oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // E3-4（索引48）→ E3-5（索引49）
+        this.moveTraysWithinRoom('E', 48, 49, increaseCount);
+      } else if (newVal < oldVal) {
+        // E线第二条出库线
+        const decreaseCount = oldVal - newVal;
+        if (this.outWarehouseExecuting.E) {
+          for (let i = 0; i < decreaseCount; i++) {
+            const queueIndex = 49; // E3-5队列索引
+            if (this.queues[queueIndex].trayInfo.length > 0) {
+              const tray = this.queues[queueIndex].trayInfo[0];
+              this.addLog(`E35托盘信息：${tray.trayCode} 出库`);
+              this.outWarehouseTrayCode.E35 = tray.trayCode;
+              this.queues[queueIndex].trayInfo.shift();
+              this.updateOutNeedAndWrite('E');
+            } else {
+              this.addLog('E3-5队列空，无法出库');
+              break;
+            }
+          }
+        } else {
+          this.addLog(
+            '未设置E线出库，但E35却减少了，程序错误！报警！',
+            'alarm'
+          );
+        }
+      }
+    },
+    // 监听预热房到灭菌柜选择变化，自动更新需进货数量
+    disinfectionRoomSelectedFrom(newVal) {
+      if (!newVal) {
+        this.cancelDisinfectionRoom();
+      } else {
+        this.updateDisinfectionNeedAndWrite();
+      }
+    },
+    // 监听灭菌柜到解析房选择变化，自动更新需进货数量
+    warehouseSelectedFrom(newVal) {
+      if (!newVal) {
+        this.cancelAnalysisRoom();
+      } else {
+        this.updateAnalysisNeedAndWrite();
       }
     }
   },
@@ -3804,19 +4810,71 @@ export default {
     },
     // 出库选择相关方法
     sendToWarehouse(line) {
+      if (!line) {
+        this.$message.warning('请选择出库线体');
+        return;
+      }
+
+      // 判断起始地数量是否大于0（系统队列数量和PLC解析房数量都要大于0）
+      const systemQueueCount = this.getAnalysisCountFor(line);
+      let plcAnalysisCount = 0;
+      if (line === 'A') {
+        plcAnalysisCount =
+          (this.aLineQuantity.a34 || 0) + (this.aLineQuantity.a35 || 0);
+      } else if (line === 'B') {
+        plcAnalysisCount =
+          (this.bLineQuantity.b34 || 0) + (this.bLineQuantity.b35 || 0);
+      } else if (line === 'C') {
+        plcAnalysisCount =
+          (this.cLineQuantity.c34 || 0) + (this.cLineQuantity.c35 || 0);
+      } else if (line === 'D') {
+        plcAnalysisCount =
+          (this.dLineQuantity.d34 || 0) + (this.dLineQuantity.d35 || 0);
+      } else if (line === 'E') {
+        plcAnalysisCount =
+          (this.eLineQuantity.e34 || 0) + (this.eLineQuantity.e35 || 0);
+      }
+
+      if (systemQueueCount <= 0 || plcAnalysisCount <= 0) {
+        this.$message.warning(
+          `${line}解析房中没有可用的托盘，请检查起始地数量`
+        );
+        return;
+      }
+
       this.outWarehouseLoading[line] = true;
-      // 模拟执行出库操作
+      this.outWarehouseExecuting[line] = true;
+
+      // 计算需进货数量
+      const analysisCount = this.getAnalysisCountFor(line);
+      this.outNeedQty[line] = analysisCount;
+
+      this.addLog(`出库${line}开始执行，需进货：${analysisCount}`);
+
       setTimeout(() => {
         this.outWarehouseLoading[line] = false;
-        this.outWarehouseExecuting[line] = true;
-        this.outWarehouseTrayCode[line] = `TRAY-${line}-${Date.now()}`;
-        this.outNeedQty[line] = Math.floor(Math.random() * 10) + 1;
-      }, 1000);
+        // 初始化出库托盘码显示（实际托盘码会在PLC触发时更新）
+      }, 500);
     },
     cancelOutWarehouse(line) {
       this.outWarehouseExecuting[line] = false;
-      this.outWarehouseTrayCode[line] = '';
       this.outNeedQty[line] = 0;
+      // 清空该线所有子线的托盘码
+      if (line === 'A') {
+        this.outWarehouseTrayCode.A35 = '';
+      } else if (line === 'B') {
+        this.outWarehouseTrayCode.B32 = '';
+        this.outWarehouseTrayCode.B35 = '';
+      } else if (line === 'C') {
+        this.outWarehouseTrayCode.C32 = '';
+        this.outWarehouseTrayCode.C35 = '';
+      } else if (line === 'D') {
+        this.outWarehouseTrayCode.D32 = '';
+        this.outWarehouseTrayCode.D35 = '';
+      } else if (line === 'E') {
+        this.outWarehouseTrayCode.E32 = '';
+        this.outWarehouseTrayCode.E35 = '';
+      }
     },
     // 确认订单选择
     confirmOrderSelection() {
@@ -3850,26 +4908,33 @@ export default {
       );
     },
     // 处理上货请求
-    handleLoadingRequest(lineLetter, bitIndex) {
-      console.log(`线体${lineLetter}触发上货请求，bit索引：${bitIndex}`);
+    handleLoadingRequest(lineLetter, witchLine) {
+      this.addLog(`线体${lineLetter}${witchLine}触发上货请求`);
+
+      // 无码上货模式
+      if (this.noCodeUpload) {
+        this.addLog(`${lineLetter}线触发上货请求，无码上货模式启用`);
+        this.addNoCodeTrayToQueue(lineLetter, witchLine);
+        return;
+      }
 
       // 找到对应的生产线
       const line = this.productionLines.find((l) => l.letter === lineLetter);
       if (!line) {
-        console.error(`未找到线体${lineLetter}`);
+        this.addLog(`未找到线体${lineLetter}`);
         return;
       }
 
       // 检查是否有当前订单
       if (!line.currentOrder) {
-        console.warn(`线体${lineLetter}没有设置订单`);
+        this.addLog(`线体${lineLetter}没有设置订单`);
         this.$message.warning(`线体${lineLetter}没有设置订单，无法上货`);
         return;
       }
 
       // 检查订单是否有托盘数据
       if (!line.currentOrder.trays || line.currentOrder.trays.length === 0) {
-        console.warn(`线体${lineLetter}的订单没有托盘数据`);
+        this.addLog(`线体${lineLetter}的订单没有托盘数据`);
         this.$message.warning(`线体${lineLetter}的订单没有托盘数据`);
         return;
       }
@@ -3879,7 +4944,7 @@ export default {
 
       // 检查是否还有可用托盘
       if (currentIndex >= line.currentOrder.trays.length) {
-        console.warn(`线体${lineLetter}的订单托盘已全部上货完毕`);
+        this.addLog(`线体${lineLetter}的订单托盘已全部上货完毕`);
         this.$message.warning(`线体${lineLetter}的订单托盘已全部上货完毕`);
         return;
       }
@@ -3887,21 +4952,24 @@ export default {
       // 获取当前托盘
       const currentTray = line.currentOrder.trays[currentIndex];
 
-      // 根据线体获取对应的第一个队列ID
-      // A-6, B-11, C-21, D-31, E-41
-      const firstQueueIdMap = {
-        A: 6, // A1-5
-        B: 11, // B1-2
-        C: 21, // C1-2
-        D: 31, // D1-2
-        E: 41 // E1-2
-      };
+      // 根据线体和bitIndex获取对应的队列索引
+      // A线只有一条子线：A15 (索引=5)
+      // B/C/D/E线有两条子线：第一条和第二条
+      let queueIndex;
+      if (lineLetter === 'A') {
+        queueIndex = 5; // A1-5
+      } else if (lineLetter === 'B') {
+        queueIndex = witchLine === '1-2' ? 10 : 15; // B1-2 或 B1-5
+      } else if (lineLetter === 'C') {
+        queueIndex = witchLine === '1-2' ? 20 : 25; // C1-2 或 C1-5
+      } else if (lineLetter === 'D') {
+        queueIndex = witchLine === '1-2' ? 30 : 35; // D1-2 或 D1-5
+      } else if (lineLetter === 'E') {
+        queueIndex = witchLine === '1-2' ? 40 : 45; // E1-2 或 E1-5
+      }
 
-      const queueId = firstQueueIdMap[lineLetter];
-      const queue = this.queues.find((q) => q.id === queueId);
-
-      if (!queue) {
-        console.error(`未找到队列ID：${queueId}`);
+      if (!this.queues[queueIndex]) {
+        this.addLog(`未找到队列索引：${queueIndex}`);
         return;
       }
 
@@ -3912,8 +4980,8 @@ export default {
         time: moment().format('YYYY-MM-DD HH:mm:ss')
       };
 
-      // 添加到队列开头
-      queue.trayInfo.unshift(trayToAdd);
+      // 直接使用数组索引操作队列
+      this.queues[queueIndex].trayInfo.push(trayToAdd);
 
       // 更新左上角卡片显示的当前扫码托盘信息
       this.nowScanTrayInfo = {
@@ -3921,25 +4989,25 @@ export default {
         productName: currentTray.productName,
         productCode: currentTray.productCode,
         batchNo: currentTray.batchNo,
-        inPut: `${lineLetter}线`,
+        inPut: `${lineLetter}${witchLine}`,
         isTerile: currentTray.isTerile === 1 ? '是' : '否'
       };
 
       // 更新右侧上货扫码信息面板
       const bitToFieldMap = {
-        0: 'A14', // A1-4 (实际不使用bit0)
-        1: 'A14', // A1-4
-        2: 'B11', // B1-1
-        3: 'B14', // B1-4
-        4: 'C11', // C1-1
-        5: 'C14', // C1-4
-        6: 'D11', // D1-1
-        7: 'D14', // D1-4
-        8: 'E11', // E1-1
-        9: 'E14' // E1-4
+        'A1-2': 'A14', // A1-4 (实际不使用bit0)
+        'A1-5': 'A14', // A1-4
+        'B1-2': 'B11', // B1-1
+        'B1-5': 'B14', // B1-4
+        'C1-2': 'C11', // C1-1
+        'C1-5': 'C14', // C1-4
+        'D1-2': 'D11', // D1-1
+        'D1-5': 'D14', // D1-4
+        'E1-2': 'E11', // E1-1
+        'E1-5': 'E14' // E1-4
       };
 
-      const fieldKey = bitToFieldMap[bitIndex];
+      const fieldKey = bitToFieldMap[lineLetter + witchLine];
       if (fieldKey) {
         this.uploadScanInfo[fieldKey] = currentTray.productName;
       }
@@ -3949,17 +5017,16 @@ export default {
 
       // 添加日志
       this.addLog(
-        `线体${lineLetter}上货：${currentTray.productName}，托盘号：${currentTray.name}`
+        `线体${lineLetter}${witchLine}上货：${
+          currentTray.productName
+        }，托盘号：${currentTray.name},剩余托盘数：${
+          line.currentOrder.trays.length - (currentIndex + 1)
+        }`
       );
 
       // 显示成功消息
       this.$message.success(
-        `线体${lineLetter}上货成功：${currentTray.productName} - ${currentTray.name}`
-      );
-
-      console.log(`线体${lineLetter}上货成功，托盘：`, trayToAdd);
-      console.log(
-        `剩余托盘数：${line.currentOrder.trays.length - (currentIndex + 1)}`
+        `线体${lineLetter}${witchLine}上货成功：${currentTray.productName} - ${currentTray.name}`
       );
     },
     // 获取进货口文本
@@ -3995,9 +5062,9 @@ export default {
               fault_reset: false,
               clear: false
             };
-            ipcRenderer.send('writeValuesToPLC', 'DBW502', 1);
+            ipcRenderer.send('writeValuesToPLC', 'DBW1002', 1);
             setTimeout(() => {
-              ipcRenderer.send('writeValuesToPLC', 'DBW502', 0);
+              ipcRenderer.send('writeValuesToPLC', 'DBW1002', 0);
             }, 2000);
             this.buttonStates[button] = !this.buttonStates[button];
             this.$message.success('全线启动成功');
@@ -4020,9 +5087,9 @@ export default {
               fault_reset: false,
               clear: false
             };
-            ipcRenderer.send('writeValuesToPLC', 'DBW504', 1);
+            ipcRenderer.send('writeValuesToPLC', 'DBW1004', 1);
             setTimeout(() => {
-              ipcRenderer.send('writeValuesToPLC', 'DBW504', 0);
+              ipcRenderer.send('writeValuesToPLC', 'DBW1004', 0);
             }, 2000);
             this.buttonStates[button] = !this.buttonStates[button];
             this.$message.success('全线停止成功');
@@ -4046,9 +5113,9 @@ export default {
               clear: false
             };
             this.buttonStates[button] = !this.buttonStates[button];
-            ipcRenderer.send('writeValuesToPLC', 'DBW506', 1);
+            ipcRenderer.send('writeValuesToPLC', 'DBW1006', 1);
             setTimeout(() => {
-              ipcRenderer.send('writeValuesToPLC', 'DBW506', 0);
+              ipcRenderer.send('writeValuesToPLC', 'DBW1006', 0);
             }, 2000);
             this.$message.success('全线暂停成功');
             this.addLog('全线暂停成功');
@@ -4063,9 +5130,9 @@ export default {
           type: 'warning'
         })
           .then(() => {
-            ipcRenderer.send('writeValuesToPLC', 'DBW508', 1);
+            ipcRenderer.send('writeValuesToPLC', 'DBW1008', 1);
             setTimeout(() => {
-              ipcRenderer.send('writeValuesToPLC', 'DBW508', 0);
+              ipcRenderer.send('writeValuesToPLC', 'DBW1008', 0);
             }, 2000);
             this.$message.success('故障复位成功');
             this.addLog('故障复位成功');
@@ -4210,7 +5277,7 @@ export default {
         const trayInfo = Array.isArray(selectedQueue.trayInfo)
           ? selectedQueue.trayInfo
           : [];
-
+        console.log(trayInfo);
         this.nowTrays = trayInfo
           .map((tray) => ({
             id: tray.trayCode || '',
@@ -4227,6 +5294,7 @@ export default {
             batchNo: tray.batchNo || '' // 添加备注
           }))
           .filter((tray) => tray.id); // 过滤掉没有 id 的托盘
+        console.log(this.nowTrays);
       } catch (error) {
         console.error('处理托盘信息时出错:', error);
         this.nowTrays = [];
@@ -4825,14 +5893,14 @@ export default {
                     );
                     this.addLog('无码上货模式已启用，已给PLC，DBW562发送2');
                     // 无码模式发2
-                    ipcRenderer.send('writeValuesToPLC', 'DBW562', 2);
+                    ipcRenderer.send('writeValuesToPLC', 'DBW1040', 2);
                   } else {
                     this.$message.info(
-                      '已关闭无码上货模式，已给PLC，DBW562发送1'
+                      '已关闭无码上货模式，已给PLC，DBW1040发送1'
                     );
                     this.addLog('无码上货模式已关闭');
                     // 有码模式发1
-                    ipcRenderer.send('writeValuesToPLC', 'DBW562', 1);
+                    ipcRenderer.send('writeValuesToPLC', 'DBW1040', 1);
                   }
                 }
 
@@ -4873,6 +5941,603 @@ export default {
       if (this.currentOperation === 'toggleNoCodeUpload') {
         this.$message.info('已取消无码上货模式切换');
       }
+    },
+    // 无码上货 - 直接添加托盘到队列
+    addNoCodeTrayToQueue(lineLetter, witchLine) {
+      // 根据线体和bitIndex获取对应的队列索引
+      // A线只有一条子线：A15 (索引=5)
+      // B/C/D/E线有两条子线：第一条和第二条
+      let queueIndex;
+      if (lineLetter === 'A') {
+        queueIndex = 5; // A1-5
+      } else if (lineLetter === 'B') {
+        queueIndex = witchLine === '1-2' ? 10 : 15; // B1-2 或 B1-5
+      } else if (lineLetter === 'C') {
+        queueIndex = witchLine === '1-2' ? 20 : 25; // C1-2 或 C1-5
+      } else if (lineLetter === 'D') {
+        queueIndex = witchLine === '1-2' ? 30 : 35; // D1-2 或 D1-5
+      } else if (lineLetter === 'E') {
+        queueIndex = witchLine === '1-2' ? 40 : 45; // E1-2 或 E1-5
+      }
+
+      if (!this.queues[queueIndex]) {
+        this.addLog(`未找到队列索引：${queueIndex}`);
+        return;
+      }
+
+      // 创建无码托盘
+      const trayInfo = {
+        trayCode: 'no-tray-code',
+        trayTime: moment().format('YYYY-MM-DD HH:mm:ss'),
+        orderId: 'NO-ORDER',
+        productCode: 'NO-PRODUCT',
+        productName: '无码产品',
+        isTerile: 1, // 默认需要消毒
+        state: '0',
+        sendTo: '',
+        // 预热间信息
+        preheatingRoom: '',
+        inPreheatingRoomTime: null,
+        outPreheatingRoomTime: null,
+        // 灭菌间信息
+        sterilizationRoom: '',
+        inSterilizationRoomTime: null,
+        outSterilizationRoomTime: null,
+        // 解析间信息
+        analysisRoom: '',
+        inAnalysisRoomTime: null,
+        outAnalysisRoomTime: null
+      };
+
+      // 直接使用数组索引操作队列
+      this.queues[queueIndex].trayInfo.push(trayInfo);
+
+      // 更新左上角卡片显示的当前扫码托盘信息
+      this.nowScanTrayInfo = {
+        orderId: trayInfo.orderId,
+        productName: trayInfo.productName,
+        inPut: `${lineLetter}${witchLine}`,
+        isTerile: '是'
+      };
+
+      this.addLog(
+        `${lineLetter}${witchLine}无码上货成功，托盘号：no-tray-code，已添加到队列${this.queues[queueIndex].queueName}`
+      );
+
+      this.$message.success(`${lineLetter}${witchLine}无码上货成功`);
+    },
+    // 获取预热房数量（两条线加起来）
+    getPreheatCountFor(line) {
+      if (!line) return 0;
+      // 每条线有两个预热房队列，需要把两条线的数量加起来
+      // 队列索引映射：A(5,6), B(10,11,15,16), C(20,21,25,26), D(30,31,35,36), E(40,41,45,46)
+      const queueIndexMap = {
+        A: [5, 6], // A1-5, A1-6
+        B: [10, 11, 15, 16], // B1-2, B1-3, B1-5, B1-6
+        C: [20, 21, 25, 26], // C1-2, C1-3, C1-5, C1-6
+        D: [30, 31, 35, 36], // D1-2, D1-3, D1-5, D1-6
+        E: [40, 41, 45, 46] // E1-2, E1-3, E1-5, E1-6
+      };
+
+      const queueIndexes = queueIndexMap[line] || [];
+      let total = 0;
+      queueIndexes.forEach((index) => {
+        if (this.queues[index]) {
+          total += this.queues[index].trayInfo.length || 0;
+        }
+      });
+      return total;
+    },
+    // 获取灭菌柜数量（两条线加起来：进队列+出队列）
+    getSterilizeCountFor(line) {
+      if (!line) return 0;
+      // 灭菌柜"进队列"数量（不包括出队列，用于判断是否满了）
+      // 队列索引映射：A(7), B(12,17), C(22,27), D(32,37), E(42,47)
+      const queueIndexMap = {
+        A: [7], // A2-2-进
+        B: [12, 17], // B2-1-进, B2-2-进
+        C: [22, 27], // C2-1-进, C2-2-进
+        D: [32, 37], // D2-1-进, D2-2-进
+        E: [42, 47] // E2-1-进, E2-2-进
+      };
+
+      const queueIndexes = queueIndexMap[line] || [];
+      let total = 0;
+      queueIndexes.forEach((index) => {
+        if (this.queues[index]) {
+          total += this.queues[index].trayInfo.length || 0;
+        }
+      });
+      return total;
+    },
+    // 获取灭菌柜出队列数量（用于灭菌柜到解析房）
+    getSterilizeOutCountFor(line) {
+      if (!line) return 0;
+      // 灭菌柜"出队列"数量
+      // 队列索引映射：A(51), B(52,53), C(54,55), D(56,57), E(58,59)
+      const queueIndexMap = {
+        A: [51], // A2-2-出
+        B: [52, 53], // B2-1-出, B2-2-出
+        C: [54, 55], // C2-1-出, C2-2-出
+        D: [56, 57], // D2-1-出, D2-2-出
+        E: [58, 59] // E2-1-出, E2-2-出
+      };
+
+      const queueIndexes = queueIndexMap[line] || [];
+      let total = 0;
+      queueIndexes.forEach((index) => {
+        if (this.queues[index]) {
+          total += this.queues[index].trayInfo.length || 0;
+        }
+      });
+      return total;
+    },
+    // 获取解析房数量（两条线加起来）
+    getAnalysisCountFor(line) {
+      if (!line) return 0;
+      // 每条线有两个解析房队列
+      // 队列索引映射：A(8,9), B(13,14,18,19), C(23,24,28,29), D(33,34,38,39), E(43,44,48,49)
+      const queueIndexMap = {
+        A: [8, 9], // A3-4, A3-5
+        B: [13, 14, 18, 19], // B3-1, B3-2, B3-4, B3-5
+        C: [23, 24, 28, 29], // C3-1, C3-2, C3-4, C3-5
+        D: [33, 34, 38, 39], // D3-1, D3-2, D3-4, D3-5
+        E: [43, 44, 48, 49] // E3-1, E3-2, E3-4, E3-5
+      };
+
+      const queueIndexes = queueIndexMap[line] || [];
+      let total = 0;
+      queueIndexes.forEach((index) => {
+        if (this.queues[index]) {
+          total += this.queues[index].trayInfo.length || 0;
+        }
+      });
+      return total;
+    },
+    // 预热房到灭菌柜执行
+    sendToDisinfectionRoom() {
+      if (
+        !this.disinfectionRoomSelectedFrom ||
+        !this.disinfectionRoomSelectedTo
+      ) {
+        this.$message.warning('请选择预热房和灭菌柜');
+        return;
+      }
+
+      // 判断起始地数量是否大于0（系统队列数量和PLC预热房数量都要大于0）
+      const systemQueueCount = this.getPreheatCountFor(
+        this.disinfectionRoomSelectedFrom
+      );
+      let plcPreheatCount = 0;
+      if (this.disinfectionRoomSelectedFrom === 'A') {
+        plcPreheatCount =
+          (this.aLineQuantity.a15 || 0) + (this.aLineQuantity.a16 || 0);
+      } else if (this.disinfectionRoomSelectedFrom === 'B') {
+        plcPreheatCount =
+          (this.bLineQuantity.b12 || 0) +
+          (this.bLineQuantity.b13 || 0) +
+          (this.bLineQuantity.b15 || 0) +
+          (this.bLineQuantity.b16 || 0);
+      } else if (this.disinfectionRoomSelectedFrom === 'C') {
+        plcPreheatCount =
+          (this.cLineQuantity.c12 || 0) +
+          (this.cLineQuantity.c13 || 0) +
+          (this.cLineQuantity.c15 || 0) +
+          (this.cLineQuantity.c16 || 0);
+      } else if (this.disinfectionRoomSelectedFrom === 'D') {
+        plcPreheatCount =
+          (this.dLineQuantity.d12 || 0) +
+          (this.dLineQuantity.d13 || 0) +
+          (this.dLineQuantity.d15 || 0) +
+          (this.dLineQuantity.d16 || 0);
+      } else if (this.disinfectionRoomSelectedFrom === 'E') {
+        plcPreheatCount =
+          (this.eLineQuantity.e12 || 0) +
+          (this.eLineQuantity.e13 || 0) +
+          (this.eLineQuantity.e15 || 0) +
+          (this.eLineQuantity.e16 || 0);
+      }
+
+      if (systemQueueCount <= 0 || plcPreheatCount <= 0) {
+        this.$message.warning(
+          `${this.disinfectionRoomSelectedFrom}预热房中没有可用的托盘，请检查起始地数量`
+        );
+        return;
+      }
+
+      this.disinfectionRoomLoading = true;
+      this.disinfectionExecuting = true;
+
+      // 更新需进货数量并写入PLC
+      this.updateDisinfectionNeedAndWrite();
+
+      this.addLog(
+        `预热房${this.disinfectionRoomSelectedFrom}到灭菌柜${this.disinfectionRoomSelectedTo}开始执行，需进货：${this.disinfectionNeedQty}`
+      );
+
+      setTimeout(() => {
+        this.disinfectionRoomLoading = false;
+        this.disinfectionTrayCode = `${this.disinfectionRoomSelectedFrom}-TO-${this.disinfectionRoomSelectedTo}`;
+      }, 500);
+    },
+    // 取消预热房到灭菌柜执行
+    cancelDisinfectionRoom() {
+      this.disinfectionExecuting = false;
+      this.disinfectionTrayCode = '';
+      this.disinfectionNeedQty = 0;
+      this.disinfectionRoomLoading = false;
+      this.disinfectionRoomSelectedFrom = null;
+      this.disinfectionRoomSelectedTo = null;
+
+      this.writeWordWithCancel('DBW1022', 0);
+      this.addLog('预热房到灭菌柜执行已取消，写入PLC DBW1022: 0');
+      this.$message.info('已取消预热房到灭菌柜执行');
+    },
+    // 灭菌柜到解析房执行
+    sendDisinfectionRoomToWarehouse() {
+      if (!this.warehouseSelectedFrom || !this.warehouseSelectedTo) {
+        this.$message.warning('请选择灭菌柜和解析房');
+        return;
+      }
+
+      // 判断起始地数量是否大于0（系统出队列数量和PLC灭菌柜出队列数量都要大于0）
+      const systemQueueCount = this.getSterilizeOutCountFor(
+        this.warehouseSelectedFrom
+      );
+      let plcDisinfectionCount = 0;
+      if (this.warehouseSelectedFrom === 'A') {
+        plcDisinfectionCount = this.aLineQuantity.a22out || 0;
+      } else if (this.warehouseSelectedFrom === 'B') {
+        plcDisinfectionCount =
+          (this.bLineQuantity.b21out || 0) + (this.bLineQuantity.b22out || 0);
+      } else if (this.warehouseSelectedFrom === 'C') {
+        plcDisinfectionCount =
+          (this.cLineQuantity.c21out || 0) + (this.cLineQuantity.c22out || 0);
+      } else if (this.warehouseSelectedFrom === 'D') {
+        plcDisinfectionCount =
+          (this.dLineQuantity.d21out || 0) + (this.dLineQuantity.d22out || 0);
+      } else if (this.warehouseSelectedFrom === 'E') {
+        plcDisinfectionCount =
+          (this.eLineQuantity.e21out || 0) + (this.eLineQuantity.e22out || 0);
+      }
+
+      if (systemQueueCount <= 0 || plcDisinfectionCount <= 0) {
+        this.$message.warning(
+          `${this.warehouseSelectedFrom}灭菌柜出队列中没有可用的托盘，请检查起始地数量`
+        );
+        return;
+      }
+
+      this.analysisRoomLoading = true;
+      this.analysisExecuting = true;
+
+      // 更新需进货数量并写入PLC
+      this.updateAnalysisNeedAndWrite();
+
+      this.addLog(
+        `灭菌柜${this.warehouseSelectedFrom}到解析房${this.warehouseSelectedTo}开始执行，需进货：${this.analysisNeedQty}`
+      );
+
+      setTimeout(() => {
+        this.analysisRoomLoading = false;
+        this.analysisTrayCode = `${this.warehouseSelectedFrom}-TO-${this.warehouseSelectedTo}`;
+      }, 500);
+    },
+    // 取消灭菌柜到解析房执行
+    cancelAnalysisRoom() {
+      this.analysisExecuting = false;
+      this.analysisTrayCode = '';
+      this.analysisNeedQty = 0;
+      this.analysisRoomLoading = false;
+      this.warehouseSelectedFrom = null;
+      this.warehouseSelectedTo = null;
+
+      this.writeWordWithCancel('DBW1024', 0);
+      this.addLog('灭菌柜到解析房执行已取消，写入PLC DBW1024: 0');
+      this.$message.info('已取消灭菌柜到解析房执行');
+    },
+    // 房间内部移动托盘（不需要判断卡片设置）
+    moveTraysWithinRoom(line, fromQueueIndex, toQueueIndex, count) {
+      const fromQueue = this.queues[fromQueueIndex];
+      const toQueue = this.queues[toQueueIndex];
+
+      if (!fromQueue || !toQueue) {
+        this.addLog(
+          `队列不存在，无法移动托盘：from=${fromQueueIndex}, to=${toQueueIndex}`
+        );
+        return;
+      }
+
+      let movedCount = 0;
+      for (let i = 0; i < count; i++) {
+        if (fromQueue.trayInfo.length > 0) {
+          const tray = fromQueue.trayInfo.shift();
+          toQueue.trayInfo.push(tray);
+          movedCount++;
+          this.addLog(
+            `托盘 ${tray.trayCode} 从 ${fromQueue.queueName} 移动到 ${toQueue.queueName}（预热房内部移动）`
+          );
+        } else {
+          break;
+        }
+      }
+
+      if (movedCount < count) {
+        this.addLog(
+          `${fromQueue.queueName}队列数量不足，仅移动${movedCount}/${count}个托盘到${toQueue.queueName}`
+        );
+      }
+    },
+    // 在队列之间移动托盘 - 固定对应关系（上面的线对应上面，下面的线对应下面）
+    moveTraysBetweenQueues(line, fromType, toType, count) {
+      // 获取源队列和目标队列的固定对应关系
+      const getQueuePairs = (line, fromType, toType) => {
+        const pairMaps = {
+          'preheat-disinfection': {
+            A: [
+              [5, 7],
+              [6, 7]
+            ], // A1-5->A2-2-进, A1-6->A2-2-进（A只有一条进线）
+            B: [
+              [10, 12],
+              [11, 12],
+              [15, 17],
+              [16, 17]
+            ], // B1-2->B2-1-进, B1-3->B2-1-进, B1-5->B2-2-进, B1-6->B2-2-进
+            C: [
+              [20, 22],
+              [21, 22],
+              [25, 27],
+              [26, 27]
+            ], // C1-2->C2-1-进, C1-3->C2-1-进, C1-5->C2-2-进, C1-6->C2-2-进
+            D: [
+              [30, 32],
+              [31, 32],
+              [35, 37],
+              [36, 37]
+            ], // D1-2->D2-1-进, D1-3->D2-1-进, D1-5->D2-2-进, D1-6->D2-2-进
+            E: [
+              [40, 42],
+              [41, 42],
+              [45, 47],
+              [46, 47]
+            ] // E1-2->E2-1-进, E1-3->E2-1-进, E1-5->E2-2-进, E1-6->E2-2-进
+          },
+          'disinfection-analysis': {
+            A: [
+              [51, 8],
+              [51, 9]
+            ], // A2-2-出->A3-4, A2-2-出->A3-5
+            B: [
+              [52, 13],
+              [52, 14],
+              [53, 18],
+              [53, 19]
+            ], // B2-1-出->B3-1, B2-1-出->B3-2, B2-2-出->B3-4, B2-2-出->B3-5
+            C: [
+              [54, 23],
+              [54, 24],
+              [55, 28],
+              [55, 29]
+            ], // C2-1-出->C3-1, C2-1-出->C3-2, C2-2-出->C3-4, C2-2-出->C3-5
+            D: [
+              [56, 33],
+              [56, 34],
+              [57, 38],
+              [57, 39]
+            ], // D2-1-出->D3-1, D2-1-出->D3-2, D2-2-出->D3-4, D2-2-出->D3-5
+            E: [
+              [58, 43],
+              [58, 44],
+              [59, 48],
+              [59, 49]
+            ] // E2-1-出->E3-1, E2-1-出->E3-2, E2-2-出->E3-4, E2-2-出->E3-5
+          }
+        };
+        const key = `${fromType}-${toType}`;
+        return pairMaps[key]?.[line] || [];
+      };
+
+      const queuePairs = getQueuePairs(line, fromType, toType);
+
+      // 按照固定对应关系移动托盘
+      let movedCount = 0;
+      for (let i = 0; i < count && movedCount < count; i++) {
+        let moved = false;
+
+        // 尝试每一对队列关系
+        for (const [fromQueueIndex, toQueueIndex] of queuePairs) {
+          const fromQueue = this.queues[fromQueueIndex];
+          const toQueue = this.queues[toQueueIndex];
+
+          if (fromQueue && toQueue && fromQueue.trayInfo.length > 0) {
+            const tray = fromQueue.trayInfo.shift();
+            toQueue.trayInfo.push(tray);
+            movedCount++;
+            moved = true;
+            this.addLog(
+              `托盘 ${tray.trayCode} 从 ${fromQueue.queueName} 移动到 ${toQueue.queueName}`
+            );
+            break;
+          }
+        }
+
+        if (!moved) break;
+      }
+
+      // 更新需进货数量并写入PLC
+      if (fromType === 'preheat' && toType === 'disinfection') {
+        this.updateDisinfectionNeedAndWrite();
+      } else if (fromType === 'disinfection' && toType === 'analysis') {
+        this.updateAnalysisNeedAndWrite();
+      }
+    },
+    // 灭菌柜进队列到出队列的移动（类似DE队列）
+    moveDisinfectionTraysToOut(line) {
+      const queueIndexMap = {
+        A: { in: [7], out: [51] },
+        B: { in: [12, 17], out: [52, 53] },
+        C: { in: [22, 27], out: [54, 55] },
+        D: { in: [32, 37], out: [56, 57] },
+        E: { in: [42, 47], out: [58, 59] }
+      };
+
+      const queues = queueIndexMap[line];
+      if (!queues) return;
+
+      // 将所有进队列的托盘移动到出队列
+      let totalMoved = 0;
+      let hasTrays = false;
+
+      for (const inQueueIndex of queues.in) {
+        const inQueue = this.queues[inQueueIndex];
+        if (inQueue && inQueue.trayInfo.length > 0) {
+          hasTrays = true;
+          const trays = [...inQueue.trayInfo];
+          const moveCount = trays.length;
+          inQueue.trayInfo = [];
+
+          // 固定对应关系：上线对上线，下线对下线
+          const inQueueIndexInArray = queues.in.indexOf(inQueueIndex);
+          const outQueueIndex =
+            queues.out[inQueueIndexInArray] || queues.out[0];
+          const outQueue = this.queues[outQueueIndex];
+
+          if (outQueue) {
+            trays.forEach((tray) => {
+              outQueue.trayInfo.push(tray);
+              totalMoved++;
+            });
+          }
+
+          this.addLog(
+            `${line}灭菌柜出货数量从0增加，移动${moveCount}个托盘到${line}出货队列`
+          );
+        }
+      }
+
+      if (hasTrays && totalMoved > 0) {
+        // 显示提示消息
+        this.$message({
+          message: `${line}灭菌柜已完成上下货队列移动`,
+          type: 'info',
+          duration: 3000,
+          showClose: true
+        });
+
+        // 更新相关需进货数量
+        if (
+          this.disinfectionExecuting &&
+          this.disinfectionRoomSelectedFrom === line
+        ) {
+          this.updateDisinfectionNeedAndWrite();
+        }
+      } else if (!hasTrays) {
+        this.addLog(`${line}灭菌柜出货数量从0增加，但进货队列无托盘可移动`);
+      }
+    },
+    // 写入PLC后2秒取消
+    writeWordWithCancel(addr, value) {
+      const ipcRenderer = require('electron').ipcRenderer;
+      ipcRenderer.send('writeSingleValueToPLC', addr, Number(value) || 0);
+      setTimeout(() => {
+        ipcRenderer.send('cancelWriteToPLC', addr);
+      }, 2000);
+    },
+    // 更新并写入预热到灭菌柜需进货数量
+    updateDisinfectionNeedAndWrite() {
+      if (!this.disinfectionRoomSelectedFrom) {
+        this.disinfectionNeedQty = 0;
+        this.addLog(`写入PLC DBW1022（灭菌柜需进货数量）: 0 - 未选择灭菌柜`);
+        this.writeWordWithCancel('DBW1022', 0);
+        return;
+      }
+      const leftFromPreheat = this.getPreheatCountFor(
+        this.disinfectionRoomSelectedFrom
+      );
+      this.disinfectionNeedQty = leftFromPreheat;
+
+      this.addLog(`写入PLC DBW1022（灭菌柜需进货数量）: ${leftFromPreheat}`);
+      this.writeWordWithCancel('DBW1022', leftFromPreheat);
+
+      // 自动停止条件：只有在执行状态时才检查
+      if (this.disinfectionExecuting) {
+        const disinfectionCount = this.getSterilizeCountFor(
+          this.disinfectionRoomSelectedTo
+        );
+        // A线只有一条线，最多13个；B/C/D/E线有两条线，最多26个
+        const maxCount = this.disinfectionRoomSelectedTo === 'A' ? 13 : 26;
+        if (leftFromPreheat === 0 || disinfectionCount >= maxCount) {
+          this.addLog(
+            `预热房${this.disinfectionRoomSelectedFrom}到灭菌柜${this.disinfectionRoomSelectedTo}已完成，自动停止（灭菌柜${disinfectionCount}/${maxCount}）`
+          );
+          this.cancelDisinfectionRoom();
+        }
+      }
+    },
+    // 更新并写入灭菌柜到解析房需进货数量
+    updateAnalysisNeedAndWrite() {
+      if (!this.warehouseSelectedFrom) {
+        this.analysisNeedQty = 0;
+        this.addLog(`写入PLC DBW1024（解析柜需进货数量）: 0 - 未选择解析柜`);
+        this.writeWordWithCancel('DBW1024', 0);
+        return;
+      }
+      // 使用出队列数量（灭菌柜完成后的托盘）
+      const leftFromSterilize = this.getSterilizeOutCountFor(
+        this.warehouseSelectedFrom
+      );
+      this.analysisNeedQty = leftFromSterilize;
+
+      this.addLog(`写入PLC DBW1024（解析柜需进货数量）: ${leftFromSterilize}`);
+      this.writeWordWithCancel('DBW1024', leftFromSterilize);
+
+      // 自动停止条件：只有在执行状态时才检查
+      if (this.analysisExecuting) {
+        if (leftFromSterilize === 0) {
+          this.addLog(
+            `灭菌柜${this.warehouseSelectedFrom}到解析房${this.warehouseSelectedTo}已完成，自动停止`
+          );
+          this.cancelAnalysisRoom();
+        }
+      }
+    },
+    // 更新出库需进货数量并写入PLC
+    updateOutNeedAndWrite(line) {
+      if (!line) return;
+
+      // 获取该线解析房的托盘数量
+      const analysisCount = this.getAnalysisCountFor(line);
+      this.outNeedQty[line] = analysisCount;
+
+      this.addLog(`${line}线出库需进货数量更新为：${analysisCount}`);
+
+      // 自动停止条件：只有在执行状态时才检查
+      if (this.outWarehouseExecuting[line]) {
+        if (analysisCount === 0) {
+          this.addLog(`${line}线出库已完成，自动停止`);
+          this.cancelOutWarehouse(line);
+        }
+      }
+    },
+    wrapArrayMethods(arr, queueId) {
+      const methods = [
+        'push',
+        'pop',
+        'shift',
+        'unshift',
+        'splice',
+        'sort',
+        'reverse'
+      ];
+      methods.forEach((method) => {
+        const original = arr[method];
+        arr[method] = (...args) => {
+          const result = original.apply(arr, args);
+          this.updateQueueInfo(queueId);
+          return result;
+        };
+      });
     }
   }
 };
@@ -5888,7 +7553,7 @@ export default {
                   transform: translate(-50%, -50%);
                   font-size: 72px;
                   font-weight: bold;
-                  color: rgba(255, 193, 7, 0.15);
+                  color: rgba(255, 193, 7, 0.2);
                   z-index: 0;
                   pointer-events: none;
                   white-space: nowrap;
@@ -5902,7 +7567,7 @@ export default {
                   transform: translate(-50%, -50%);
                   font-size: 72px;
                   font-weight: bold;
-                  color: rgba(40, 167, 69, 0.15);
+                  color: rgba(40, 167, 69, 0.2);
                   z-index: 0;
                   pointer-events: none;
                   white-space: nowrap;
