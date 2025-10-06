@@ -470,151 +470,96 @@ function conPLC() {
             return variables[tag];
           }); // This sets the "translation" to allow us to work with object names
           logger.info('连接PLC成功');
-          // 输送线看门狗心跳
-          conn.addItems('DBW0');
-          // 输送线当前运行状态
-          conn.addItems('DBW2');
-          // 允许进料反馈
-          conn.addItems('DBW4');
-          // A线电机运行信号
-          conn.addItems('DBW6');
-          // A线光电检测信号
-          conn.addItems('DBW8');
-          // B线电机运行信号
-          conn.addItems('DBW10');
-          // B线光电检测信号
-          conn.addItems('DBW12');
-          // C线电机运行信号
-          conn.addItems('DBW14');
-          // C线光电检测信号
-          conn.addItems('DBW16');
-          // D线电机运行信号
-          conn.addItems('DBW18');
-          // D线光电检测信号
-          conn.addItems('DBW20');
-          // E线电机运行信号
-          conn.addItems('DBW22');
-          // E线光电检测信号
-          conn.addItems('DBW24');
-          // 输送线故障反馈
-          conn.addItems('DBW26');
-          // 缓存区数量
-          conn.addItems('DBW28');
-          // 请求上位机下发任务(判断去灭菌还是非灭菌）
-          conn.addItems('DBW30');
-          // 非灭菌缓存区数量
-          conn.addItems('DBW32');
-          // A1数量
-          conn.addItems('DBW34');
-          // A2数量
-          conn.addItems('DBW36');
-          // A3数量
-          conn.addItems('DBW38');
-          // B1数量
-          conn.addItems('DBW40');
-          // B2数量
-          conn.addItems('DBW42');
-          // B3数量
-          conn.addItems('DBW44');
-          // C1数量
-          conn.addItems('DBW46');
-          // C2数量
-          conn.addItems('DBW48');
-          // C3数量
-          conn.addItems('DBW50');
-          // D进货数量
-          conn.addItems('DBW52');
-          // D出货数量
-          conn.addItems('DBW54');
-          // D请求出货信号
-          conn.addItems('DBW56');
-          // E进货数量
-          conn.addItems('DBW58');
-          // E出货数量
-          conn.addItems('DBW60');
-          // E请求出货信号
-          conn.addItems('DBW62');
-          // E数量
-          conn.addItems('DBW58');
-          // 上货区电机运行信号（扫码后入队）
-          conn.addItems('DBW64');
-          // 上货区输送线光电信号
-          conn.addItems('DBW66');
-          // 预热前小车电机运行信号1#车
-          conn.addItems('DBW68');
-          // 预热前小车检测信号1#车
-          conn.addItems('DBW70');
-          // 灭菌前小车电机运行信号2#车
-          conn.addItems('DBW72');
-          // 灭菌前小车检测信号2#车
-          conn.addItems('DBW74');
-          // 解析前小车电机运行信号3#车
-          conn.addItems('DBW76');
-          // 解析前小车检测信号3#车
-          conn.addItems('DBW78');
-          // 解析后小车电机运行信号4#车
-          conn.addItems('DBW80');
-          // 解析后小车检测信号4#车
-          conn.addItems('DBW82');
-          // 扫码枪处光电信号
-          conn.addItems('DBW84');
-          // 请求上位机下发任务(预热小车前）
-          conn.addItems('DBW86');
-          // 预热前1#小车位置值
-          conn.addItems('DBW88');
-          // 灭菌前2#小车位置值
-          conn.addItems('DBW90');
-          // 解析出4#小车位置值
-          conn.addItems('DBW92');
-          // 灭菌前2#小车位置值
-          conn.addItems('DBW94');
-          // 提升机一楼接货站台扫码数据（托盘号）
-          conn.addItems('DBB160');
-          // 一楼顶升移栽区扫码数据（扫码后判断方向）（托盘号）
-          conn.addItems('DBB190');
-          // 提升机二楼接货站台扫码数据（托盘号）
-          conn.addItems('DBB220');
-          // 提升机三楼接货站台扫码数据（托盘号）
-          conn.addItems('DBB250');
-          // 提升机四楼接货站台扫码数据（托盘号）
-          conn.addItems('DBB280');
-          // D扫码
-          conn.addItems('DBB310');
-          //E扫码
-          conn.addItems('DBB340');
-          // 报警点位读取
-          conn.addItems('DBW370'); // 提升机相关报警
-          conn.addItems('DBW372'); // 提升机相关报警
-          conn.addItems('DBW374'); // 门安全故障相关报警
-          conn.addItems('DBW376'); // 备用报警点位
-          conn.addItems('DBW378'); // 链条电机相关报警
-          conn.addItems('DBW380'); // 链条电机相关报警
-          conn.addItems('DBW382'); // 链条电机相关报警
-          conn.addItems('DBW384'); // 预热进口小车相关报警
-          conn.addItems('DBW386'); // 预热进口小车相关报警
-          conn.addItems('DBW388'); // A1-1预热相关报警
-          conn.addItems('DBW390'); // B1-1预热相关报警
-          conn.addItems('DBW392'); // C1-1预热相关报警
-          conn.addItems('DBW394'); // 预热出小车相关报警
-          conn.addItems('DBW396'); // 预热出小车相关报警
-          conn.addItems('DBW398'); // A2-1灭菌相关报警
-          conn.addItems('DBW400'); // B2-1灭菌相关报警
-          conn.addItems('DBW402'); // C2-1灭菌相关报警
-          conn.addItems('DBW404'); // 解析进小车相关报警
-          conn.addItems('DBW406'); // 解析进小车相关报警
-          conn.addItems('DBW408'); // A3-1解析相关报警
-          conn.addItems('DBW410'); // B3-1解析相关报警
-          conn.addItems('DBW412'); // C3-1解析相关报警
-          conn.addItems('DBW414'); // 解析出小车相关报警
-          conn.addItems('DBW416'); // 解析出小车相关报警
-          conn.addItems('DBW418'); // 立库对接相关报警
-          conn.addItems('DBW420'); // D柜相关报警
-          conn.addItems('DBW422'); // E柜相关报警
-          conn.addItems('DBW424'); // 上货1数量
-          conn.addItems('DBW426'); // 上货2数量
-          conn.addItems('DBW428'); // 缓存区1数量
-          conn.addItems('DBW430'); // 缓存区2数量
-          conn.addItems('DBW432'); // 预热、灭菌、解析柜状态
+          // 添加所有需要读取的变量
+          conn.addItems([
+            'DBW0', // 心跳
+            'DBW2', // 输送线当前运行状态
+            'DBW4', // 允许进料反馈
+            'DBW6', // A线电机运行信号
+            'DBW8', // A线光电检测信号
+            'DBW10', // B线电机运行信号
+            'DBW12', // B线光电检测信号
+            'DBW14', // C线电机运行信号
+            'DBW16', // C线光电检测信号
+            'DBW18', // D线电机运行信号
+            'DBW20', // D线光电检测信号
+            'DBW22', // E线电机运行信号
+            'DBW24', // E线光电检测信号
+            'DBW26', // 输送线故障反馈
+            'DBW28', // A1-2数量   预热房(前期备用）
+            'DBW30', // A1-3数量    预热房(前期备用）
+            'DBW32', // A2-1-进货 数量   灭菌柜     (前期备用）
+            'DBW34', // A3-1数量    解析房(前期备用）
+            'DBW36', // A3-2数量   解析放 (前期备用）
+            'DBW38', // A1-5数量   预热房（本次开始）
+            'DBW40', // A1-6数量   预热房
+            'DBW42', // A2-2-进货 数量   灭菌柜
+            'DBW44', // A3-4数量   解析房
+            'DBW46', // A3-5数量   解析房
+            'DBW48', // B1-2数量   预热房
+            'DBW50', // B1-3数量    预热房
+            'DBW52', // B2-1-进货 数量   灭菌柜
+            'DBW54', // B3-1数量    解析房
+            'DBW56', // B3-2数量   解析放
+            'DBW58', // B1-5数量   预热房
+            'DBW60', // B1-6数量   预热房
+            'DBW62', // B2-2-进货 数量   灭菌柜
+            'DBW64', // B3-4数量   解析房
+            'DBW66', // B3-5数量   解析房
+            'DBW68', // C1-2数量   预热房
+            'DBW70', // C1-3数量    预热房
+            'DBW72', // C2-1-进货 数量   灭菌柜
+            'DBW74', // C3-1数量    解析房
+            'DBW76', // C3-2数量   解析放
+            'DBW78', // C1-5数量   预热房
+            'DBW80', // C1-6数量   预热房
+            'DBW82', // C2-2-进货 数量   灭菌柜
+            'DBW84', // C3-4数量   解析房
+            'DBW86', // C3-5数量   解析房
+            'DBW88', // D1-2数量   预热房
+            'DBW90', // D1-3数量    预热房
+            'DBW92', // D2-1-进货 数量   灭菌柜
+            'DBW94', // D3-1数量    解析房
+            'DBW96', // D3-2数量   解析放
+            'DBW98', // D1-5数量   预热房
+            'DBW100', // D1-6数量   预热房
+            'DBW102', // D2-2-进货 数量   灭菌柜
+            'DBW104', // D3-4数量   解析房
+            'DBW106', // D3-5数量   解析房
+            'DBW108', // E1-2数量   预热房
+            'DBW110', // E1-3数量    预热房
+            'DBW112', // E2-1-进货 数量   灭菌柜
+            'DBW114', // E3-1数量    解析房
+            'DBW116', // E3-2数量   解析放
+            'DBW118', // E1-5数量   预热房
+            'DBW120', // E1-6数量   预热房
+            'DBW122', // E2-2-进货 数量   灭菌柜
+            'DBW124', // E3-4数量   解析房
+            'DBW126', // E3-5数量   解析房
+            'DBW128', // 上货区请求进货信号
+            'DBW134', // 灭菌前1#小车位置值
+            'DBW136', // 灭菌后2#小车位置值
+            'DBW140', // A2-1-出货 数量
+            'DBW142', // A2-2-出货 数量
+            'DBW144', // B2-1-出货 数量
+            'DBW146', // B2-2-出货 数量
+            'DBW148', // C2-1-出货 数量
+            'DBW150', // C2-2-出货 数量
+            'DBW152', // D2-1-出货 数量
+            'DBW154', // D2-2-出货 数量
+            'DBW156', // E2-1-出货 数量
+            'DBW158', // E2-2-出货 数量
+            'DBB200', // A1-1上货码
+            'DBB230', // A1-4上货码
+            'DBB260', // B1-1上货码
+            'DBB290', // B1-4上货码
+            'DBB310', // C1-1上货码
+            'DBB340', // C1-4上货码
+            'DBB370', // D1-1上货码
+            'DBB400', // D1-4上货码
+            'DBB430', // E1-1上货码
+            'DBB460' // E1-4上货码
+          ]);
           setInterval(() => {
             conn.readAllItems(valuesReady);
           }, 200);
@@ -661,57 +606,67 @@ var variables = {
   DBW26: 'DB101,INT26', // 输送线故障反馈
   DBW28: 'DB101,INT28', // A1-2数量   预热房(前期备用）
   DBW30: 'DB101,INT30', // A1-3数量    预热房(前期备用）
-  DBW32: 'DB101,INT32', // A2-1数量   灭菌柜     (前期备用） 
+  DBW32: 'DB101,INT32', // A2-1-进货 数量   灭菌柜     (前期备用）
   DBW34: 'DB101,INT34', // A3-1数量    解析房(前期备用）
   DBW36: 'DB101,INT36', // A3-2数量   解析放 (前期备用）
   DBW38: 'DB101,INT38', // A1-5数量   预热房（本次开始）
   DBW40: 'DB101,INT40', // A1-6数量   预热房
-  DBW42: 'DB101,INT42', // A2-2数量   灭菌柜
-  DBW44: 'DB101,INT44', // A1-4数量   解析房
-  DBW46: 'DB101,INT46', // A1-5数量   解析房
+  DBW42: 'DB101,INT42', // A2-2-进货 数量   灭菌柜
+  DBW44: 'DB101,INT44', // A3-4数量   解析房
+  DBW46: 'DB101,INT46', // A3-5数量   解析房
   DBW48: 'DB101,INT48', // B1-2数量   预热房
   DBW50: 'DB101,INT50', // B1-3数量    预热房
-  DBW52: 'DB101,INT52', // B2-1数量   灭菌柜
+  DBW52: 'DB101,INT52', // B2-1-进货 数量   灭菌柜
   DBW54: 'DB101,INT54', // B3-1数量    解析房
-  DBW56: 'DB101,INT56', // B3-2数量   解析放  
+  DBW56: 'DB101,INT56', // B3-2数量   解析放
   DBW58: 'DB101,INT58', // B1-5数量   预热房
   DBW60: 'DB101,INT60', // B1-6数量   预热房
-  DBW62: 'DB101,INT62', // B2-2数量   灭菌柜
-  DBW64: 'DB101,INT64', // B1-4数量   解析房
-  DBW66: 'DB101,INT66', // B1-5数量   解析房
+  DBW62: 'DB101,INT62', // B2-2-进货 数量   灭菌柜
+  DBW64: 'DB101,INT64', // B3-4数量   解析房
+  DBW66: 'DB101,INT66', // B3-5数量   解析房
   DBW68: 'DB101,INT68', // C1-2数量   预热房
   DBW70: 'DB101,INT70', // C1-3数量    预热房
-  DBW72: 'DB101,INT72', // C2-1数量   灭菌柜
+  DBW72: 'DB101,INT72', // C2-1-进货 数量   灭菌柜
   DBW74: 'DB101,INT74', // C3-1数量    解析房
   DBW76: 'DB101,INT76', // C3-2数量   解析放
   DBW78: 'DB101,INT78', // C1-5数量   预热房
   DBW80: 'DB101,INT80', // C1-6数量   预热房
-  DBW82: 'DB101,INT82', // C2-2数量   灭菌柜
-  DBW84: 'DB101,INT84', // C1-4数量   解析房
-  DBW86: 'DB101,INT86', // C1-5数量   解析房
+  DBW82: 'DB101,INT82', // C2-2-进货 数量   灭菌柜
+  DBW84: 'DB101,INT84', // C3-4数量   解析房
+  DBW86: 'DB101,INT86', // C3-5数量   解析房
   DBW88: 'DB101,INT88', // D1-2数量   预热房
   DBW90: 'DB101,INT90', // D1-3数量    预热房
-  DBW92: 'DB101,INT92', // D2-1数量   灭菌柜
+  DBW92: 'DB101,INT92', // D2-1-进货 数量   灭菌柜
   DBW94: 'DB101,INT94', // D3-1数量    解析房
   DBW96: 'DB101,INT96', // D3-2数量   解析放
   DBW98: 'DB101,INT98', // D1-5数量   预热房
   DBW100: 'DB101,INT100', // D1-6数量   预热房
-  DBW102: 'DB101,INT102', // D2-2数量   灭菌柜
-  DBW104: 'DB101,INT104', // D1-4数量   解析房
-  DBW106: 'DB101,INT106', // D1-5数量   解析房
+  DBW102: 'DB101,INT102', // D2-2-进货 数量   灭菌柜
+  DBW104: 'DB101,INT104', // D3-4数量   解析房
+  DBW106: 'DB101,INT106', // D3-5数量   解析房
   DBW108: 'DB101,INT108', // E1-2数量   预热房
   DBW110: 'DB101,INT110', // E1-3数量    预热房
-  DBW112: 'DB101,INT112', // E2-1数量   灭菌柜
+  DBW112: 'DB101,INT112', // E2-1-进货 数量   灭菌柜
   DBW114: 'DB101,INT114', // E3-1数量    解析房
   DBW116: 'DB101,INT116', // E3-2数量   解析放
   DBW118: 'DB101,INT118', // E1-5数量   预热房
   DBW120: 'DB101,INT120', // E1-6数量   预热房
-  DBW122: 'DB101,INT122', // E2-2数量   灭菌柜
-  DBW124: 'DB101,INT124', // E1-4数量   解析房
-  DBW126: 'DB101,INT126', // E1-5数量   解析房
+  DBW122: 'DB101,INT122', // E2-2-进货 数量   灭菌柜
+  DBW124: 'DB101,INT124', // E3-4数量   解析房
+  DBW126: 'DB101,INT126', // E3-5数量   解析房
   DBW128: 'DB101,INT128', // 上货区请求进货信号
   DBW134: 'DB101,INT134', // 灭菌前1#小车位置值
   DBW136: 'DB101,INT136', // 灭菌后2#小车位置值
+  DBW140: 'DB101,INT140', // A2-1-出货 数量
+  DBW142: 'DB101,INT142', // A2-2-出货 数量
+  DBW144: 'DB101,INT144', // B2-1-出货 数量
+  DBW146: 'DB101,INT146', // B2-2-出货 数量
+  DBW148: 'DB101,INT148', // C2-1-出货 数量
+  DBW150: 'DB101,INT150', // C2-2-出货 数量
+  DBW152: 'DB101,INT152', // D2-1-出货 数量
+  DBW154: 'DB101,INT154', // D2-2-出货 数量
+  DBW156: 'DB101,INT156', // E2-1-出货 数量
+  DBW158: 'DB101,INT158', // E2-2-出货 数量
   DBB200: 'DB101,C200.30', // A1-1上货码
   DBB230: 'DB101,C230.30', // A1-4上货码
   DBB260: 'DB101,C260.30', // B1-1上货码
@@ -752,7 +707,7 @@ var variables = {
   DBW1034: 'DB101,INT1034', // D1-4数量 需进货数量
   DBW1036: 'DB101,INT1036', // E1-1数量 需进货数量
   DBW1038: 'DB101,INT1038', // E1-4数量 需进货数量
-  DBW1040: 'DB101,INT1040', // 系统模式切换 01：单机模式02：AGV模式
+  DBW1040: 'DB101,INT1040' // 系统模式切换 01：单机模式02：AGV模式
 };
 
 var writeStrArr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
