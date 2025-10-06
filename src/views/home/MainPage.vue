@@ -3769,25 +3769,6 @@ export default {
       };
     }
   },
-  created() {
-    this.queues.forEach((q) => {
-      q.trayInfo = new Proxy(q.trayInfo, {
-        set: (arr, idx, val) => {
-          const result = Reflect.set(arr, idx, val);
-          this.updateQueueInfo(q.id);
-          return result;
-        },
-        deleteProperty: (arr, idx) => {
-          const result = Reflect.deleteProperty(arr, idx);
-          this.updateQueueInfo(q.id);
-          return result;
-        }
-      });
-
-      // 包装常用数组方法
-      this.wrapArrayMethods(q.trayInfo, q.id);
-    });
-  },
   mounted() {
     this.initializeMarkers();
     this.loadQueueInfoFromDatabase();
@@ -6519,25 +6500,6 @@ export default {
           this.cancelOutWarehouse(line);
         }
       }
-    },
-    wrapArrayMethods(arr, queueId) {
-      const methods = [
-        'push',
-        'pop',
-        'shift',
-        'unshift',
-        'splice',
-        'sort',
-        'reverse'
-      ];
-      methods.forEach((method) => {
-        const original = arr[method];
-        arr[method] = (...args) => {
-          const result = original.apply(arr, args);
-          this.updateQueueInfo(queueId);
-          return result;
-        };
-      });
     }
   }
 };
