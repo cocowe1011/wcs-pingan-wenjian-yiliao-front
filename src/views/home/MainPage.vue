@@ -4037,16 +4037,12 @@ export default {
       this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
       // 灭菌前2#小车位置值
       this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
-
-      // 只在第一次接收到数据时设置标志位为 true
-      if (!this.isDataReady) {
-        this.isDataReady = true;
-      }
     });
-    // 测试模式下，把上边注释，下面打开
-    // if (!this.isDataReady) {
-    //   this.isDataReady = true;
-    // }
+    // 给PLC数据加载时间
+    setTimeout(() => {
+      this.addLog('isDataReady数据加载完成');
+      this.isDataReady = true;
+    }, 3000);
   },
   watch: {
     // ---- 新增：监听小车位置数值变化 ----
@@ -4060,7 +4056,7 @@ export default {
     'scanPhotoelectricSignal.bit0'(newVal, oldVal) {
       // A线上货请求 - bit0
       if (newVal === '1' && oldVal === '0') {
-        this.handleLoadingRequest('A', 0);
+        this.handleLoadingRequest('A', '1-2');
       }
     },
     'scanPhotoelectricSignal.bit1'(newVal, oldVal) {
@@ -4934,11 +4930,58 @@ export default {
     },
     // 允许上货状态改变
     onAllowLoadingChange(line) {
-      this.$message.info(
-        `生产线 ${line.letter} 允许上货状态已${
-          line.allowLoading ? '开启' : '关闭'
-        }`
-      );
+      // 根据A-E线设置给PLC发送命令
+      // 'DBW1010_BIT0',
+      // 'DBW1010_BIT1',
+      // 'DBW1010_BIT2',
+      // 'DBW1010_BIT3',
+      // 'DBW1010_BIT4',
+      // 'DBW1010_BIT5',
+      // 'DBW1010_BIT6',
+      // 'DBW1010_BIT7',
+      // 'DBW1010_BIT8',
+      // 'DBW1010_BIT9',
+      if (line.letter === 'A') {
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT0', line.allowLoading);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT1', line.allowLoading);
+        this.addLog(
+          `生产线 ${line.letter} 允许上货状态已${
+            line.allowLoading ? '开启' : '关闭'
+          },给DBW1010_BIT0,DBW1010_BIT1发送命令:${line.allowLoading}`
+        );
+      } else if (line.letter === 'B') {
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT2', line.allowLoading);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT3', line.allowLoading);
+        this.addLog(
+          `生产线 ${line.letter} 允许上货状态已${
+            line.allowLoading ? '开启' : '关闭'
+          },给DBW1010_BIT2,DBW1010_BIT3发送命令:${line.allowLoading}`
+        );
+      } else if (line.letter === 'C') {
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT4', line.allowLoading);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT5', line.allowLoading);
+        this.addLog(
+          `生产线 ${line.letter} 允许上货状态已${
+            line.allowLoading ? '开启' : '关闭'
+          },给DBW1010_BIT4,DBW1010_BIT5发送命令:${line.allowLoading}`
+        );
+      } else if (line.letter === 'D') {
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT6', line.allowLoading);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT7', line.allowLoading);
+        this.addLog(
+          `生产线 ${line.letter} 允许上货状态已${
+            line.allowLoading ? '开启' : '关闭'
+          },给DBW1010_BIT6,DBW1010_BIT7发送命令:${line.allowLoading}`
+        );
+      } else if (line.letter === 'E') {
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT8', line.allowLoading);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT9', line.allowLoading);
+        this.addLog(
+          `生产线 ${line.letter} 允许上货状态已${
+            line.allowLoading ? '开启' : '关闭'
+          },给DBW1010_BIT8,DBW1010_BIT9发送命令:${line.allowLoading}`
+        );
+      }
     },
     // 处理上货请求
     handleLoadingRequest(lineLetter, witchLine) {
