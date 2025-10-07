@@ -3769,9 +3769,20 @@ export default {
       };
     }
   },
-  mounted() {
+  async mounted() {
     this.initializeMarkers();
-    this.loadQueueInfoFromDatabase();
+    await this.loadQueueInfoFromDatabase();
+    // 数据加载完成后创建监听
+    this.$nextTick(() => {
+      this.queues.forEach((queue, index) => {
+        this.$watch(`queues.${index}.trayInfo`, {
+          handler(newVal, oldVal) {
+            this.updateQueueInfo(queue.id);
+          },
+          deep: true
+        });
+      });
+    });
     ipcRenderer.on('receivedMsg', (event, values, values2) => {
       // 使用位运算优化赋值
       const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
@@ -4038,14 +4049,6 @@ export default {
     // }
   },
   watch: {
-    // ---- 新增：监听指定队列的 trayInfo 变化 ----
-    'queues.0.trayInfo': {
-      // 监听上货区 (ID: 1)
-      deep: true,
-      handler(newVal, oldVal) {
-        this.updateQueueInfo(1);
-      }
-    },
     // ---- 新增：监听小车位置数值变化 ----
     'cartPositionValues.cart1'(newVal) {
       this.updateCartPositionByValue(1, newVal);
@@ -4117,6 +4120,7 @@ export default {
     // 监听预热房数量变化 - A线
     // a15增加：从上货线移动托盘到A1-5队列（不需要判断卡片）
     'aLineQuantity.a15'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // a15对应队列索引5(A1-5)，从上货队列移动过来
         // 这里需要从对应的上货队列移动，暂时不处理
@@ -4125,6 +4129,7 @@ export default {
     },
     // a16增加：从A1-5移动托盘到A1-6（不需要判断卡片，预热房内部）
     'aLineQuantity.a16'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         // 从队列索引5(A1-5)移动到队列索引6(A1-6)
@@ -4134,12 +4139,14 @@ export default {
     // 监听预热房数量变化 - B线
     // b12增加：从上游移动托盘到B1-2（不需要判断卡片）
     'bLineQuantity.b12'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     // b13增加：从B1-2移动托盘到B1-3（不需要判断卡片）
     'bLineQuantity.b13'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('B', 10, 11, increaseCount);
@@ -4153,6 +4160,7 @@ export default {
     },
     // b16增加：从B1-5移动托盘到B1-6（不需要判断卡片）
     'bLineQuantity.b16'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('B', 15, 16, increaseCount);
@@ -4160,22 +4168,26 @@ export default {
     },
     // 监听预热房数量变化 - C线
     'cLineQuantity.c12'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     'cLineQuantity.c13'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('C', 20, 21, increaseCount);
       }
     },
     'cLineQuantity.c15'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     'cLineQuantity.c16'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('C', 25, 26, increaseCount);
@@ -4183,22 +4195,26 @@ export default {
     },
     // 监听预热房数量变化 - D线
     'dLineQuantity.d12'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     'dLineQuantity.d13'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('D', 30, 31, increaseCount);
       }
     },
     'dLineQuantity.d15'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     'dLineQuantity.d16'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('D', 35, 36, increaseCount);
@@ -4206,22 +4222,26 @@ export default {
     },
     // 监听预热房数量变化 - E线
     'eLineQuantity.e12'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     'eLineQuantity.e13'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('E', 40, 41, increaseCount);
       }
     },
     'eLineQuantity.e15'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         // 上货由handleLoadingRequest处理
       }
     },
     'eLineQuantity.e16'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('E', 45, 46, increaseCount);
@@ -4229,6 +4249,7 @@ export default {
     },
     // 监听灭菌柜入口数量变化 - 需要判断卡片（跨房间）
     'aLineQuantity.a22in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4244,6 +4265,7 @@ export default {
       }
     },
     'bLineQuantity.b21in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4259,6 +4281,7 @@ export default {
       }
     },
     'bLineQuantity.b22in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4274,6 +4297,7 @@ export default {
       }
     },
     'cLineQuantity.c21in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4289,6 +4313,7 @@ export default {
       }
     },
     'cLineQuantity.c22in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4304,6 +4329,7 @@ export default {
       }
     },
     'dLineQuantity.d21in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4319,6 +4345,7 @@ export default {
       }
     },
     'dLineQuantity.d22in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4334,6 +4361,7 @@ export default {
       }
     },
     'eLineQuantity.e21in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4349,6 +4377,7 @@ export default {
       }
     },
     'eLineQuantity.e22in'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
@@ -4365,47 +4394,56 @@ export default {
     },
     // 监听灭菌柜出队列数量变化 - 类似DE队列规则
     'aLineQuantity.a22out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       // A灭菌柜出货数量从0增加，移动所有进货队列托盘到出货队列
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('A');
       }
     },
     'bLineQuantity.b21out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('B');
       }
     },
     'bLineQuantity.b22out'(newVal, oldVal) {
       if (oldVal === 0 && newVal > 0) {
+        if (!this.isDataReady) return;
         this.moveDisinfectionTraysToOut('B');
       }
     },
     'cLineQuantity.c21out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('C');
       }
     },
     'cLineQuantity.c22out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('C');
       }
     },
     'dLineQuantity.d21out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('D');
       }
     },
     'dLineQuantity.d22out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('D');
       }
     },
     'eLineQuantity.e21out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('E');
       }
     },
     'eLineQuantity.e22out'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('E');
       }
@@ -4413,6 +4451,7 @@ export default {
     // 监听解析房数量变化 - A线
     // a34增加：从A22-OUT移动托盘到A3-4（需要判断卡片，跨房间）
     'aLineQuantity.a34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.analysisExecuting &&
@@ -4430,6 +4469,7 @@ export default {
     // a35增加：从A3-4移动托盘到A3-5（不需要判断卡片）
     // a35减少：出库（需要判断outWarehouseExecuting['A']）
     'aLineQuantity.a35'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('A', 8, 9, increaseCount);
@@ -4461,6 +4501,7 @@ export default {
     // 监听解析房数量变化 - B/C/D/E线
     // b32减少：B线第一条出库线
     'bLineQuantity.b32'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.B) {
@@ -4486,6 +4527,7 @@ export default {
       }
     },
     'bLineQuantity.b34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.analysisExecuting &&
@@ -4501,6 +4543,7 @@ export default {
       }
     },
     'bLineQuantity.b35'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         // B3-4（索引18）→ B3-5（索引19）
@@ -4532,6 +4575,7 @@ export default {
     },
     // c32减少：C线第一条出库线
     'cLineQuantity.c32'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.C) {
@@ -4557,6 +4601,7 @@ export default {
       }
     },
     'cLineQuantity.c34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.analysisExecuting &&
@@ -4572,6 +4617,7 @@ export default {
       }
     },
     'cLineQuantity.c35'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         // C3-4（索引28）→ C3-5（索引29）
@@ -4603,6 +4649,7 @@ export default {
     },
     // d32减少：D线第一条出库线
     'dLineQuantity.d32'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.D) {
@@ -4628,6 +4675,7 @@ export default {
       }
     },
     'dLineQuantity.d34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.analysisExecuting &&
@@ -4643,6 +4691,7 @@ export default {
       }
     },
     'dLineQuantity.d35'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         // D3-4（索引38）→ D3-5（索引39）
@@ -4674,6 +4723,7 @@ export default {
     },
     // e32减少：E线第一条出库线
     'eLineQuantity.e32'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.E) {
@@ -4699,6 +4749,7 @@ export default {
       }
     },
     'eLineQuantity.e34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (
         newVal > oldVal &&
         this.analysisExecuting &&
@@ -4714,6 +4765,7 @@ export default {
       }
     },
     'eLineQuantity.e35'(newVal, oldVal) {
+      if (!this.isDataReady) return;
       if (newVal > oldVal) {
         const increaseCount = newVal - oldVal;
         // E3-4（索引48）→ E3-5（索引49）
@@ -5765,8 +5817,8 @@ export default {
       });
     },
     // 从数据库加载队列信息
-    loadQueueInfoFromDatabase() {
-      HttpUtil.post('/queue_info/queryQueueList', {})
+    async loadQueueInfoFromDatabase() {
+      await HttpUtil.post('/queue_info/queryQueueList', {})
         .then((res) => {
           if (res.data && res.data.length > 0) {
             // 遍历数据库返回的队列信息
