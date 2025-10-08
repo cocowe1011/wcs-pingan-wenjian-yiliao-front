@@ -1436,83 +1436,273 @@
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit1 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="423"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit1')"
                 >
                   <div class="marker-label">A1-4#进货</div>
                 </div>
+                <!-- A1-4#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="423">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 上货口需进货信息 -->
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit2 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="520"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit2')"
                 >
                   <div class="marker-label">B1-1#进货</div>
                 </div>
+                <!-- B1-1#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="520">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit3 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="575"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit3')"
                 >
                   <div class="marker-label">B1-4#进货</div>
                 </div>
+                <!-- B1-4#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="575">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit4 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="671"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">C1-1#进货</div>
                 </div>
+                <!-- C1-1#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="671">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit5 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="723"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">C1-4#进货</div>
                 </div>
+                <!-- C1-4#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="723">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit6 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="820"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">D1-1#进货</div>
                 </div>
+                <!-- D1-1#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="820">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit7 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="872"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">D1-4#进货</div>
                 </div>
+                <!-- D1-4#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="872">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit8 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="969"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit8')"
                 >
                   <div class="marker-label">E1-1#进货</div>
                 </div>
+                <!-- E1-1#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="969">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="arrow-marker label-top"
                   :class="{ active: scanPhotoelectricSignal.bit9 === '1' }"
-                  data-x="95"
+                  data-x="100"
                   data-y="1020"
                   @click="toggleBitValue(scanPhotoelectricSignal, 'bit9')"
                 >
                   <div class="marker-label">E1-4#进货</div>
+                </div>
+                <!-- E1-4#需进货信息卡片 -->
+                <div class="marker-with-panel" data-x="100" data-y="1020">
+                  <div
+                    class="data-panel"
+                    :class="['position-left', { 'always-show': true }]"
+                    style="
+                      width: 35px;
+                      padding: 3px;
+                      border-radius: 5px;
+                      text-align: center;
+                      font-weight: bold;
+                      box-shadow: none;
+                    "
+                  >
+                    <div class="data-panel-content">
+                      <div class="data-panel-row" style="color: #293849">
+                        需进:{{ stockRequiredInfo.A14 }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <!-- 扫码信息汇总卡片 -->
                 <div class="marker-with-panel" data-x="1350" data-y="1400">
@@ -1900,7 +2090,7 @@
                               type="danger"
                               size="mini"
                               @click="cancelOutWarehouse(line)"
-                              style="width: 100%"
+                              style="width: 100%; margin-left: 0px"
                             >
                               取消
                             </el-button>
@@ -1915,7 +2105,7 @@
                                 margin-bottom: 2px;
                               "
                             >
-                              执行中
+                              执行中：{{ outWarehouseExecutingTrayCode[line] }}
                             </span>
                             <div
                               style="
@@ -2730,6 +2920,18 @@ export default {
         D14: '--', // D1-4
         E11: '--', // E1-1
         E14: '--' // E1-4
+      },
+      // 需进货信息数据
+      stockRequiredInfo: {
+        A14: 0, // A1-4
+        B11: 0, // B1-1
+        B14: 0, // B1-4
+        C11: 0, // C1-1
+        C14: 0, // C1-4
+        D11: 0, // D1-1
+        D14: 0, // D1-4
+        E11: 0, // E1-1
+        E14: 0 // E1-4
       },
       // 生产线卡片相关数据
       productionLines: [
@@ -3654,6 +3856,8 @@ export default {
       disinfectionExecuting: false,
       disinfectionTrayCode: '',
       disinfectionNeedQty: 0,
+      // 预热到灭菌的目标总数量（起始地队列数量+目的地已有队列数量）
+      disinfectionTargetTotal: 0,
       // 灭菌柜到解析房相关
       warehouseSelectedFrom: null, // 选择的灭菌柜
       warehouseSelectedTo: null, // 选择的解析房
@@ -3661,6 +3865,8 @@ export default {
       analysisExecuting: false,
       analysisTrayCode: '',
       analysisNeedQty: 0,
+      // 灭菌到解析的目标总数量（起始地队列数量+目的地已有队列数量）
+      analysisTargetTotal: 0,
       // 出库相关 - 每条线独立管理
       outWarehouseLoading: {
         A: false,
@@ -3686,6 +3892,14 @@ export default {
         D35: '', // D线第2条出库线
         E32: '', // E线第1条出库线
         E35: '' // E线第2条出库线
+      },
+      // 出库执行中的托盘号
+      outWarehouseExecutingTrayCode: {
+        A: '',
+        B: '',
+        C: '',
+        D: '',
+        E: ''
       },
       outNeedQty: {
         A: 0,
@@ -4113,16 +4327,6 @@ export default {
         this.handleLoadingRequest('E', '1-5');
       }
     },
-    // 监听预热房数量变化 - A线
-    // a15增加：从上货线移动托盘到A1-5队列（不需要判断卡片）
-    'aLineQuantity.a15'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // a15对应队列索引5(A1-5)，从上货队列移动过来
-        // 这里需要从对应的上货队列移动，暂时不处理
-        // 因为上货是通过handleLoadingRequest处理的
-      }
-    },
     // a16增加：从A1-5移动托盘到A1-6（不需要判断卡片，预热房内部）
     'aLineQuantity.a16'(newVal, oldVal) {
       if (!this.isDataReady) return;
@@ -4131,13 +4335,11 @@ export default {
         // 从队列索引5(A1-5)移动到队列索引6(A1-6)
         this.moveTraysWithinRoom('A', 5, 6, increaseCount);
       }
-    },
-    // 监听预热房数量变化 - B线
-    // b12增加：从上游移动托盘到B1-2（不需要判断卡片）
-    'bLineQuantity.b12'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'A' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     // b13增加：从B1-2移动托盘到B1-3（不需要判断卡片）
@@ -4147,11 +4349,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('B', 10, 11, increaseCount);
       }
-    },
-    // b15增加：从上游移动托盘到B1-5（不需要判断卡片）
-    'bLineQuantity.b15'(newVal, oldVal) {
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'B' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     // b16增加：从B1-5移动托盘到B1-6（不需要判断卡片）
@@ -4161,12 +4363,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('B', 15, 16, increaseCount);
       }
-    },
-    // 监听预热房数量变化 - C线
-    'cLineQuantity.c12'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'B' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     'cLineQuantity.c13'(newVal, oldVal) {
@@ -4175,11 +4376,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('C', 20, 21, increaseCount);
       }
-    },
-    'cLineQuantity.c15'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'C' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     'cLineQuantity.c16'(newVal, oldVal) {
@@ -4188,12 +4389,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('C', 25, 26, increaseCount);
       }
-    },
-    // 监听预热房数量变化 - D线
-    'dLineQuantity.d12'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'C' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     'dLineQuantity.d13'(newVal, oldVal) {
@@ -4202,11 +4402,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('D', 30, 31, increaseCount);
       }
-    },
-    'dLineQuantity.d15'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'D' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     'dLineQuantity.d16'(newVal, oldVal) {
@@ -4215,12 +4415,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('D', 35, 36, increaseCount);
       }
-    },
-    // 监听预热房数量变化 - E线
-    'eLineQuantity.e12'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'D' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     'eLineQuantity.e13'(newVal, oldVal) {
@@ -4229,11 +4428,11 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('E', 40, 41, increaseCount);
       }
-    },
-    'eLineQuantity.e15'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (newVal > oldVal) {
-        // 上货由handleLoadingRequest处理
+      if (
+        this.disinfectionRoomSelectedFrom === 'E' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
       }
     },
     'eLineQuantity.e16'(newVal, oldVal) {
@@ -4242,6 +4441,12 @@ export default {
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('E', 45, 46, increaseCount);
       }
+      if (
+        this.disinfectionRoomSelectedFrom === 'E' &&
+        this.disinfectionExecuting
+      ) {
+        this.updateDisinfectionNeedAndWrite();
+      }
     },
     // 监听灭菌柜入口数量变化 - 需要判断卡片（跨房间）
     'aLineQuantity.a22in'(newVal, oldVal) {
@@ -4249,15 +4454,30 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'A' &&
         this.disinfectionRoomSelectedTo === 'A'
       ) {
-        this.moveTraysBetweenQueues(
-          'A',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'a22in',
           newVal - oldVal
         );
+      }
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'A' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('A');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地A2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'A') {
+        this.checkDestinationLimit();
       }
     },
     'bLineQuantity.b21in'(newVal, oldVal) {
@@ -4265,15 +4485,30 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'B' &&
         this.disinfectionRoomSelectedTo === 'B'
       ) {
-        this.moveTraysBetweenQueues(
-          'B',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'b21in',
           newVal - oldVal
         );
+      }
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'B' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('B');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地B2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'B') {
+        this.checkDestinationLimit();
       }
     },
     'bLineQuantity.b22in'(newVal, oldVal) {
@@ -4281,15 +4516,30 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'B' &&
         this.disinfectionRoomSelectedTo === 'B'
       ) {
-        this.moveTraysBetweenQueues(
-          'B',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'b22in',
           newVal - oldVal
         );
+      }
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'B' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('B');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地B2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'B') {
+        this.checkDestinationLimit();
       }
     },
     'cLineQuantity.c21in'(newVal, oldVal) {
@@ -4297,15 +4547,30 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'C' &&
         this.disinfectionRoomSelectedTo === 'C'
       ) {
-        this.moveTraysBetweenQueues(
-          'C',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'c21in',
           newVal - oldVal
         );
+      }
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'C' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('C');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地C2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'C') {
+        this.checkDestinationLimit();
       }
     },
     'cLineQuantity.c22in'(newVal, oldVal) {
@@ -4313,15 +4578,26 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'C' &&
         this.disinfectionRoomSelectedTo === 'C'
       ) {
-        this.moveTraysBetweenQueues(
-          'C',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'c22in',
           newVal - oldVal
         );
+      }
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'C' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('C');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地C2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
       }
     },
     'dLineQuantity.d21in'(newVal, oldVal) {
@@ -4329,15 +4605,17 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'D' &&
         this.disinfectionRoomSelectedTo === 'D'
       ) {
-        this.moveTraysBetweenQueues(
-          'D',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'd21in',
           newVal - oldVal
         );
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'D') {
+        this.checkDestinationLimit();
       }
     },
     'dLineQuantity.d22in'(newVal, oldVal) {
@@ -4345,15 +4623,17 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'D' &&
         this.disinfectionRoomSelectedTo === 'D'
       ) {
-        this.moveTraysBetweenQueues(
-          'D',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'd22in',
           newVal - oldVal
         );
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'D') {
+        this.checkDestinationLimit();
       }
     },
     'eLineQuantity.e21in'(newVal, oldVal) {
@@ -4361,15 +4641,17 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'E' &&
         this.disinfectionRoomSelectedTo === 'E'
       ) {
-        this.moveTraysBetweenQueues(
-          'E',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'e21in',
           newVal - oldVal
         );
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'E') {
+        this.checkDestinationLimit();
       }
     },
     'eLineQuantity.e22in'(newVal, oldVal) {
@@ -4377,15 +4659,17 @@ export default {
       if (
         newVal > oldVal &&
         this.disinfectionExecuting &&
-        this.disinfectionRoomSelectedFrom === 'E' &&
         this.disinfectionRoomSelectedTo === 'E'
       ) {
-        this.moveTraysBetweenQueues(
-          'E',
-          'preheat',
-          'disinfection',
+        this.moveTrays(
+          this.disinfectionRoomSelectedFrom,
+          'e22in',
           newVal - oldVal
         );
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      if (this.disinfectionRoomSelectedTo === 'E') {
+        this.checkDestinationLimit();
       }
     },
     // 监听灭菌柜出队列数量变化 - 类似DE队列规则
@@ -4395,11 +4679,18 @@ export default {
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('A');
       }
+      // 更新相关需进货数量
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'A') {
+        this.updateAnalysisNeedAndWrite();
+      }
     },
     'bLineQuantity.b21out'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('B');
+      }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'B') {
+        this.updateAnalysisNeedAndWrite();
       }
     },
     'bLineQuantity.b22out'(newVal, oldVal) {
@@ -4407,11 +4698,17 @@ export default {
         if (!this.isDataReady) return;
         this.moveDisinfectionTraysToOut('B');
       }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'B') {
+        this.updateAnalysisNeedAndWrite();
+      }
     },
     'cLineQuantity.c21out'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('C');
+      }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'C') {
+        this.updateAnalysisNeedAndWrite();
       }
     },
     'cLineQuantity.c22out'(newVal, oldVal) {
@@ -4419,11 +4716,17 @@ export default {
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('C');
       }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'C') {
+        this.updateAnalysisNeedAndWrite();
+      }
     },
     'dLineQuantity.d21out'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('D');
+      }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'D') {
+        this.updateAnalysisNeedAndWrite();
       }
     },
     'dLineQuantity.d22out'(newVal, oldVal) {
@@ -4431,17 +4734,26 @@ export default {
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('D');
       }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'D') {
+        this.updateAnalysisNeedAndWrite();
+      }
     },
     'eLineQuantity.e21out'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('E');
       }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'E') {
+        this.updateAnalysisNeedAndWrite();
+      }
     },
     'eLineQuantity.e22out'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (oldVal === 0 && newVal > 0) {
         this.moveDisinfectionTraysToOut('E');
+      }
+      if (this.analysisExecuting && this.warehouseSelectedFrom === 'E') {
+        this.updateAnalysisNeedAndWrite();
       }
     },
     // 监听解析房数量变化 - A线
@@ -4451,16 +4763,198 @@ export default {
       if (
         newVal > oldVal &&
         this.analysisExecuting &&
-        this.warehouseSelectedFrom === 'A' &&
         this.warehouseSelectedTo === 'A'
       ) {
-        this.moveTraysBetweenQueues(
-          'A',
-          'disinfection',
-          'analysis',
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'a34',
+          newVal - oldVal
+        );
+        const currentTotal = this.getAnalysisCountFor('A');
+        if (currentTotal === this.analysisTargetTotal) {
+          this.cancelAnalysisRoom();
+          this.addLog(
+            `灭菌柜到解析房执行完成，目的地A3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+          );
+        }
+        this.checkDestinationLimit();
+      }
+    },
+    'aLineQuantity.b31'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'B'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'b31',
+          newVal - oldVal
+        );
+        const currentTotal = this.getAnalysisCountFor('B');
+        if (currentTotal === this.analysisTargetTotal) {
+          this.cancelAnalysisRoom();
+          this.addLog(
+            `灭菌柜到解析房执行完成，目的地B3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+          );
+        }
+        this.checkDestinationLimit();
+      }
+    },
+    'bLineQuantity.b34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'B'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'b34',
           newVal - oldVal
         );
       }
+      const currentTotal = this.getAnalysisCountFor('B');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地B3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
+    },
+    'cLineQuantity.c31'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'C'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'c31',
+          newVal - oldVal
+        );
+      }
+      const currentTotal = this.getAnalysisCountFor('C');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地C3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
+    },
+    'cLineQuantity.c34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'C'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'c34',
+          newVal - oldVal
+        );
+      }
+      const currentTotal = this.getAnalysisCountFor('C');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地C3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
+    },
+    'dLineQuantity.d31'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'D'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'd31',
+          newVal - oldVal
+        );
+      }
+      const currentTotal = this.getAnalysisCountFor('D');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地C3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
+    },
+    'dLineQuantity.d34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'D'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'd34',
+          newVal - oldVal
+        );
+      }
+      const currentTotal = this.getAnalysisCountFor('D');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地D3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
+    },
+    'eLineQuantity.e31'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'E'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'e31',
+          newVal - oldVal
+        );
+      }
+      const currentTotal = this.getAnalysisCountFor('E');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地E3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
+    },
+    'eLineQuantity.e34'(newVal, oldVal) {
+      if (!this.isDataReady) return;
+      if (
+        newVal > oldVal &&
+        this.analysisExecuting &&
+        this.warehouseSelectedTo === 'E'
+      ) {
+        this.moveTraysFromDisinfectionToAnalysis(
+          this.warehouseSelectedFrom,
+          'e34',
+          newVal - oldVal
+        );
+      }
+      const currentTotal = this.getAnalysisCountFor('E');
+      if (currentTotal === this.analysisTargetTotal) {
+        this.cancelAnalysisRoom();
+        this.addLog(
+          `灭菌柜到解析房执行完成，目的地E3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+        );
+      }
+      this.checkDestinationLimit();
     },
     // a35增加：从A3-4移动托盘到A3-5（不需要判断卡片）
     // a35减少：出库（需要判断outWarehouseExecuting['A']）
@@ -4487,18 +4981,20 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置A线出库，但A35却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置A线出库，但A35却减少了，程序错误！报警！');
         }
       }
     },
     // 监听解析房数量变化 - B/C/D/E线
+    // b32增加：从B3-1移动托盘到B3-2
     // b32减少：B线第一条出库线
     'bLineQuantity.b32'(newVal, oldVal) {
       if (!this.isDataReady) return;
-      if (newVal < oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // B3-1（索引13）→ B3-2（索引14）
+        this.moveTraysWithinRoom('B', 13, 14, increaseCount);
+      } else if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.B) {
           for (let i = 0; i < decreaseCount; i++) {
@@ -4515,27 +5011,8 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置B线出库，但B32却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置B线出库，但B32却减少了，程序错误！报警！');
         }
-      }
-    },
-    'bLineQuantity.b34'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (
-        newVal > oldVal &&
-        this.analysisExecuting &&
-        this.warehouseSelectedFrom === 'B' &&
-        this.warehouseSelectedTo === 'B'
-      ) {
-        this.moveTraysBetweenQueues(
-          'B',
-          'disinfection',
-          'analysis',
-          newVal - oldVal
-        );
       }
     },
     'bLineQuantity.b35'(newVal, oldVal) {
@@ -4562,17 +5039,19 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置B线出库，但B35却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置B线出库，但B35却减少了，程序错误！报警！');
         }
       }
     },
+    // c32增加：从C3-1移动托盘到C3-2
     // c32减少：C线第一条出库线
     'cLineQuantity.c32'(newVal, oldVal) {
       if (!this.isDataReady) return;
-      if (newVal < oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // C3-1（索引23）→ C3-2（索引24）
+        this.moveTraysWithinRoom('C', 23, 24, increaseCount);
+      } else if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.C) {
           for (let i = 0; i < decreaseCount; i++) {
@@ -4589,27 +5068,8 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置C线出库，但C32却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置C线出库，但C32却减少了，程序错误！报警！');
         }
-      }
-    },
-    'cLineQuantity.c34'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (
-        newVal > oldVal &&
-        this.analysisExecuting &&
-        this.warehouseSelectedFrom === 'C' &&
-        this.warehouseSelectedTo === 'C'
-      ) {
-        this.moveTraysBetweenQueues(
-          'C',
-          'disinfection',
-          'analysis',
-          newVal - oldVal
-        );
       }
     },
     'cLineQuantity.c35'(newVal, oldVal) {
@@ -4636,17 +5096,19 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置C线出库，但C35却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置C线出库，但C35却减少了，程序错误！报警！');
         }
       }
     },
+    // d32增加：从D3-1移动托盘到D3-2
     // d32减少：D线第一条出库线
     'dLineQuantity.d32'(newVal, oldVal) {
       if (!this.isDataReady) return;
-      if (newVal < oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // D3-1（索引33）→ D3-2（索引34）
+        this.moveTraysWithinRoom('D', 33, 34, increaseCount);
+      } else if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.D) {
           for (let i = 0; i < decreaseCount; i++) {
@@ -4663,27 +5125,8 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置D线出库，但D32却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置D线出库，但D32却减少了，程序错误！报警！');
         }
-      }
-    },
-    'dLineQuantity.d34'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (
-        newVal > oldVal &&
-        this.analysisExecuting &&
-        this.warehouseSelectedFrom === 'D' &&
-        this.warehouseSelectedTo === 'D'
-      ) {
-        this.moveTraysBetweenQueues(
-          'D',
-          'disinfection',
-          'analysis',
-          newVal - oldVal
-        );
       }
     },
     'dLineQuantity.d35'(newVal, oldVal) {
@@ -4710,17 +5153,19 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置D线出库，但D35却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置D线出库，但D35却减少了，程序错误！报警！');
         }
       }
     },
+    // e32增加：从E3-1移动托盘到E3-2
     // e32减少：E线第一条出库线
     'eLineQuantity.e32'(newVal, oldVal) {
       if (!this.isDataReady) return;
-      if (newVal < oldVal) {
+      if (newVal > oldVal) {
+        const increaseCount = newVal - oldVal;
+        // E3-1（索引43）→ E3-2（索引44）
+        this.moveTraysWithinRoom('E', 43, 44, increaseCount);
+      } else if (newVal < oldVal) {
         const decreaseCount = oldVal - newVal;
         if (this.outWarehouseExecuting.E) {
           for (let i = 0; i < decreaseCount; i++) {
@@ -4737,27 +5182,8 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置E线出库，但E32却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置E线出库，但E32却减少了，程序错误！报警！');
         }
-      }
-    },
-    'eLineQuantity.e34'(newVal, oldVal) {
-      if (!this.isDataReady) return;
-      if (
-        newVal > oldVal &&
-        this.analysisExecuting &&
-        this.warehouseSelectedFrom === 'E' &&
-        this.warehouseSelectedTo === 'E'
-      ) {
-        this.moveTraysBetweenQueues(
-          'E',
-          'disinfection',
-          'analysis',
-          newVal - oldVal
-        );
       }
     },
     'eLineQuantity.e35'(newVal, oldVal) {
@@ -4784,10 +5210,7 @@ export default {
             }
           }
         } else {
-          this.addLog(
-            '未设置E线出库，但E35却减少了，程序错误！报警！',
-            'alarm'
-          );
+          this.addLog('未设置E线出库，但E35却减少了，程序错误！报警！');
         }
       }
     },
@@ -4796,16 +5219,62 @@ export default {
       if (!this.isDataReady) return;
       if (!newVal) {
         this.cancelDisinfectionRoom();
-      } else {
-        this.updateDisinfectionNeedAndWrite();
       }
     },
     // 监听灭菌柜到解析房选择变化，自动更新需进货数量
     warehouseSelectedFrom(newVal) {
       if (!newVal) {
         this.cancelAnalysisRoom();
-      } else {
-        this.updateAnalysisNeedAndWrite();
+      }
+
+      // 检查灭菌到解析来源冲突：灭菌到解析的灭菌选择A，预热到灭菌的灭菌就不能选择A
+      if (newVal && this.disinfectionRoomSelectedTo === newVal) {
+        this.warehouseSelectedFrom = null;
+        this.addLog(
+          `灭菌房${newVal}已被选择为预热到灭菌的目的地，不能同时设置为灭菌到解析的来源，已自动取消灭菌到解析来源设置`
+        );
+        this.$message({
+          message: `⚠️ 灭菌房${newVal}已被选择为预热到灭菌的目的地，不能同时设置为灭菌到解析的来源，已自动取消灭菌到解析来源设置`,
+          type: 'warning',
+          duration: 5000,
+          showClose: true
+        });
+      }
+    },
+    // 监听灭菌房目的地选择变化
+    disinfectionRoomSelectedTo(newVal) {
+      if (!this.isDataReady) return;
+
+      // 检查预热到灭菌目的地冲突：预热到灭菌的灭菌选择A，灭菌到解析的灭菌就不能选择A
+      if (newVal && this.warehouseSelectedFrom === newVal) {
+        this.disinfectionRoomSelectedTo = null;
+        this.addLog(
+          `灭菌房${newVal}已被选择为灭菌到解析的来源，不能同时设置为预热到灭菌的目的地，已自动取消预热到灭菌目的地设置`
+        );
+        this.$message({
+          message: `⚠️ 灭菌房${newVal}已被选择为灭菌到解析的来源，不能同时设置为预热到灭菌的目的地，已自动取消预热到灭菌目的地设置`,
+          type: 'warning',
+          duration: 5000,
+          showClose: true
+        });
+      }
+    },
+    // 监听解析库目的地选择变化
+    warehouseSelectedTo(newVal) {
+      if (!this.isDataReady) return;
+
+      // 检查灭菌到解析目的地冲突：灭菌到解析的解析选择A，出库就不能选择A
+      if (newVal && this.outWarehouseSelected === newVal) {
+        this.warehouseSelectedTo = null;
+        this.addLog(
+          `解析库${newVal}已被选择为出库来源，不能同时设置为灭菌到解析的目的地，已自动取消灭菌到解析目的地设置`
+        );
+        this.$message({
+          message: `⚠️ 解析库${newVal}已被选择为出库来源，不能同时设置为灭菌到解析的目的地，已自动取消灭菌到解析目的地设置`,
+          type: 'warning',
+          duration: 5000,
+          showClose: true
+        });
       }
     }
   },
@@ -4845,66 +5314,130 @@ export default {
         return;
       }
 
-      // 判断起始地数量是否大于0（系统队列数量和PLC解析房数量都要大于0）
-      const systemQueueCount = this.getAnalysisCountFor(line);
-      let plcAnalysisCount = 0;
+      // 判断起始地数量是否大于0（系统队列数量和PLC出库队列数量都要大于0）
+      const systemQueueCount = this.getOutWarehouseCountFor(line);
+      let plcOutCount = 0;
       if (line === 'A') {
-        plcAnalysisCount =
-          (this.aLineQuantity.a34 || 0) + (this.aLineQuantity.a35 || 0);
+        plcOutCount = this.aLineQuantity.a35 || 0;
       } else if (line === 'B') {
-        plcAnalysisCount =
-          (this.bLineQuantity.b34 || 0) + (this.bLineQuantity.b35 || 0);
+        plcOutCount =
+          (this.bLineQuantity.b32 || 0) + (this.bLineQuantity.b35 || 0);
       } else if (line === 'C') {
-        plcAnalysisCount =
-          (this.cLineQuantity.c34 || 0) + (this.cLineQuantity.c35 || 0);
+        plcOutCount =
+          (this.cLineQuantity.c32 || 0) + (this.cLineQuantity.c35 || 0);
       } else if (line === 'D') {
-        plcAnalysisCount =
-          (this.dLineQuantity.d34 || 0) + (this.dLineQuantity.d35 || 0);
+        plcOutCount =
+          (this.dLineQuantity.d32 || 0) + (this.dLineQuantity.d35 || 0);
       } else if (line === 'E') {
-        plcAnalysisCount =
-          (this.eLineQuantity.e34 || 0) + (this.eLineQuantity.e35 || 0);
+        plcOutCount =
+          (this.eLineQuantity.e32 || 0) + (this.eLineQuantity.e35 || 0);
       }
 
-      if (systemQueueCount <= 0 || plcAnalysisCount <= 0) {
+      if (systemQueueCount <= 0 || plcOutCount <= 0) {
         this.$message.warning(
-          `${line}解析房中没有可用的托盘，请检查起始地数量`
+          `${line}出库队列中没有可用的托盘，请检查起始地数量`
+        );
+        return;
+      }
+
+      if (systemQueueCount !== plcOutCount) {
+        this.$message.warning(
+          `${line}出库队列中系统数量和PLC数量不一致，请检查起始地数量`
+        );
+        this.addLog(
+          `${line}出库队列中系统数量和PLC数量不一致，请检查起始地数量`
         );
         return;
       }
 
       this.outWarehouseLoading[line] = true;
       this.outWarehouseExecuting[line] = true;
-
-      // 计算需进货数量
-      const analysisCount = this.getAnalysisCountFor(line);
-      this.outNeedQty[line] = analysisCount;
-
-      this.addLog(`出库${line}开始执行，需进货：${analysisCount}`);
-
-      setTimeout(() => {
-        this.outWarehouseLoading[line] = false;
-        // 初始化出库托盘码显示（实际托盘码会在PLC触发时更新）
-      }, 500);
+      if (line === 'A') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW534', 1);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW534');
+        }, 2000);
+        this.outWarehouseExecutingTrayCode.A =
+          this.queues[9].trayInfo[0].trayCode;
+      } else if (line === 'B') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW534', 2);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW534');
+        }, 500);
+        this.outWarehouseExecutingTrayCode.B =
+          this.queues[14].trayInfo[0].trayCode +
+          '/' +
+          this.queues[19].trayInfo[0].trayCode;
+      } else if (line === 'C') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW534', 3);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW534');
+        }, 2000);
+        this.outWarehouseExecutingTrayCode.C =
+          this.queues[24].trayInfo[0].trayCode +
+          '/' +
+          this.queues[29].trayInfo[0].trayCode;
+      } else if (line === 'D') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW536', 1);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW536');
+        }, 2000);
+        this.outWarehouseExecutingTrayCode.D =
+          this.queues[34].trayInfo[0].trayCode +
+          '/' +
+          this.queues[39].trayInfo[0].trayCode;
+      } else if (line === 'E') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW536', 2);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW536');
+        }, 2000);
+        this.outWarehouseExecutingTrayCode.E =
+          this.queues[44].trayInfo[0].trayCode +
+          '/' +
+          this.queues[49].trayInfo[0].trayCode;
+      }
+      console.log(this.outWarehouseExecutingTrayCode);
+      // 计算需进货数量（只计算出库队列的数量）
+      this.updateOutNeedAndWrite(line);
+      this.addLog(`出库${line}开始执行，需进货：${this.outNeedQty[line]}`);
     },
     cancelOutWarehouse(line) {
       this.outWarehouseExecuting[line] = false;
+      this.outWarehouseLoading[line] = false;
       this.outNeedQty[line] = 0;
+      // 清空执行中的托盘号
+      this.outWarehouseExecutingTrayCode[line] = '';
       // 清空该线所有子线的托盘码
       if (line === 'A') {
         this.outWarehouseTrayCode.A35 = '';
+        // 取消A线PLC写入
+        ipcRenderer.send('cancelWriteToPLC', 'DBW534');
       } else if (line === 'B') {
         this.outWarehouseTrayCode.B32 = '';
         this.outWarehouseTrayCode.B35 = '';
+        // 取消B线PLC写入
+        ipcRenderer.send('cancelWriteToPLC', 'DBW534');
       } else if (line === 'C') {
         this.outWarehouseTrayCode.C32 = '';
         this.outWarehouseTrayCode.C35 = '';
+        // 取消C线PLC写入
+        ipcRenderer.send('cancelWriteToPLC', 'DBW534');
       } else if (line === 'D') {
         this.outWarehouseTrayCode.D32 = '';
         this.outWarehouseTrayCode.D35 = '';
+        // 取消D线PLC写入
+        ipcRenderer.send('cancelWriteToPLC', 'DBW536');
       } else if (line === 'E') {
         this.outWarehouseTrayCode.E32 = '';
         this.outWarehouseTrayCode.E35 = '';
+        // 取消E线PLC写入
+        ipcRenderer.send('cancelWriteToPLC', 'DBW536');
       }
+
+      // 写入PLC出库需进货数量为0
+      this.writeWordWithCancel('DBW1026', 0);
+      this.addLog(`出库${line}执行已取消，写入PLC DBW1026: 0`);
+      this.$message.info(`已取消出库${line}执行`);
     },
     // 确认订单选择
     confirmOrderSelection() {
@@ -5371,9 +5904,8 @@ export default {
             batchNo: tray.batchNo || '' // 添加备注
           }))
           .filter((tray) => tray.id); // 过滤掉没有 id 的托盘
-        console.log(this.nowTrays);
       } catch (error) {
-        console.error('处理托盘信息时出错:', error);
+        this.addLog('处理托盘信息时出错:');
         this.nowTrays = [];
       }
     },
@@ -5474,7 +6006,6 @@ export default {
           // 用户取消操作
           return;
         }
-        console.error('移动托盘时出错:', error);
         this.$message.error(error.message || '移动托盘失败，请重试');
       } finally {
         this.draggedTray = null;
@@ -5738,7 +6269,6 @@ export default {
           this.addLog('托盘检索：未找到符合条件的托盘');
         }
       } catch (error) {
-        console.error('托盘检索失败:', error);
         this.$message.error('托盘检索失败，请重试');
         this.addLog(`托盘检索失败：${error.message}`);
       } finally {
@@ -5887,7 +6417,6 @@ export default {
                     }个托盘`
                   );
                 } catch (error) {
-                  console.error(`解析队列${queueId}的托盘信息失败:`, error);
                   this.queues[queueIndex].trayInfo = [];
                   this.addLog(`队列${queueId}托盘信息解析失败，已重置为空`);
                 }
@@ -6154,11 +6683,11 @@ export default {
       // 每条线有两个解析房队列
       // 队列索引映射：A(8,9), B(13,14,18,19), C(23,24,28,29), D(33,34,38,39), E(43,44,48,49)
       const queueIndexMap = {
-        A: [8, 9], // A3-4, A3-5
-        B: [13, 14, 18, 19], // B3-1, B3-2, B3-4, B3-5
-        C: [23, 24, 28, 29], // C3-1, C3-2, C3-4, C3-5
-        D: [33, 34, 38, 39], // D3-1, D3-2, D3-4, D3-5
-        E: [43, 44, 48, 49] // E3-1, E3-2, E3-4, E3-5
+        A: [8], // A3-4, A3-5
+        B: [13, 18], // B3-1, B3-4
+        C: [23, 28], // C3-1, C3-4
+        D: [33, 38], // D3-1, D3-4
+        E: [43, 48] // E3-1, E3-4
       };
 
       const queueIndexes = queueIndexMap[line] || [];
@@ -6169,6 +6698,59 @@ export default {
         }
       });
       return total;
+    },
+    // 获取出库队列数量（只计算A35、B32、B35、C32、C35、D32、D35、E32、E35）
+    getOutWarehouseCountFor(line) {
+      if (!line) return 0;
+      // 出库队列索引映射：A35(9), B32(14), B35(19), C32(24), C35(29), D32(34), D35(39), E32(44), E35(49)
+      const outQueueIndexMap = {
+        A: [9], // A3-5
+        B: [14, 19], // B3-2, B3-5
+        C: [24, 29], // C3-2, C3-5
+        D: [34, 39], // D3-2, D3-5
+        E: [44, 49] // E3-2, E3-5
+      };
+
+      const queueIndexes = outQueueIndexMap[line] || [];
+      let total = 0;
+      queueIndexes.forEach((index) => {
+        if (this.queues[index]) {
+          total += this.queues[index].trayInfo.length || 0;
+        }
+      });
+      return total;
+    },
+    // 检查目的地是否已满16个托盘，满了则自动设置为不执行
+    checkDestinationLimit() {
+      // 检查灭菌房目的地（A2, B2, C2）是否满16个
+      if (this.disinfectionRoomSelectedTo && this.disinfectionExecuting) {
+        const disinfectionCount = this.getSterilizeCountFor(
+          this.disinfectionRoomSelectedTo
+        );
+        // A线只有一条线，最多13个；B/C/D/E线有两条线，最多26个
+        const maxCount = this.disinfectionRoomSelectedTo === 'A' ? 13 : 26;
+        if (disinfectionCount >= maxCount) {
+          this.addLog(
+            `预热房${this.disinfectionRoomSelectedFrom}到灭菌柜${this.disinfectionRoomSelectedTo}已完成，自动停止（灭菌柜${disinfectionCount}/${maxCount}）`
+          );
+          this.cancelDisinfectionRoom();
+        }
+      }
+
+      // 检查解析库目的地（A3, B3, C3）是否满16个
+      if (this.warehouseSelectedTo && this.analysisExecuting) {
+        const analysisCount = this.getAnalysisCountFor(
+          this.warehouseSelectedTo
+        );
+        // A线只有一条线，最多13个；B/C/D/E线有两条线，最多26个
+        const maxCount = this.warehouseSelectedTo === 'A' ? 13 : 26;
+        if (analysisCount >= maxCount) {
+          this.addLog(
+            `灭菌柜${this.warehouseSelectedFrom}到解析库${this.warehouseSelectedTo}已完成，自动停止（解析库${analysisCount}/${maxCount}）`
+          );
+          this.cancelAnalysisRoom();
+        }
+      }
     },
     // 预热房到灭菌柜执行
     sendToDisinfectionRoom() {
@@ -6230,7 +6812,75 @@ export default {
 
       this.disinfectionRoomLoading = true;
       this.disinfectionExecuting = true;
-
+      if (this.disinfectionRoomSelectedFrom === 'A') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 13);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1012');
+        }, 2000);
+        this.disinfectionTrayCode = this.queues[6].trayInfo[0].trayCode;
+      } else if (this.disinfectionRoomSelectedFrom === 'B') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 23);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1012');
+        }, 2000);
+        this.disinfectionTrayCode =
+          this.queues[11].trayInfo[0].trayCode +
+          '/' +
+          this.queues[16].trayInfo[0].trayCode;
+      } else if (this.disinfectionRoomSelectedFrom === 'C') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 33);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1012');
+        }, 2000);
+        this.disinfectionTrayCode =
+          this.queues[21].trayInfo[0].trayCode +
+          '/' +
+          this.queues[26].trayInfo[0].trayCode;
+      } else if (this.disinfectionRoomSelectedFrom === 'D') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 43);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1012');
+        }, 2000);
+        this.disinfectionTrayCode =
+          this.queues[31].trayInfo[0].trayCode +
+          '/' +
+          this.queues[36].trayInfo[0].trayCode;
+      } else if (this.disinfectionRoomSelectedFrom === 'E') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 53);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1012');
+        }, 2000);
+        this.disinfectionTrayCode =
+          this.queues[41].trayInfo[0].trayCode +
+          '/' +
+          this.queues[46].trayInfo[0].trayCode;
+      }
+      if (this.disinfectionRoomSelectedTo === 'A') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 13);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1014');
+        }, 2000);
+      } else if (this.disinfectionRoomSelectedTo === 'B') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 23);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1014');
+        }, 2000);
+      } else if (this.disinfectionRoomSelectedTo === 'C') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 33);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1014');
+        }, 2000);
+      } else if (this.disinfectionRoomSelectedTo === 'D') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 43);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1014');
+        }, 2000);
+      } else if (this.disinfectionRoomSelectedTo === 'E') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 53);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1014');
+        }, 2000);
+      }
       // 更新需进货数量并写入PLC
       this.updateDisinfectionNeedAndWrite();
 
@@ -6286,20 +6936,103 @@ export default {
         return;
       }
 
+      if (systemQueueCount !== plcDisinfectionCount) {
+        this.$message.warning(
+          `${this.warehouseSelectedFrom}灭菌柜出队列中系统数量和PLC数量不一致，请检查起始地数量`
+        );
+        this.addLog(
+          `${this.warehouseSelectedFrom}灭菌柜出队列中系统数量和PLC数量不一致，请检查起始地数量`
+        );
+        return;
+      }
+
+      // 计算并存储目标总数量：起始地队列数量 + 目的地已有队列数量
+      const sourceQueueCount = systemQueueCount;
+      const destinationQueueCount = this.getAnalysisCountFor(
+        this.warehouseSelectedTo
+      );
+      this.analysisTargetTotal = sourceQueueCount + destinationQueueCount;
+
       this.analysisRoomLoading = true;
       this.analysisExecuting = true;
 
+      if (this.warehouseSelectedFrom === 'A') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 13);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1016');
+        }, 2000);
+        this.analysisTrayCode = this.queues[51].trayInfo[0].trayCode;
+      } else if (this.warehouseSelectedFrom === 'B') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 23);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1016');
+        }, 2000);
+        this.analysisTrayCode =
+          this.queues[52].trayInfo[0].trayCode +
+          '/' +
+          this.queues[53].trayInfo[0].trayCode;
+      } else if (this.warehouseSelectedFrom === 'C') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 33);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1016');
+        }, 2000);
+        this.analysisTrayCode =
+          this.queues[54].trayInfo[0].trayCode +
+          '/' +
+          this.queues[55].trayInfo[0].trayCode;
+      } else if (this.warehouseSelectedFrom === 'D') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 43);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1016');
+        }, 2000);
+        this.analysisTrayCode =
+          this.queues[56].trayInfo[0].trayCode +
+          '/' +
+          this.queues[57].trayInfo[0].trayCode;
+      } else if (this.warehouseSelectedFrom === 'E') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 53);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1016');
+        }, 2000);
+        this.analysisTrayCode =
+          this.queues[58].trayInfo[0].trayCode +
+          '/' +
+          this.queues[59].trayInfo[0].trayCode;
+      }
+      if (this.warehouseSelectedTo === 'A') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 13);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1018');
+        }, 2000);
+      } else if (this.warehouseSelectedTo === 'B') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 23);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1018');
+        }, 2000);
+      } else if (this.warehouseSelectedTo === 'C') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 33);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1018');
+        }, 2000);
+      } else if (this.warehouseSelectedTo === 'D') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 43);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1018');
+        }, 2000);
+      } else if (this.warehouseSelectedTo === 'E') {
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 53);
+        setTimeout(() => {
+          ipcRenderer.send('cancelWriteToPLC', 'DBW1018');
+        }, 2000);
+      }
       // 更新需进货数量并写入PLC
       this.updateAnalysisNeedAndWrite();
-
       this.addLog(
         `灭菌柜${this.warehouseSelectedFrom}到解析房${this.warehouseSelectedTo}开始执行，需进货：${this.analysisNeedQty}`
       );
-
-      setTimeout(() => {
-        this.analysisRoomLoading = false;
-        this.analysisTrayCode = `${this.warehouseSelectedFrom}-TO-${this.warehouseSelectedTo}`;
-      }, 500);
+      this.$message.success(
+        `已发送从灭菌柜${this.warehouseSelectedFrom}出库到解析库${this.warehouseSelectedTo}入库`
+      );
     },
     // 取消灭菌柜到解析房执行
     cancelAnalysisRoom() {
@@ -6346,108 +7079,100 @@ export default {
         );
       }
     },
-    // 在队列之间移动托盘 - 固定对应关系（上面的线对应上面，下面的线对应下面）
-    moveTraysBetweenQueues(line, fromType, toType, count) {
-      // 获取源队列和目标队列的固定对应关系
-      const getQueuePairs = (line, fromType, toType) => {
-        const pairMaps = {
-          'preheat-disinfection': {
-            A: [
-              [5, 7],
-              [6, 7]
-            ], // A1-5->A2-2-进, A1-6->A2-2-进（A只有一条进线）
-            B: [
-              [10, 12],
-              [11, 12],
-              [15, 17],
-              [16, 17]
-            ], // B1-2->B2-1-进, B1-3->B2-1-进, B1-5->B2-2-进, B1-6->B2-2-进
-            C: [
-              [20, 22],
-              [21, 22],
-              [25, 27],
-              [26, 27]
-            ], // C1-2->C2-1-进, C1-3->C2-1-进, C1-5->C2-2-进, C1-6->C2-2-进
-            D: [
-              [30, 32],
-              [31, 32],
-              [35, 37],
-              [36, 37]
-            ], // D1-2->D2-1-进, D1-3->D2-1-进, D1-5->D2-2-进, D1-6->D2-2-进
-            E: [
-              [40, 42],
-              [41, 42],
-              [45, 47],
-              [46, 47]
-            ] // E1-2->E2-1-进, E1-3->E2-1-进, E1-5->E2-2-进, E1-6->E2-2-进
-          },
-          'disinfection-analysis': {
-            A: [
-              [51, 8],
-              [51, 9]
-            ], // A2-2-出->A3-4, A2-2-出->A3-5
-            B: [
-              [52, 13],
-              [52, 14],
-              [53, 18],
-              [53, 19]
-            ], // B2-1-出->B3-1, B2-1-出->B3-2, B2-2-出->B3-4, B2-2-出->B3-5
-            C: [
-              [54, 23],
-              [54, 24],
-              [55, 28],
-              [55, 29]
-            ], // C2-1-出->C3-1, C2-1-出->C3-2, C2-2-出->C3-4, C2-2-出->C3-5
-            D: [
-              [56, 33],
-              [56, 34],
-              [57, 38],
-              [57, 39]
-            ], // D2-1-出->D3-1, D2-1-出->D3-2, D2-2-出->D3-4, D2-2-出->D3-5
-            E: [
-              [58, 43],
-              [58, 44],
-              [59, 48],
-              [59, 49]
-            ] // E2-1-出->E3-1, E2-1-出->E3-2, E2-2-出->E3-4, E2-2-出->E3-5
-          }
-        };
-        const key = `${fromType}-${toType}`;
-        return pairMaps[key]?.[line] || [];
+
+    // 移动托盘 - 根据目标队列标识匹配源队列和目标队列
+    moveTrays(fromArea, targetQueueKey, count) {
+      // 目标队列映射：目标队列标识 -> {索引, 是否上线}
+      const targetQueueMap = {
+        a22in: { index: 7, isUp: false }, // A2-2-进 (id=8, index=7)
+        b21in: { index: 12, isUp: true }, // B2-1-进 (id=13, index=12)
+        b22in: { index: 17, isUp: false }, // B2-2-进 (id=18, index=17)
+        c21in: { index: 22, isUp: true }, // C2-1-进 (id=23, index=22)
+        c22in: { index: 27, isUp: false }, // C2-2-进 (id=28, index=27)
+        d21in: { index: 32, isUp: true }, // D2-1-进 (id=33, index=32)
+        d22in: { index: 37, isUp: false }, // D2-2-进 (id=38, index=37)
+        e21in: { index: 42, isUp: true }, // E2-1-进 (id=43, index=42)
+        e22in: { index: 47, isUp: false } // E2-2-进 (id=48, index=47)
       };
 
-      const queuePairs = getQueuePairs(line, fromType, toType);
+      // 源队列映射：源区域 -> 预热队列索引（根据目标队列的上下线决定）
+      const sourceQueueMap = {
+        A: { up: 6, down: 6 }, // A1-6 (id=7, index=6) - A区域只有一条线，都在A1-6取
+        B: { up: 11, down: 16 }, // B1-3 (id=12, index=11), B1-6 (id=17, index=16)
+        C: { up: 21, down: 26 }, // C1-3 (id=22, index=21), C1-6 (id=27, index=26)
+        D: { up: 31, down: 36 }, // D1-3 (id=32, index=31), D1-6 (id=37, index=36)
+        E: { up: 41, down: 46 } // E1-3 (id=42, index=41), E1-6 (id=47, index=46)
+      };
 
-      // 按照固定对应关系移动托盘
-      let movedCount = 0;
-      for (let i = 0; i < count && movedCount < count; i++) {
-        let moved = false;
+      const targetIndex = targetQueueMap[targetQueueKey].index;
+      const sourceIndex = targetQueueMap[targetQueueKey].isUp
+        ? sourceQueueMap[fromArea].up
+        : sourceQueueMap[fromArea].down;
 
-        // 尝试每一对队列关系
-        for (const [fromQueueIndex, toQueueIndex] of queuePairs) {
-          const fromQueue = this.queues[fromQueueIndex];
-          const toQueue = this.queues[toQueueIndex];
+      // 直接通过索引获取队列对象
+      const sourceQueue = this.queues[sourceIndex];
+      const targetQueue = this.queues[targetIndex];
 
-          if (fromQueue && toQueue && fromQueue.trayInfo.length > 0) {
-            const tray = fromQueue.trayInfo.shift();
-            toQueue.trayInfo.push(tray);
-            movedCount++;
-            moved = true;
-            this.addLog(
-              `托盘 ${tray.trayCode} 从 ${fromQueue.queueName} 移动到 ${toQueue.queueName}`
-            );
-            break;
-          }
-        }
-
-        if (!moved) break;
+      if (!sourceQueue || !targetQueue) {
+        this.addLog(
+          `未找到队列：源队列索引${sourceIndex} 或 目标队列索引${targetIndex}`
+        );
+        return;
       }
+      for (let i = 0; i < count && sourceQueue.trayInfo.length > 0; i++) {
+        const tray = sourceQueue.trayInfo.shift();
+        targetQueue.trayInfo.push(tray);
+        this.addLog(
+          `托盘 ${tray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
+        );
+      }
+    },
 
-      // 更新需进货数量并写入PLC
-      if (fromType === 'preheat' && toType === 'disinfection') {
-        this.updateDisinfectionNeedAndWrite();
-      } else if (fromType === 'disinfection' && toType === 'analysis') {
-        this.updateAnalysisNeedAndWrite();
+    // 移动托盘从灭菌到解析 - 根据目标队列标识匹配源队列和目标队列
+    moveTraysFromDisinfectionToAnalysis(fromArea, targetQueueKey, count) {
+      // 目标队列映射：目标队列标识 -> {索引, 是否上线}
+      const targetQueueMap = {
+        a34: { index: 8, isUp: true }, // A3-4 (id=9, index=8)
+        b31: { index: 13, isUp: true }, // B3-1 (id=14, index=13)
+        b34: { index: 18, isUp: false }, // B3-4 (id=19, index=18)
+        c31: { index: 23, isUp: true }, // C3-1 (id=24, index=23)
+        c34: { index: 28, isUp: false }, // C3-4 (id=29, index=28)
+        d31: { index: 33, isUp: true }, // D3-1 (id=34, index=33)
+        d34: { index: 38, isUp: false }, // D3-4 (id=39, index=38)
+        e31: { index: 43, isUp: true }, // E3-1 (id=44, index=43)
+        e34: { index: 48, isUp: false } // E3-4 (id=49, index=48)
+      };
+
+      // 源队列映射：源区域 -> 灭菌出队列索引（根据目标队列的上下线决定）
+      const sourceQueueMap = {
+        A: { up: 51, down: 51 }, // A2-2-出 (id=52, index=51) - A区域只有一条线，都在A2-2-出取
+        B: { up: 52, down: 53 }, // B2-1-出 (id=53, index=52), B2-2-出 (id=54, index=53)
+        C: { up: 54, down: 55 }, // C2-1-出 (id=55, index=54), C2-2-出 (id=56, index=55)
+        D: { up: 56, down: 57 }, // D2-1-出 (id=57, index=56), D2-2-出 (id=58, index=57)
+        E: { up: 58, down: 59 } // E2-1-出 (id=59, index=58), E2-2-出 (id=60, index=59)
+      };
+
+      const targetIndex = targetQueueMap[targetQueueKey].index;
+      const sourceIndex = targetQueueMap[targetQueueKey].isUp
+        ? sourceQueueMap[fromArea].up
+        : sourceQueueMap[fromArea].down;
+
+      // 直接通过索引获取队列对象
+      const sourceQueue = this.queues[sourceIndex];
+      const targetQueue = this.queues[targetIndex];
+
+      if (!sourceQueue || !targetQueue) {
+        this.addLog(
+          `未找到队列：源队列索引${sourceIndex} 或 目标队列索引${targetIndex}`
+        );
+        return;
+      }
+      for (let i = 0; i < count && sourceQueue.trayInfo.length > 0; i++) {
+        const tray = sourceQueue.trayInfo.shift();
+        targetQueue.trayInfo.push(tray);
+        this.addLog(
+          `托盘 ${tray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
+        );
       }
     },
     // 灭菌柜进队列到出队列的移动（类似DE队列）
@@ -6463,14 +7188,9 @@ export default {
       const queues = queueIndexMap[line];
       if (!queues) return;
 
-      // 将所有进队列的托盘移动到出队列
-      let totalMoved = 0;
-      let hasTrays = false;
-
       for (const inQueueIndex of queues.in) {
         const inQueue = this.queues[inQueueIndex];
         if (inQueue && inQueue.trayInfo.length > 0) {
-          hasTrays = true;
           const trays = [...inQueue.trayInfo];
           const moveCount = trays.length;
           inQueue.trayInfo = [];
@@ -6484,34 +7204,13 @@ export default {
           if (outQueue) {
             trays.forEach((tray) => {
               outQueue.trayInfo.push(tray);
-              totalMoved++;
             });
           }
 
           this.addLog(
-            `${line}灭菌柜出货数量从0增加，移动${moveCount}个托盘到${line}出货队列`
+            `${line}灭菌柜出货数量从0增加，移动${moveCount}个托盘到${line}解析队列`
           );
         }
-      }
-
-      if (hasTrays && totalMoved > 0) {
-        // 显示提示消息
-        this.$message({
-          message: `${line}灭菌柜已完成上下货队列移动`,
-          type: 'info',
-          duration: 3000,
-          showClose: true
-        });
-
-        // 更新相关需进货数量
-        if (
-          this.disinfectionExecuting &&
-          this.disinfectionRoomSelectedFrom === line
-        ) {
-          this.updateDisinfectionNeedAndWrite();
-        }
-      } else if (!hasTrays) {
-        this.addLog(`${line}灭菌柜出货数量从0增加，但进货队列无托盘可移动`);
       }
     },
     // 写入PLC后2秒取消
@@ -6523,13 +7222,6 @@ export default {
     },
     // 更新并写入预热到灭菌柜需进货数量
     updateDisinfectionNeedAndWrite() {
-      if (!this.disinfectionRoomSelectedFrom) {
-        this.disinfectionNeedQty = 0;
-        this.addLog(`写入PLC DBW1022（灭菌柜需进货数量）: 0 - 未选择灭菌柜`);
-        // 暂时注释，不知道往哪个位置写入
-        // this.writeWordWithCancel('DBW1022', 0);
-        return;
-      }
       const leftFromPreheat = this.getPreheatCountFor(
         this.disinfectionRoomSelectedFrom
       );
@@ -6541,12 +7233,6 @@ export default {
     },
     // 更新并写入灭菌柜到解析房需进货数量
     updateAnalysisNeedAndWrite() {
-      if (!this.warehouseSelectedFrom) {
-        this.analysisNeedQty = 0;
-        this.addLog(`写入PLC DBW1024（解析柜需进货数量）: 0 - 未选择解析柜`);
-        this.writeWordWithCancel('DBW1024', 0);
-        return;
-      }
       // 使用出队列数量（灭菌柜完成后的托盘）
       const leftFromSterilize = this.getSterilizeOutCountFor(
         this.warehouseSelectedFrom
@@ -6554,31 +7240,25 @@ export default {
       this.analysisNeedQty = leftFromSterilize;
 
       this.addLog(`写入PLC DBW1024（解析柜需进货数量）: ${leftFromSterilize}`);
-      this.writeWordWithCancel('DBW1024', leftFromSterilize);
-
-      // 自动停止条件：只有在执行状态时才检查
-      if (this.analysisExecuting) {
-        if (leftFromSterilize === 0) {
-          this.addLog(
-            `灭菌柜${this.warehouseSelectedFrom}到解析房${this.warehouseSelectedTo}已完成，自动停止`
-          );
-          this.cancelAnalysisRoom();
-        }
-      }
+      // this.writeWordWithCancel('DBW1024', leftFromSterilize);
     },
     // 更新出库需进货数量并写入PLC
     updateOutNeedAndWrite(line) {
       if (!line) return;
 
-      // 获取该线解析房的托盘数量
-      const analysisCount = this.getAnalysisCountFor(line);
-      this.outNeedQty[line] = analysisCount;
+      // 获取该线出库队列的托盘数量（只计算A35、B32、B35、C32、C35、D32、D35、E32、E35）
+      const outCount = this.getOutWarehouseCountFor(line);
+      this.outNeedQty[line] = outCount;
 
-      this.addLog(`${line}线出库需进货数量更新为：${analysisCount}`);
+      this.addLog(`${line}线出库需进货数量更新为：${outCount}`);
+
+      // 写入PLC出库需进货数量
+      this.writeWordWithCancel('DBW1026', outCount);
+      this.addLog(`写入PLC DBW1026（出库需进货数量）: ${outCount}`);
 
       // 自动停止条件：只有在执行状态时才检查
       if (this.outWarehouseExecuting[line]) {
-        if (analysisCount === 0) {
+        if (outCount === 0) {
           this.addLog(`${line}线出库已完成，自动停止`);
           this.cancelOutWarehouse(line);
         }

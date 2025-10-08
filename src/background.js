@@ -134,6 +134,23 @@ app.on('before-quit', () => {
   flushLogBuffer();
 });
 
+// 单实例锁，防止应用被多开 - 必须在app.ready之前检查
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
+  // 直接退出，不创建任何窗口，避免白色背景框
+  console.log('检测到已有程序运行，直接退出');
+  // 使用 process.exit 确保立即退出，避免任何延迟
+  process.exit(0);
+} else {
+  app.on('second-instance', (event, argv, workingDirectory) => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      if (!mainWindow.isVisible()) mainWindow.show();
+      mainWindow.focus();
+    }
+  });
+}
+
 global.sharedObject = {
   userInfo: {}
 };
