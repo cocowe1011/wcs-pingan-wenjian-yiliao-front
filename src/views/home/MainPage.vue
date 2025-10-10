@@ -102,6 +102,9 @@
                       <i class="el-icon-loading"></i>
                       执行中
                     </span>
+                    <el-button type="text" size="small" style="padding: 0px">
+                      取消
+                    </el-button>
                   </div>
                   <div class="order-details">
                     <div class="info-row">
@@ -335,7 +338,7 @@
                   <div class="marker-label" style="width: 36px">A3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: aLineMotorRunning.bit11 === '1' }"
                   data-x="2750"
                   data-y="423"
@@ -345,13 +348,13 @@
                 </div>
                 <!-- A线光电检测信号 -->
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: aLinePhotoelectricSignal.bit4 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit1 === '1' }"
                   data-x="150"
                   data-y="423"
-                  @click="toggleBitValue(aLinePhotoelectricSignal, 'bit4')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit1')"
                 >
-                  <div class="marker-label">A1-5#</div>
+                  <div class="marker-label">A1-4#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -490,7 +493,7 @@
                   <div class="marker-label" style="width: 36px">B3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: bLineMotorRunning.bit8 === '1' }"
                   data-x="2750"
                   data-y="520"
@@ -517,7 +520,7 @@
                   <div class="marker-label" style="width: 36px">B3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: bLineMotorRunning.bit11 === '1' }"
                   data-x="2750"
                   data-y="575"
@@ -527,13 +530,13 @@
                 </div>
                 <!-- B线光电检测信号 -->
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: bLinePhotoelectricSignal.bit0 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit2 === '1' }"
                   data-x="150"
                   data-y="525"
-                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit0')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit2')"
                 >
-                  <div class="marker-label">B1-1#</div>
+                  <div class="marker-label">B1-1#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -563,13 +566,13 @@
                   <div class="marker-label">B1-4#</div>
                 </div>
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: bLinePhotoelectricSignal.bit4 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit3 === '1' }"
                   data-x="150"
                   data-y="572"
-                  @click="toggleBitValue(bLinePhotoelectricSignal, 'bit4')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit3')"
                 >
-                  <div class="marker-label">B1-5#</div>
+                  <div class="marker-label">B1-4#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -744,7 +747,7 @@
                   <div class="marker-label" style="width: 36px">C3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: cLineMotorRunning.bit8 === '1' }"
                   data-x="2750"
                   data-y="671"
@@ -771,7 +774,7 @@
                   <div class="marker-label" style="width: 36px">C3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: cLineMotorRunning.bit11 === '1' }"
                   data-x="2750"
                   data-y="723"
@@ -781,13 +784,13 @@
                 </div>
                 <!-- C线光电检测信号 -->
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: cLinePhotoelectricSignal.bit0 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit4 === '1' }"
                   data-x="150"
                   data-y="673"
-                  @click="toggleBitValue(cLinePhotoelectricSignal, 'bit0')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit4')"
                 >
-                  <div class="marker-label">C1-1#</div>
+                  <div class="marker-label">C1-1#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -817,13 +820,13 @@
                   <div class="marker-label">C1-4#</div>
                 </div>
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: cLinePhotoelectricSignal.bit4 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit5 === '1' }"
                   data-x="150"
                   data-y="718"
-                  @click="toggleBitValue(cLinePhotoelectricSignal, 'bit4')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit5')"
                 >
-                  <div class="marker-label">C1-5#</div>
+                  <div class="marker-label">C1-4#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -998,7 +1001,7 @@
                   <div class="marker-label" style="width: 36px">D3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: dLineMotorRunning.bit8 === '1' }"
                   data-x="2750"
                   data-y="820"
@@ -1025,7 +1028,7 @@
                   <div class="marker-label" style="width: 36px">D3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: dLineMotorRunning.bit11 === '1' }"
                   data-x="2750"
                   data-y="872"
@@ -1035,13 +1038,13 @@
                 </div>
                 <!-- D线光电检测信号 -->
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: dLinePhotoelectricSignal.bit0 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit6 === '1' }"
                   data-x="150"
                   data-y="820"
-                  @click="toggleBitValue(dLinePhotoelectricSignal, 'bit0')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit6')"
                 >
-                  <div class="marker-label">D1-1#</div>
+                  <div class="marker-label">D1-1#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -1071,13 +1074,13 @@
                   <div class="marker-label">D1-4#</div>
                 </div>
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: dLinePhotoelectricSignal.bit4 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit7 === '1' }"
                   data-x="150"
                   data-y="867"
-                  @click="toggleBitValue(dLinePhotoelectricSignal, 'bit4')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit7')"
                 >
-                  <div class="marker-label">D1-5#</div>
+                  <div class="marker-label">D1-4#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -1252,7 +1255,7 @@
                   <div class="marker-label" style="width: 36px">E3-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: eLineMotorRunning.bit8 === '1' }"
                   data-x="2750"
                   data-y="969"
@@ -1279,7 +1282,7 @@
                   <div class="marker-label" style="width: 36px">E3-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-right"
                   :class="{ running: eLineMotorRunning.bit11 === '1' }"
                   data-x="2750"
                   data-y="1020"
@@ -1289,13 +1292,13 @@
                 </div>
                 <!-- E线光电检测信号 -->
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: eLinePhotoelectricSignal.bit0 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit8 === '1' }"
                   data-x="150"
                   data-y="970"
-                  @click="toggleBitValue(eLinePhotoelectricSignal, 'bit0')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit8')"
                 >
-                  <div class="marker-label">E1-1#</div>
+                  <div class="marker-label">E1-1#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -1325,13 +1328,13 @@
                   <div class="marker-label">E1-4#</div>
                 </div>
                 <div
-                  class="marker label-top"
-                  :class="{ scanning: eLinePhotoelectricSignal.bit4 === '1' }"
+                  class="marker label-right"
+                  :class="{ scanning: scanPhotoelectricSignal.bit9 === '1' }"
                   data-x="150"
                   data-y="1015"
-                  @click="toggleBitValue(eLinePhotoelectricSignal, 'bit4')"
+                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit9')"
                 >
-                  <div class="marker-label">E1-5#</div>
+                  <div class="marker-label">E1-4#请求</div>
                 </div>
                 <div
                   class="marker label-top"
@@ -1435,10 +1438,9 @@
                 <!-- 箭头指示器 -->
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit1 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['A1-5'] }"
                   data-x="100"
                   data-y="423"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit1')"
                 >
                   <div class="marker-label">A1-4#进货</div>
                 </div>
@@ -1448,7 +1450,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1466,10 +1468,9 @@
                 <!-- 上货口需进货信息 -->
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit2 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['B1-2'] }"
                   data-x="100"
                   data-y="520"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit2')"
                 >
                   <div class="marker-label">B1-1#进货</div>
                 </div>
@@ -1479,7 +1480,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1489,17 +1490,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.B11 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit3 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['B1-5'] }"
                   data-x="100"
                   data-y="575"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit3')"
                 >
                   <div class="marker-label">B1-4#进货</div>
                 </div>
@@ -1509,7 +1509,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1519,17 +1519,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.B14 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit4 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['C1-2'] }"
                   data-x="100"
                   data-y="671"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit4')"
                 >
                   <div class="marker-label">C1-1#进货</div>
                 </div>
@@ -1539,7 +1538,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1549,17 +1548,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.C11 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit5 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['C1-5'] }"
                   data-x="100"
                   data-y="723"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit5')"
                 >
                   <div class="marker-label">C1-4#进货</div>
                 </div>
@@ -1569,7 +1567,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1579,17 +1577,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.C14 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit6 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['D1-2'] }"
                   data-x="100"
                   data-y="820"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit6')"
                 >
                   <div class="marker-label">D1-1#进货</div>
                 </div>
@@ -1599,7 +1596,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1609,17 +1606,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.D11 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit7 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['D1-5'] }"
                   data-x="100"
                   data-y="872"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit7')"
                 >
                   <div class="marker-label">D1-4#进货</div>
                 </div>
@@ -1629,7 +1625,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1639,17 +1635,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.D14 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit8 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['E1-2'] }"
                   data-x="100"
                   data-y="969"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit8')"
                 >
                   <div class="marker-label">E1-1#进货</div>
                 </div>
@@ -1659,7 +1654,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1669,17 +1664,16 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.E11 }}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div
                   class="arrow-marker label-top"
-                  :class="{ active: scanPhotoelectricSignal.bit9 === '1' }"
+                  :class="{ active: lineAllowLoadingStatus['E1-5'] }"
                   data-x="100"
                   data-y="1020"
-                  @click="toggleBitValue(scanPhotoelectricSignal, 'bit9')"
                 >
                   <div class="marker-label">E1-4#进货</div>
                 </div>
@@ -1689,7 +1683,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 35px;
+                      width: 40px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1699,7 +1693,7 @@
                   >
                     <div class="data-panel-content">
                       <div class="data-panel-row" style="color: #293849">
-                        需进:{{ stockRequiredInfo.A14 }}
+                        需进:{{ stockRequiredInfo.E14 }}
                       </div>
                     </div>
                   </div>
@@ -2932,6 +2926,18 @@ export default {
         D14: 0, // D1-4
         E11: 0, // E1-1
         E14: 0 // E1-4
+      },
+      // 各线允许上货状态映射
+      lineAllowLoadingStatus: {
+        'A1-5': false, // A1-4
+        'B1-2': false, // B1-1
+        'B1-5': false, // B1-4
+        'C1-2': false, // C1-1
+        'C1-5': false, // C1-4
+        'D1-2': false, // D1-1
+        'D1-5': false, // D1-4
+        'E1-2': false, // E1-1
+        'E1-5': false // E1-4
       },
       // 生产线卡片相关数据
       productionLines: [
@@ -5434,9 +5440,32 @@ export default {
         ipcRenderer.send('cancelWriteToPLC', 'DBW536');
       }
 
+      // 根据不同的线写入对应的PLC地址并清零
+      let plcAddress = '';
+      switch (line) {
+        case 'A':
+          plcAddress = 'DB101.DBW1046';
+          break;
+        case 'B':
+          plcAddress = 'DB101.DBW1048';
+          break;
+        case 'C':
+          plcAddress = 'DB101.DBW1050';
+          break;
+        case 'D':
+          plcAddress = 'DB101.DBW1052';
+          break;
+        case 'E':
+          plcAddress = 'DB101.DBW1054';
+          break;
+        default:
+          this.addLog(`未知的线：${line}`);
+          return;
+      }
+
       // 写入PLC出库需进货数量为0
-      this.writeWordWithCancel('DBW1026', 0);
-      this.addLog(`出库${line}执行已取消，写入PLC DBW1026: 0`);
+      this.writeWordWithCancel(plcAddress, 0);
+      this.addLog(`出库${line}执行已取消，写入PLC ${plcAddress}: 0`);
       this.$message.info(`已取消出库${line}执行`);
     },
     // 确认订单选择
@@ -5462,8 +5491,184 @@ export default {
       this.selectedLine = null;
       this.selectedOrderId = null;
     },
+    // 检查对应线的队列容量是否已满（最大容量13）
+    checkQueueCapacity(line) {
+      const MAX_CAPACITY = 13;
+
+      // 定义各线对应的队列索引映射
+      const queueIndexMap = {
+        A: [5], // A1-5 (A15)
+        B: [10, 15], // B1-2 (B12), B1-5 (B15)
+        C: [20, 25], // C1-2 (C12), C1-5 (C15)
+        D: [30, 35], // D1-2 (D12), D1-5 (D15)
+        E: [40, 45] // E1-2 (E12), E1-5 (E15)
+      };
+
+      const queueIndexes = queueIndexMap[line.letter] || [];
+
+      // 检查每个队列是否已满
+      for (const queueIndex of queueIndexes) {
+        const queue = this.queues[queueIndex];
+        if (queue && queue.trayInfo.length >= MAX_CAPACITY) {
+          this.addLog(
+            `${line.letter}线队列${queue.queueName}已满（${queue.trayInfo.length}/${MAX_CAPACITY}），不允许开启上货`
+          );
+          return false;
+        }
+      }
+
+      return true;
+    },
+    // 计算并更新预热需进货数量
+    updatePreheatNeedQuantity(lineLetter, witchLine) {
+      const MAX_CAPACITY = 13;
+
+      // 根据线体和子线获取对应的队列索引
+      let queueIndex;
+      if (lineLetter === 'A') {
+        queueIndex = 5; // A1-5
+      } else if (lineLetter === 'B') {
+        queueIndex = witchLine === '1-2' ? 10 : 15; // B1-2 或 B1-5
+      } else if (lineLetter === 'C') {
+        queueIndex = witchLine === '1-2' ? 20 : 25; // C1-2 或 C1-5
+      } else if (lineLetter === 'D') {
+        queueIndex = witchLine === '1-2' ? 30 : 35; // D1-2 或 D1-5
+      } else if (lineLetter === 'E') {
+        queueIndex = witchLine === '1-2' ? 40 : 45; // E1-2 或 E1-5
+      }
+
+      if (!this.queues[queueIndex]) {
+        this.addLog(`未找到队列索引：${queueIndex}`);
+        return;
+      }
+
+      // 计算当前队列数量
+      const currentCount = this.queues[queueIndex].trayInfo.length;
+
+      // 计算需进货数量：13 - 当前数量
+      const needQuantity = Math.max(0, MAX_CAPACITY - currentCount);
+
+      // 更新对应的需进货信息
+      const fieldKeyMap = {
+        'A1-5': 'A14', // A1-4
+        'B1-2': 'B11', // B1-1
+        'B1-5': 'B14', // B1-4
+        'C1-2': 'C11', // C1-1
+        'C1-5': 'C14', // C1-4
+        'D1-2': 'D11', // D1-1
+        'D1-5': 'D14', // D1-4
+        'E1-2': 'E11', // E1-1
+        'E1-5': 'E14' // E1-4
+      };
+
+      const fieldKey = fieldKeyMap[lineLetter + witchLine];
+      if (fieldKey) {
+        this.stockRequiredInfo[fieldKey] = needQuantity;
+        this.addLog(
+          `${lineLetter}${witchLine}需进货数量更新为：${needQuantity}（当前队列：${currentCount}/${MAX_CAPACITY}）`
+        );
+
+        // 写入PLC
+        this.writePreheatNeedQuantityToPLC(lineLetter, witchLine, needQuantity);
+
+        // 如果需进货数量为0，停止对应线的允许进货信号
+        if (needQuantity === 0) {
+          this.stopLoadingSignalForLine(lineLetter, witchLine);
+        }
+      }
+    },
+    // 将预热需进货数量写入PLC
+    writePreheatNeedQuantityToPLC(lineLetter, witchLine, needQuantity) {
+      // PLC地址映射
+      const plcAddressMap = {
+        'A1-5': 'DB101.DBW1022', // A1-4数量
+        'B1-2': 'DB101.DBW1024', // B1-1数量
+        'B1-5': 'DB101.DBW1026', // B1-4数量
+        'C1-2': 'DB101.DBW1028', // C1-1数量
+        'C1-5': 'DB101.DBW1030', // C1-4数量
+        'D1-2': 'DB101.DBW1032', // D1-1数量
+        'D1-5': 'DB101.DBW1034', // D1-4数量
+        'E1-2': 'DB101.DBW1036', // E1-1数量
+        'E1-5': 'DB101.DBW1038' // E1-4数量
+      };
+
+      const plcAddress = plcAddressMap[lineLetter + witchLine];
+      if (plcAddress) {
+        this.writeWordWithCancel(plcAddress, needQuantity);
+        this.addLog(
+          `写入PLC ${plcAddress}（${lineLetter}${witchLine}需进货数量）: ${needQuantity}`
+        );
+      }
+    },
+    // 停止对应线的允许进货信号
+    stopLoadingSignalForLine(lineLetter, witchLine) {
+      // 根据线体和子线确定对应的PLC位地址
+      const bitAddressMap = {
+        'A1-5': 'DBW1010_BIT1', // A1-4#允许进货信号
+        'B1-2': 'DBW1010_BIT2', // B1-1#允许进货信号
+        'B1-5': 'DBW1010_BIT3', // B1-4#允许进货信号
+        'C1-2': 'DBW1010_BIT4', // C1-1#允许进货信号
+        'C1-5': 'DBW1010_BIT5', // C1-4#允许进货信号
+        'D1-2': 'DBW1010_BIT6', // D1-1#允许进货信号
+        'D1-5': 'DBW1010_BIT7', // D1-4#允许进货信号
+        'E1-2': 'DBW1010_BIT8', // E1-1#允许进货信号
+        'E1-5': 'DBW1010_BIT9' // E1-4#允许进货信号
+      };
+
+      const bitAddress = bitAddressMap[lineLetter + witchLine];
+      if (bitAddress) {
+        // 发送false信号停止允许进货
+        ipcRenderer.send('writeValuesToPLC', bitAddress, false);
+        this.addLog(
+          `${lineLetter}${witchLine}需进货数量为0，停止允许进货信号 ${bitAddress}: false`
+        );
+
+        // 更新对应子线的允许上货状态
+        this.lineAllowLoadingStatus[lineLetter + witchLine] = false;
+
+        // 检查该线的所有子线是否都为false，如果是则取消勾选主线的允许上货按钮
+        this.checkAndUncheckMainLineButton(lineLetter);
+      }
+    },
+    // 检查并取消勾选主线的允许上货按钮
+    checkAndUncheckMainLineButton(lineLetter) {
+      // 定义各线的子线映射
+      const subLineMap = {
+        A: ['A1-5'],
+        B: ['B1-2', 'B1-5'],
+        C: ['C1-2', 'C1-5'],
+        D: ['D1-2', 'D1-5'],
+        E: ['E1-2', 'E1-5']
+      };
+
+      const subLines = subLineMap[lineLetter] || [];
+
+      // 检查所有子线是否都为false
+      const allSubLinesFalse = subLines.every(
+        (subLine) => !this.lineAllowLoadingStatus[subLine]
+      );
+
+      if (allSubLinesFalse) {
+        // 找到对应的生产线并取消勾选
+        const line = this.productionLines.find((l) => l.letter === lineLetter);
+        if (line && line.allowLoading) {
+          line.allowLoading = false;
+          this.addLog(
+            `${lineLetter}线所有子线允许上货状态都为false，自动取消勾选主线的允许上货按钮`
+          );
+        }
+      }
+    },
     // 允许上货状态改变
     onAllowLoadingChange(line) {
+      // 如果要开启上货，先检查队列容量
+      if (line.allowLoading && !this.checkQueueCapacity(line)) {
+        // 队列已满，不允许开启上货
+        line.allowLoading = false;
+        this.$message.warning(`${line.letter}线队列已满，不允许开启上货`);
+        return;
+      }
+
       // 根据A-E线设置给PLC发送命令
       // 'DBW1010_BIT0',
       // 'DBW1010_BIT1',
@@ -5475,15 +5680,19 @@ export default {
       // 'DBW1010_BIT7',
       // 'DBW1010_BIT8',
       // 'DBW1010_BIT9',
+      // 更新各子线的允许上货状态
       if (line.letter === 'A') {
-        ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT0', line.allowLoading);
+        this.lineAllowLoadingStatus['A1-5'] = line.allowLoading;
+        // ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT0', line.allowLoading);
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT1', line.allowLoading);
         this.addLog(
           `生产线 ${line.letter} 允许上货状态已${
             line.allowLoading ? '开启' : '关闭'
-          },给DBW1010_BIT0,DBW1010_BIT1发送命令:${line.allowLoading}`
+          },DBW1010_BIT1发送命令:${line.allowLoading}`
         );
       } else if (line.letter === 'B') {
+        this.lineAllowLoadingStatus['B1-2'] = line.allowLoading;
+        this.lineAllowLoadingStatus['B1-5'] = line.allowLoading;
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT2', line.allowLoading);
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT3', line.allowLoading);
         this.addLog(
@@ -5492,6 +5701,8 @@ export default {
           },给DBW1010_BIT2,DBW1010_BIT3发送命令:${line.allowLoading}`
         );
       } else if (line.letter === 'C') {
+        this.lineAllowLoadingStatus['C1-2'] = line.allowLoading;
+        this.lineAllowLoadingStatus['C1-5'] = line.allowLoading;
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT4', line.allowLoading);
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT5', line.allowLoading);
         this.addLog(
@@ -5500,6 +5711,8 @@ export default {
           },给DBW1010_BIT4,DBW1010_BIT5发送命令:${line.allowLoading}`
         );
       } else if (line.letter === 'D') {
+        this.lineAllowLoadingStatus['D1-2'] = line.allowLoading;
+        this.lineAllowLoadingStatus['D1-5'] = line.allowLoading;
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT6', line.allowLoading);
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT7', line.allowLoading);
         this.addLog(
@@ -5508,6 +5721,8 @@ export default {
           },给DBW1010_BIT6,DBW1010_BIT7发送命令:${line.allowLoading}`
         );
       } else if (line.letter === 'E') {
+        this.lineAllowLoadingStatus['E1-2'] = line.allowLoading;
+        this.lineAllowLoadingStatus['E1-5'] = line.allowLoading;
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT8', line.allowLoading);
         ipcRenderer.send('writeValuesToPLC', 'DBW1010_BIT9', line.allowLoading);
         this.addLog(
@@ -5592,6 +5807,9 @@ export default {
 
       // 直接使用数组索引操作队列
       this.queues[queueIndex].trayInfo.push(trayToAdd);
+
+      // 计算并更新预热需进货数量
+      this.updatePreheatNeedQuantity(lineLetter, witchLine);
 
       // 更新左上角卡片显示的当前扫码托盘信息
       this.nowScanTrayInfo = {
@@ -6813,7 +7031,7 @@ export default {
       this.disinfectionRoomLoading = true;
       this.disinfectionExecuting = true;
       if (this.disinfectionRoomSelectedFrom === 'A') {
-        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 13);
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1012', 12);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW1012');
         }, 2000);
@@ -6856,7 +7074,7 @@ export default {
           this.queues[46].trayInfo[0].trayCode;
       }
       if (this.disinfectionRoomSelectedTo === 'A') {
-        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 13);
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1014', 12);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW1014');
         }, 2000);
@@ -6957,7 +7175,7 @@ export default {
       this.analysisExecuting = true;
 
       if (this.warehouseSelectedFrom === 'A') {
-        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 13);
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1016', 12);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW1016');
         }, 2000);
@@ -7000,7 +7218,7 @@ export default {
           this.queues[59].trayInfo[0].trayCode;
       }
       if (this.warehouseSelectedTo === 'A') {
-        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 13);
+        ipcRenderer.send('writeSingleValueToPLC', 'DBW1018', 12);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW1018');
         }, 2000);
@@ -7227,9 +7445,9 @@ export default {
       );
       this.disinfectionNeedQty = leftFromPreheat;
 
-      this.addLog(`写入PLC DBW1022（灭菌柜需进货数量）: ${leftFromPreheat}`);
+      this.addLog(`写入PLC DBW1042（灭菌柜需进货数量）: ${leftFromPreheat}`);
       // 暂时注释，不知道往哪个位置写入
-      // this.writeWordWithCancel('DBW1022', leftFromPreheat);
+      this.writeWordWithCancel('DBW1042', leftFromPreheat);
     },
     // 更新并写入灭菌柜到解析房需进货数量
     updateAnalysisNeedAndWrite() {
@@ -7239,8 +7457,8 @@ export default {
       );
       this.analysisNeedQty = leftFromSterilize;
 
-      this.addLog(`写入PLC DBW1024（解析柜需进货数量）: ${leftFromSterilize}`);
-      // this.writeWordWithCancel('DBW1024', leftFromSterilize);
+      this.addLog(`写入PLC DBW1044（解析柜需进货数量）: ${leftFromSterilize}`);
+      this.writeWordWithCancel('DBW1044', leftFromSterilize);
     },
     // 更新出库需进货数量并写入PLC
     updateOutNeedAndWrite(line) {
@@ -7252,9 +7470,32 @@ export default {
 
       this.addLog(`${line}线出库需进货数量更新为：${outCount}`);
 
+      // 根据不同的线写入对应的PLC地址
+      let plcAddress = '';
+      switch (line) {
+        case 'A':
+          plcAddress = 'DBW1046';
+          break;
+        case 'B':
+          plcAddress = 'DBW1048';
+          break;
+        case 'C':
+          plcAddress = 'DBW1050';
+          break;
+        case 'D':
+          plcAddress = 'DBW1052';
+          break;
+        case 'E':
+          plcAddress = 'DBW1054';
+          break;
+        default:
+          this.addLog(`未知的线：${line}`);
+          return;
+      }
+
       // 写入PLC出库需进货数量
-      this.writeWordWithCancel('DBW1026', outCount);
-      this.addLog(`写入PLC DBW1026（出库需进货数量）: ${outCount}`);
+      this.writeWordWithCancel(plcAddress, outCount);
+      this.addLog(`写入PLC ${plcAddress}（${line}线需出货数量）: ${outCount}`);
 
       // 自动停止条件：只有在执行状态时才检查
       if (this.outWarehouseExecuting[line]) {
@@ -8027,11 +8268,11 @@ export default {
 
               /* 箭头激活状态 (红色) */
               .arrow-marker.active::before {
-                background: rgba(255, 0, 0, 0.8);
+                background: green;
               }
 
               .arrow-marker.active::after {
-                border-left-color: rgba(255, 0, 0, 0.8);
+                border-left-color: green;
               }
 
               /* 默认隐藏标签，hover时显示 */
