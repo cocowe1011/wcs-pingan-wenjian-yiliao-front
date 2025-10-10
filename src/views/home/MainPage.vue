@@ -1803,6 +1803,89 @@
                     </div>
                   </div>
                 </div>
+                <!-- 出货箭头指示器 -->
+                <!-- A3-5#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['A3-5'] }"
+                  data-x="2840"
+                  data-y="423"
+                >
+                  <div class="marker-label">A3-5#出货</div>
+                </div>
+                <!-- B3-2#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['B3-2'] }"
+                  data-x="2840"
+                  data-y="520"
+                >
+                  <div class="marker-label">B3-2#出货</div>
+                </div>
+                <!-- B3-5#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['B3-5'] }"
+                  data-x="2840"
+                  data-y="575"
+                >
+                  <div class="marker-label">B3-5#出货</div>
+                </div>
+                <!-- C3-2#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['C3-2'] }"
+                  data-x="2840"
+                  data-y="671"
+                >
+                  <div class="marker-label">C3-2#出货</div>
+                </div>
+                <!-- C3-5#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['C3-5'] }"
+                  data-x="2840"
+                  data-y="723"
+                >
+                  <div class="marker-label">C3-5#出货</div>
+                </div>
+                <!-- D3-2#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['D3-2'] }"
+                  data-x="2840"
+                  data-y="820"
+                >
+                  <div class="marker-label">D3-2#出货</div>
+                </div>
+                <!-- D3-5#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['D3-5'] }"
+                  data-x="2840"
+                  data-y="872"
+                >
+                  <div class="marker-label">D3-5#出货</div>
+                </div>
+                <!-- E3-2#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['E3-2'] }"
+                  data-x="2840"
+                  data-y="969"
+                >
+                  <div class="marker-label">E3-2#出货</div>
+                </div>
+                <!-- E3-5#出货箭头 -->
+                <div
+                  class="arrow-marker label-top"
+                  :class="{ active: outWarehouseArrowStatus['E3-5'] }"
+                  data-x="2840"
+                  data-y="1020"
+                >
+                  <div class="marker-label">E3-5#出货</div>
+                </div>
+
                 <!-- 出库信息卡片 -->
                 <div class="marker-with-panel" data-x="2880" data-y="1400">
                   <div
@@ -3907,6 +3990,19 @@ export default {
         D: '',
         E: ''
       },
+      // 出货箭头状态管理
+      outWarehouseArrowStatus: {
+        'A3-2': false, // A3-2#允许出货信号
+        'A3-5': false, // A3-5#允许出货信号
+        'B3-2': false, // B3-2#允许出货信号
+        'B3-5': false, // B3-5#允许出货信号
+        'C3-2': false, // C3-2#允许出货信号
+        'C3-5': false, // C3-5#允许出货信号
+        'D3-2': false, // D3-2#允许出货信号
+        'D3-5': false, // D3-5#允许出货信号
+        'E3-2': false, // E3-2#允许出货信号
+        'E3-5': false // E3-5#允许出货信号
+      },
       outNeedQty: {
         A: 0,
         B: 0,
@@ -5016,6 +5112,12 @@ export default {
               break;
             }
           }
+          // 检查B3-2队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.bLineQuantity.b32 === 0 && this.outWarehouseExecuting.B) {
+            this.addLog('B3-2队列数量为0，取消B3-2#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT2', false);
+            this.outWarehouseArrowStatus['B3-2'] = false;
+          }
         } else {
           this.addLog('未设置B线出库，但B32却减少了，程序错误！报警！');
         }
@@ -5043,6 +5145,12 @@ export default {
               this.addLog('B3-5队列空，无法出库');
               break;
             }
+          }
+          // 检查B3-5队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.bLineQuantity.b35 === 0 && this.outWarehouseExecuting.B) {
+            this.addLog('B3-5队列数量为0，取消B3-5#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT3', false);
+            this.outWarehouseArrowStatus['B3-5'] = false;
           }
         } else {
           this.addLog('未设置B线出库，但B35却减少了，程序错误！报警！');
@@ -5073,6 +5181,12 @@ export default {
               break;
             }
           }
+          // 检查C3-2队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.cLineQuantity.c32 === 0 && this.outWarehouseExecuting.C) {
+            this.addLog('C3-2队列数量为0，取消C3-2#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT4', false);
+            this.outWarehouseArrowStatus['C3-2'] = false;
+          }
         } else {
           this.addLog('未设置C线出库，但C32却减少了，程序错误！报警！');
         }
@@ -5100,6 +5214,12 @@ export default {
               this.addLog('C3-5队列空，无法出库');
               break;
             }
+          }
+          // 检查C3-5队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.cLineQuantity.c35 === 0 && this.outWarehouseExecuting.C) {
+            this.addLog('C3-5队列数量为0，取消C3-5#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT5', false);
+            this.outWarehouseArrowStatus['C3-5'] = false;
           }
         } else {
           this.addLog('未设置C线出库，但C35却减少了，程序错误！报警！');
@@ -5130,6 +5250,12 @@ export default {
               break;
             }
           }
+          // 检查D3-2队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.dLineQuantity.d32 === 0 && this.outWarehouseExecuting.D) {
+            this.addLog('D3-2队列数量为0，取消D3-2#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT6', false);
+            this.outWarehouseArrowStatus['D3-2'] = false;
+          }
         } else {
           this.addLog('未设置D线出库，但D32却减少了，程序错误！报警！');
         }
@@ -5157,6 +5283,12 @@ export default {
               this.addLog('D3-5队列空，无法出库');
               break;
             }
+          }
+          // 检查D3-5队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.dLineQuantity.d35 === 0 && this.outWarehouseExecuting.D) {
+            this.addLog('D3-5队列数量为0，取消D3-5#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT7', false);
+            this.outWarehouseArrowStatus['D3-5'] = false;
           }
         } else {
           this.addLog('未设置D线出库，但D35却减少了，程序错误！报警！');
@@ -5187,6 +5319,12 @@ export default {
               break;
             }
           }
+          // 检查E3-2队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.eLineQuantity.e32 === 0 && this.outWarehouseExecuting.E) {
+            this.addLog('E3-2队列数量为0，取消E3-2#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT8', false);
+            this.outWarehouseArrowStatus['E3-2'] = false;
+          }
         } else {
           this.addLog('未设置E线出库，但E32却减少了，程序错误！报警！');
         }
@@ -5214,6 +5352,12 @@ export default {
               this.addLog('E3-5队列空，无法出库');
               break;
             }
+          }
+          // 检查E3-5队列是否为0，如果为0则取消该条线的允许出货信号
+          if (this.eLineQuantity.e35 === 0 && this.outWarehouseExecuting.E) {
+            this.addLog('E3-5队列数量为0，取消E3-5#允许出货信号');
+            ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT9', false);
+            this.outWarehouseArrowStatus['E3-5'] = false;
           }
         } else {
           this.addLog('未设置E线出库，但E35却减少了，程序错误！报警！');
@@ -5358,7 +5502,14 @@ export default {
 
       this.outWarehouseLoading[line] = true;
       this.outWarehouseExecuting[line] = true;
+
+      // 发送允许出货信号到DBW1056
       if (line === 'A') {
+        // A线只有A3-5一条出货线，发送BIT1信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT1', true);
+        this.outWarehouseArrowStatus['A3-5'] = true;
+        this.addLog('A线出货执行：发送A3-5#允许出货信号 DBW1056_BIT1: true');
+
         ipcRenderer.send('writeSingleValueToPLC', 'DBW534', 1);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW534');
@@ -5366,6 +5517,15 @@ export default {
         this.outWarehouseExecutingTrayCode.A =
           this.queues[9].trayInfo[0].trayCode;
       } else if (line === 'B') {
+        // B线有B3-2和B3-5两条出货线，发送BIT2和BIT3信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT2', true);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT3', true);
+        this.outWarehouseArrowStatus['B3-2'] = true;
+        this.outWarehouseArrowStatus['B3-5'] = true;
+        this.addLog(
+          'B线出货执行：发送B3-2#和B3-5#允许出货信号 DBW1056_BIT2/BIT3: true'
+        );
+
         ipcRenderer.send('writeSingleValueToPLC', 'DBW534', 2);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW534');
@@ -5375,6 +5535,15 @@ export default {
           '/' +
           this.queues[19].trayInfo[0].trayCode;
       } else if (line === 'C') {
+        // C线有C3-2和C3-5两条出货线，发送BIT4和BIT5信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT4', true);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT5', true);
+        this.outWarehouseArrowStatus['C3-2'] = true;
+        this.outWarehouseArrowStatus['C3-5'] = true;
+        this.addLog(
+          'C线出货执行：发送C3-2#和C3-5#允许出货信号 DBW1056_BIT4/BIT5: true'
+        );
+
         ipcRenderer.send('writeSingleValueToPLC', 'DBW534', 3);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW534');
@@ -5384,6 +5553,15 @@ export default {
           '/' +
           this.queues[29].trayInfo[0].trayCode;
       } else if (line === 'D') {
+        // D线有D3-2和D3-5两条出货线，发送BIT6和BIT7信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT6', true);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT7', true);
+        this.outWarehouseArrowStatus['D3-2'] = true;
+        this.outWarehouseArrowStatus['D3-5'] = true;
+        this.addLog(
+          'D线出货执行：发送D3-2#和D3-5#允许出货信号 DBW1056_BIT6/BIT7: true'
+        );
+
         ipcRenderer.send('writeSingleValueToPLC', 'DBW536', 1);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW536');
@@ -5393,6 +5571,15 @@ export default {
           '/' +
           this.queues[39].trayInfo[0].trayCode;
       } else if (line === 'E') {
+        // E线有E3-2和E3-5两条出货线，发送BIT8和BIT9信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT8', true);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT9', true);
+        this.outWarehouseArrowStatus['E3-2'] = true;
+        this.outWarehouseArrowStatus['E3-5'] = true;
+        this.addLog(
+          'E线出货执行：发送E3-2#和E3-5#允许出货信号 DBW1056_BIT8/BIT9: true'
+        );
+
         ipcRenderer.send('writeSingleValueToPLC', 'DBW536', 2);
         setTimeout(() => {
           ipcRenderer.send('cancelWriteToPLC', 'DBW536');
@@ -5413,27 +5600,71 @@ export default {
       this.outNeedQty[line] = 0;
       // 清空执行中的托盘号
       this.outWarehouseExecutingTrayCode[line] = '';
-      // 清空该线所有子线的托盘码
+
+      // 取消允许出货信号
       if (line === 'A') {
+        // 取消A3-5允许出货信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT1', false);
+        this.outWarehouseArrowStatus['A3-5'] = false;
+        this.addLog(
+          'A线取消出货执行：取消A3-5#允许出货信号 DBW1056_BIT1: false'
+        );
+
         this.outWarehouseTrayCode.A35 = '';
         // 取消A线PLC写入
         ipcRenderer.send('cancelWriteToPLC', 'DBW534');
       } else if (line === 'B') {
+        // 取消B3-2和B3-5允许出货信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT2', false);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT3', false);
+        this.outWarehouseArrowStatus['B3-2'] = false;
+        this.outWarehouseArrowStatus['B3-5'] = false;
+        this.addLog(
+          'B线取消出货执行：取消B3-2#和B3-5#允许出货信号 DBW1056_BIT2/BIT3: false'
+        );
+
         this.outWarehouseTrayCode.B32 = '';
         this.outWarehouseTrayCode.B35 = '';
         // 取消B线PLC写入
         ipcRenderer.send('cancelWriteToPLC', 'DBW534');
       } else if (line === 'C') {
+        // 取消C3-2和C3-5允许出货信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT4', false);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT5', false);
+        this.outWarehouseArrowStatus['C3-2'] = false;
+        this.outWarehouseArrowStatus['C3-5'] = false;
+        this.addLog(
+          'C线取消出货执行：取消C3-2#和C3-5#允许出货信号 DBW1056_BIT4/BIT5: false'
+        );
+
         this.outWarehouseTrayCode.C32 = '';
         this.outWarehouseTrayCode.C35 = '';
         // 取消C线PLC写入
         ipcRenderer.send('cancelWriteToPLC', 'DBW534');
       } else if (line === 'D') {
+        // 取消D3-2和D3-5允许出货信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT6', false);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT7', false);
+        this.outWarehouseArrowStatus['D3-2'] = false;
+        this.outWarehouseArrowStatus['D3-5'] = false;
+        this.addLog(
+          'D线取消出货执行：取消D3-2#和D3-5#允许出货信号 DBW1056_BIT6/BIT7: false'
+        );
+
         this.outWarehouseTrayCode.D32 = '';
         this.outWarehouseTrayCode.D35 = '';
         // 取消D线PLC写入
         ipcRenderer.send('cancelWriteToPLC', 'DBW536');
       } else if (line === 'E') {
+        // 取消E3-2和E3-5允许出货信号
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT8', false);
+        ipcRenderer.send('writeValuesToPLC', 'DBW1056_BIT9', false);
+        this.outWarehouseArrowStatus['E3-2'] = false;
+        this.outWarehouseArrowStatus['E3-5'] = false;
+        this.addLog(
+          'E线取消出货执行：取消E3-2#和E3-5#允许出货信号 DBW1056_BIT8/BIT9: false'
+        );
+
         this.outWarehouseTrayCode.E32 = '';
         this.outWarehouseTrayCode.E35 = '';
         // 取消E线PLC写入
@@ -8287,6 +8518,7 @@ export default {
                 left: 50%;
                 transform: translateX(-50%);
               }
+
               /* --- 箭头指示器样式结束 --- */
 
               /* --- 新增电机点位样式 --- */
