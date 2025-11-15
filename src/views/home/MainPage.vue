@@ -69,7 +69,18 @@
         <!-- 订单设置卡片区域 -->
         <div class="production-cards-section">
           <div class="section-header">
-            <span>订单设置</span>
+            <div class="section-title">
+              <span>订单设置</span>
+              <div class="title-actions">
+                <div
+                  class="add-order-btn"
+                  @click="showAddOrderDialog"
+                  title="新建订单"
+                >
+                  <i class="el-icon-plus"></i>
+                </div>
+              </div>
+            </div>
             <el-button
               type="primary"
               size="mini"
@@ -102,7 +113,12 @@
                       <i class="el-icon-loading"></i>
                       执行中
                     </span>
-                    <el-button type="text" size="small" style="padding: 0px">
+                    <el-button
+                      type="text"
+                      size="small"
+                      style="padding: 0px"
+                      @click="cancelCurrentOrder(line)"
+                    >
                       取消
                     </el-button>
                   </div>
@@ -2713,6 +2729,24 @@
                 <el-tag type="warning" size="small">待执行</el-tag>
               </template>
             </el-table-column>
+            <el-table-column
+              label="操作"
+              width="100"
+              align="center"
+              fixed="right"
+            >
+              <template slot-scope="{ row }">
+                <el-button
+                  type="danger"
+                  size="mini"
+                  icon="el-icon-delete"
+                  @click.stop="deleteOrder(row)"
+                  :loading="row.isDeleting"
+                >
+                  删除
+                </el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
         <div v-else class="empty-state">
@@ -2966,6 +3000,109 @@
         >
       </div>
     </el-dialog>
+
+    <!-- 新建订单弹窗 -->
+    <el-dialog
+      title="新建订单"
+      :visible.sync="addOrderDialogVisible"
+      width="600px"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      append-to-body
+      class="add-order-dialog"
+    >
+      <div class="form-container">
+        <el-form
+          ref="newOrderForm"
+          :model="newOrderForm"
+          :rules="orderFormRules"
+          label-width="120px"
+          size="small"
+        >
+          <el-form-item label="生产总订单号" prop="orderId">
+            <el-input
+              v-model="newOrderForm.orderId"
+              placeholder="请输入生产总订单号"
+              maxlength="50"
+            />
+          </el-form-item>
+
+          <el-form-item label="产品编号" prop="productCode">
+            <el-input
+              v-model="newOrderForm.productCode"
+              placeholder="请输入产品编号"
+              maxlength="50"
+            />
+          </el-form-item>
+
+          <el-form-item label="产品名称" prop="productName">
+            <el-input
+              v-model="newOrderForm.productName"
+              placeholder="请输入产品名称"
+              maxlength="100"
+            />
+          </el-form-item>
+
+          <el-form-item
+            label="托盘码"
+            prop="trayCodes"
+            class="tray-codes-section"
+          >
+            <div class="tray-codes-container">
+              <div class="tray-input-section">
+                <el-input
+                  v-model="newOrderForm.currentTrayCode"
+                  placeholder="请输入托盘码"
+                  maxlength="50"
+                  @keyup.enter="addTrayCode"
+                />
+                <el-button
+                  type="primary"
+                  size="small"
+                  icon="el-icon-plus"
+                  @click="addTrayCode"
+                  :disabled="!newOrderForm.currentTrayCode.trim()"
+                >
+                  添加
+                </el-button>
+              </div>
+
+              <div
+                class="tray-codes-display"
+                v-if="newOrderForm.trayCodes.length > 0"
+              >
+                <div class="tray-codes-list">
+                  <div
+                    v-for="(code, index) in newOrderForm.trayCodes"
+                    :key="index"
+                    class="tray-code-tag"
+                  >
+                    <span class="tray-code-text">{{ code }}</span>
+                    <el-button
+                      type="text"
+                      icon="el-icon-close"
+                      @click="removeTrayCode(index)"
+                      class="remove-btn"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </el-form-item>
+        </el-form>
+      </div>
+
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAddOrder">取消</el-button>
+        <el-button
+          type="primary"
+          @click="submitAddOrder"
+          :loading="isSubmittingOrder"
+        >
+          确定
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -3034,158 +3171,42 @@ export default {
       orderSelectDialogVisible: false,
       selectedLine: null,
       selectedOrderId: null,
-      availableOrders: [
-        {
-          orderId: 'ORD001',
-          productName: '医疗器械A',
-          insertTime: '2024-01-15 10:30:00',
-          inPut: '1',
-          isPrint3: '1',
-          orderStatus: '0',
-          trays: Array.from({ length: 16 }, (_, i) => ({
-            id: `ORD001-TRAY-${i + 1}`,
-            name: `托盘${i + 1}`,
-            orderId: 'ORD001',
-            productName: '医疗器械A',
-            productCode: 'MC-A001',
-            batchNo: `BATCH-001-${i + 1}`,
-            unit: '标准规格',
-            isTerile: 1,
-            time: '2024-01-15 10:30:00',
-            // 添加上货参数对应的字段
-            mainId: `MAIN-001-${i + 1}`,
-            trayCode: `ORD001-TRAY-${i + 1}`,
-            trayTime: '2024-01-15 10:30:00',
-            receiptOrderCode: 'REC-001',
-            state: '0',
-            sendTo: '',
-            remark: `备注信息-${i + 1}`,
-            receivedPkgQuantity: 1,
-            sequenceNumber: i + 1
-          })),
-          currentTrayIndex: 0
-        },
-        {
-          orderId: 'ORD002',
-          productName: '医疗器械B',
-          insertTime: '2024-01-15 11:15:00',
-          inPut: '2',
-          isPrint3: '0',
-          orderStatus: '0',
-          trays: Array.from({ length: 16 }, (_, i) => ({
-            id: `ORD002-TRAY-${i + 1}`,
-            name: `托盘${i + 1}`,
-            orderId: 'ORD002',
-            productName: '医疗器械B',
-            productCode: 'MC-B002',
-            batchNo: `BATCH-002-${i + 1}`,
-            unit: '标准规格',
-            isTerile: 0,
-            time: '2024-01-15 11:15:00',
-            // 添加上货参数对应的字段
-            mainId: `MAIN-002-${i + 1}`,
-            trayCode: `ORD002-TRAY-${i + 1}`,
-            trayTime: '2024-01-15 11:15:00',
-            receiptOrderCode: 'REC-002',
-            state: '0',
-            sendTo: '',
-            remark: `备注信息-${i + 1}`,
-            receivedPkgQuantity: 1,
-            sequenceNumber: i + 1
-          })),
-          currentTrayIndex: 0
-        },
-        {
-          orderId: 'ORD003',
-          productName: '医疗器械C',
-          insertTime: '2024-01-15 12:00:00',
-          inPut: '3',
-          isPrint3: '2',
-          orderStatus: '0',
-          trays: Array.from({ length: 16 }, (_, i) => ({
-            id: `ORD003-TRAY-${i + 1}`,
-            name: `托盘${i + 1}`,
-            orderId: 'ORD003',
-            productName: '医疗器械C',
-            productCode: 'MC-C003',
-            batchNo: `BATCH-003-${i + 1}`,
-            unit: '标准规格',
-            isTerile: 1,
-            time: '2024-01-15 12:00:00',
-            // 添加上货参数对应的字段
-            mainId: `MAIN-003-${i + 1}`,
-            trayCode: `ORD003-TRAY-${i + 1}`,
-            trayTime: '2024-01-15 12:00:00',
-            receiptOrderCode: 'REC-003',
-            state: '0',
-            sendTo: '',
-            remark: `备注信息-${i + 1}`,
-            receivedPkgQuantity: 1,
-            sequenceNumber: i + 1
-          })),
-          currentTrayIndex: 0
-        },
-        {
-          orderId: 'ORD004',
-          productName: '医疗器械D',
-          insertTime: '2024-01-15 13:45:00',
-          inPut: '1',
-          isPrint3: '1',
-          orderStatus: '0',
-          trays: Array.from({ length: 16 }, (_, i) => ({
-            id: `ORD004-TRAY-${i + 1}`,
-            name: `托盘${i + 1}`,
-            orderId: 'ORD004',
-            productName: '医疗器械D',
-            productCode: 'MC-D004',
-            batchNo: `BATCH-004-${i + 1}`,
-            unit: '标准规格',
-            isTerile: 0,
-            time: '2024-01-15 13:45:00',
-            // 添加上货参数对应的字段
-            mainId: `MAIN-004-${i + 1}`,
-            trayCode: `ORD004-TRAY-${i + 1}`,
-            trayTime: '2024-01-15 13:45:00',
-            receiptOrderCode: 'REC-004',
-            state: '0',
-            sendTo: '',
-            remark: `备注信息-${i + 1}`,
-            receivedPkgQuantity: 1,
-            sequenceNumber: i + 1
-          })),
-          currentTrayIndex: 0
-        },
-        {
-          orderId: 'ORD005',
-          productName: '医疗器械E',
-          insertTime: '2024-01-15 14:20:00',
-          inPut: '2',
-          isPrint3: '0',
-          orderStatus: '0',
-          trays: Array.from({ length: 16 }, (_, i) => ({
-            id: `ORD005-TRAY-${i + 1}`,
-            name: `托盘${i + 1}`,
-            orderId: 'ORD005',
-            productName: '医疗器械E',
-            productCode: 'MC-E005',
-            batchNo: `BATCH-005-${i + 1}`,
-            unit: '标准规格',
-            isTerile: 1,
-            time: '2024-01-15 14:20:00',
-            // 添加上货参数对应的字段
-            mainId: `MAIN-005-${i + 1}`,
-            trayCode: `ORD005-TRAY-${i + 1}`,
-            trayTime: '2024-01-15 14:20:00',
-            receiptOrderCode: 'REC-005',
-            state: '0',
-            sendTo: '',
-            remark: `备注信息-${i + 1}`,
-            receivedPkgQuantity: 1,
-            sequenceNumber: i + 1
-          })),
-          currentTrayIndex: 0
-        }
-      ],
+      availableOrders: [],
+      // 新建订单相关
+      addOrderDialogVisible: false,
+      isSubmittingOrder: false,
+      newOrderForm: {
+        orderId: '',
+        productCode: '',
+        productName: '',
+        currentTrayCode: '', // 当前输入的托盘码
+        trayCodes: [] // 已添加的托盘码列表
+      },
+      orderFormRules: {
+        orderId: [
+          { required: true, message: '请输入生产总订单号', trigger: 'blur' }
+        ],
+        productCode: [
+          { required: true, message: '请输入产品编号', trigger: 'blur' }
+        ],
+        productName: [
+          { required: true, message: '请输入产品名称', trigger: 'blur' }
+        ],
+        trayCodes: [
+          {
+            required: true,
+            message: '请至少添加一个托盘码',
+            trigger: 'change',
+            validator: (rule, value, callback) => {
+              if (!value || value.length === 0) {
+                callback(new Error('请至少添加一个托盘码'));
+              } else {
+                callback();
+              }
+            }
+          }
+        ]
+      },
       buttonStates: {
         start: false,
         stop: false,
@@ -4099,261 +4120,261 @@ export default {
         });
       });
     });
-    // ipcRenderer.on('receivedMsg', (event, values, values2) => {
-    //   // 使用位运算优化赋值
-    //   const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
+    ipcRenderer.on('receivedMsg', (event, values, values2) => {
+      // 使用位运算优化赋值
+      const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
 
-    //   // A线电机运行信号 (DBW6)
-    //   let word6 = this.convertToWord(values.DBW6);
-    //   this.aLineMotorRunning.bit0 = getBit(word6, 8);
-    //   this.aLineMotorRunning.bit1 = getBit(word6, 9);
-    //   this.aLineMotorRunning.bit2 = getBit(word6, 10);
-    //   this.aLineMotorRunning.bit3 = getBit(word6, 11);
-    //   this.aLineMotorRunning.bit4 = getBit(word6, 12);
-    //   this.aLineMotorRunning.bit5 = getBit(word6, 13);
-    //   this.aLineMotorRunning.bit6 = getBit(word6, 14);
-    //   this.aLineMotorRunning.bit7 = getBit(word6, 15);
-    //   this.aLineMotorRunning.bit8 = getBit(word6, 0);
-    //   this.aLineMotorRunning.bit9 = getBit(word6, 1);
-    //   this.aLineMotorRunning.bit10 = getBit(word6, 2);
-    //   this.aLineMotorRunning.bit11 = getBit(word6, 3);
+      // A线电机运行信号 (DBW6)
+      let word6 = this.convertToWord(values.DBW6);
+      this.aLineMotorRunning.bit0 = getBit(word6, 8);
+      this.aLineMotorRunning.bit1 = getBit(word6, 9);
+      this.aLineMotorRunning.bit2 = getBit(word6, 10);
+      this.aLineMotorRunning.bit3 = getBit(word6, 11);
+      this.aLineMotorRunning.bit4 = getBit(word6, 12);
+      this.aLineMotorRunning.bit5 = getBit(word6, 13);
+      this.aLineMotorRunning.bit6 = getBit(word6, 14);
+      this.aLineMotorRunning.bit7 = getBit(word6, 15);
+      this.aLineMotorRunning.bit8 = getBit(word6, 0);
+      this.aLineMotorRunning.bit9 = getBit(word6, 1);
+      this.aLineMotorRunning.bit10 = getBit(word6, 2);
+      this.aLineMotorRunning.bit11 = getBit(word6, 3);
 
-    //   // A线光电检测信号 (DBW8)
-    //   let word8 = this.convertToWord(values.DBW8);
-    //   this.aLinePhotoelectricSignal.bit0 = getBit(word8, 8);
-    //   this.aLinePhotoelectricSignal.bit1 = getBit(word8, 9);
-    //   this.aLinePhotoelectricSignal.bit2 = getBit(word8, 10);
-    //   this.aLinePhotoelectricSignal.bit3 = getBit(word8, 11);
-    //   this.aLinePhotoelectricSignal.bit4 = getBit(word8, 12);
-    //   this.aLinePhotoelectricSignal.bit5 = getBit(word8, 13);
-    //   this.aLinePhotoelectricSignal.bit6 = getBit(word8, 14);
-    //   this.aLinePhotoelectricSignal.bit7 = getBit(word8, 15);
-    //   this.aLinePhotoelectricSignal.bit8 = getBit(word8, 0);
-    //   this.aLinePhotoelectricSignal.bit9 = getBit(word8, 1);
-    //   this.aLinePhotoelectricSignal.bit10 = getBit(word8, 2);
-    //   this.aLinePhotoelectricSignal.bit11 = getBit(word8, 3);
-    //   this.aLinePhotoelectricSignal.bit12 = getBit(word8, 4);
-    //   this.aLinePhotoelectricSignal.bit13 = getBit(word8, 5);
-    //   this.aLinePhotoelectricSignal.bit14 = getBit(word8, 6);
-    //   this.aLinePhotoelectricSignal.bit15 = getBit(word8, 7);
+      // A线光电检测信号 (DBW8)
+      let word8 = this.convertToWord(values.DBW8);
+      this.aLinePhotoelectricSignal.bit0 = getBit(word8, 8);
+      this.aLinePhotoelectricSignal.bit1 = getBit(word8, 9);
+      this.aLinePhotoelectricSignal.bit2 = getBit(word8, 10);
+      this.aLinePhotoelectricSignal.bit3 = getBit(word8, 11);
+      this.aLinePhotoelectricSignal.bit4 = getBit(word8, 12);
+      this.aLinePhotoelectricSignal.bit5 = getBit(word8, 13);
+      this.aLinePhotoelectricSignal.bit6 = getBit(word8, 14);
+      this.aLinePhotoelectricSignal.bit7 = getBit(word8, 15);
+      this.aLinePhotoelectricSignal.bit8 = getBit(word8, 0);
+      this.aLinePhotoelectricSignal.bit9 = getBit(word8, 1);
+      this.aLinePhotoelectricSignal.bit10 = getBit(word8, 2);
+      this.aLinePhotoelectricSignal.bit11 = getBit(word8, 3);
+      this.aLinePhotoelectricSignal.bit12 = getBit(word8, 4);
+      this.aLinePhotoelectricSignal.bit13 = getBit(word8, 5);
+      this.aLinePhotoelectricSignal.bit14 = getBit(word8, 6);
+      this.aLinePhotoelectricSignal.bit15 = getBit(word8, 7);
 
-    //   // B线电机运行信号 (DBW10)
-    //   let word10 = this.convertToWord(values.DBW10);
-    //   this.bLineMotorRunning.bit0 = getBit(word10, 8);
-    //   this.bLineMotorRunning.bit1 = getBit(word10, 9);
-    //   this.bLineMotorRunning.bit2 = getBit(word10, 10);
-    //   this.bLineMotorRunning.bit3 = getBit(word10, 11);
-    //   this.bLineMotorRunning.bit4 = getBit(word10, 12);
-    //   this.bLineMotorRunning.bit5 = getBit(word10, 13);
-    //   this.bLineMotorRunning.bit6 = getBit(word10, 14);
-    //   this.bLineMotorRunning.bit7 = getBit(word10, 15);
-    //   this.bLineMotorRunning.bit8 = getBit(word10, 0);
-    //   this.bLineMotorRunning.bit9 = getBit(word10, 1);
-    //   this.bLineMotorRunning.bit10 = getBit(word10, 2);
-    //   this.bLineMotorRunning.bit11 = getBit(word10, 3);
+      // B线电机运行信号 (DBW10)
+      let word10 = this.convertToWord(values.DBW10);
+      this.bLineMotorRunning.bit0 = getBit(word10, 8);
+      this.bLineMotorRunning.bit1 = getBit(word10, 9);
+      this.bLineMotorRunning.bit2 = getBit(word10, 10);
+      this.bLineMotorRunning.bit3 = getBit(word10, 11);
+      this.bLineMotorRunning.bit4 = getBit(word10, 12);
+      this.bLineMotorRunning.bit5 = getBit(word10, 13);
+      this.bLineMotorRunning.bit6 = getBit(word10, 14);
+      this.bLineMotorRunning.bit7 = getBit(word10, 15);
+      this.bLineMotorRunning.bit8 = getBit(word10, 0);
+      this.bLineMotorRunning.bit9 = getBit(word10, 1);
+      this.bLineMotorRunning.bit10 = getBit(word10, 2);
+      this.bLineMotorRunning.bit11 = getBit(word10, 3);
 
-    //   // B线光电检测信号 (DBW12)
-    //   let word12 = this.convertToWord(values.DBW12);
-    //   this.bLinePhotoelectricSignal.bit0 = getBit(word12, 8);
-    //   this.bLinePhotoelectricSignal.bit1 = getBit(word12, 9);
-    //   this.bLinePhotoelectricSignal.bit2 = getBit(word12, 10);
-    //   this.bLinePhotoelectricSignal.bit3 = getBit(word12, 11);
-    //   this.bLinePhotoelectricSignal.bit4 = getBit(word12, 12);
-    //   this.bLinePhotoelectricSignal.bit5 = getBit(word12, 13);
-    //   this.bLinePhotoelectricSignal.bit6 = getBit(word12, 14);
-    //   this.bLinePhotoelectricSignal.bit7 = getBit(word12, 15);
-    //   this.bLinePhotoelectricSignal.bit8 = getBit(word12, 0);
-    //   this.bLinePhotoelectricSignal.bit9 = getBit(word12, 1);
-    //   this.bLinePhotoelectricSignal.bit10 = getBit(word12, 2);
-    //   this.bLinePhotoelectricSignal.bit11 = getBit(word12, 3);
-    //   this.bLinePhotoelectricSignal.bit12 = getBit(word12, 4);
-    //   this.bLinePhotoelectricSignal.bit13 = getBit(word12, 5);
-    //   this.bLinePhotoelectricSignal.bit14 = getBit(word12, 6);
-    //   this.bLinePhotoelectricSignal.bit15 = getBit(word12, 7);
+      // B线光电检测信号 (DBW12)
+      let word12 = this.convertToWord(values.DBW12);
+      this.bLinePhotoelectricSignal.bit0 = getBit(word12, 8);
+      this.bLinePhotoelectricSignal.bit1 = getBit(word12, 9);
+      this.bLinePhotoelectricSignal.bit2 = getBit(word12, 10);
+      this.bLinePhotoelectricSignal.bit3 = getBit(word12, 11);
+      this.bLinePhotoelectricSignal.bit4 = getBit(word12, 12);
+      this.bLinePhotoelectricSignal.bit5 = getBit(word12, 13);
+      this.bLinePhotoelectricSignal.bit6 = getBit(word12, 14);
+      this.bLinePhotoelectricSignal.bit7 = getBit(word12, 15);
+      this.bLinePhotoelectricSignal.bit8 = getBit(word12, 0);
+      this.bLinePhotoelectricSignal.bit9 = getBit(word12, 1);
+      this.bLinePhotoelectricSignal.bit10 = getBit(word12, 2);
+      this.bLinePhotoelectricSignal.bit11 = getBit(word12, 3);
+      this.bLinePhotoelectricSignal.bit12 = getBit(word12, 4);
+      this.bLinePhotoelectricSignal.bit13 = getBit(word12, 5);
+      this.bLinePhotoelectricSignal.bit14 = getBit(word12, 6);
+      this.bLinePhotoelectricSignal.bit15 = getBit(word12, 7);
 
-    //   // C线电机运行信号 (DBW14)
-    //   let word14 = this.convertToWord(values.DBW14);
-    //   this.cLineMotorRunning.bit0 = getBit(word14, 8);
-    //   this.cLineMotorRunning.bit1 = getBit(word14, 9);
-    //   this.cLineMotorRunning.bit2 = getBit(word14, 10);
-    //   this.cLineMotorRunning.bit3 = getBit(word14, 11);
-    //   this.cLineMotorRunning.bit4 = getBit(word14, 12);
-    //   this.cLineMotorRunning.bit5 = getBit(word14, 13);
-    //   this.cLineMotorRunning.bit6 = getBit(word14, 14);
-    //   this.cLineMotorRunning.bit7 = getBit(word14, 15);
-    //   this.cLineMotorRunning.bit8 = getBit(word14, 0);
-    //   this.cLineMotorRunning.bit9 = getBit(word14, 1);
-    //   this.cLineMotorRunning.bit10 = getBit(word14, 2);
-    //   this.cLineMotorRunning.bit11 = getBit(word14, 3);
-    //   // C线光电检测信号 (DBW16)
-    //   let word16 = this.convertToWord(values.DBW16);
-    //   this.cLinePhotoelectricSignal.bit0 = getBit(word16, 8);
-    //   this.cLinePhotoelectricSignal.bit1 = getBit(word16, 9);
-    //   this.cLinePhotoelectricSignal.bit2 = getBit(word16, 10);
-    //   this.cLinePhotoelectricSignal.bit3 = getBit(word16, 11);
-    //   this.cLinePhotoelectricSignal.bit4 = getBit(word16, 12);
-    //   this.cLinePhotoelectricSignal.bit5 = getBit(word16, 13);
-    //   this.cLinePhotoelectricSignal.bit6 = getBit(word16, 14);
-    //   this.cLinePhotoelectricSignal.bit7 = getBit(word16, 15);
-    //   this.cLinePhotoelectricSignal.bit8 = getBit(word16, 0);
-    //   this.cLinePhotoelectricSignal.bit9 = getBit(word16, 1);
-    //   this.cLinePhotoelectricSignal.bit10 = getBit(word16, 2);
-    //   this.cLinePhotoelectricSignal.bit11 = getBit(word16, 3);
-    //   this.cLinePhotoelectricSignal.bit12 = getBit(word16, 4);
-    //   this.cLinePhotoelectricSignal.bit13 = getBit(word16, 5);
-    //   this.cLinePhotoelectricSignal.bit14 = getBit(word16, 6);
-    //   this.cLinePhotoelectricSignal.bit15 = getBit(word16, 7);
-    //   // D线电机运行信号-读取PLC
-    //   let word18 = this.convertToWord(values.DBW18);
-    //   this.dLineMotorRunning.bit0 = getBit(word18, 8);
-    //   this.dLineMotorRunning.bit1 = getBit(word18, 9);
-    //   this.dLineMotorRunning.bit2 = getBit(word18, 10);
-    //   this.dLineMotorRunning.bit3 = getBit(word18, 11);
-    //   this.dLineMotorRunning.bit4 = getBit(word18, 12);
-    //   this.dLineMotorRunning.bit5 = getBit(word18, 13);
-    //   this.dLineMotorRunning.bit6 = getBit(word18, 14);
-    //   this.dLineMotorRunning.bit7 = getBit(word18, 15);
-    //   this.dLineMotorRunning.bit8 = getBit(word18, 0);
-    //   this.dLineMotorRunning.bit9 = getBit(word18, 1);
-    //   this.dLineMotorRunning.bit10 = getBit(word18, 2);
-    //   this.dLineMotorRunning.bit11 = getBit(word18, 3);
-    //   // D线光电检测信号-读取PLC
-    //   let word20 = this.convertToWord(values.DBW20);
-    //   this.dLinePhotoelectricSignal.bit1 = getBit(word20, 9);
-    //   this.dLinePhotoelectricSignal.bit2 = getBit(word20, 10);
-    //   this.dLinePhotoelectricSignal.bit3 = getBit(word20, 11);
-    //   this.dLinePhotoelectricSignal.bit4 = getBit(word20, 12);
-    //   this.dLinePhotoelectricSignal.bit5 = getBit(word20, 13);
-    //   this.dLinePhotoelectricSignal.bit6 = getBit(word20, 14);
-    //   this.dLinePhotoelectricSignal.bit7 = getBit(word20, 15);
-    //   this.dLinePhotoelectricSignal.bit8 = getBit(word20, 0);
-    //   this.dLinePhotoelectricSignal.bit9 = getBit(word20, 1);
-    //   this.dLinePhotoelectricSignal.bit10 = getBit(word20, 2);
-    //   this.dLinePhotoelectricSignal.bit11 = getBit(word20, 3);
-    //   this.dLinePhotoelectricSignal.bit12 = getBit(word20, 4);
-    //   this.dLinePhotoelectricSignal.bit13 = getBit(word20, 5);
-    //   this.dLinePhotoelectricSignal.bit14 = getBit(word20, 6);
-    //   this.dLinePhotoelectricSignal.bit15 = getBit(word20, 7);
-    //   // E线电机运行信号-读取PLC
-    //   let word22 = this.convertToWord(values.DBW22);
-    //   this.eLineMotorRunning.bit0 = getBit(word22, 8);
-    //   this.eLineMotorRunning.bit1 = getBit(word22, 9);
-    //   this.eLineMotorRunning.bit2 = getBit(word22, 10);
-    //   this.eLineMotorRunning.bit3 = getBit(word22, 11);
-    //   this.eLineMotorRunning.bit4 = getBit(word22, 12);
-    //   this.eLineMotorRunning.bit5 = getBit(word22, 13);
-    //   this.eLineMotorRunning.bit6 = getBit(word22, 14);
-    //   this.eLineMotorRunning.bit7 = getBit(word22, 15);
-    //   this.eLineMotorRunning.bit8 = getBit(word22, 0);
-    //   this.eLineMotorRunning.bit9 = getBit(word22, 1);
-    //   this.eLineMotorRunning.bit10 = getBit(word22, 2);
-    //   this.eLineMotorRunning.bit11 = getBit(word22, 3);
-    //   // E线光电检测信号-读取PLC
-    //   let word24 = this.convertToWord(values.DBW24);
-    //   this.eLinePhotoelectricSignal.bit1 = getBit(word24, 9);
-    //   this.eLinePhotoelectricSignal.bit2 = getBit(word24, 10);
-    //   this.eLinePhotoelectricSignal.bit3 = getBit(word24, 11);
-    //   this.eLinePhotoelectricSignal.bit4 = getBit(word24, 12);
-    //   this.eLinePhotoelectricSignal.bit5 = getBit(word24, 13);
-    //   this.eLinePhotoelectricSignal.bit6 = getBit(word24, 14);
-    //   this.eLinePhotoelectricSignal.bit7 = getBit(word24, 15);
-    //   this.eLinePhotoelectricSignal.bit8 = getBit(word24, 0);
-    //   this.eLinePhotoelectricSignal.bit9 = getBit(word24, 1);
-    //   this.eLinePhotoelectricSignal.bit10 = getBit(word24, 2);
-    //   this.eLinePhotoelectricSignal.bit11 = getBit(word24, 3);
-    //   this.eLinePhotoelectricSignal.bit12 = getBit(word24, 4);
-    //   this.eLinePhotoelectricSignal.bit13 = getBit(word24, 5);
-    //   this.eLinePhotoelectricSignal.bit14 = getBit(word24, 6);
-    //   this.eLinePhotoelectricSignal.bit15 = getBit(word24, 7);
+      // C线电机运行信号 (DBW14)
+      let word14 = this.convertToWord(values.DBW14);
+      this.cLineMotorRunning.bit0 = getBit(word14, 8);
+      this.cLineMotorRunning.bit1 = getBit(word14, 9);
+      this.cLineMotorRunning.bit2 = getBit(word14, 10);
+      this.cLineMotorRunning.bit3 = getBit(word14, 11);
+      this.cLineMotorRunning.bit4 = getBit(word14, 12);
+      this.cLineMotorRunning.bit5 = getBit(word14, 13);
+      this.cLineMotorRunning.bit6 = getBit(word14, 14);
+      this.cLineMotorRunning.bit7 = getBit(word14, 15);
+      this.cLineMotorRunning.bit8 = getBit(word14, 0);
+      this.cLineMotorRunning.bit9 = getBit(word14, 1);
+      this.cLineMotorRunning.bit10 = getBit(word14, 2);
+      this.cLineMotorRunning.bit11 = getBit(word14, 3);
+      // C线光电检测信号 (DBW16)
+      let word16 = this.convertToWord(values.DBW16);
+      this.cLinePhotoelectricSignal.bit0 = getBit(word16, 8);
+      this.cLinePhotoelectricSignal.bit1 = getBit(word16, 9);
+      this.cLinePhotoelectricSignal.bit2 = getBit(word16, 10);
+      this.cLinePhotoelectricSignal.bit3 = getBit(word16, 11);
+      this.cLinePhotoelectricSignal.bit4 = getBit(word16, 12);
+      this.cLinePhotoelectricSignal.bit5 = getBit(word16, 13);
+      this.cLinePhotoelectricSignal.bit6 = getBit(word16, 14);
+      this.cLinePhotoelectricSignal.bit7 = getBit(word16, 15);
+      this.cLinePhotoelectricSignal.bit8 = getBit(word16, 0);
+      this.cLinePhotoelectricSignal.bit9 = getBit(word16, 1);
+      this.cLinePhotoelectricSignal.bit10 = getBit(word16, 2);
+      this.cLinePhotoelectricSignal.bit11 = getBit(word16, 3);
+      this.cLinePhotoelectricSignal.bit12 = getBit(word16, 4);
+      this.cLinePhotoelectricSignal.bit13 = getBit(word16, 5);
+      this.cLinePhotoelectricSignal.bit14 = getBit(word16, 6);
+      this.cLinePhotoelectricSignal.bit15 = getBit(word16, 7);
+      // D线电机运行信号-读取PLC
+      let word18 = this.convertToWord(values.DBW18);
+      this.dLineMotorRunning.bit0 = getBit(word18, 8);
+      this.dLineMotorRunning.bit1 = getBit(word18, 9);
+      this.dLineMotorRunning.bit2 = getBit(word18, 10);
+      this.dLineMotorRunning.bit3 = getBit(word18, 11);
+      this.dLineMotorRunning.bit4 = getBit(word18, 12);
+      this.dLineMotorRunning.bit5 = getBit(word18, 13);
+      this.dLineMotorRunning.bit6 = getBit(word18, 14);
+      this.dLineMotorRunning.bit7 = getBit(word18, 15);
+      this.dLineMotorRunning.bit8 = getBit(word18, 0);
+      this.dLineMotorRunning.bit9 = getBit(word18, 1);
+      this.dLineMotorRunning.bit10 = getBit(word18, 2);
+      this.dLineMotorRunning.bit11 = getBit(word18, 3);
+      // D线光电检测信号-读取PLC
+      let word20 = this.convertToWord(values.DBW20);
+      this.dLinePhotoelectricSignal.bit1 = getBit(word20, 9);
+      this.dLinePhotoelectricSignal.bit2 = getBit(word20, 10);
+      this.dLinePhotoelectricSignal.bit3 = getBit(word20, 11);
+      this.dLinePhotoelectricSignal.bit4 = getBit(word20, 12);
+      this.dLinePhotoelectricSignal.bit5 = getBit(word20, 13);
+      this.dLinePhotoelectricSignal.bit6 = getBit(word20, 14);
+      this.dLinePhotoelectricSignal.bit7 = getBit(word20, 15);
+      this.dLinePhotoelectricSignal.bit8 = getBit(word20, 0);
+      this.dLinePhotoelectricSignal.bit9 = getBit(word20, 1);
+      this.dLinePhotoelectricSignal.bit10 = getBit(word20, 2);
+      this.dLinePhotoelectricSignal.bit11 = getBit(word20, 3);
+      this.dLinePhotoelectricSignal.bit12 = getBit(word20, 4);
+      this.dLinePhotoelectricSignal.bit13 = getBit(word20, 5);
+      this.dLinePhotoelectricSignal.bit14 = getBit(word20, 6);
+      this.dLinePhotoelectricSignal.bit15 = getBit(word20, 7);
+      // E线电机运行信号-读取PLC
+      let word22 = this.convertToWord(values.DBW22);
+      this.eLineMotorRunning.bit0 = getBit(word22, 8);
+      this.eLineMotorRunning.bit1 = getBit(word22, 9);
+      this.eLineMotorRunning.bit2 = getBit(word22, 10);
+      this.eLineMotorRunning.bit3 = getBit(word22, 11);
+      this.eLineMotorRunning.bit4 = getBit(word22, 12);
+      this.eLineMotorRunning.bit5 = getBit(word22, 13);
+      this.eLineMotorRunning.bit6 = getBit(word22, 14);
+      this.eLineMotorRunning.bit7 = getBit(word22, 15);
+      this.eLineMotorRunning.bit8 = getBit(word22, 0);
+      this.eLineMotorRunning.bit9 = getBit(word22, 1);
+      this.eLineMotorRunning.bit10 = getBit(word22, 2);
+      this.eLineMotorRunning.bit11 = getBit(word22, 3);
+      // E线光电检测信号-读取PLC
+      let word24 = this.convertToWord(values.DBW24);
+      this.eLinePhotoelectricSignal.bit1 = getBit(word24, 9);
+      this.eLinePhotoelectricSignal.bit2 = getBit(word24, 10);
+      this.eLinePhotoelectricSignal.bit3 = getBit(word24, 11);
+      this.eLinePhotoelectricSignal.bit4 = getBit(word24, 12);
+      this.eLinePhotoelectricSignal.bit5 = getBit(word24, 13);
+      this.eLinePhotoelectricSignal.bit6 = getBit(word24, 14);
+      this.eLinePhotoelectricSignal.bit7 = getBit(word24, 15);
+      this.eLinePhotoelectricSignal.bit8 = getBit(word24, 0);
+      this.eLinePhotoelectricSignal.bit9 = getBit(word24, 1);
+      this.eLinePhotoelectricSignal.bit10 = getBit(word24, 2);
+      this.eLinePhotoelectricSignal.bit11 = getBit(word24, 3);
+      this.eLinePhotoelectricSignal.bit12 = getBit(word24, 4);
+      this.eLinePhotoelectricSignal.bit13 = getBit(word24, 5);
+      this.eLinePhotoelectricSignal.bit14 = getBit(word24, 6);
+      this.eLinePhotoelectricSignal.bit15 = getBit(word24, 7);
 
-    //   // A线数量-读取PLC
-    //   this.aLineQuantity.a12 = Number(values.DBW28 ?? 0);
-    //   this.aLineQuantity.a13 = Number(values.DBW30 ?? 0);
-    //   this.aLineQuantity.a21in = Number(values.DBW32 ?? 0);
-    //   this.aLineQuantity.a21out = Number(values.DBW140 ?? 0);
-    //   this.aLineQuantity.a31 = Number(values.DBW34 ?? 0);
-    //   this.aLineQuantity.a32 = Number(values.DBW36 ?? 0);
-    //   this.aLineQuantity.a15 = Number(values.DBW38 ?? 0);
-    //   this.aLineQuantity.a16 = Number(values.DBW40 ?? 0);
-    //   this.aLineQuantity.a22in = Number(values.DBW42 ?? 0);
-    //   this.aLineQuantity.a22out = Number(values.DBW142 ?? 0);
-    //   this.aLineQuantity.a34 = Number(values.DBW44 ?? 0);
-    //   this.aLineQuantity.a35 = Number(values.DBW46 ?? 0);
+      // A线数量-读取PLC
+      this.aLineQuantity.a12 = Number(values.DBW28 ?? 0);
+      this.aLineQuantity.a13 = Number(values.DBW30 ?? 0);
+      this.aLineQuantity.a21in = Number(values.DBW32 ?? 0);
+      this.aLineQuantity.a21out = Number(values.DBW140 ?? 0);
+      this.aLineQuantity.a31 = Number(values.DBW34 ?? 0);
+      this.aLineQuantity.a32 = Number(values.DBW36 ?? 0);
+      this.aLineQuantity.a15 = Number(values.DBW38 ?? 0);
+      this.aLineQuantity.a16 = Number(values.DBW40 ?? 0);
+      this.aLineQuantity.a22in = Number(values.DBW42 ?? 0);
+      this.aLineQuantity.a22out = Number(values.DBW142 ?? 0);
+      this.aLineQuantity.a34 = Number(values.DBW44 ?? 0);
+      this.aLineQuantity.a35 = Number(values.DBW46 ?? 0);
 
-    //   // B线数量-读取PLC
-    //   this.bLineQuantity.b12 = Number(values.DBW48 ?? 0);
-    //   this.bLineQuantity.b13 = Number(values.DBW50 ?? 0);
-    //   this.bLineQuantity.b21in = Number(values.DBW52 ?? 0);
-    //   this.bLineQuantity.b21out = Number(values.DBW144 ?? 0);
-    //   this.bLineQuantity.b31 = Number(values.DBW54 ?? 0);
-    //   this.bLineQuantity.b32 = Number(values.DBW56 ?? 0);
-    //   this.bLineQuantity.b15 = Number(values.DBW58 ?? 0);
-    //   this.bLineQuantity.b16 = Number(values.DBW60 ?? 0);
-    //   this.bLineQuantity.b22in = Number(values.DBW62 ?? 0);
-    //   this.bLineQuantity.b22out = Number(values.DBW146 ?? 0);
-    //   this.bLineQuantity.b34 = Number(values.DBW64 ?? 0);
-    //   this.bLineQuantity.b35 = Number(values.DBW66 ?? 0);
+      // B线数量-读取PLC
+      this.bLineQuantity.b12 = Number(values.DBW48 ?? 0);
+      this.bLineQuantity.b13 = Number(values.DBW50 ?? 0);
+      this.bLineQuantity.b21in = Number(values.DBW52 ?? 0);
+      this.bLineQuantity.b21out = Number(values.DBW144 ?? 0);
+      this.bLineQuantity.b31 = Number(values.DBW54 ?? 0);
+      this.bLineQuantity.b32 = Number(values.DBW56 ?? 0);
+      this.bLineQuantity.b15 = Number(values.DBW58 ?? 0);
+      this.bLineQuantity.b16 = Number(values.DBW60 ?? 0);
+      this.bLineQuantity.b22in = Number(values.DBW62 ?? 0);
+      this.bLineQuantity.b22out = Number(values.DBW146 ?? 0);
+      this.bLineQuantity.b34 = Number(values.DBW64 ?? 0);
+      this.bLineQuantity.b35 = Number(values.DBW66 ?? 0);
 
-    //   // C线数量-读取PLC
-    //   this.cLineQuantity.c12 = Number(values.DBW68 ?? 0);
-    //   this.cLineQuantity.c13 = Number(values.DBW70 ?? 0);
-    //   this.cLineQuantity.c21in = Number(values.DBW72 ?? 0);
-    //   this.cLineQuantity.c21out = Number(values.DBW148 ?? 0);
-    //   this.cLineQuantity.c31 = Number(values.DBW74 ?? 0);
-    //   this.cLineQuantity.c32 = Number(values.DBW76 ?? 0);
-    //   this.cLineQuantity.c15 = Number(values.DBW78 ?? 0);
-    //   this.cLineQuantity.c16 = Number(values.DBW80 ?? 0);
-    //   this.cLineQuantity.c22in = Number(values.DBW82 ?? 0);
-    //   this.cLineQuantity.c22out = Number(values.DBW150 ?? 0);
-    //   this.cLineQuantity.c34 = Number(values.DBW84 ?? 0);
-    //   this.cLineQuantity.c35 = Number(values.DBW86 ?? 0);
+      // C线数量-读取PLC
+      this.cLineQuantity.c12 = Number(values.DBW68 ?? 0);
+      this.cLineQuantity.c13 = Number(values.DBW70 ?? 0);
+      this.cLineQuantity.c21in = Number(values.DBW72 ?? 0);
+      this.cLineQuantity.c21out = Number(values.DBW148 ?? 0);
+      this.cLineQuantity.c31 = Number(values.DBW74 ?? 0);
+      this.cLineQuantity.c32 = Number(values.DBW76 ?? 0);
+      this.cLineQuantity.c15 = Number(values.DBW78 ?? 0);
+      this.cLineQuantity.c16 = Number(values.DBW80 ?? 0);
+      this.cLineQuantity.c22in = Number(values.DBW82 ?? 0);
+      this.cLineQuantity.c22out = Number(values.DBW150 ?? 0);
+      this.cLineQuantity.c34 = Number(values.DBW84 ?? 0);
+      this.cLineQuantity.c35 = Number(values.DBW86 ?? 0);
 
-    //   // D线数量-读取PLC
-    //   this.dLineQuantity.d12 = Number(values.DBW88 ?? 0);
-    //   this.dLineQuantity.d13 = Number(values.DBW90 ?? 0);
-    //   this.dLineQuantity.d21in = Number(values.DBW92 ?? 0);
-    //   this.dLineQuantity.d21out = Number(values.DBW152 ?? 0);
-    //   this.dLineQuantity.d31 = Number(values.DBW94 ?? 0);
-    //   this.dLineQuantity.d32 = Number(values.DBW96 ?? 0);
-    //   this.dLineQuantity.d15 = Number(values.DBW98 ?? 0);
-    //   this.dLineQuantity.d16 = Number(values.DBW100 ?? 0);
-    //   this.dLineQuantity.d22in = Number(values.DBW102 ?? 0);
-    //   this.dLineQuantity.d22out = Number(values.DBW154 ?? 0);
-    //   this.dLineQuantity.d34 = Number(values.DBW104 ?? 0);
-    //   this.dLineQuantity.d35 = Number(values.DBW106 ?? 0);
+      // D线数量-读取PLC
+      this.dLineQuantity.d12 = Number(values.DBW88 ?? 0);
+      this.dLineQuantity.d13 = Number(values.DBW90 ?? 0);
+      this.dLineQuantity.d21in = Number(values.DBW92 ?? 0);
+      this.dLineQuantity.d21out = Number(values.DBW152 ?? 0);
+      this.dLineQuantity.d31 = Number(values.DBW94 ?? 0);
+      this.dLineQuantity.d32 = Number(values.DBW96 ?? 0);
+      this.dLineQuantity.d15 = Number(values.DBW98 ?? 0);
+      this.dLineQuantity.d16 = Number(values.DBW100 ?? 0);
+      this.dLineQuantity.d22in = Number(values.DBW102 ?? 0);
+      this.dLineQuantity.d22out = Number(values.DBW154 ?? 0);
+      this.dLineQuantity.d34 = Number(values.DBW104 ?? 0);
+      this.dLineQuantity.d35 = Number(values.DBW106 ?? 0);
 
-    //   // E线数量-读取PLC
-    //   this.eLineQuantity.e12 = Number(values.DBW108 ?? 0);
-    //   this.eLineQuantity.e13 = Number(values.DBW110 ?? 0);
-    //   this.eLineQuantity.e21in = Number(values.DBW112 ?? 0);
-    //   this.eLineQuantity.e21out = Number(values.DBW156 ?? 0);
-    //   this.eLineQuantity.e31 = Number(values.DBW114 ?? 0);
-    //   this.eLineQuantity.e32 = Number(values.DBW116 ?? 0);
-    //   this.eLineQuantity.e15 = Number(values.DBW118 ?? 0);
-    //   this.eLineQuantity.e16 = Number(values.DBW120 ?? 0);
-    //   this.eLineQuantity.e22in = Number(values.DBW122 ?? 0);
-    //   this.eLineQuantity.e22out = Number(values.DBW158 ?? 0);
-    //   this.eLineQuantity.e34 = Number(values.DBW124 ?? 0);
-    //   this.eLineQuantity.e35 = Number(values.DBW126 ?? 0);
+      // E线数量-读取PLC
+      this.eLineQuantity.e12 = Number(values.DBW108 ?? 0);
+      this.eLineQuantity.e13 = Number(values.DBW110 ?? 0);
+      this.eLineQuantity.e21in = Number(values.DBW112 ?? 0);
+      this.eLineQuantity.e21out = Number(values.DBW156 ?? 0);
+      this.eLineQuantity.e31 = Number(values.DBW114 ?? 0);
+      this.eLineQuantity.e32 = Number(values.DBW116 ?? 0);
+      this.eLineQuantity.e15 = Number(values.DBW118 ?? 0);
+      this.eLineQuantity.e16 = Number(values.DBW120 ?? 0);
+      this.eLineQuantity.e22in = Number(values.DBW122 ?? 0);
+      this.eLineQuantity.e22out = Number(values.DBW158 ?? 0);
+      this.eLineQuantity.e34 = Number(values.DBW124 ?? 0);
+      this.eLineQuantity.e35 = Number(values.DBW126 ?? 0);
 
-    //   // 上货区请求进货信号scanPhotoelectricSignal
-    //   let word128 = this.convertToWord(values.DBW128);
-    //   this.scanPhotoelectricSignal.bit0 = getBit(word128, 8);
-    //   this.scanPhotoelectricSignal.bit1 = getBit(word128, 9);
-    //   this.scanPhotoelectricSignal.bit2 = getBit(word128, 10);
-    //   this.scanPhotoelectricSignal.bit3 = getBit(word128, 11);
-    //   this.scanPhotoelectricSignal.bit4 = getBit(word128, 12);
-    //   this.scanPhotoelectricSignal.bit5 = getBit(word128, 13);
-    //   this.scanPhotoelectricSignal.bit6 = getBit(word128, 14);
-    //   this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
-    //   this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
-    //   this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
+      // 上货区请求进货信号scanPhotoelectricSignal
+      let word128 = this.convertToWord(values.DBW128);
+      this.scanPhotoelectricSignal.bit0 = getBit(word128, 8);
+      this.scanPhotoelectricSignal.bit1 = getBit(word128, 9);
+      this.scanPhotoelectricSignal.bit2 = getBit(word128, 10);
+      this.scanPhotoelectricSignal.bit3 = getBit(word128, 11);
+      this.scanPhotoelectricSignal.bit4 = getBit(word128, 12);
+      this.scanPhotoelectricSignal.bit5 = getBit(word128, 13);
+      this.scanPhotoelectricSignal.bit6 = getBit(word128, 14);
+      this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
+      this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
+      this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
 
-    //   // 灭菌前1#小车位置值
-    //   this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
-    //   // 灭菌前2#小车位置值
-    //   this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
-    // });
+      // 灭菌前1#小车位置值
+      this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
+      // 灭菌前2#小车位置值
+      this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
+    });
     // 给PLC数据加载时间
     setTimeout(() => {
       this.addLog('isDataReady数据加载完成');
@@ -5441,10 +5462,247 @@ export default {
       this.orderQueryDialogVisible = true;
     },
     // 显示订单选择弹窗
-    showOrderDialog(line) {
+    async showOrderDialog(line) {
       this.selectedLine = line;
       this.selectedOrderId = null;
+      // 打开弹窗前刷新订单列表
+      await this.refreshAvailableOrders();
       this.orderSelectDialogVisible = true;
+    },
+    // 刷新可用订单列表
+    async refreshAvailableOrders() {
+      try {
+        const res = await HttpUtil.post('/order/queryOrderList', {});
+        if (res.code === '200' && res.data) {
+          // 处理订单数据，确保包含trays数组（根据trayCode字段解析）
+          this.availableOrders = res.data.map((order) => {
+            // 如果订单有trayCode字段，解析成托盘数组
+            let trays = [];
+            if (order.trayCode) {
+              const trayCodes = order.trayCode
+                .split(',')
+                .filter((code) => code.trim());
+              // 格式化insertTime为字符串
+              const currentTime = order.insertTime
+                ? typeof order.insertTime === 'string'
+                  ? order.insertTime
+                  : moment(order.insertTime).format('YYYY-MM-DD HH:mm:ss')
+                : moment().format('YYYY-MM-DD HH:mm:ss');
+              trays = trayCodes.map((trayCode, index) => {
+                return {
+                  id: `${order.orderId}-TRAY-${index + 1}`,
+                  name: `托盘${index + 1}`,
+                  orderId: order.orderId,
+                  productName: order.productName || '',
+                  productCode: order.productCode || '',
+                  batchNo: order.batchNo || '', // 批号/备注，从订单中获取
+                  unit: order.unit || '', // 规格，从订单中获取
+                  isTerile: order.isTerile || 0, // 是否消毒
+                  time: currentTime,
+                  trayCode: trayCode.trim(),
+                  receiptOrderCode: order.receiptOrderCode || '',
+                  state: '0', // 未执行
+                  sendTo: '',
+                  receivedPkgQuantity: order.receivedPkgQuantity || 1, // 从订单中获取
+                  sequenceNumber: index + 1
+                };
+              });
+            }
+
+            // 格式化insertTime为字符串（如果后端返回的是Date对象）
+            const formattedInsertTime = order.insertTime
+              ? typeof order.insertTime === 'string'
+                ? order.insertTime
+                : moment(order.insertTime).format('YYYY-MM-DD HH:mm:ss')
+              : '';
+
+            // 返回订单对象，保持原有结构
+            return {
+              ...order,
+              insertTime: formattedInsertTime, // 确保insertTime是字符串格式
+              isPrint3: order.isPrint3 || null, // 如果后端没有返回isPrint3，设置为null（前端会处理）
+              trays: trays,
+              currentTrayIndex: 0
+            };
+          });
+        } else {
+          this.availableOrders = [];
+        }
+      } catch (err) {
+        console.error('刷新订单列表失败：', err);
+        this.$message.error('刷新订单列表失败，请重试');
+        this.availableOrders = [];
+      }
+    },
+    // 显示新建订单弹窗
+    showAddOrderDialog() {
+      this.addOrderDialogVisible = true;
+      // 重置表单
+      this.newOrderForm = {
+        orderId: '',
+        productCode: '',
+        productName: '',
+        currentTrayCode: '',
+        trayCodes: []
+      };
+      // 清除表单验证
+      this.$nextTick(() => {
+        if (this.$refs.newOrderForm) {
+          this.$refs.newOrderForm.clearValidate();
+        }
+      });
+    },
+    // 添加托盘码
+    addTrayCode() {
+      const code = this.newOrderForm.currentTrayCode.trim();
+      if (!code) {
+        this.$message.warning('请输入托盘码');
+        return;
+      }
+
+      // 检查是否已存在
+      if (this.newOrderForm.trayCodes.includes(code)) {
+        this.$message.warning('该托盘码已存在');
+        return;
+      }
+
+      // 添加到列表
+      this.newOrderForm.trayCodes.push(code);
+      // 清空输入框
+      this.newOrderForm.currentTrayCode = '';
+      // 触发表单验证
+      this.$nextTick(() => {
+        if (this.$refs.newOrderForm) {
+          this.$refs.newOrderForm.validateField('trayCodes');
+        }
+      });
+    },
+    // 删除托盘码
+    removeTrayCode(index) {
+      this.newOrderForm.trayCodes.splice(index, 1);
+      // 触发表单验证
+      this.$nextTick(() => {
+        if (this.$refs.newOrderForm) {
+          this.$refs.newOrderForm.validateField('trayCodes');
+        }
+      });
+    },
+    // 提交新建订单
+    async submitAddOrder() {
+      try {
+        // 表单验证
+        await this.$refs.newOrderForm.validate();
+
+        // 验证至少有一个托盘码
+        if (this.newOrderForm.trayCodes.length === 0) {
+          this.$message.error('请至少添加一个托盘码');
+          return;
+        }
+
+        this.isSubmittingOrder = true;
+
+        // 获取当前时间
+        const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
+
+        // 根据托盘码列表生成托盘对象数组（只保留页面用到的字段）
+        // 注意：这个trays数组只是前端使用，不会提交给后端
+        const trays = this.newOrderForm.trayCodes.map((trayCode, index) => {
+          return {
+            id: `${this.newOrderForm.orderId}-TRAY-${index + 1}`,
+            name: `托盘${index + 1}`,
+            orderId: this.newOrderForm.orderId,
+            productName: this.newOrderForm.productName,
+            productCode: this.newOrderForm.productCode,
+            batchNo: '', // 批号/备注，新建时为空
+            unit: '', // 规格，新建时为空
+            isTerile: 0, // 是否消毒，默认不消毒
+            time: currentTime,
+            trayCode: trayCode,
+            receiptOrderCode: '',
+            state: '0', // 未执行
+            sendTo: '',
+            receivedPkgQuantity: 1, // 默认值
+            sequenceNumber: index + 1
+          };
+        });
+
+        // 构建订单数据（提交给后端，只包含后端需要的字段）
+        const orderData = {
+          orderId: this.newOrderForm.orderId,
+          productCode: this.newOrderForm.productCode,
+          productName: this.newOrderForm.productName,
+          trayCode: this.newOrderForm.trayCodes.join(','), // 托盘码用逗号分隔
+          orderStatus: 0, // 待执行
+          invalidFlag: 0 // 未作废
+        };
+
+        // 调用保存接口
+        const res = await HttpUtil.post('/order/insert', orderData);
+        if (res.code === '200' || res.data) {
+          this.$message.success('订单创建成功');
+          // 关闭弹窗
+          this.addOrderDialogVisible = false;
+          // 刷新订单列表
+          await this.refreshAvailableOrders();
+        } else {
+          this.$message.error('创建订单失败：' + (res.message || '请重试'));
+        }
+      } catch (error) {
+        if (error !== 'cancel') {
+          this.$message.error('表单验证失败，请检查输入');
+        }
+      } finally {
+        this.isSubmittingOrder = false;
+      }
+    },
+    // 取消新建订单
+    cancelAddOrder() {
+      this.addOrderDialogVisible = false;
+      // 重置表单
+      this.newOrderForm = {
+        orderId: '',
+        productCode: '',
+        productName: '',
+        currentTrayCode: '',
+        trayCodes: []
+      };
+      // 清除表单验证
+      if (this.$refs.newOrderForm) {
+        this.$refs.newOrderForm.clearValidate();
+      }
+    },
+    // 删除订单
+    async deleteOrder(order) {
+      try {
+        await this.$confirm('确认要删除该订单吗？删除后无法恢复。', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        });
+
+        // 设置删除加载状态
+        this.$set(order, 'isDeleting', true);
+        const param = {
+          id: order.id,
+          invalidFlag: 1
+        };
+
+        const res = await HttpUtil.post('/order/update', param);
+        if (res.code === '200') {
+          this.$message.success('订单删除成功');
+          // 重新查询订单列表
+          await this.refreshAvailableOrders();
+        } else {
+          this.$message.error('删除订单失败，请重试');
+        }
+      } catch (err) {
+        // 用户取消操作，不做处理
+        if (err !== 'cancel') {
+          this.$message.error('删除订单失败：' + err);
+        }
+      } finally {
+        this.$set(order, 'isDeleting', false);
+      }
     },
     // 选择订单
     selectOrder(order) {
@@ -5698,6 +5956,42 @@ export default {
       this.writeWordWithCancel(plcAddress, 0);
       this.addLog(`出库${line}执行已取消，写入PLC ${plcAddress}: 0`);
       this.$message.info(`已取消出库${line}执行`);
+    },
+    // 取消当前订单
+    async cancelCurrentOrder(line) {
+      try {
+        await this.$confirm(
+          `确认要取消生产线 ${line.letter} 的当前订单吗？取消后订单将停止执行。`,
+          '提示',
+          {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }
+        );
+
+        const orderId = line.currentOrder?.orderId || '未知订单';
+        const lineLetter = line.letter;
+
+        // 如果正在出库，先取消出库操作
+        if (this.outWarehouseExecuting[lineLetter]) {
+          this.cancelOutWarehouse(lineLetter);
+        }
+
+        // 清空当前订单
+        line.currentOrder = null;
+
+        // 添加日志
+        this.addLog(`生产线 ${lineLetter} 的订单 ${orderId} 已取消`);
+
+        // 显示成功消息
+        this.$message.success(`已取消生产线 ${lineLetter} 的订单 ${orderId}`);
+      } catch (err) {
+        // 用户取消操作，不做处理
+        if (err !== 'cancel') {
+          this.$message.error('取消订单失败：' + err);
+        }
+      }
     },
     // 确认订单选择
     confirmOrderSelection() {
@@ -7825,6 +8119,35 @@ export default {
             display: flex;
             align-items: center;
             gap: 10px;
+            .title-actions {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .add-order-btn {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 28px;
+              height: 28px;
+              border-radius: 4px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              background: rgba(64, 158, 255, 0.2);
+              border: 1px solid rgba(64, 158, 255, 0.3);
+              i {
+                font-size: 16px;
+                color: #409eff;
+                transition: all 0.3s ease;
+              }
+            }
+            .add-order-btn:hover {
+              background: rgba(64, 158, 255, 0.3);
+              border-color: rgba(64, 158, 255, 0.5);
+              i {
+                color: #fff;
+              }
+            }
           }
           .el-button {
             background: rgba(10, 197, 168, 0.2);
@@ -9804,6 +10127,71 @@ export default {
     &:hover {
       color: #fff;
       transform: scale(1.1);
+    }
+  }
+}
+
+/* 新建订单弹窗样式 */
+.add-order-dialog {
+  .form-container {
+    padding: 20px 0;
+  }
+}
+
+/* 托盘码录入样式 */
+.tray-codes-section {
+  .tray-codes-container {
+    .tray-input-section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      align-items: center;
+
+      .el-input {
+        flex: 1;
+      }
+    }
+
+    .tray-codes-display {
+      .tray-codes-list {
+        max-height: 150px;
+        overflow-y: auto;
+        border: 1px solid #dcdfe6;
+        border-radius: 4px;
+        padding: 10px;
+        background-color: #fafafa;
+
+        .tray-code-tag {
+          display: inline-flex;
+          align-items: center;
+          background-color: #409eff;
+          color: white;
+          padding: 4px 8px;
+          border-radius: 4px;
+          margin: 2px;
+          font-size: 12px;
+          position: relative;
+
+          .tray-code-text {
+            margin-right: 8px;
+          }
+
+          .remove-btn {
+            color: white;
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+            width: 16px;
+            height: 16px;
+            min-height: 16px;
+            line-height: 1;
+
+            &:hover {
+              color: #ff4757;
+            }
+          }
+        }
+      }
     }
   }
 }
