@@ -283,14 +283,16 @@
                   :style="
                     marker.name.includes('进') || marker.name.includes('出')
                       ? 'width: 75px'
-                      : 'width: 60px'
+                      : 'width: 80px'
                   "
                   :data-x="marker.x"
                   :data-y="marker.y"
                   @click="handleQueueMarkerClick(marker.queueId)"
                 >
                   <div class="queue-marker-content">
-                    <span class="queue-marker-name">{{ marker.name }}</span>
+                    <span class="queue-marker-name">
+                      {{ transformQueueName(marker.name) }}
+                    </span>
                     <span class="queue-marker-count"
                       >({{ quantityByQueueId[marker.queueId] || 0 }})</span
                     >
@@ -309,7 +311,7 @@
                 </div>
                 <!-- A线电机运行信号 -->
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: aLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="423"
@@ -318,36 +320,36 @@
                   <div class="marker-label" style="width: 36px">A1-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: aLineMotorRunning.bit4 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">A1-5#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: aLineMotorRunning.bit5 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">A1-6#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: aLineMotorRunning.bit9 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">A3-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: aLineMotorRunning.bit10 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit10')"
                 >
@@ -437,7 +439,7 @@
                 </div>
                 <!-- B线电机运行信号 -->
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="520"
@@ -446,25 +448,25 @@
                   <div class="marker-label" style="width: 36px">B1-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit1 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">B1-2#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit2 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">B1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="575"
@@ -473,36 +475,36 @@
                   <div class="marker-label" style="width: 36px">B1-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit4 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">B1-5#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit5 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">B1-6#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit6 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">B3-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit7 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit7')"
                 >
@@ -518,18 +520,18 @@
                   <div class="marker-label" style="width: 36px">B3-3#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit9 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">B3-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: bLineMotorRunning.bit10 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit10')"
                 >
@@ -691,7 +693,7 @@
                 </div>
                 <!-- C线电机运行信号 -->
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="671"
@@ -700,25 +702,25 @@
                   <div class="marker-label" style="width: 36px">C1-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit1 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">C1-2#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit2 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">C1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="723"
@@ -727,36 +729,36 @@
                   <div class="marker-label" style="width: 36px">C1-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit4 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">C1-5#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit5 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">C1-6#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit6 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">C3-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit7 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit7')"
                 >
@@ -772,18 +774,18 @@
                   <div class="marker-label" style="width: 36px">C3-3#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit9 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">C3-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: cLineMotorRunning.bit10 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit10')"
                 >
@@ -945,7 +947,7 @@
                 </div>
                 <!-- D线电机运行信号 -->
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="820"
@@ -954,25 +956,25 @@
                   <div class="marker-label" style="width: 36px">D1-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit1 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">D1-2#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit2 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">D1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="872"
@@ -981,36 +983,36 @@
                   <div class="marker-label" style="width: 36px">D1-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit4 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">D1-5#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit5 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">D1-6#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit6 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">D3-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit7 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit7')"
                 >
@@ -1026,18 +1028,18 @@
                   <div class="marker-label" style="width: 36px">D3-3#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit9 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">D3-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: dLineMotorRunning.bit10 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit10')"
                 >
@@ -1199,7 +1201,7 @@
                 </div>
                 <!-- E线电机运行信号 -->
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="969"
@@ -1208,25 +1210,25 @@
                   <div class="marker-label" style="width: 36px">E1-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit1 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">E1-2#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit2 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">E1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="1020"
@@ -1235,36 +1237,36 @@
                   <div class="marker-label" style="width: 36px">E1-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit4 === '1' }"
-                  data-x="400"
+                  data-x="481"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">E1-5#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit5 === '1' }"
-                  data-x="860"
+                  data-x="930"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">E1-6#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit6 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">E3-1#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit7 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit7')"
                 >
@@ -1280,18 +1282,18 @@
                   <div class="marker-label" style="width: 36px">E3-3#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit9 === '1' }"
-                  data-x="2070"
+                  data-x="2130"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">E3-4#</div>
                 </div>
                 <div
-                  class="motor-marker marker-show-label label-left"
+                  class="motor-marker label-top"
                   :class="{ running: eLineMotorRunning.bit10 === '1' }"
-                  data-x="2530"
+                  data-x="2570"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit10')"
                 >
@@ -1901,6 +1903,38 @@
                 >
                   <div class="marker-label">E3-5#出货</div>
                 </div>
+                <!-- 预热/灭菌完成信号组（通过配置数组渲染） -->
+                <div
+                  v-for="marker in preheatDisinfectMarkers"
+                  :key="marker.key"
+                  class="analysis-status-marker"
+                  :data-x="marker.x"
+                  :data-y="marker.y"
+                >
+                  <el-tag
+                    v-show="getMarkerVisible(marker)"
+                    type="success"
+                    size="small"
+                  >
+                    {{ marker.label }}
+                  </el-tag>
+                </div>
+                <!-- 解析完成信号组（通过配置数组渲染） -->
+                <div
+                  v-for="marker in analysisMarkers"
+                  :key="marker.key"
+                  class="analysis-status-marker"
+                  :data-x="marker.x"
+                  :data-y="marker.y"
+                >
+                  <el-tag
+                    v-show="getMarkerVisible(marker)"
+                    type="success"
+                    size="small"
+                  >
+                    {{ marker.label }}
+                  </el-tag>
+                </div>
 
                 <!-- 出库信息卡片 -->
                 <div class="marker-with-panel" data-x="2880" data-y="1400">
@@ -2207,7 +2241,7 @@
                                 text-align: left;
                               "
                             >
-                              需进货：<b>{{ outNeedQty[line] || 0 }}</b>
+                              需出货：<b>{{ outNeedQty[line] || 0 }}</b>
                             </div>
                           </div>
                         </div>
@@ -2304,7 +2338,9 @@
                 @dragover.prevent
                 @drop="handleDrop(index)"
               >
-                <span class="queue-name">{{ queue.queueName }}</span>
+                <span class="queue-name">
+                  {{ transformQueueName(queue.queueName) }}
+                </span>
                 <span class="tray-count">{{
                   queue.trayInfo?.length || 0
                 }}</span>
@@ -2314,7 +2350,7 @@
             <!-- 右侧托盘列表 -->
             <div class="queue-container-right">
               <div class="selected-queue-header" v-if="selectedQueue">
-                <h3>{{ selectedQueue.queueName }}</h3>
+                <h3>{{ transformQueueName(selectedQueue.queueName) }}</h3>
                 <div class="queue-header-actions">
                   <el-button
                     type="primary"
@@ -2468,14 +2504,14 @@
             <div class="cart-position-test-container">
               <div class="cart-position-group">
                 <div class="cart-position-label">
-                  <span>小车1 (0-1010):</span>
+                  <span>小车1 (1000-2910):</span>
                   <span class="cart-value">{{ cartPositionValues.cart1 }}</span>
                 </div>
                 <div class="cart-position-slider-container">
                   <el-slider
                     v-model="cartPositionValues.cart1"
-                    :min="0"
-                    :max="1010"
+                    :min="1000"
+                    :max="2910"
                     :step="1"
                     class="cart-position-slider"
                   ></el-slider>
@@ -2483,14 +2519,14 @@
               </div>
               <div class="cart-position-group">
                 <div class="cart-position-label">
-                  <span>小车2 (0-1010):</span>
+                  <span>小车2 (1000-2857):</span>
                   <span class="cart-value">{{ cartPositionValues.cart2 }}</span>
                 </div>
                 <div class="cart-position-slider-container">
                   <el-slider
                     v-model="cartPositionValues.cart2"
-                    :min="0"
-                    :max="1010"
+                    :min="1000"
+                    :max="2857"
                     :step="1"
                     class="cart-position-slider"
                   ></el-slider>
@@ -2925,7 +2961,7 @@
             >
               <template slot-scope="scope">
                 <span style="color: red; font-weight: bold">{{
-                  scope.row.queueName
+                  transformQueueName(scope.row.queueName)
                 }}</span>
               </template>
             </el-table-column>
@@ -3112,6 +3148,66 @@ import HttpUtilwms from '@/utils/HttpUtilwms';
 import moment from 'moment';
 import { ipcRenderer } from 'electron';
 import OrderQueryDialog from '@/components/OrderQueryDialog.vue';
+// 队列名称显示映射（仅用于显示，不影响内部逻辑判断）
+const QUEUE_NAME_DISPLAY_MAP = {
+  // YR 区
+  'A1-5': 'YR#1-1-1',
+  'A1-6': 'YR#1-2-1',
+  'B1-2': 'YR#2-1-1',
+  'B1-3': 'YR#2-2-1',
+  'B1-5': 'YR#2-1-2',
+  'B1-6': 'YR#2-2-2',
+  'C1-2': 'YR#3-1-1',
+  'C1-3': 'YR#3-2-1',
+  'C1-5': 'YR#3-1-2',
+  'C1-6': 'YR#3-2-2',
+  'D1-2': 'YR#4-1-1',
+  'D1-3': 'YR#4-2-1',
+  'D1-5': 'YR#4-1-2',
+  'D1-6': 'YR#4-2-2',
+  'E1-2': 'YR#5-1-1',
+  'E1-3': 'YR#5-2-1',
+  'E1-5': 'YR#5-1-2',
+  'E1-6': 'YR#5-2-2',
+  // 进/出
+  'A2-2-进': '#1-1进',
+  'A2-2-出': '#1-1出',
+  'B2-1-进': '#2-1进',
+  'B2-1-出': '#2-1出',
+  'B2-2-进': '#2-2进',
+  'B2-2-出': '#2-2出',
+  'C2-1-进': '#3-1进',
+  'C2-1-出': '#3-1出',
+  'C2-2-进': '#3-2进',
+  'C2-2-出': '#3-2出',
+  'D2-1-进': '#4-1进',
+  'D2-1-出': '#4-1出',
+  'D2-2-进': '#4-2进',
+  'D2-2-出': '#4-2出',
+  'E2-1-进': '#5-1进',
+  'E2-1-出': '#5-1出',
+  'E2-2-进': '#5-2进',
+  'E2-2-出': '#5-2出',
+  // JX 区
+  'A3-4': 'JX#1-1-1',
+  'A3-5': 'JX#1-2-1',
+  'B3-1': 'JX#2-1-1',
+  'B3-2': 'JX#2-2-1',
+  'B3-4': 'JX#2-1-2',
+  'B3-5': 'JX#2-2-2',
+  'C3-1': 'JX#3-1-1',
+  'C3-2': 'JX#3-2-1',
+  'C3-4': 'JX#3-1-2',
+  'C3-5': 'JX#3-2-2',
+  'D3-1': 'JX#4-1-1',
+  'D3-2': 'JX#4-2-1',
+  'D3-4': 'JX#4-1-2',
+  'D3-5': 'JX#4-2-2',
+  'E3-1': 'JX#5-1-1',
+  'E3-2': 'JX#5-2-1',
+  'E3-4': 'JX#5-1-2',
+  'E3-5': 'JX#5-2-2'
+};
 export default {
   name: 'MonitorScreen',
   components: {
@@ -3276,31 +3372,31 @@ export default {
         ]
       },
       queues: [
-        {
-          id: 1,
-          queueName: 'A1-2',
-          trayInfo: []
-        },
-        {
-          id: 2,
-          queueName: 'A1-3',
-          trayInfo: []
-        },
-        {
-          id: 3,
-          queueName: 'A2-1-进',
-          trayInfo: []
-        },
-        {
-          id: 4,
-          queueName: 'A3-1',
-          trayInfo: []
-        },
-        {
-          id: 5,
-          queueName: 'A3-2',
-          trayInfo: []
-        },
+        // {
+        //   id: 1,
+        //   queueName: 'A1-2',
+        //   trayInfo: []
+        // },
+        // {
+        //   id: 2,
+        //   queueName: 'A1-3',
+        //   trayInfo: []
+        // },
+        // {
+        //   id: 3,
+        //   queueName: 'A2-1-进',
+        //   trayInfo: []
+        // },
+        // {
+        //   id: 4,
+        //   queueName: 'A3-1',
+        //   trayInfo: []
+        // },
+        // {
+        //   id: 5,
+        //   queueName: 'A3-2',
+        //   trayInfo: []
+        // },
         {
           id: 6,
           queueName: 'A1-5',
@@ -3584,52 +3680,52 @@ export default {
         // { id: 3, name: 'A2-1-进', queueId: 3, x: 2100, y: 180 },
         // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
         // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
-        { id: 6, name: 'A1-5', queueId: 6, x: 520, y: 420 },
-        { id: 7, name: 'A1-6', queueId: 7, x: 990, y: 420 },
+        { id: 6, name: 'A1-5', queueId: 6, x: 330, y: 420 },
+        { id: 7, name: 'A1-6', queueId: 7, x: 810, y: 420 },
         { id: 8, name: 'A2-2-进', queueId: 8, x: 1400, y: 420 },
-        { id: 9, name: 'A3-4', queueId: 9, x: 2170, y: 420 },
-        { id: 10, name: 'A3-5', queueId: 10, x: 2640, y: 420 },
-        { id: 11, name: 'B1-2', queueId: 11, x: 520, y: 518 },
-        { id: 12, name: 'B1-3', queueId: 12, x: 990, y: 518 },
+        { id: 9, name: 'A3-4', queueId: 9, x: 1970, y: 420 },
+        { id: 10, name: 'A3-5', queueId: 10, x: 2440, y: 420 },
+        { id: 11, name: 'B1-2', queueId: 11, x: 330, y: 518 },
+        { id: 12, name: 'B1-3', queueId: 12, x: 810, y: 518 },
         { id: 13, name: 'B2-1-进', queueId: 13, x: 1400, y: 518 },
-        { id: 14, name: 'B3-1', queueId: 14, x: 2170, y: 518 },
-        { id: 15, name: 'B3-2', queueId: 15, x: 2640, y: 518 },
-        { id: 16, name: 'B1-5', queueId: 16, x: 520, y: 578 },
-        { id: 17, name: 'B1-6', queueId: 17, x: 990, y: 578 },
+        { id: 14, name: 'B3-1', queueId: 14, x: 1970, y: 518 },
+        { id: 15, name: 'B3-2', queueId: 15, x: 2440, y: 518 },
+        { id: 16, name: 'B1-5', queueId: 16, x: 330, y: 578 },
+        { id: 17, name: 'B1-6', queueId: 17, x: 810, y: 578 },
         { id: 18, name: 'B2-2-进', queueId: 18, x: 1400, y: 578 },
-        { id: 19, name: 'B3-4', queueId: 19, x: 2170, y: 578 },
-        { id: 20, name: 'B3-5', queueId: 20, x: 2640, y: 578 },
-        { id: 21, name: 'C1-2', queueId: 21, x: 520, y: 670 },
-        { id: 22, name: 'C1-3', queueId: 22, x: 990, y: 670 },
+        { id: 19, name: 'B3-4', queueId: 19, x: 1970, y: 578 },
+        { id: 20, name: 'B3-5', queueId: 20, x: 2440, y: 578 },
+        { id: 21, name: 'C1-2', queueId: 21, x: 330, y: 670 },
+        { id: 22, name: 'C1-3', queueId: 22, x: 810, y: 670 },
         { id: 23, name: 'C2-1-进', queueId: 23, x: 1400, y: 670 },
-        { id: 24, name: 'C3-1', queueId: 24, x: 2170, y: 670 },
-        { id: 25, name: 'C3-2', queueId: 25, x: 2640, y: 670 },
-        { id: 26, name: 'C1-5', queueId: 26, x: 520, y: 730 },
-        { id: 27, name: 'C1-6', queueId: 27, x: 990, y: 730 },
+        { id: 24, name: 'C3-1', queueId: 24, x: 1970, y: 670 },
+        { id: 25, name: 'C3-2', queueId: 25, x: 2440, y: 670 },
+        { id: 26, name: 'C1-5', queueId: 26, x: 330, y: 730 },
+        { id: 27, name: 'C1-6', queueId: 27, x: 810, y: 730 },
         { id: 28, name: 'C2-2-进', queueId: 28, x: 1400, y: 730 },
-        { id: 29, name: 'C3-4', queueId: 29, x: 2170, y: 730 },
-        { id: 30, name: 'C3-5', queueId: 30, x: 2640, y: 730 },
-        { id: 31, name: 'D1-2', queueId: 31, x: 520, y: 820 },
-        { id: 32, name: 'D1-3', queueId: 32, x: 990, y: 820 },
+        { id: 29, name: 'C3-4', queueId: 29, x: 1970, y: 730 },
+        { id: 30, name: 'C3-5', queueId: 30, x: 2440, y: 730 },
+        { id: 31, name: 'D1-2', queueId: 31, x: 330, y: 820 },
+        { id: 32, name: 'D1-3', queueId: 32, x: 810, y: 820 },
         { id: 33, name: 'D2-1-进', queueId: 33, x: 1400, y: 820 },
-        { id: 34, name: 'D3-1', queueId: 34, x: 2170, y: 820 },
-        { id: 35, name: 'D3-2', queueId: 35, x: 2640, y: 820 },
-        { id: 36, name: 'D1-5', queueId: 36, x: 520, y: 880 },
-        { id: 37, name: 'D1-6', queueId: 37, x: 990, y: 880 },
+        { id: 34, name: 'D3-1', queueId: 34, x: 1970, y: 820 },
+        { id: 35, name: 'D3-2', queueId: 35, x: 2440, y: 820 },
+        { id: 36, name: 'D1-5', queueId: 36, x: 330, y: 880 },
+        { id: 37, name: 'D1-6', queueId: 37, x: 810, y: 880 },
         { id: 38, name: 'D2-2-进', queueId: 38, x: 1400, y: 880 },
-        { id: 39, name: 'D3-4', queueId: 39, x: 2170, y: 880 },
-        { id: 40, name: 'D3-5', queueId: 40, x: 2640, y: 880 },
-        { id: 41, name: 'E1-2', queueId: 41, x: 520, y: 970 },
-        { id: 42, name: 'E1-3', queueId: 42, x: 990, y: 970 },
+        { id: 39, name: 'D3-4', queueId: 39, x: 1970, y: 880 },
+        { id: 40, name: 'D3-5', queueId: 40, x: 2440, y: 880 },
+        { id: 41, name: 'E1-2', queueId: 41, x: 330, y: 970 },
+        { id: 42, name: 'E1-3', queueId: 42, x: 810, y: 970 },
         { id: 43, name: 'E2-1-进', queueId: 43, x: 1400, y: 970 },
-        { id: 44, name: 'E3-1', queueId: 44, x: 2170, y: 970 },
-        { id: 45, name: 'E3-2', queueId: 45, x: 2640, y: 970 },
-        { id: 46, name: 'E1-5', queueId: 46, x: 520, y: 1030 },
-        { id: 47, name: 'E1-6', queueId: 47, x: 990, y: 1030 },
+        { id: 44, name: 'E3-1', queueId: 44, x: 1970, y: 970 },
+        { id: 45, name: 'E3-2', queueId: 45, x: 2440, y: 970 },
+        { id: 46, name: 'E1-5', queueId: 46, x: 330, y: 1030 },
+        { id: 47, name: 'E1-6', queueId: 47, x: 810, y: 1030 },
         { id: 48, name: 'E2-2-进', queueId: 48, x: 1400, y: 1030 },
-        { id: 49, name: 'E3-4', queueId: 49, x: 2170, y: 1030 },
-        { id: 50, name: 'E3-5', queueId: 50, x: 2640, y: 1030 },
-        // { id: 51, name: 'A2-1-进', queueId: 51, x: 520, y: 1120 },
+        { id: 49, name: 'E3-4', queueId: 49, x: 1970, y: 1030 },
+        { id: 50, name: 'E3-5', queueId: 50, x: 2440, y: 1030 },
+        // { id: 51, name: 'A2-1-进', queueId: 51, x: 330, y: 1120 },
         { id: 52, name: 'A2-2-出', queueId: 52, x: 1600, y: 420 },
         { id: 53, name: 'B2-1-出', queueId: 53, x: 1600, y: 518 },
         { id: 54, name: 'B2-2-出', queueId: 54, x: 1600, y: 578 },
@@ -4030,7 +4126,244 @@ export default {
         C: 0,
         D: 0,
         E: 0
-      }
+      },
+      // 预热、灭菌完成信号
+      disinfectionCompleted: {
+        bit0: '0', // YR1-1预热完成
+        bit1: '0', // YR1-2预热完成
+        bit2: '0', // YR2-1预热完成
+        bit3: '0', // YR2-1预热完成
+        bit4: '0', // YR3-1预热完成
+        bit5: '0', // YR3-2预热完成
+        bit6: '0', // YR4-1预热完成
+        bit7: '0', // YR4-2预热完成
+        bit8: '0', // YR5-1预热完成
+        bit9: '0', // YR5-2预热完成
+        bit10: '0', // MJ-1灭菌完成
+        bit11: '0', // MJ-2灭菌完成
+        bit12: '0', // MJ-3灭菌完成
+        bit13: '0', // MJ-4灭菌完成
+        bit14: '0' // MJ-5灭菌完成
+      },
+      // 解析完成信号
+      analysisCompleted: {
+        bit0: '0', // JX1-1解析完成
+        bit1: '0', // JX1-2解析完成
+        bit2: '0', // JX2-1解析完成
+        bit3: '0', // JX2-2解析完成
+        bit4: '0', // JX3-1解析完成
+        bit5: '0', // JX3-2解析完成
+        bit6: '0', // JX4-1解析完成
+        bit7: '0', // JX4-2解析完成
+        bit8: '0', // JX5-1解析完成
+        bit9: '0' // JX5-2解析完成
+      },
+      // 预热/灭菌完成 - 配置化渲染（位置可直接在此设置）
+      preheatDisinfectMarkers: [
+        // {
+        //   key: 'dis_bit0',
+        //   source: 'disinfectionCompleted',
+        //   bit: 'bit0',
+        //   label: 'YR1-1预热完成',
+        //   x: 160,
+        //   y: 170
+        // },
+        {
+          key: 'dis_bit1',
+          source: 'disinfectionCompleted',
+          bit: 'bit1',
+          label: '预热完成',
+          x: 1015,
+          y: 420
+        },
+        {
+          key: 'dis_bit2',
+          source: 'disinfectionCompleted',
+          bit: 'bit2',
+          label: '预热完成',
+          x: 1015,
+          y: 515
+        },
+        {
+          key: 'dis_bit3',
+          source: 'disinfectionCompleted',
+          bit: 'bit3',
+          label: '预热完成',
+          x: 1015,
+          y: 567
+        },
+        {
+          key: 'dis_bit4',
+          source: 'disinfectionCompleted',
+          bit: 'bit4',
+          label: '预热完成',
+          x: 1015,
+          y: 667
+        },
+        {
+          key: 'dis_bit5',
+          source: 'disinfectionCompleted',
+          bit: 'bit5',
+          label: '预热完成',
+          x: 1015,
+          y: 717
+        },
+        {
+          key: 'dis_bit6',
+          source: 'disinfectionCompleted',
+          bit: 'bit6',
+          label: '预热完成',
+          x: 1015,
+          y: 817
+        },
+        {
+          key: 'dis_bit7',
+          source: 'disinfectionCompleted',
+          bit: 'bit7',
+          label: '预热完成',
+          x: 1015,
+          y: 872
+        },
+        {
+          key: 'dis_bit8',
+          source: 'disinfectionCompleted',
+          bit: 'bit8',
+          label: '预热完成',
+          x: 1015,
+          y: 965
+        },
+        {
+          key: 'dis_bit9',
+          source: 'disinfectionCompleted',
+          bit: 'bit9',
+          label: '预热完成',
+          x: 1015,
+          y: 1020
+        },
+        {
+          key: 'dis_bit10',
+          source: 'disinfectionCompleted',
+          bit: 'bit10',
+          label: 'MJ-1灭菌完成',
+          x: 1500,
+          y: 470
+        },
+        {
+          key: 'dis_bit11',
+          source: 'disinfectionCompleted',
+          bit: 'bit11',
+          label: 'MJ-2灭菌完成',
+          x: 1500,
+          y: 622
+        },
+        {
+          key: 'dis_bit12',
+          source: 'disinfectionCompleted',
+          bit: 'bit12',
+          label: 'MJ-3灭菌完成',
+          x: 1500,
+          y: 772
+        },
+        {
+          key: 'dis_bit13',
+          source: 'disinfectionCompleted',
+          bit: 'bit13',
+          label: 'MJ-4灭菌完成',
+          x: 1500,
+          y: 925
+        },
+        {
+          key: 'dis_bit14',
+          source: 'disinfectionCompleted',
+          bit: 'bit14',
+          label: 'MJ-5灭菌完成',
+          x: 1500,
+          y: 1080
+        }
+      ],
+      // 解析完成 - 配置化渲染（位置可直接在此设置）
+      analysisMarkers: [
+        // {
+        //   key: 'ana_bit0',
+        //   source: 'analysisCompleted',
+        //   bit: 'bit0',
+        //   label: 'JX1-1解析完成',
+        //   x: 0,
+        //   y: 0
+        // },
+        {
+          key: 'ana_bit1',
+          source: 'analysisCompleted',
+          bit: 'bit1',
+          label: '解析完成',
+          x: 2660,
+          y: 420
+        },
+        {
+          key: 'ana_bit2',
+          source: 'analysisCompleted',
+          bit: 'bit2',
+          label: '解析完成',
+          x: 2660,
+          y: 515
+        },
+        {
+          key: 'ana_bit3',
+          source: 'analysisCompleted',
+          bit: 'bit3',
+          label: '解析完成',
+          x: 2660,
+          y: 567
+        },
+        {
+          key: 'ana_bit4',
+          source: 'analysisCompleted',
+          bit: 'bit4',
+          label: '解析完成',
+          x: 2660,
+          y: 667
+        },
+        {
+          key: 'ana_bit5',
+          source: 'analysisCompleted',
+          bit: 'bit5',
+          label: '解析完成',
+          x: 2660,
+          y: 717
+        },
+        {
+          key: 'ana_bit6',
+          source: 'analysisCompleted',
+          bit: 'bit6',
+          label: '解析完成',
+          x: 2660,
+          y: 817
+        },
+        {
+          key: 'ana_bit7',
+          source: 'analysisCompleted',
+          bit: 'bit7',
+          label: '解析完成',
+          x: 2660,
+          y: 872
+        },
+        {
+          key: 'ana_bit8',
+          source: 'analysisCompleted',
+          bit: 'bit8',
+          label: '解析完成',
+          x: 2660,
+          y: 965
+        },
+        {
+          key: 'ana_bit9',
+          source: 'analysisCompleted',
+          bit: 'bit9',
+          label: '解析完成',
+          x: 2660,
+          y: 1020
+        }
+      ]
     };
   },
   computed: {
@@ -4369,6 +4702,37 @@ export default {
       this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
       this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
       this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
+
+      // 预热、灭菌完成信号
+      let word160 = this.convertToWord(values.DBW160);
+      this.disinfectionCompleted.bit0 = getBit(word160, 8);
+      this.disinfectionCompleted.bit1 = getBit(word160, 9);
+      this.disinfectionCompleted.bit2 = getBit(word160, 10);
+      this.disinfectionCompleted.bit3 = getBit(word160, 11);
+      this.disinfectionCompleted.bit4 = getBit(word160, 12);
+      this.disinfectionCompleted.bit5 = getBit(word160, 13);
+      this.disinfectionCompleted.bit6 = getBit(word160, 14);
+      this.disinfectionCompleted.bit7 = getBit(word160, 15);
+      this.disinfectionCompleted.bit8 = getBit(word160, 0);
+      this.disinfectionCompleted.bit9 = getBit(word160, 1);
+      this.disinfectionCompleted.bit10 = getBit(word160, 2);
+      this.disinfectionCompleted.bit11 = getBit(word160, 3);
+      this.disinfectionCompleted.bit12 = getBit(word160, 4);
+      this.disinfectionCompleted.bit13 = getBit(word160, 5);
+      this.disinfectionCompleted.bit14 = getBit(word160, 6);
+
+      // 解析完成信号
+      let word162 = this.convertToWord(values.DBW162);
+      this.analysisCompleted.bit0 = getBit(word162, 8);
+      this.analysisCompleted.bit1 = getBit(word162, 9);
+      this.analysisCompleted.bit2 = getBit(word162, 10);
+      this.analysisCompleted.bit3 = getBit(word162, 11);
+      this.analysisCompleted.bit4 = getBit(word162, 12);
+      this.analysisCompleted.bit5 = getBit(word162, 13);
+      this.analysisCompleted.bit6 = getBit(word162, 14);
+      this.analysisCompleted.bit7 = getBit(word162, 15);
+      this.analysisCompleted.bit8 = getBit(word162, 0);
+      this.analysisCompleted.bit9 = getBit(word162, 1);
 
       // 灭菌前1#小车位置值
       this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
@@ -5450,6 +5814,22 @@ export default {
     }
   },
   methods: {
+    // 队列显示名称转换（仅用于UI展示）
+    transformQueueName(name) {
+      if (!name) return '';
+      return QUEUE_NAME_DISPLAY_MAP[name] || name;
+    },
+    // 配置化完成信号可见性判断
+    getMarkerVisible(marker) {
+      const sourceName = marker && marker.source;
+      const bitKey = marker && marker.bit;
+      if (!sourceName || !bitKey) return false;
+      const sourceObj =
+        sourceName === 'disinfectionCompleted'
+          ? this.disinfectionCompleted
+          : this.analysisCompleted;
+      return sourceObj && sourceObj[bitKey] === '1';
+    },
     changeQueueExpanded() {
       this.isQueueExpanded = !this.isQueueExpanded;
       // 当展开面板时，刷新当前选中队列的托盘信息
@@ -6036,7 +6416,9 @@ export default {
         const queue = this.queues[queueIndex];
         if (queue && queue.trayInfo.length >= MAX_CAPACITY) {
           this.addLog(
-            `${line.letter}线队列${queue.queueName}已满（${queue.trayInfo.length}/${MAX_CAPACITY}），不允许开启上货`
+            `${line.letter}线队列${this.transformQueueName(
+              queue.queueName
+            )}已满（${queue.trayInfo.length}/${MAX_CAPACITY}），不允许开启上货`
           );
           return false;
         }
@@ -6260,6 +6642,22 @@ export default {
     // 处理上货请求
     handleLoadingRequest(lineLetter, witchLine) {
       this.addLog(`线体${lineLetter}${witchLine}触发上货请求`);
+
+      // 先校验对应线体是否勾选了“允许上货”
+      // A线只有一个实际受控子线：A1-5，因此无论witchLine传入什么，都统一校验A1-5
+      const allowKey =
+        lineLetter === 'A' ? 'A1-5' : `${lineLetter}${witchLine}`;
+      const isAllowed = this.lineAllowLoadingStatus[allowKey] === true;
+      if (!isAllowed) {
+        this.addLog(
+          `线体${lineLetter}${witchLine}未“允许上货”，拦截本次上货请求`,
+          'alarm'
+        );
+        this.$message.warning(
+          `线体${lineLetter}${witchLine}未“允许上货”，无法上货`
+        );
+        return;
+      }
 
       // 无码上货模式
       if (this.noCodeUpload) {
@@ -6590,15 +6988,16 @@ export default {
 
       // 获取PLC数值范围
       const plcRanges = {
-        cart1: { min: 0, max: 1010 },
-        cart2: { min: 0, max: 1010 }
+        cart1: { min: 1000, max: 2910 },
+        cart2: { min: 1000, max: 2857 }
       };
 
       const plcRange = plcRanges[`cart${cartId}`];
       if (!plcRange) return;
 
       // 计算比例（基于新的范围起点）
-      const ratio = value / plcRange.max;
+      let ratio = (value - plcRange.min) / (plcRange.max - plcRange.min);
+      ratio = Math.max(0, Math.min(1, ratio)); // 限制在0-1范围
 
       // 根据比例计算y轴位置（PLC原点对应y轴最小值，PLC终点对应y轴最大值）
       const yPosition = yRange.min + (yRange.max - yRange.min) * ratio;
@@ -6697,7 +7096,9 @@ export default {
       try {
         // 确认移动操作
         await this.$confirm(
-          `确认将托盘 ${this.draggedTray.id} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}？`,
+          `确认将托盘 ${this.draggedTray.id} 从 ${this.transformQueueName(
+            sourceQueue.queueName
+          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}？`,
           '移动托盘确认',
           {
             confirmButtonText: '确定',
@@ -6736,12 +7137,16 @@ export default {
 
         // 添加托盘移动日志
         this.addLog(
-          `托盘 ${movedTray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
+          `托盘 ${movedTray.trayCode} 从 ${this.transformQueueName(
+            sourceQueue.queueName
+          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}`
         );
 
         this.$message({
           type: 'success',
-          message: `托盘 ${movedTray.trayCode} 已成功移动到 ${targetQueue.queueName}`,
+          message: `托盘 ${
+            movedTray.trayCode
+          } 已成功移动到 ${this.transformQueueName(targetQueue.queueName)}`,
           duration: 2000
         });
       } catch (error) {
@@ -6764,7 +7169,11 @@ export default {
         // 直接更新前端队列数据
         this.queues[queueIndex].trayInfo = trayInfo;
         // 添加日志
-        this.addLog(`队列 ${this.queues[queueIndex].queueName} 数据已更新`);
+        this.addLog(
+          `队列 ${this.transformQueueName(
+            this.queues[queueIndex].queueName
+          )} 数据已更新`
+        );
       } else {
         this.$message.error('找不到队列ID: ' + queueId);
       }
@@ -6799,7 +7208,9 @@ export default {
 
           // 添加删除托盘日志
           this.addLog(
-            `托盘 ${tray.id} 已从 ${this.selectedQueue.queueName} 删除`
+            `托盘 ${tray.id} 已从 ${this.transformQueueName(
+              this.selectedQueue.queueName
+            )} 删除`
           );
 
           this.$message.success('托盘删除成功');
@@ -6846,7 +7257,9 @@ export default {
 
         // 添加操作日志
         this.addLog(
-          `托盘 ${currentTray.trayCode} 在 ${this.selectedQueue.queueName} 中上移`
+          `托盘 ${currentTray.trayCode} 在 ${this.transformQueueName(
+            this.selectedQueue.queueName
+          )} 中上移`
         );
 
         this.$message.success('托盘上移成功');
@@ -6894,7 +7307,9 @@ export default {
 
         // 添加操作日志
         this.addLog(
-          `托盘 ${currentTray.trayCode} 在 ${this.selectedQueue.queueName} 中下移`
+          `托盘 ${currentTray.trayCode} 在 ${this.transformQueueName(
+            this.selectedQueue.queueName
+          )} 中下移`
         );
 
         this.$message.success('托盘下移成功');
@@ -7155,7 +7570,9 @@ export default {
                     ? trayInfo
                     : [];
                   this.addLog(
-                    `已加载队列${queueData.queueName || queueId}的托盘信息，共${
+                    `已加载队列${this.transformQueueName(
+                      queueData.queueName || queueId
+                    )}的托盘信息，共${
                       this.queues[queueIndex].trayInfo.length
                     }个托盘`
                   );
@@ -7350,7 +7767,9 @@ export default {
       };
 
       this.addLog(
-        `${lineLetter}${witchLine}无码上货成功，托盘号：no-tray-code，已添加到队列${this.queues[queueIndex].queueName}`
+        `${lineLetter}${witchLine}无码上货成功，托盘号：no-tray-code，已添加到队列${this.transformQueueName(
+          this.queues[queueIndex].queueName
+        )}`
       );
 
       this.$message.success(`${lineLetter}${witchLine}无码上货成功`);
@@ -7809,7 +8228,11 @@ export default {
           toQueue.trayInfo.push(tray);
           movedCount++;
           this.addLog(
-            `托盘 ${tray.trayCode} 从 ${fromQueue.queueName} 移动到 ${toQueue.queueName}（预热房内部移动）`
+            `托盘 ${tray.trayCode} 从 ${this.transformQueueName(
+              fromQueue.queueName
+            )} 移动到 ${this.transformQueueName(
+              toQueue.queueName
+            )}（预热房内部移动）`
           );
         } else {
           break;
@@ -7818,7 +8241,11 @@ export default {
 
       if (movedCount < count) {
         this.addLog(
-          `${fromQueue.queueName}队列数量不足，仅移动${movedCount}/${count}个托盘到${toQueue.queueName}`
+          `${this.transformQueueName(
+            fromQueue.queueName
+          )}队列数量不足，仅移动${movedCount}/${count}个托盘到${this.transformQueueName(
+            toQueue.queueName
+          )}`
         );
       }
     },
@@ -7866,7 +8293,9 @@ export default {
         const tray = sourceQueue.trayInfo.shift();
         targetQueue.trayInfo.push(tray);
         this.addLog(
-          `托盘 ${tray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
+          `托盘 ${tray.trayCode} 从 ${this.transformQueueName(
+            sourceQueue.queueName
+          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}`
         );
       }
     },
@@ -7914,7 +8343,9 @@ export default {
         const tray = sourceQueue.trayInfo.shift();
         targetQueue.trayInfo.push(tray);
         this.addLog(
-          `托盘 ${tray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
+          `托盘 ${tray.trayCode} 从 ${this.transformQueueName(
+            sourceQueue.queueName
+          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}`
         );
       }
     },
