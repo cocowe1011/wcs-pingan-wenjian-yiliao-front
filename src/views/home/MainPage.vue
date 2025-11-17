@@ -69,18 +69,7 @@
         <!-- 订单设置卡片区域 -->
         <div class="production-cards-section">
           <div class="section-header">
-            <div class="section-title">
-              <span>订单设置</span>
-              <div class="title-actions">
-                <div
-                  class="add-order-btn"
-                  @click="showAddOrderDialog"
-                  title="新建订单"
-                >
-                  <i class="el-icon-plus"></i>
-                </div>
-              </div>
-            </div>
+            <span>订单设置</span>
             <el-button
               type="primary"
               size="mini"
@@ -113,12 +102,7 @@
                       <i class="el-icon-loading"></i>
                       执行中
                     </span>
-                    <el-button
-                      type="text"
-                      size="small"
-                      style="padding: 0px"
-                      @click="cancelCurrentOrder(line)"
-                    >
+                    <el-button type="text" size="small" style="padding: 0px">
                       取消
                     </el-button>
                   </div>
@@ -283,16 +267,14 @@
                   :style="
                     marker.name.includes('进') || marker.name.includes('出')
                       ? 'width: 75px'
-                      : 'width: 80px'
+                      : 'width: 60px'
                   "
                   :data-x="marker.x"
                   :data-y="marker.y"
                   @click="handleQueueMarkerClick(marker.queueId)"
                 >
                   <div class="queue-marker-content">
-                    <span class="queue-marker-name">
-                      {{ transformQueueName(marker.name) }}
-                    </span>
+                    <span class="queue-marker-name">{{ marker.name }}</span>
                     <span class="queue-marker-count"
                       >({{ quantityByQueueId[marker.queueId] || 0 }})</span
                     >
@@ -311,7 +293,7 @@
                 </div>
                 <!-- A线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="423"
@@ -320,36 +302,36 @@
                   <div class="marker-label" style="width: 36px">A1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">A1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">A1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">A3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: aLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit10')"
                 >
@@ -439,7 +421,7 @@
                 </div>
                 <!-- B线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="520"
@@ -448,25 +430,25 @@
                   <div class="marker-label" style="width: 36px">B1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">B1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">B1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="575"
@@ -475,36 +457,36 @@
                   <div class="marker-label" style="width: 36px">B1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">B1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">B1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">B3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit7')"
                 >
@@ -520,18 +502,18 @@
                   <div class="marker-label" style="width: 36px">B3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">B3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: bLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit10')"
                 >
@@ -693,7 +675,7 @@
                 </div>
                 <!-- C线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="671"
@@ -702,25 +684,25 @@
                   <div class="marker-label" style="width: 36px">C1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">C1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">C1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="723"
@@ -729,36 +711,36 @@
                   <div class="marker-label" style="width: 36px">C1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">C1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">C1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">C3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit7')"
                 >
@@ -774,18 +756,18 @@
                   <div class="marker-label" style="width: 36px">C3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">C3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: cLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit10')"
                 >
@@ -947,7 +929,7 @@
                 </div>
                 <!-- D线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="820"
@@ -956,25 +938,25 @@
                   <div class="marker-label" style="width: 36px">D1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">D1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">D1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="872"
@@ -983,36 +965,36 @@
                   <div class="marker-label" style="width: 36px">D1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">D1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">D1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">D3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit7')"
                 >
@@ -1028,18 +1010,18 @@
                   <div class="marker-label" style="width: 36px">D3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">D3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: dLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit10')"
                 >
@@ -1201,7 +1183,7 @@
                 </div>
                 <!-- E线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="969"
@@ -1210,25 +1192,25 @@
                   <div class="marker-label" style="width: 36px">E1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">E1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">E1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="1020"
@@ -1237,36 +1219,36 @@
                   <div class="marker-label" style="width: 36px">E1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">E1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">E1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">E3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit7')"
                 >
@@ -1282,18 +1264,18 @@
                   <div class="marker-label" style="width: 36px">E3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">E3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker marker-show-label label-left"
                   :class="{ running: eLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit10')"
                 >
@@ -1903,38 +1885,6 @@
                 >
                   <div class="marker-label">E3-5#出货</div>
                 </div>
-                <!-- 预热/灭菌完成信号组（通过配置数组渲染） -->
-                <div
-                  v-for="marker in preheatDisinfectMarkers"
-                  :key="marker.key"
-                  class="analysis-status-marker"
-                  :data-x="marker.x"
-                  :data-y="marker.y"
-                >
-                  <el-tag
-                    v-show="getMarkerVisible(marker)"
-                    type="success"
-                    size="small"
-                  >
-                    {{ marker.label }}
-                  </el-tag>
-                </div>
-                <!-- 解析完成信号组（通过配置数组渲染） -->
-                <div
-                  v-for="marker in analysisMarkers"
-                  :key="marker.key"
-                  class="analysis-status-marker"
-                  :data-x="marker.x"
-                  :data-y="marker.y"
-                >
-                  <el-tag
-                    v-show="getMarkerVisible(marker)"
-                    type="success"
-                    size="small"
-                  >
-                    {{ marker.label }}
-                  </el-tag>
-                </div>
 
                 <!-- 出库信息卡片 -->
                 <div class="marker-with-panel" data-x="2880" data-y="1400">
@@ -2241,7 +2191,7 @@
                                 text-align: left;
                               "
                             >
-                              需出货：<b>{{ outNeedQty[line] || 0 }}</b>
+                              需进货：<b>{{ outNeedQty[line] || 0 }}</b>
                             </div>
                           </div>
                         </div>
@@ -2338,9 +2288,7 @@
                 @dragover.prevent
                 @drop="handleDrop(index)"
               >
-                <span class="queue-name">
-                  {{ transformQueueName(queue.queueName) }}
-                </span>
+                <span class="queue-name">{{ queue.queueName }}</span>
                 <span class="tray-count">{{
                   queue.trayInfo?.length || 0
                 }}</span>
@@ -2350,7 +2298,7 @@
             <!-- 右侧托盘列表 -->
             <div class="queue-container-right">
               <div class="selected-queue-header" v-if="selectedQueue">
-                <h3>{{ transformQueueName(selectedQueue.queueName) }}</h3>
+                <h3>{{ selectedQueue.queueName }}</h3>
                 <div class="queue-header-actions">
                   <el-button
                     type="primary"
@@ -2504,14 +2452,14 @@
             <div class="cart-position-test-container">
               <div class="cart-position-group">
                 <div class="cart-position-label">
-                  <span>小车1 (1000-2910):</span>
+                  <span>小车1 (0-1010):</span>
                   <span class="cart-value">{{ cartPositionValues.cart1 }}</span>
                 </div>
                 <div class="cart-position-slider-container">
                   <el-slider
                     v-model="cartPositionValues.cart1"
-                    :min="1000"
-                    :max="2910"
+                    :min="0"
+                    :max="1010"
                     :step="1"
                     class="cart-position-slider"
                   ></el-slider>
@@ -2519,14 +2467,14 @@
               </div>
               <div class="cart-position-group">
                 <div class="cart-position-label">
-                  <span>小车2 (1000-2857):</span>
+                  <span>小车2 (0-1010):</span>
                   <span class="cart-value">{{ cartPositionValues.cart2 }}</span>
                 </div>
                 <div class="cart-position-slider-container">
                   <el-slider
                     v-model="cartPositionValues.cart2"
-                    :min="1000"
-                    :max="2857"
+                    :min="0"
+                    :max="1010"
                     :step="1"
                     class="cart-position-slider"
                   ></el-slider>
@@ -2765,24 +2713,6 @@
                 <el-tag type="warning" size="small">待执行</el-tag>
               </template>
             </el-table-column>
-            <el-table-column
-              label="操作"
-              width="100"
-              align="center"
-              fixed="right"
-            >
-              <template slot-scope="{ row }">
-                <el-button
-                  type="danger"
-                  size="mini"
-                  icon="el-icon-delete"
-                  @click.stop="deleteOrder(row)"
-                  :loading="row.isDeleting"
-                >
-                  删除
-                </el-button>
-              </template>
-            </el-table-column>
           </el-table>
         </div>
         <div v-else class="empty-state">
@@ -2961,7 +2891,7 @@
             >
               <template slot-scope="scope">
                 <span style="color: red; font-weight: bold">{{
-                  transformQueueName(scope.row.queueName)
+                  scope.row.queueName
                 }}</span>
               </template>
             </el-table-column>
@@ -3036,109 +2966,6 @@
         >
       </div>
     </el-dialog>
-
-    <!-- 新建订单弹窗 -->
-    <el-dialog
-      title="新建订单"
-      :visible.sync="addOrderDialogVisible"
-      width="600px"
-      :close-on-click-modal="false"
-      :close-on-press-escape="false"
-      append-to-body
-      class="add-order-dialog"
-    >
-      <div class="form-container">
-        <el-form
-          ref="newOrderForm"
-          :model="newOrderForm"
-          :rules="orderFormRules"
-          label-width="120px"
-          size="small"
-        >
-          <el-form-item label="生产总订单号" prop="orderId">
-            <el-input
-              v-model="newOrderForm.orderId"
-              placeholder="请输入生产总订单号"
-              maxlength="50"
-            />
-          </el-form-item>
-
-          <el-form-item label="产品编号" prop="productCode">
-            <el-input
-              v-model="newOrderForm.productCode"
-              placeholder="请输入产品编号"
-              maxlength="50"
-            />
-          </el-form-item>
-
-          <el-form-item label="产品名称" prop="productName">
-            <el-input
-              v-model="newOrderForm.productName"
-              placeholder="请输入产品名称"
-              maxlength="100"
-            />
-          </el-form-item>
-
-          <el-form-item
-            label="托盘码"
-            prop="trayCodes"
-            class="tray-codes-section"
-          >
-            <div class="tray-codes-container">
-              <div class="tray-input-section">
-                <el-input
-                  v-model="newOrderForm.currentTrayCode"
-                  placeholder="请输入托盘码"
-                  maxlength="50"
-                  @keyup.enter="addTrayCode"
-                />
-                <el-button
-                  type="primary"
-                  size="small"
-                  icon="el-icon-plus"
-                  @click="addTrayCode"
-                  :disabled="!newOrderForm.currentTrayCode.trim()"
-                >
-                  添加
-                </el-button>
-              </div>
-
-              <div
-                class="tray-codes-display"
-                v-if="newOrderForm.trayCodes.length > 0"
-              >
-                <div class="tray-codes-list">
-                  <div
-                    v-for="(code, index) in newOrderForm.trayCodes"
-                    :key="index"
-                    class="tray-code-tag"
-                  >
-                    <span class="tray-code-text">{{ code }}</span>
-                    <el-button
-                      type="text"
-                      icon="el-icon-close"
-                      @click="removeTrayCode(index)"
-                      class="remove-btn"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </el-form-item>
-        </el-form>
-      </div>
-
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="cancelAddOrder">取消</el-button>
-        <el-button
-          type="primary"
-          @click="submitAddOrder"
-          :loading="isSubmittingOrder"
-        >
-          确定
-        </el-button>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
@@ -3148,66 +2975,6 @@ import HttpUtilwms from '@/utils/HttpUtilwms';
 import moment from 'moment';
 import { ipcRenderer } from 'electron';
 import OrderQueryDialog from '@/components/OrderQueryDialog.vue';
-// 队列名称显示映射（仅用于显示，不影响内部逻辑判断）
-const QUEUE_NAME_DISPLAY_MAP = {
-  // YR 区
-  'A1-5': 'YR#1-1-1',
-  'A1-6': 'YR#1-2-1',
-  'B1-2': 'YR#2-1-1',
-  'B1-3': 'YR#2-2-1',
-  'B1-5': 'YR#2-1-2',
-  'B1-6': 'YR#2-2-2',
-  'C1-2': 'YR#3-1-1',
-  'C1-3': 'YR#3-2-1',
-  'C1-5': 'YR#3-1-2',
-  'C1-6': 'YR#3-2-2',
-  'D1-2': 'YR#4-1-1',
-  'D1-3': 'YR#4-2-1',
-  'D1-5': 'YR#4-1-2',
-  'D1-6': 'YR#4-2-2',
-  'E1-2': 'YR#5-1-1',
-  'E1-3': 'YR#5-2-1',
-  'E1-5': 'YR#5-1-2',
-  'E1-6': 'YR#5-2-2',
-  // 进/出
-  'A2-2-进': '#1-1进',
-  'A2-2-出': '#1-1出',
-  'B2-1-进': '#2-1进',
-  'B2-1-出': '#2-1出',
-  'B2-2-进': '#2-2进',
-  'B2-2-出': '#2-2出',
-  'C2-1-进': '#3-1进',
-  'C2-1-出': '#3-1出',
-  'C2-2-进': '#3-2进',
-  'C2-2-出': '#3-2出',
-  'D2-1-进': '#4-1进',
-  'D2-1-出': '#4-1出',
-  'D2-2-进': '#4-2进',
-  'D2-2-出': '#4-2出',
-  'E2-1-进': '#5-1进',
-  'E2-1-出': '#5-1出',
-  'E2-2-进': '#5-2进',
-  'E2-2-出': '#5-2出',
-  // JX 区
-  'A3-4': 'JX#1-1-1',
-  'A3-5': 'JX#1-2-1',
-  'B3-1': 'JX#2-1-1',
-  'B3-2': 'JX#2-2-1',
-  'B3-4': 'JX#2-1-2',
-  'B3-5': 'JX#2-2-2',
-  'C3-1': 'JX#3-1-1',
-  'C3-2': 'JX#3-2-1',
-  'C3-4': 'JX#3-1-2',
-  'C3-5': 'JX#3-2-2',
-  'D3-1': 'JX#4-1-1',
-  'D3-2': 'JX#4-2-1',
-  'D3-4': 'JX#4-1-2',
-  'D3-5': 'JX#4-2-2',
-  'E3-1': 'JX#5-1-1',
-  'E3-2': 'JX#5-2-1',
-  'E3-4': 'JX#5-1-2',
-  'E3-5': 'JX#5-2-2'
-};
 export default {
   name: 'MonitorScreen',
   components: {
@@ -3267,42 +3034,158 @@ export default {
       orderSelectDialogVisible: false,
       selectedLine: null,
       selectedOrderId: null,
-      availableOrders: [],
-      // 新建订单相关
-      addOrderDialogVisible: false,
-      isSubmittingOrder: false,
-      newOrderForm: {
-        orderId: '',
-        productCode: '',
-        productName: '',
-        currentTrayCode: '', // 当前输入的托盘码
-        trayCodes: [] // 已添加的托盘码列表
-      },
-      orderFormRules: {
-        orderId: [
-          { required: true, message: '请输入生产总订单号', trigger: 'blur' }
-        ],
-        productCode: [
-          { required: true, message: '请输入产品编号', trigger: 'blur' }
-        ],
-        productName: [
-          { required: true, message: '请输入产品名称', trigger: 'blur' }
-        ],
-        trayCodes: [
-          {
-            required: true,
-            message: '请至少添加一个托盘码',
-            trigger: 'change',
-            validator: (rule, value, callback) => {
-              if (!value || value.length === 0) {
-                callback(new Error('请至少添加一个托盘码'));
-              } else {
-                callback();
-              }
-            }
-          }
-        ]
-      },
+      availableOrders: [
+        {
+          orderId: 'ORD001',
+          productName: '医疗器械A',
+          insertTime: '2024-01-15 10:30:00',
+          inPut: '1',
+          isPrint3: '1',
+          orderStatus: '0',
+          trays: Array.from({ length: 26 }, (_, i) => ({
+            id: `ORD001-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD001',
+            productName: '医疗器械A',
+            productCode: 'MC-A001',
+            batchNo: `BATCH-001-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 1,
+            time: '2024-01-15 10:30:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-001-${i + 1}`,
+            trayCode: `ORD001-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 10:30:00',
+            receiptOrderCode: 'REC-001',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
+          })),
+          currentTrayIndex: 0
+        },
+        {
+          orderId: 'ORD002',
+          productName: '医疗器械B',
+          insertTime: '2024-01-15 11:15:00',
+          inPut: '2',
+          isPrint3: '0',
+          orderStatus: '0',
+          trays: Array.from({ length: 26 }, (_, i) => ({
+            id: `ORD002-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD002',
+            productName: '医疗器械B',
+            productCode: 'MC-B002',
+            batchNo: `BATCH-002-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 0,
+            time: '2024-01-15 11:15:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-002-${i + 1}`,
+            trayCode: `ORD002-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 11:15:00',
+            receiptOrderCode: 'REC-002',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
+          })),
+          currentTrayIndex: 0
+        },
+        {
+          orderId: 'ORD003',
+          productName: '医疗器械C',
+          insertTime: '2024-01-15 12:00:00',
+          inPut: '3',
+          isPrint3: '2',
+          orderStatus: '0',
+          trays: Array.from({ length: 26 }, (_, i) => ({
+            id: `ORD003-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD003',
+            productName: '医疗器械C',
+            productCode: 'MC-C003',
+            batchNo: `BATCH-003-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 1,
+            time: '2024-01-15 12:00:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-003-${i + 1}`,
+            trayCode: `ORD003-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 12:00:00',
+            receiptOrderCode: 'REC-003',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
+          })),
+          currentTrayIndex: 0
+        },
+        {
+          orderId: 'ORD004',
+          productName: '医疗器械D',
+          insertTime: '2024-01-15 13:45:00',
+          inPut: '1',
+          isPrint3: '1',
+          orderStatus: '0',
+          trays: Array.from({ length: 26 }, (_, i) => ({
+            id: `ORD004-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD004',
+            productName: '医疗器械D',
+            productCode: 'MC-D004',
+            batchNo: `BATCH-004-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 0,
+            time: '2024-01-15 13:45:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-004-${i + 1}`,
+            trayCode: `ORD004-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 13:45:00',
+            receiptOrderCode: 'REC-004',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
+          })),
+          currentTrayIndex: 0
+        },
+        {
+          orderId: 'ORD005',
+          productName: '医疗器械E',
+          insertTime: '2024-01-15 14:20:00',
+          inPut: '2',
+          isPrint3: '0',
+          orderStatus: '0',
+          trays: Array.from({ length: 26 }, (_, i) => ({
+            id: `ORD005-TRAY-${i + 1}`,
+            name: `托盘${i + 1}`,
+            orderId: 'ORD005',
+            productName: '医疗器械E',
+            productCode: 'MC-E005',
+            batchNo: `BATCH-005-${i + 1}`,
+            unit: '标准规格',
+            isTerile: 1,
+            time: '2024-01-15 14:20:00',
+            // 添加上货参数对应的字段
+            mainId: `MAIN-005-${i + 1}`,
+            trayCode: `ORD005-TRAY-${i + 1}`,
+            trayTime: '2024-01-15 14:20:00',
+            receiptOrderCode: 'REC-005',
+            state: '0',
+            sendTo: '',
+            remark: `备注信息-${i + 1}`,
+            receivedPkgQuantity: 1,
+            sequenceNumber: i + 1
+          })),
+          currentTrayIndex: 0
+        }
+      ],
       buttonStates: {
         start: false,
         stop: false,
@@ -3372,31 +3255,31 @@ export default {
         ]
       },
       queues: [
-        // {
-        //   id: 1,
-        //   queueName: 'A1-2',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 2,
-        //   queueName: 'A1-3',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 3,
-        //   queueName: 'A2-1-进',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 4,
-        //   queueName: 'A3-1',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 5,
-        //   queueName: 'A3-2',
-        //   trayInfo: []
-        // },
+        {
+          id: 1,
+          queueName: 'A1-2',
+          trayInfo: []
+        },
+        {
+          id: 2,
+          queueName: 'A1-3',
+          trayInfo: []
+        },
+        {
+          id: 3,
+          queueName: 'A2-1-进',
+          trayInfo: []
+        },
+        {
+          id: 4,
+          queueName: 'A3-1',
+          trayInfo: []
+        },
+        {
+          id: 5,
+          queueName: 'A3-2',
+          trayInfo: []
+        },
         {
           id: 6,
           queueName: 'A1-5',
@@ -3680,52 +3563,52 @@ export default {
         // { id: 3, name: 'A2-1-进', queueId: 3, x: 2100, y: 180 },
         // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
         // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
-        { id: 6, name: 'A1-5', queueId: 6, x: 330, y: 420 },
-        { id: 7, name: 'A1-6', queueId: 7, x: 810, y: 420 },
+        { id: 6, name: 'A1-5', queueId: 6, x: 520, y: 420 },
+        { id: 7, name: 'A1-6', queueId: 7, x: 990, y: 420 },
         { id: 8, name: 'A2-2-进', queueId: 8, x: 1400, y: 420 },
-        { id: 9, name: 'A3-4', queueId: 9, x: 1970, y: 420 },
-        { id: 10, name: 'A3-5', queueId: 10, x: 2440, y: 420 },
-        { id: 11, name: 'B1-2', queueId: 11, x: 330, y: 518 },
-        { id: 12, name: 'B1-3', queueId: 12, x: 810, y: 518 },
+        { id: 9, name: 'A3-4', queueId: 9, x: 2170, y: 420 },
+        { id: 10, name: 'A3-5', queueId: 10, x: 2640, y: 420 },
+        { id: 11, name: 'B1-2', queueId: 11, x: 520, y: 518 },
+        { id: 12, name: 'B1-3', queueId: 12, x: 990, y: 518 },
         { id: 13, name: 'B2-1-进', queueId: 13, x: 1400, y: 518 },
-        { id: 14, name: 'B3-1', queueId: 14, x: 1970, y: 518 },
-        { id: 15, name: 'B3-2', queueId: 15, x: 2440, y: 518 },
-        { id: 16, name: 'B1-5', queueId: 16, x: 330, y: 578 },
-        { id: 17, name: 'B1-6', queueId: 17, x: 810, y: 578 },
+        { id: 14, name: 'B3-1', queueId: 14, x: 2170, y: 518 },
+        { id: 15, name: 'B3-2', queueId: 15, x: 2640, y: 518 },
+        { id: 16, name: 'B1-5', queueId: 16, x: 520, y: 578 },
+        { id: 17, name: 'B1-6', queueId: 17, x: 990, y: 578 },
         { id: 18, name: 'B2-2-进', queueId: 18, x: 1400, y: 578 },
-        { id: 19, name: 'B3-4', queueId: 19, x: 1970, y: 578 },
-        { id: 20, name: 'B3-5', queueId: 20, x: 2440, y: 578 },
-        { id: 21, name: 'C1-2', queueId: 21, x: 330, y: 670 },
-        { id: 22, name: 'C1-3', queueId: 22, x: 810, y: 670 },
+        { id: 19, name: 'B3-4', queueId: 19, x: 2170, y: 578 },
+        { id: 20, name: 'B3-5', queueId: 20, x: 2640, y: 578 },
+        { id: 21, name: 'C1-2', queueId: 21, x: 520, y: 670 },
+        { id: 22, name: 'C1-3', queueId: 22, x: 990, y: 670 },
         { id: 23, name: 'C2-1-进', queueId: 23, x: 1400, y: 670 },
-        { id: 24, name: 'C3-1', queueId: 24, x: 1970, y: 670 },
-        { id: 25, name: 'C3-2', queueId: 25, x: 2440, y: 670 },
-        { id: 26, name: 'C1-5', queueId: 26, x: 330, y: 730 },
-        { id: 27, name: 'C1-6', queueId: 27, x: 810, y: 730 },
+        { id: 24, name: 'C3-1', queueId: 24, x: 2170, y: 670 },
+        { id: 25, name: 'C3-2', queueId: 25, x: 2640, y: 670 },
+        { id: 26, name: 'C1-5', queueId: 26, x: 520, y: 730 },
+        { id: 27, name: 'C1-6', queueId: 27, x: 990, y: 730 },
         { id: 28, name: 'C2-2-进', queueId: 28, x: 1400, y: 730 },
-        { id: 29, name: 'C3-4', queueId: 29, x: 1970, y: 730 },
-        { id: 30, name: 'C3-5', queueId: 30, x: 2440, y: 730 },
-        { id: 31, name: 'D1-2', queueId: 31, x: 330, y: 820 },
-        { id: 32, name: 'D1-3', queueId: 32, x: 810, y: 820 },
+        { id: 29, name: 'C3-4', queueId: 29, x: 2170, y: 730 },
+        { id: 30, name: 'C3-5', queueId: 30, x: 2640, y: 730 },
+        { id: 31, name: 'D1-2', queueId: 31, x: 520, y: 820 },
+        { id: 32, name: 'D1-3', queueId: 32, x: 990, y: 820 },
         { id: 33, name: 'D2-1-进', queueId: 33, x: 1400, y: 820 },
-        { id: 34, name: 'D3-1', queueId: 34, x: 1970, y: 820 },
-        { id: 35, name: 'D3-2', queueId: 35, x: 2440, y: 820 },
-        { id: 36, name: 'D1-5', queueId: 36, x: 330, y: 880 },
-        { id: 37, name: 'D1-6', queueId: 37, x: 810, y: 880 },
+        { id: 34, name: 'D3-1', queueId: 34, x: 2170, y: 820 },
+        { id: 35, name: 'D3-2', queueId: 35, x: 2640, y: 820 },
+        { id: 36, name: 'D1-5', queueId: 36, x: 520, y: 880 },
+        { id: 37, name: 'D1-6', queueId: 37, x: 990, y: 880 },
         { id: 38, name: 'D2-2-进', queueId: 38, x: 1400, y: 880 },
-        { id: 39, name: 'D3-4', queueId: 39, x: 1970, y: 880 },
-        { id: 40, name: 'D3-5', queueId: 40, x: 2440, y: 880 },
-        { id: 41, name: 'E1-2', queueId: 41, x: 330, y: 970 },
-        { id: 42, name: 'E1-3', queueId: 42, x: 810, y: 970 },
+        { id: 39, name: 'D3-4', queueId: 39, x: 2170, y: 880 },
+        { id: 40, name: 'D3-5', queueId: 40, x: 2640, y: 880 },
+        { id: 41, name: 'E1-2', queueId: 41, x: 520, y: 970 },
+        { id: 42, name: 'E1-3', queueId: 42, x: 990, y: 970 },
         { id: 43, name: 'E2-1-进', queueId: 43, x: 1400, y: 970 },
-        { id: 44, name: 'E3-1', queueId: 44, x: 1970, y: 970 },
-        { id: 45, name: 'E3-2', queueId: 45, x: 2440, y: 970 },
-        { id: 46, name: 'E1-5', queueId: 46, x: 330, y: 1030 },
-        { id: 47, name: 'E1-6', queueId: 47, x: 810, y: 1030 },
+        { id: 44, name: 'E3-1', queueId: 44, x: 2170, y: 970 },
+        { id: 45, name: 'E3-2', queueId: 45, x: 2640, y: 970 },
+        { id: 46, name: 'E1-5', queueId: 46, x: 520, y: 1030 },
+        { id: 47, name: 'E1-6', queueId: 47, x: 990, y: 1030 },
         { id: 48, name: 'E2-2-进', queueId: 48, x: 1400, y: 1030 },
-        { id: 49, name: 'E3-4', queueId: 49, x: 1970, y: 1030 },
-        { id: 50, name: 'E3-5', queueId: 50, x: 2440, y: 1030 },
-        // { id: 51, name: 'A2-1-进', queueId: 51, x: 330, y: 1120 },
+        { id: 49, name: 'E3-4', queueId: 49, x: 2170, y: 1030 },
+        { id: 50, name: 'E3-5', queueId: 50, x: 2640, y: 1030 },
+        // { id: 51, name: 'A2-1-进', queueId: 51, x: 520, y: 1120 },
         { id: 52, name: 'A2-2-出', queueId: 52, x: 1600, y: 420 },
         { id: 53, name: 'B2-1-出', queueId: 53, x: 1600, y: 518 },
         { id: 54, name: 'B2-2-出', queueId: 54, x: 1600, y: 578 },
@@ -4126,244 +4009,7 @@ export default {
         C: 0,
         D: 0,
         E: 0
-      },
-      // 预热、灭菌完成信号
-      disinfectionCompleted: {
-        bit0: '0', // YR1-1预热完成
-        bit1: '0', // YR1-2预热完成
-        bit2: '0', // YR2-1预热完成
-        bit3: '0', // YR2-1预热完成
-        bit4: '0', // YR3-1预热完成
-        bit5: '0', // YR3-2预热完成
-        bit6: '0', // YR4-1预热完成
-        bit7: '0', // YR4-2预热完成
-        bit8: '0', // YR5-1预热完成
-        bit9: '0', // YR5-2预热完成
-        bit10: '0', // MJ-1灭菌完成
-        bit11: '0', // MJ-2灭菌完成
-        bit12: '0', // MJ-3灭菌完成
-        bit13: '0', // MJ-4灭菌完成
-        bit14: '0' // MJ-5灭菌完成
-      },
-      // 解析完成信号
-      analysisCompleted: {
-        bit0: '0', // JX1-1解析完成
-        bit1: '0', // JX1-2解析完成
-        bit2: '0', // JX2-1解析完成
-        bit3: '0', // JX2-2解析完成
-        bit4: '0', // JX3-1解析完成
-        bit5: '0', // JX3-2解析完成
-        bit6: '0', // JX4-1解析完成
-        bit7: '0', // JX4-2解析完成
-        bit8: '0', // JX5-1解析完成
-        bit9: '0' // JX5-2解析完成
-      },
-      // 预热/灭菌完成 - 配置化渲染（位置可直接在此设置）
-      preheatDisinfectMarkers: [
-        // {
-        //   key: 'dis_bit0',
-        //   source: 'disinfectionCompleted',
-        //   bit: 'bit0',
-        //   label: 'YR1-1预热完成',
-        //   x: 160,
-        //   y: 170
-        // },
-        {
-          key: 'dis_bit1',
-          source: 'disinfectionCompleted',
-          bit: 'bit1',
-          label: '预热完成',
-          x: 1015,
-          y: 420
-        },
-        {
-          key: 'dis_bit2',
-          source: 'disinfectionCompleted',
-          bit: 'bit2',
-          label: '预热完成',
-          x: 1015,
-          y: 515
-        },
-        {
-          key: 'dis_bit3',
-          source: 'disinfectionCompleted',
-          bit: 'bit3',
-          label: '预热完成',
-          x: 1015,
-          y: 567
-        },
-        {
-          key: 'dis_bit4',
-          source: 'disinfectionCompleted',
-          bit: 'bit4',
-          label: '预热完成',
-          x: 1015,
-          y: 667
-        },
-        {
-          key: 'dis_bit5',
-          source: 'disinfectionCompleted',
-          bit: 'bit5',
-          label: '预热完成',
-          x: 1015,
-          y: 717
-        },
-        {
-          key: 'dis_bit6',
-          source: 'disinfectionCompleted',
-          bit: 'bit6',
-          label: '预热完成',
-          x: 1015,
-          y: 817
-        },
-        {
-          key: 'dis_bit7',
-          source: 'disinfectionCompleted',
-          bit: 'bit7',
-          label: '预热完成',
-          x: 1015,
-          y: 872
-        },
-        {
-          key: 'dis_bit8',
-          source: 'disinfectionCompleted',
-          bit: 'bit8',
-          label: '预热完成',
-          x: 1015,
-          y: 965
-        },
-        {
-          key: 'dis_bit9',
-          source: 'disinfectionCompleted',
-          bit: 'bit9',
-          label: '预热完成',
-          x: 1015,
-          y: 1020
-        },
-        {
-          key: 'dis_bit10',
-          source: 'disinfectionCompleted',
-          bit: 'bit10',
-          label: 'MJ-1灭菌完成',
-          x: 1500,
-          y: 470
-        },
-        {
-          key: 'dis_bit11',
-          source: 'disinfectionCompleted',
-          bit: 'bit11',
-          label: 'MJ-2灭菌完成',
-          x: 1500,
-          y: 622
-        },
-        {
-          key: 'dis_bit12',
-          source: 'disinfectionCompleted',
-          bit: 'bit12',
-          label: 'MJ-3灭菌完成',
-          x: 1500,
-          y: 772
-        },
-        {
-          key: 'dis_bit13',
-          source: 'disinfectionCompleted',
-          bit: 'bit13',
-          label: 'MJ-4灭菌完成',
-          x: 1500,
-          y: 925
-        },
-        {
-          key: 'dis_bit14',
-          source: 'disinfectionCompleted',
-          bit: 'bit14',
-          label: 'MJ-5灭菌完成',
-          x: 1500,
-          y: 1080
-        }
-      ],
-      // 解析完成 - 配置化渲染（位置可直接在此设置）
-      analysisMarkers: [
-        // {
-        //   key: 'ana_bit0',
-        //   source: 'analysisCompleted',
-        //   bit: 'bit0',
-        //   label: 'JX1-1解析完成',
-        //   x: 0,
-        //   y: 0
-        // },
-        {
-          key: 'ana_bit1',
-          source: 'analysisCompleted',
-          bit: 'bit1',
-          label: '解析完成',
-          x: 2660,
-          y: 420
-        },
-        {
-          key: 'ana_bit2',
-          source: 'analysisCompleted',
-          bit: 'bit2',
-          label: '解析完成',
-          x: 2660,
-          y: 515
-        },
-        {
-          key: 'ana_bit3',
-          source: 'analysisCompleted',
-          bit: 'bit3',
-          label: '解析完成',
-          x: 2660,
-          y: 567
-        },
-        {
-          key: 'ana_bit4',
-          source: 'analysisCompleted',
-          bit: 'bit4',
-          label: '解析完成',
-          x: 2660,
-          y: 667
-        },
-        {
-          key: 'ana_bit5',
-          source: 'analysisCompleted',
-          bit: 'bit5',
-          label: '解析完成',
-          x: 2660,
-          y: 717
-        },
-        {
-          key: 'ana_bit6',
-          source: 'analysisCompleted',
-          bit: 'bit6',
-          label: '解析完成',
-          x: 2660,
-          y: 817
-        },
-        {
-          key: 'ana_bit7',
-          source: 'analysisCompleted',
-          bit: 'bit7',
-          label: '解析完成',
-          x: 2660,
-          y: 872
-        },
-        {
-          key: 'ana_bit8',
-          source: 'analysisCompleted',
-          bit: 'bit8',
-          label: '解析完成',
-          x: 2660,
-          y: 965
-        },
-        {
-          key: 'ana_bit9',
-          source: 'analysisCompleted',
-          bit: 'bit9',
-          label: '解析完成',
-          x: 2660,
-          y: 1020
-        }
-      ]
+      }
     };
   },
   computed: {
@@ -4702,37 +4348,6 @@ export default {
       this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
       this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
       this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
-
-      // 预热、灭菌完成信号
-      let word160 = this.convertToWord(values.DBW160);
-      this.disinfectionCompleted.bit0 = getBit(word160, 8);
-      this.disinfectionCompleted.bit1 = getBit(word160, 9);
-      this.disinfectionCompleted.bit2 = getBit(word160, 10);
-      this.disinfectionCompleted.bit3 = getBit(word160, 11);
-      this.disinfectionCompleted.bit4 = getBit(word160, 12);
-      this.disinfectionCompleted.bit5 = getBit(word160, 13);
-      this.disinfectionCompleted.bit6 = getBit(word160, 14);
-      this.disinfectionCompleted.bit7 = getBit(word160, 15);
-      this.disinfectionCompleted.bit8 = getBit(word160, 0);
-      this.disinfectionCompleted.bit9 = getBit(word160, 1);
-      this.disinfectionCompleted.bit10 = getBit(word160, 2);
-      this.disinfectionCompleted.bit11 = getBit(word160, 3);
-      this.disinfectionCompleted.bit12 = getBit(word160, 4);
-      this.disinfectionCompleted.bit13 = getBit(word160, 5);
-      this.disinfectionCompleted.bit14 = getBit(word160, 6);
-
-      // 解析完成信号
-      let word162 = this.convertToWord(values.DBW162);
-      this.analysisCompleted.bit0 = getBit(word162, 8);
-      this.analysisCompleted.bit1 = getBit(word162, 9);
-      this.analysisCompleted.bit2 = getBit(word162, 10);
-      this.analysisCompleted.bit3 = getBit(word162, 11);
-      this.analysisCompleted.bit4 = getBit(word162, 12);
-      this.analysisCompleted.bit5 = getBit(word162, 13);
-      this.analysisCompleted.bit6 = getBit(word162, 14);
-      this.analysisCompleted.bit7 = getBit(word162, 15);
-      this.analysisCompleted.bit8 = getBit(word162, 0);
-      this.analysisCompleted.bit9 = getBit(word162, 1);
 
       // 灭菌前1#小车位置值
       this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
@@ -5814,22 +5429,6 @@ export default {
     }
   },
   methods: {
-    // 队列显示名称转换（仅用于UI展示）
-    transformQueueName(name) {
-      if (!name) return '';
-      return QUEUE_NAME_DISPLAY_MAP[name] || name;
-    },
-    // 配置化完成信号可见性判断
-    getMarkerVisible(marker) {
-      const sourceName = marker && marker.source;
-      const bitKey = marker && marker.bit;
-      if (!sourceName || !bitKey) return false;
-      const sourceObj =
-        sourceName === 'disinfectionCompleted'
-          ? this.disinfectionCompleted
-          : this.analysisCompleted;
-      return sourceObj && sourceObj[bitKey] === '1';
-    },
     changeQueueExpanded() {
       this.isQueueExpanded = !this.isQueueExpanded;
       // 当展开面板时，刷新当前选中队列的托盘信息
@@ -5842,247 +5441,10 @@ export default {
       this.orderQueryDialogVisible = true;
     },
     // 显示订单选择弹窗
-    async showOrderDialog(line) {
+    showOrderDialog(line) {
       this.selectedLine = line;
       this.selectedOrderId = null;
-      // 打开弹窗前刷新订单列表
-      await this.refreshAvailableOrders();
       this.orderSelectDialogVisible = true;
-    },
-    // 刷新可用订单列表
-    async refreshAvailableOrders() {
-      try {
-        const res = await HttpUtil.post('/order/queryOrderList', {});
-        if (res.code === '200' && res.data) {
-          // 处理订单数据，确保包含trays数组（根据trayCode字段解析）
-          this.availableOrders = res.data.map((order) => {
-            // 如果订单有trayCode字段，解析成托盘数组
-            let trays = [];
-            if (order.trayCode) {
-              const trayCodes = order.trayCode
-                .split(',')
-                .filter((code) => code.trim());
-              // 格式化insertTime为字符串
-              const currentTime = order.insertTime
-                ? typeof order.insertTime === 'string'
-                  ? order.insertTime
-                  : moment(order.insertTime).format('YYYY-MM-DD HH:mm:ss')
-                : moment().format('YYYY-MM-DD HH:mm:ss');
-              trays = trayCodes.map((trayCode, index) => {
-                return {
-                  id: `${order.orderId}-TRAY-${index + 1}`,
-                  name: `托盘${index + 1}`,
-                  orderId: order.orderId,
-                  productName: order.productName || '',
-                  productCode: order.productCode || '',
-                  batchNo: order.batchNo || '', // 批号/备注，从订单中获取
-                  unit: order.unit || '', // 规格，从订单中获取
-                  isTerile: order.isTerile || 0, // 是否消毒
-                  time: currentTime,
-                  trayCode: trayCode.trim(),
-                  receiptOrderCode: order.receiptOrderCode || '',
-                  state: '0', // 未执行
-                  sendTo: '',
-                  receivedPkgQuantity: order.receivedPkgQuantity || 1, // 从订单中获取
-                  sequenceNumber: index + 1
-                };
-              });
-            }
-
-            // 格式化insertTime为字符串（如果后端返回的是Date对象）
-            const formattedInsertTime = order.insertTime
-              ? typeof order.insertTime === 'string'
-                ? order.insertTime
-                : moment(order.insertTime).format('YYYY-MM-DD HH:mm:ss')
-              : '';
-
-            // 返回订单对象，保持原有结构
-            return {
-              ...order,
-              insertTime: formattedInsertTime, // 确保insertTime是字符串格式
-              isPrint3: order.isPrint3 || null, // 如果后端没有返回isPrint3，设置为null（前端会处理）
-              trays: trays,
-              currentTrayIndex: 0
-            };
-          });
-        } else {
-          this.availableOrders = [];
-        }
-      } catch (err) {
-        console.error('刷新订单列表失败：', err);
-        this.$message.error('刷新订单列表失败，请重试');
-        this.availableOrders = [];
-      }
-    },
-    // 显示新建订单弹窗
-    showAddOrderDialog() {
-      this.addOrderDialogVisible = true;
-      // 重置表单
-      this.newOrderForm = {
-        orderId: '',
-        productCode: '',
-        productName: '',
-        currentTrayCode: '',
-        trayCodes: []
-      };
-      // 清除表单验证
-      this.$nextTick(() => {
-        if (this.$refs.newOrderForm) {
-          this.$refs.newOrderForm.clearValidate();
-        }
-      });
-    },
-    // 添加托盘码
-    addTrayCode() {
-      const code = this.newOrderForm.currentTrayCode.trim();
-      if (!code) {
-        this.$message.warning('请输入托盘码');
-        return;
-      }
-
-      // 检查是否已存在
-      if (this.newOrderForm.trayCodes.includes(code)) {
-        this.$message.warning('该托盘码已存在');
-        return;
-      }
-
-      // 添加到列表
-      this.newOrderForm.trayCodes.push(code);
-      // 清空输入框
-      this.newOrderForm.currentTrayCode = '';
-      // 触发表单验证
-      this.$nextTick(() => {
-        if (this.$refs.newOrderForm) {
-          this.$refs.newOrderForm.validateField('trayCodes');
-        }
-      });
-    },
-    // 删除托盘码
-    removeTrayCode(index) {
-      this.newOrderForm.trayCodes.splice(index, 1);
-      // 触发表单验证
-      this.$nextTick(() => {
-        if (this.$refs.newOrderForm) {
-          this.$refs.newOrderForm.validateField('trayCodes');
-        }
-      });
-    },
-    // 提交新建订单
-    async submitAddOrder() {
-      try {
-        // 表单验证
-        await this.$refs.newOrderForm.validate();
-
-        // 验证至少有一个托盘码
-        if (this.newOrderForm.trayCodes.length === 0) {
-          this.$message.error('请至少添加一个托盘码');
-          return;
-        }
-
-        this.isSubmittingOrder = true;
-
-        // 获取当前时间
-        const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
-
-        // 根据托盘码列表生成托盘对象数组（只保留页面用到的字段）
-        // 注意：这个trays数组只是前端使用，不会提交给后端
-        const trays = this.newOrderForm.trayCodes.map((trayCode, index) => {
-          return {
-            id: `${this.newOrderForm.orderId}-TRAY-${index + 1}`,
-            name: `托盘${index + 1}`,
-            orderId: this.newOrderForm.orderId,
-            productName: this.newOrderForm.productName,
-            productCode: this.newOrderForm.productCode,
-            batchNo: '', // 批号/备注，新建时为空
-            unit: '', // 规格，新建时为空
-            isTerile: 0, // 是否消毒，默认不消毒
-            time: currentTime,
-            trayCode: trayCode,
-            receiptOrderCode: '',
-            state: '0', // 未执行
-            sendTo: '',
-            receivedPkgQuantity: 1, // 默认值
-            sequenceNumber: index + 1
-          };
-        });
-
-        // 构建订单数据（提交给后端，只包含后端需要的字段）
-        const orderData = {
-          orderId: this.newOrderForm.orderId,
-          productCode: this.newOrderForm.productCode,
-          productName: this.newOrderForm.productName,
-          trayCode: this.newOrderForm.trayCodes.join(','), // 托盘码用逗号分隔
-          orderStatus: 0, // 待执行
-          invalidFlag: 0 // 未作废
-        };
-
-        // 调用保存接口
-        const res = await HttpUtil.post('/order/insert', orderData);
-        if (res.code === '200' || res.data) {
-          this.$message.success('订单创建成功');
-          // 关闭弹窗
-          this.addOrderDialogVisible = false;
-          // 刷新订单列表
-          await this.refreshAvailableOrders();
-        } else {
-          this.$message.error('创建订单失败：' + (res.message || '请重试'));
-        }
-      } catch (error) {
-        if (error !== 'cancel') {
-          this.$message.error('表单验证失败，请检查输入');
-        }
-      } finally {
-        this.isSubmittingOrder = false;
-      }
-    },
-    // 取消新建订单
-    cancelAddOrder() {
-      this.addOrderDialogVisible = false;
-      // 重置表单
-      this.newOrderForm = {
-        orderId: '',
-        productCode: '',
-        productName: '',
-        currentTrayCode: '',
-        trayCodes: []
-      };
-      // 清除表单验证
-      if (this.$refs.newOrderForm) {
-        this.$refs.newOrderForm.clearValidate();
-      }
-    },
-    // 删除订单
-    async deleteOrder(order) {
-      try {
-        await this.$confirm('确认要删除该订单吗？删除后无法恢复。', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        });
-
-        // 设置删除加载状态
-        this.$set(order, 'isDeleting', true);
-        const param = {
-          id: order.id,
-          invalidFlag: 1
-        };
-
-        const res = await HttpUtil.post('/order/update', param);
-        if (res.code === '200') {
-          this.$message.success('订单删除成功');
-          // 重新查询订单列表
-          await this.refreshAvailableOrders();
-        } else {
-          this.$message.error('删除订单失败，请重试');
-        }
-      } catch (err) {
-        // 用户取消操作，不做处理
-        if (err !== 'cancel') {
-          this.$message.error('删除订单失败：' + err);
-        }
-      } finally {
-        this.$set(order, 'isDeleting', false);
-      }
     },
     // 选择订单
     selectOrder(order) {
@@ -6337,42 +5699,6 @@ export default {
       this.addLog(`出库${line}执行已取消，写入PLC ${plcAddress}: 0`);
       this.$message.info(`已取消出库${line}执行`);
     },
-    // 取消当前订单
-    async cancelCurrentOrder(line) {
-      try {
-        await this.$confirm(
-          `确认要取消生产线 ${line.letter} 的当前订单吗？取消后订单将停止执行。`,
-          '提示',
-          {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }
-        );
-
-        const orderId = line.currentOrder?.orderId || '未知订单';
-        const lineLetter = line.letter;
-
-        // 如果正在出库，先取消出库操作
-        if (this.outWarehouseExecuting[lineLetter]) {
-          this.cancelOutWarehouse(lineLetter);
-        }
-
-        // 清空当前订单
-        line.currentOrder = null;
-
-        // 添加日志
-        this.addLog(`生产线 ${lineLetter} 的订单 ${orderId} 已取消`);
-
-        // 显示成功消息
-        this.$message.success(`已取消生产线 ${lineLetter} 的订单 ${orderId}`);
-      } catch (err) {
-        // 用户取消操作，不做处理
-        if (err !== 'cancel') {
-          this.$message.error('取消订单失败：' + err);
-        }
-      }
-    },
     // 确认订单选择
     confirmOrderSelection() {
       if (!this.selectedOrderId || !this.selectedLine) return;
@@ -6416,9 +5742,7 @@ export default {
         const queue = this.queues[queueIndex];
         if (queue && queue.trayInfo.length >= MAX_CAPACITY) {
           this.addLog(
-            `${line.letter}线队列${this.transformQueueName(
-              queue.queueName
-            )}已满（${queue.trayInfo.length}/${MAX_CAPACITY}），不允许开启上货`
+            `${line.letter}线队列${queue.queueName}已满（${queue.trayInfo.length}/${MAX_CAPACITY}），不允许开启上货`
           );
           return false;
         }
@@ -6642,22 +5966,6 @@ export default {
     // 处理上货请求
     handleLoadingRequest(lineLetter, witchLine) {
       this.addLog(`线体${lineLetter}${witchLine}触发上货请求`);
-
-      // 先校验对应线体是否勾选了“允许上货”
-      // A线只有一个实际受控子线：A1-5，因此无论witchLine传入什么，都统一校验A1-5
-      const allowKey =
-        lineLetter === 'A' ? 'A1-5' : `${lineLetter}${witchLine}`;
-      const isAllowed = this.lineAllowLoadingStatus[allowKey] === true;
-      if (!isAllowed) {
-        this.addLog(
-          `线体${lineLetter}${witchLine}未“允许上货”，拦截本次上货请求`,
-          'alarm'
-        );
-        this.$message.warning(
-          `线体${lineLetter}${witchLine}未“允许上货”，无法上货`
-        );
-        return;
-      }
 
       // 无码上货模式
       if (this.noCodeUpload) {
@@ -6988,16 +6296,15 @@ export default {
 
       // 获取PLC数值范围
       const plcRanges = {
-        cart1: { min: 1000, max: 2910 },
-        cart2: { min: 1000, max: 2857 }
+        cart1: { min: 0, max: 1010 },
+        cart2: { min: 0, max: 1010 }
       };
 
       const plcRange = plcRanges[`cart${cartId}`];
       if (!plcRange) return;
 
       // 计算比例（基于新的范围起点）
-      let ratio = (value - plcRange.min) / (plcRange.max - plcRange.min);
-      ratio = Math.max(0, Math.min(1, ratio)); // 限制在0-1范围
+      const ratio = value / plcRange.max;
 
       // 根据比例计算y轴位置（PLC原点对应y轴最小值，PLC终点对应y轴最大值）
       const yPosition = yRange.min + (yRange.max - yRange.min) * ratio;
@@ -7096,9 +6403,7 @@ export default {
       try {
         // 确认移动操作
         await this.$confirm(
-          `确认将托盘 ${this.draggedTray.id} 从 ${this.transformQueueName(
-            sourceQueue.queueName
-          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}？`,
+          `确认将托盘 ${this.draggedTray.id} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}？`,
           '移动托盘确认',
           {
             confirmButtonText: '确定',
@@ -7137,16 +6442,12 @@ export default {
 
         // 添加托盘移动日志
         this.addLog(
-          `托盘 ${movedTray.trayCode} 从 ${this.transformQueueName(
-            sourceQueue.queueName
-          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}`
+          `托盘 ${movedTray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
         );
 
         this.$message({
           type: 'success',
-          message: `托盘 ${
-            movedTray.trayCode
-          } 已成功移动到 ${this.transformQueueName(targetQueue.queueName)}`,
+          message: `托盘 ${movedTray.trayCode} 已成功移动到 ${targetQueue.queueName}`,
           duration: 2000
         });
       } catch (error) {
@@ -7169,11 +6470,7 @@ export default {
         // 直接更新前端队列数据
         this.queues[queueIndex].trayInfo = trayInfo;
         // 添加日志
-        this.addLog(
-          `队列 ${this.transformQueueName(
-            this.queues[queueIndex].queueName
-          )} 数据已更新`
-        );
+        this.addLog(`队列 ${this.queues[queueIndex].queueName} 数据已更新`);
       } else {
         this.$message.error('找不到队列ID: ' + queueId);
       }
@@ -7208,9 +6505,7 @@ export default {
 
           // 添加删除托盘日志
           this.addLog(
-            `托盘 ${tray.id} 已从 ${this.transformQueueName(
-              this.selectedQueue.queueName
-            )} 删除`
+            `托盘 ${tray.id} 已从 ${this.selectedQueue.queueName} 删除`
           );
 
           this.$message.success('托盘删除成功');
@@ -7257,9 +6552,7 @@ export default {
 
         // 添加操作日志
         this.addLog(
-          `托盘 ${currentTray.trayCode} 在 ${this.transformQueueName(
-            this.selectedQueue.queueName
-          )} 中上移`
+          `托盘 ${currentTray.trayCode} 在 ${this.selectedQueue.queueName} 中上移`
         );
 
         this.$message.success('托盘上移成功');
@@ -7307,9 +6600,7 @@ export default {
 
         // 添加操作日志
         this.addLog(
-          `托盘 ${currentTray.trayCode} 在 ${this.transformQueueName(
-            this.selectedQueue.queueName
-          )} 中下移`
+          `托盘 ${currentTray.trayCode} 在 ${this.selectedQueue.queueName} 中下移`
         );
 
         this.$message.success('托盘下移成功');
@@ -7570,9 +6861,7 @@ export default {
                     ? trayInfo
                     : [];
                   this.addLog(
-                    `已加载队列${this.transformQueueName(
-                      queueData.queueName || queueId
-                    )}的托盘信息，共${
+                    `已加载队列${queueData.queueName || queueId}的托盘信息，共${
                       this.queues[queueIndex].trayInfo.length
                     }个托盘`
                   );
@@ -7767,9 +7056,7 @@ export default {
       };
 
       this.addLog(
-        `${lineLetter}${witchLine}无码上货成功，托盘号：no-tray-code，已添加到队列${this.transformQueueName(
-          this.queues[queueIndex].queueName
-        )}`
+        `${lineLetter}${witchLine}无码上货成功，托盘号：no-tray-code，已添加到队列${this.queues[queueIndex].queueName}`
       );
 
       this.$message.success(`${lineLetter}${witchLine}无码上货成功`);
@@ -8228,11 +7515,7 @@ export default {
           toQueue.trayInfo.push(tray);
           movedCount++;
           this.addLog(
-            `托盘 ${tray.trayCode} 从 ${this.transformQueueName(
-              fromQueue.queueName
-            )} 移动到 ${this.transformQueueName(
-              toQueue.queueName
-            )}（预热房内部移动）`
+            `托盘 ${tray.trayCode} 从 ${fromQueue.queueName} 移动到 ${toQueue.queueName}（预热房内部移动）`
           );
         } else {
           break;
@@ -8241,11 +7524,7 @@ export default {
 
       if (movedCount < count) {
         this.addLog(
-          `${this.transformQueueName(
-            fromQueue.queueName
-          )}队列数量不足，仅移动${movedCount}/${count}个托盘到${this.transformQueueName(
-            toQueue.queueName
-          )}`
+          `${fromQueue.queueName}队列数量不足，仅移动${movedCount}/${count}个托盘到${toQueue.queueName}`
         );
       }
     },
@@ -8293,9 +7572,7 @@ export default {
         const tray = sourceQueue.trayInfo.shift();
         targetQueue.trayInfo.push(tray);
         this.addLog(
-          `托盘 ${tray.trayCode} 从 ${this.transformQueueName(
-            sourceQueue.queueName
-          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}`
+          `托盘 ${tray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
         );
       }
     },
@@ -8343,9 +7620,7 @@ export default {
         const tray = sourceQueue.trayInfo.shift();
         targetQueue.trayInfo.push(tray);
         this.addLog(
-          `托盘 ${tray.trayCode} 从 ${this.transformQueueName(
-            sourceQueue.queueName
-          )} 移动到 ${this.transformQueueName(targetQueue.queueName)}`
+          `托盘 ${tray.trayCode} 从 ${sourceQueue.queueName} 移动到 ${targetQueue.queueName}`
         );
       }
     },
@@ -8550,35 +7825,6 @@ export default {
             display: flex;
             align-items: center;
             gap: 10px;
-            .title-actions {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-            }
-            .add-order-btn {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 28px;
-              height: 28px;
-              border-radius: 4px;
-              cursor: pointer;
-              transition: all 0.3s ease;
-              background: rgba(64, 158, 255, 0.2);
-              border: 1px solid rgba(64, 158, 255, 0.3);
-              i {
-                font-size: 16px;
-                color: #409eff;
-                transition: all 0.3s ease;
-              }
-            }
-            .add-order-btn:hover {
-              background: rgba(64, 158, 255, 0.3);
-              border-color: rgba(64, 158, 255, 0.5);
-              i {
-                color: #fff;
-              }
-            }
           }
           .el-button {
             background: rgba(10, 197, 168, 0.2);
@@ -10558,71 +9804,6 @@ export default {
     &:hover {
       color: #fff;
       transform: scale(1.1);
-    }
-  }
-}
-
-/* 新建订单弹窗样式 */
-.add-order-dialog {
-  .form-container {
-    padding: 20px 0;
-  }
-}
-
-/* 托盘码录入样式 */
-.tray-codes-section {
-  .tray-codes-container {
-    .tray-input-section {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      align-items: center;
-
-      .el-input {
-        flex: 1;
-      }
-    }
-
-    .tray-codes-display {
-      .tray-codes-list {
-        max-height: 150px;
-        overflow-y: auto;
-        border: 1px solid #dcdfe6;
-        border-radius: 4px;
-        padding: 10px;
-        background-color: #fafafa;
-
-        .tray-code-tag {
-          display: inline-flex;
-          align-items: center;
-          background-color: #409eff;
-          color: white;
-          padding: 4px 8px;
-          border-radius: 4px;
-          margin: 2px;
-          font-size: 12px;
-          position: relative;
-
-          .tray-code-text {
-            margin-right: 8px;
-          }
-
-          .remove-btn {
-            color: white;
-            padding: 0;
-            margin: 0;
-            font-size: 12px;
-            width: 16px;
-            height: 16px;
-            min-height: 16px;
-            line-height: 1;
-
-            &:hover {
-              color: #ff4757;
-            }
-          }
-        }
-      }
     }
   }
 }
