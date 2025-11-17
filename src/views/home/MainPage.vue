@@ -2328,13 +2328,13 @@
             <!-- 左侧队列列表 -->
             <div class="queue-container-left">
               <div
-                v-for="(queue, index) in queues"
+                v-for="(queue, index) in displayQueues"
                 :key="'queue-' + queue.id + '-' + index"
                 class="queue"
-                :class="{ active: selectedQueueIndex === index }"
-                @click="showTrays(index)"
+                :class="{ active: selectedQueueIndex === queue.originalIndex }"
+                @click="showTrays(queue.originalIndex)"
                 @dragover.prevent
-                @drop="handleDrop(index)"
+                @drop="handleDrop(queue.originalIndex)"
               >
                 <span class="queue-name">{{ queue.queueName }}</span>
                 <span class="tray-count">{{
@@ -3308,31 +3308,31 @@ export default {
         ]
       },
       queues: [
-        // {
-        //   id: 1,
-        //   queueName: 'A1-2',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 2,
-        //   queueName: 'A1-3',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 3,
-        //   queueName: 'A2-1-进',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 4,
-        //   queueName: 'A3-1',
-        //   trayInfo: []
-        // },
-        // {
-        //   id: 5,
-        //   queueName: 'A3-2',
-        //   trayInfo: []
-        // },
+        {
+          id: 1,
+          queueName: 'A1-2',
+          trayInfo: []
+        },
+        {
+          id: 2,
+          queueName: 'A1-3',
+          trayInfo: []
+        },
+        {
+          id: 3,
+          queueName: 'A2-1-进',
+          trayInfo: []
+        },
+        {
+          id: 4,
+          queueName: 'A3-1',
+          trayInfo: []
+        },
+        {
+          id: 5,
+          queueName: 'A3-2',
+          trayInfo: []
+        },
         {
           id: 6,
           queueName: 'A1-5',
@@ -4314,6 +4314,12 @@ export default {
     selectedQueue() {
       return this.queues[this.selectedQueueIndex];
     },
+    // 过滤掉 id 为 1-5 的队列，用于右侧抽屉显示
+    displayQueues() {
+      return this.queues
+        .map((queue, index) => ({ ...queue, originalIndex: index }))
+        .filter((queue) => queue.id < 1 || queue.id > 5);
+    },
     // 超简单的数量映射
     quantityByQueueId() {
       return {
@@ -4378,9 +4384,13 @@ export default {
   async mounted() {
     this.initializeMarkers();
     await this.loadQueueInfoFromDatabase();
-    // 数据加载完成后创建监听
+    // 数据加载完成后创建监听（跳过 id 为 1-5 的队列）
     this.$nextTick(() => {
       this.queues.forEach((queue, index) => {
+        // 跳过 id 为 1-5 的队列
+        if (queue.id >= 1 && queue.id <= 5) {
+          return;
+        }
         this.$watch(`queues.${index}.trayInfo`, {
           handler(newVal, oldVal) {
             this.updateQueueInfo(queue.id);
@@ -4776,6 +4786,11 @@ export default {
         this.disinfectionRoomSelectedFrom === 'B' &&
         this.disinfectionExecuting
       ) {
+        console.log(
+          '我进来了吗？',
+          this.disinfectionRoomSelectedFrom,
+          this.disinfectionExecuting
+        );
         this.updateDisinfectionNeedAndWrite();
       }
     },
@@ -4790,6 +4805,11 @@ export default {
         this.disinfectionRoomSelectedFrom === 'B' &&
         this.disinfectionExecuting
       ) {
+        console.log(
+          '我进来了吗？',
+          this.disinfectionRoomSelectedFrom,
+          this.disinfectionExecuting
+        );
         this.updateDisinfectionNeedAndWrite();
       }
     },
@@ -6284,9 +6304,43 @@ export default {
         const orderId = line.currentOrder?.orderId || '未知订单';
         const lineLetter = line.letter;
 
-        // 如果正在出库，先取消出库操作
-        if (this.outWarehouseExecuting[lineLetter]) {
-          this.cancelOutWarehouse(lineLetter);
+        // 清零对应生产线的上货需进货数量并写入PLC
+        // A线：只有 A14 (A1-4)
+        // B线：有 B11 (B1-1) 和 B14 (B1-4)
+        // C线：有 C11 (C1-1) 和 C14 (C1-4)
+        // D线：有 D11 (D1-1) 和 D14 (D1-4)
+        // E线：有 E11 (E1-1) 和 E14 (E1-4)
+        const stockRequiredMap = {
+          A: [{ field: 'A14', plcAddress: 'DB101.DBW1022', witchLine: '1-5' }],
+          B: [
+            { field: 'B11', plcAddress: 'DB101.DBW1024', witchLine: '1-2' },
+            { field: 'B14', plcAddress: 'DB101.DBW1026', witchLine: '1-5' }
+          ],
+          C: [
+            { field: 'C11', plcAddress: 'DB101.DBW1028', witchLine: '1-2' },
+            { field: 'C14', plcAddress: 'DB101.DBW1030', witchLine: '1-5' }
+          ],
+          D: [
+            { field: 'D11', plcAddress: 'DB101.DBW1032', witchLine: '1-2' },
+            { field: 'D14', plcAddress: 'DB101.DBW1034', witchLine: '1-5' }
+          ],
+          E: [
+            { field: 'E11', plcAddress: 'DB101.DBW1036', witchLine: '1-2' },
+            { field: 'E14', plcAddress: 'DB101.DBW1038', witchLine: '1-5' }
+          ]
+        };
+
+        const lineConfig = stockRequiredMap[lineLetter];
+        if (lineConfig) {
+          lineConfig.forEach(({ field, plcAddress, witchLine }) => {
+            // 清零需进货数量
+            this.stockRequiredInfo[field] = 0;
+            // 写入PLC
+            this.writeWordWithCancel(plcAddress, 0);
+            this.addLog(
+              `取消订单${orderId}，${lineLetter}${witchLine}需进货数量清零，写入PLC ${plcAddress}: 0`
+            );
+          });
         }
 
         // 清空当前订单
@@ -6499,8 +6553,10 @@ export default {
     onAllowLoadingChange(line) {
       // 如果要开启上货，先检查队列容量
       if (line.allowLoading && !this.checkQueueCapacity(line)) {
-        // 队列已满，不允许开启上货
-        line.allowLoading = false;
+        // 队列已满，不允许开启上货，恢复复选框状态
+        this.$nextTick(() => {
+          line.allowLoading = false;
+        });
         this.$message.warning(`${line.letter}线队列已满，不允许开启上货`);
         return;
       }
@@ -6588,17 +6644,25 @@ export default {
         return;
       }
 
-      // 无码上货模式
-      if (this.noCodeUpload) {
-        this.addLog(`${lineLetter}线触发上货请求，无码上货模式启用`);
-        this.addNoCodeTrayToQueue(lineLetter, witchLine);
-        return;
-      }
-
       // 找到对应的生产线
       const line = this.productionLines.find((l) => l.letter === lineLetter);
       if (!line) {
         this.addLog(`未找到线体${lineLetter}`);
+        return;
+      }
+
+      // 无码上货模式
+      if (this.noCodeUpload) {
+        this.addLog(`${lineLetter}线触发上货请求，无码上货模式启用`);
+
+        // 无码模式下也需要检查是否有运行订单
+        if (!line.currentOrder) {
+          this.addLog(`线体${lineLetter}没有设置订单`);
+          this.$message.warning(`线体${lineLetter}没有设置订单，无法上货`);
+          return;
+        }
+
+        this.addNoCodeTrayToQueue(lineLetter, witchLine);
         return;
       }
 
@@ -6616,18 +6680,41 @@ export default {
         return;
       }
 
-      // 获取当前托盘索引
-      const currentIndex = line.currentOrder.currentTrayIndex || 0;
+      // 获取该线体对应的所有队列索引
+      const queueIndexMap = {
+        A: [5], // A1-5
+        B: [10, 15], // B1-2, B1-5
+        C: [20, 25], // C1-2, C1-5
+        D: [30, 35], // D1-2, D1-5
+        E: [40, 45] // E1-2, E1-5
+      };
+
+      const queueIndexes = queueIndexMap[lineLetter] || [];
+
+      // 收集该线体所有队列中已存在的托盘号
+      const loadedTrayCodes = new Set();
+      queueIndexes.forEach((queueIdx) => {
+        const queue = this.queues[queueIdx];
+        if (queue && queue.trayInfo) {
+          queue.trayInfo.forEach((tray) => {
+            if (tray.trayCode && tray.orderId === line.currentOrder.orderId) {
+              loadedTrayCodes.add(tray.trayCode);
+            }
+          });
+        }
+      });
+
+      // 从订单的托盘列表中，找到第一个未上货的托盘（排除已上货队列的托盘号）
+      const currentTray = line.currentOrder.trays.find(
+        (tray) => !loadedTrayCodes.has(tray.trayCode)
+      );
 
       // 检查是否还有可用托盘
-      if (currentIndex >= line.currentOrder.trays.length) {
+      if (!currentTray) {
         this.addLog(`线体${lineLetter}的订单托盘已全部上货完毕`);
         this.$message.warning(`线体${lineLetter}的订单托盘已全部上货完毕`);
         return;
       }
-
-      // 获取当前托盘
-      const currentTray = line.currentOrder.trays[currentIndex];
 
       // 根据线体和bitIndex获取对应的队列索引
       // A线只有一条子线：A15 (索引=5)
@@ -6650,6 +6737,25 @@ export default {
         return;
       }
 
+      // 检查队列容量是否已满（最大容量13）
+      const MAX_CAPACITY = 13;
+      if (this.queues[queueIndex].trayInfo.length >= MAX_CAPACITY) {
+        this.addLog(
+          `线体${lineLetter}${witchLine}队列已满（${this.queues[queueIndex].trayInfo.length}/${MAX_CAPACITY}），不允许上货`,
+          'alarm'
+        );
+        this.$message.warning(
+          `线体${lineLetter}${witchLine}队列已满，不允许上货`
+        );
+        // 恢复复选框状态
+        const allowKey =
+          lineLetter === 'A' ? 'A1-5' : `${lineLetter}${witchLine}`;
+        this.lineAllowLoadingStatus[allowKey] = false;
+        // 如果所有子线都关闭，也关闭主线的复选框
+        this.checkAndUncheckMainLineButton(lineLetter);
+        return;
+      }
+
       // 创建托盘副本并添加到队列的第一个位置
       const trayToAdd = {
         ...currentTray,
@@ -6659,6 +6765,11 @@ export default {
 
       // 直接使用数组索引操作队列
       this.queues[queueIndex].trayInfo.push(trayToAdd);
+
+      // 将当前托盘号添加到已上货集合中（用于计算剩余托盘数）
+      if (currentTray.trayCode) {
+        loadedTrayCodes.add(currentTray.trayCode);
+      }
 
       // 计算并更新预热需进货数量
       this.updatePreheatNeedQuantity(lineLetter, witchLine);
@@ -6692,16 +6803,19 @@ export default {
         this.uploadScanInfo[fieldKey] = currentTray.productName;
       }
 
-      // 更新订单的当前托盘索引
-      line.currentOrder.currentTrayIndex = currentIndex + 1;
+      // 计算剩余托盘数（排除已上货的托盘，包括当前刚添加的）
+      const remainingTrays = line.currentOrder.trays.filter(
+        (tray) => !loadedTrayCodes.has(tray.trayCode)
+      );
+      const remainingCount = remainingTrays.length;
 
       // 添加日志
       this.addLog(
         `线体${lineLetter}${witchLine}上货：${
           currentTray.productName
-        }，托盘号：${currentTray.name},剩余托盘数：${
-          line.currentOrder.trays.length - (currentIndex + 1)
-        }`
+        }，托盘号：${
+          currentTray.trayCode || currentTray.name
+        }，剩余托盘数：${remainingCount}`
       );
 
       // 显示成功消息
@@ -7669,6 +7783,9 @@ export default {
       // 直接使用数组索引操作队列
       this.queues[queueIndex].trayInfo.push(trayInfo);
 
+      // 计算并更新预热需进货数量
+      this.updatePreheatNeedQuantity(lineLetter, witchLine);
+
       // 更新左上角卡片显示的当前扫码托盘信息
       this.nowScanTrayInfo = {
         orderId: trayInfo.orderId,
@@ -7686,110 +7803,145 @@ export default {
     // 获取预热房数量（两条线加起来）
     getPreheatCountFor(line) {
       if (!line) return 0;
-      // 每条线有两个预热房队列，需要把两条线的数量加起来
-      const queueIndexMap = {
-        A: [6], // A1-6
-        B: [11, 16], // B1-3, B1-6
-        C: [21, 26], // C1-3, C1-6
-        D: [31, 36], // D1-3, D1-6
-        E: [41, 46] // E1-3, E1-6
-      };
-
-      const queueIndexes = queueIndexMap[line] || [];
-      let total = 0;
-      queueIndexes.forEach((index) => {
-        if (this.queues[index]) {
-          total += this.queues[index].trayInfo.length || 0;
-        }
-      });
-      return total;
+      if (line === 'A') {
+        return Number(this.aLineQuantity.a16 || 0);
+      } else if (line === 'B') {
+        return (
+          Number(this.bLineQuantity.b13 || 0) +
+          Number(this.bLineQuantity.b16 || 0)
+        );
+      } else if (line === 'C') {
+        return (
+          Number(this.cLineQuantity.c13 || 0) +
+          Number(this.cLineQuantity.c16 || 0)
+        );
+      } else if (line === 'D') {
+        return (
+          Number(this.dLineQuantity.d13 || 0) +
+          Number(this.dLineQuantity.d16 || 0)
+        );
+      } else if (line === 'E') {
+        return (
+          Number(this.eLineQuantity.e13 || 0) +
+          Number(this.eLineQuantity.e16 || 0)
+        );
+      }
+      return 0;
     },
     // 获取灭菌柜数量（两条线加起来：进队列+出队列）
     getSterilizeCountFor(line) {
       if (!line) return 0;
       // 灭菌柜"进队列"数量（不包括出队列，用于判断是否满了）
-      // 队列索引映射：A(7), B(12,17), C(22,27), D(32,37), E(42,47)
-      const queueIndexMap = {
-        A: [7], // A2-2-进
-        B: [12, 17], // B2-1-进, B2-2-进
-        C: [22, 27], // C2-1-进, C2-2-进
-        D: [32, 37], // D2-1-进, D2-2-进
-        E: [42, 47] // E2-1-进, E2-2-进
-      };
-
-      const queueIndexes = queueIndexMap[line] || [];
-      let total = 0;
-      queueIndexes.forEach((index) => {
-        if (this.queues[index]) {
-          total += this.queues[index].trayInfo.length || 0;
-        }
-      });
-      return total;
+      if (line === 'A') {
+        return Number(this.aLineQuantity.a22in || 0);
+      } else if (line === 'B') {
+        return (
+          Number(this.bLineQuantity.b21in || 0) +
+          Number(this.bLineQuantity.b22in || 0)
+        );
+      } else if (line === 'C') {
+        return (
+          Number(this.cLineQuantity.c21in || 0) +
+          Number(this.cLineQuantity.c22in || 0)
+        );
+      } else if (line === 'D') {
+        return (
+          Number(this.dLineQuantity.d21in || 0) +
+          Number(this.dLineQuantity.d22in || 0)
+        );
+      } else if (line === 'E') {
+        return (
+          Number(this.eLineQuantity.e21in || 0) +
+          Number(this.eLineQuantity.e22in || 0)
+        );
+      }
+      return 0;
     },
     // 获取灭菌柜出队列数量（用于灭菌柜到解析房）
     getSterilizeOutCountFor(line) {
       if (!line) return 0;
       // 灭菌柜"出队列"数量
-      // 队列索引映射：A(51), B(52,53), C(54,55), D(56,57), E(58,59)
-      const queueIndexMap = {
-        A: [51], // A2-2-出
-        B: [52, 53], // B2-1-出, B2-2-出
-        C: [54, 55], // C2-1-出, C2-2-出
-        D: [56, 57], // D2-1-出, D2-2-出
-        E: [58, 59] // E2-1-出, E2-2-出
-      };
-
-      const queueIndexes = queueIndexMap[line] || [];
-      let total = 0;
-      queueIndexes.forEach((index) => {
-        if (this.queues[index]) {
-          total += this.queues[index].trayInfo.length || 0;
-        }
-      });
-      return total;
+      if (line === 'A') {
+        return Number(this.aLineQuantity.a22out || 0);
+      } else if (line === 'B') {
+        return (
+          Number(this.bLineQuantity.b21out || 0) +
+          Number(this.bLineQuantity.b22out || 0)
+        );
+      } else if (line === 'C') {
+        return (
+          Number(this.cLineQuantity.c21out || 0) +
+          Number(this.cLineQuantity.c22out || 0)
+        );
+      } else if (line === 'D') {
+        return (
+          Number(this.dLineQuantity.d21out || 0) +
+          Number(this.dLineQuantity.d22out || 0)
+        );
+      } else if (line === 'E') {
+        return (
+          Number(this.eLineQuantity.e21out || 0) +
+          Number(this.eLineQuantity.e22out || 0)
+        );
+      }
+      return 0;
     },
     // 获取解析房数量（两条线加起来）
     getAnalysisCountFor(line) {
       if (!line) return 0;
       // 每条线有两个解析房队列
-      // 队列索引映射：A(8,9), B(13,14,18,19), C(23,24,28,29), D(33,34,38,39), E(43,44,48,49)
-      const queueIndexMap = {
-        A: [8], // A3-4, A3-5
-        B: [13, 18], // B3-1, B3-4
-        C: [23, 28], // C3-1, C3-4
-        D: [33, 38], // D3-1, D3-4
-        E: [43, 48] // E3-1, E3-4
-      };
-
-      const queueIndexes = queueIndexMap[line] || [];
-      let total = 0;
-      queueIndexes.forEach((index) => {
-        if (this.queues[index]) {
-          total += this.queues[index].trayInfo.length || 0;
-        }
-      });
-      return total;
+      if (line === 'A') {
+        return Number(this.aLineQuantity.a34 || 0);
+      } else if (line === 'B') {
+        return (
+          Number(this.bLineQuantity.b31 || 0) +
+          Number(this.bLineQuantity.b34 || 0)
+        );
+      } else if (line === 'C') {
+        return (
+          Number(this.cLineQuantity.c31 || 0) +
+          Number(this.cLineQuantity.c34 || 0)
+        );
+      } else if (line === 'D') {
+        return (
+          Number(this.dLineQuantity.d31 || 0) +
+          Number(this.dLineQuantity.d34 || 0)
+        );
+      } else if (line === 'E') {
+        return (
+          Number(this.eLineQuantity.e31 || 0) +
+          Number(this.eLineQuantity.e34 || 0)
+        );
+      }
+      return 0;
     },
     // 获取出库队列数量（只计算A35、B32、B35、C32、C35、D32、D35、E32、E35）
     getOutWarehouseCountFor(line) {
       if (!line) return 0;
-      // 出库队列索引映射：A35(9), B32(14), B35(19), C32(24), C35(29), D32(34), D35(39), E32(44), E35(49)
-      const outQueueIndexMap = {
-        A: [9], // A3-5
-        B: [14, 19], // B3-2, B3-5
-        C: [24, 29], // C3-2, C3-5
-        D: [34, 39], // D3-2, D3-5
-        E: [44, 49] // E3-2, E3-5
-      };
-
-      const queueIndexes = outQueueIndexMap[line] || [];
-      let total = 0;
-      queueIndexes.forEach((index) => {
-        if (this.queues[index]) {
-          total += this.queues[index].trayInfo.length || 0;
-        }
-      });
-      return total;
+      if (line === 'A') {
+        return Number(this.aLineQuantity.a35 || 0);
+      } else if (line === 'B') {
+        return (
+          Number(this.bLineQuantity.b32 || 0) +
+          Number(this.bLineQuantity.b35 || 0)
+        );
+      } else if (line === 'C') {
+        return (
+          Number(this.cLineQuantity.c32 || 0) +
+          Number(this.cLineQuantity.c35 || 0)
+        );
+      } else if (line === 'D') {
+        return (
+          Number(this.dLineQuantity.d32 || 0) +
+          Number(this.dLineQuantity.d35 || 0)
+        );
+      } else if (line === 'E') {
+        return (
+          Number(this.eLineQuantity.e32 || 0) +
+          Number(this.eLineQuantity.e35 || 0)
+        );
+      }
+      return 0;
     },
     // 检查目的地是否已满16个托盘，满了则自动设置为不执行
     checkDestinationLimit() {
