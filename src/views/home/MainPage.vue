@@ -309,7 +309,7 @@
                 </div>
                 <!-- A线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="423"
@@ -318,36 +318,36 @@
                   <div class="marker-label" style="width: 36px">A1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">A1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">A1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">A3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: aLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="423"
                   @click="toggleBitValue(aLineMotorRunning, 'bit10')"
                 >
@@ -437,7 +437,7 @@
                 </div>
                 <!-- B线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="520"
@@ -446,25 +446,25 @@
                   <div class="marker-label" style="width: 36px">B1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">B1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">B1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="575"
@@ -473,36 +473,36 @@
                   <div class="marker-label" style="width: 36px">B1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">B1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">B1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">B3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="520"
                   @click="toggleBitValue(bLineMotorRunning, 'bit7')"
                 >
@@ -518,18 +518,18 @@
                   <div class="marker-label" style="width: 36px">B3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">B3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: bLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="575"
                   @click="toggleBitValue(bLineMotorRunning, 'bit10')"
                 >
@@ -691,7 +691,7 @@
                 </div>
                 <!-- C线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="671"
@@ -700,25 +700,25 @@
                   <div class="marker-label" style="width: 36px">C1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">C1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">C1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="723"
@@ -727,36 +727,36 @@
                   <div class="marker-label" style="width: 36px">C1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">C1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">C1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">C3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="671"
                   @click="toggleBitValue(cLineMotorRunning, 'bit7')"
                 >
@@ -772,18 +772,18 @@
                   <div class="marker-label" style="width: 36px">C3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">C3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: cLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="723"
                   @click="toggleBitValue(cLineMotorRunning, 'bit10')"
                 >
@@ -945,7 +945,7 @@
                 </div>
                 <!-- D线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="820"
@@ -954,25 +954,25 @@
                   <div class="marker-label" style="width: 36px">D1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">D1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">D1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="872"
@@ -981,36 +981,36 @@
                   <div class="marker-label" style="width: 36px">D1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">D1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">D1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">D3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="820"
                   @click="toggleBitValue(dLineMotorRunning, 'bit7')"
                 >
@@ -1026,18 +1026,18 @@
                   <div class="marker-label" style="width: 36px">D3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">D3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: dLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="872"
                   @click="toggleBitValue(dLineMotorRunning, 'bit10')"
                 >
@@ -1199,7 +1199,7 @@
                 </div>
                 <!-- E线电机运行信号 -->
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit0 === '1' }"
                   data-x="180"
                   data-y="969"
@@ -1208,25 +1208,25 @@
                   <div class="marker-label" style="width: 36px">E1-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit1 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit1')"
                 >
                   <div class="marker-label" style="width: 36px">E1-2#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit2 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit2')"
                 >
                   <div class="marker-label" style="width: 36px">E1-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit3 === '1' }"
                   data-x="180"
                   data-y="1020"
@@ -1235,36 +1235,36 @@
                   <div class="marker-label" style="width: 36px">E1-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit4 === '1' }"
-                  data-x="481"
+                  data-x="400"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit4')"
                 >
                   <div class="marker-label" style="width: 36px">E1-5#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit5 === '1' }"
-                  data-x="930"
+                  data-x="860"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit5')"
                 >
                   <div class="marker-label" style="width: 36px">E1-6#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit6 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit6')"
                 >
                   <div class="marker-label" style="width: 36px">E3-1#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit7 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="969"
                   @click="toggleBitValue(eLineMotorRunning, 'bit7')"
                 >
@@ -1280,18 +1280,18 @@
                   <div class="marker-label" style="width: 36px">E3-3#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit9 === '1' }"
-                  data-x="2130"
+                  data-x="2070"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit9')"
                 >
                   <div class="marker-label" style="width: 36px">E3-4#</div>
                 </div>
                 <div
-                  class="motor-marker label-top"
+                  class="motor-marker label-left"
                   :class="{ running: eLineMotorRunning.bit10 === '1' }"
-                  data-x="2570"
+                  data-x="2530"
                   data-y="1020"
                   @click="toggleBitValue(eLineMotorRunning, 'bit10')"
                 >
@@ -1466,7 +1466,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1496,7 +1496,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1525,7 +1525,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1554,7 +1554,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1583,7 +1583,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1612,7 +1612,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1641,7 +1641,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1670,7 +1670,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -1699,7 +1699,7 @@
                     class="data-panel"
                     :class="['position-left', { 'always-show': true }]"
                     style="
-                      width: 40px;
+                      width: 42px;
                       padding: 3px;
                       border-radius: 5px;
                       text-align: center;
@@ -3616,61 +3616,61 @@ export default {
         // { id: 3, name: 'A2-1-进', queueId: 3, x: 2100, y: 180 },
         // { id: 4, name: 'A3-1', queueId: 4, x: 2870, y: 180 },
         // { id: 5, name: 'A3-2', queueId: 5, x: 3520, y: 180 },
-        { id: 6, name: 'A1-5', queueId: 6, x: 330, y: 420 },
-        { id: 7, name: 'A1-6', queueId: 7, x: 810, y: 420 },
-        { id: 8, name: 'A2-2-进', queueId: 8, x: 1400, y: 420 },
-        { id: 9, name: 'A3-4', queueId: 9, x: 1970, y: 420 },
-        { id: 10, name: 'A3-5', queueId: 10, x: 2440, y: 420 },
-        { id: 11, name: 'B1-2', queueId: 11, x: 330, y: 518 },
-        { id: 12, name: 'B1-3', queueId: 12, x: 810, y: 518 },
-        { id: 13, name: 'B2-1-进', queueId: 13, x: 1400, y: 518 },
-        { id: 14, name: 'B3-1', queueId: 14, x: 1970, y: 518 },
-        { id: 15, name: 'B3-2', queueId: 15, x: 2440, y: 518 },
-        { id: 16, name: 'B1-5', queueId: 16, x: 330, y: 578 },
-        { id: 17, name: 'B1-6', queueId: 17, x: 810, y: 578 },
-        { id: 18, name: 'B2-2-进', queueId: 18, x: 1400, y: 578 },
-        { id: 19, name: 'B3-4', queueId: 19, x: 1970, y: 578 },
-        { id: 20, name: 'B3-5', queueId: 20, x: 2440, y: 578 },
-        { id: 21, name: 'C1-2', queueId: 21, x: 330, y: 670 },
-        { id: 22, name: 'C1-3', queueId: 22, x: 810, y: 670 },
-        { id: 23, name: 'C2-1-进', queueId: 23, x: 1400, y: 670 },
-        { id: 24, name: 'C3-1', queueId: 24, x: 1970, y: 670 },
-        { id: 25, name: 'C3-2', queueId: 25, x: 2440, y: 670 },
-        { id: 26, name: 'C1-5', queueId: 26, x: 330, y: 730 },
-        { id: 27, name: 'C1-6', queueId: 27, x: 810, y: 730 },
-        { id: 28, name: 'C2-2-进', queueId: 28, x: 1400, y: 730 },
-        { id: 29, name: 'C3-4', queueId: 29, x: 1970, y: 730 },
-        { id: 30, name: 'C3-5', queueId: 30, x: 2440, y: 730 },
-        { id: 31, name: 'D1-2', queueId: 31, x: 330, y: 820 },
-        { id: 32, name: 'D1-3', queueId: 32, x: 810, y: 820 },
-        { id: 33, name: 'D2-1-进', queueId: 33, x: 1400, y: 820 },
-        { id: 34, name: 'D3-1', queueId: 34, x: 1970, y: 820 },
-        { id: 35, name: 'D3-2', queueId: 35, x: 2440, y: 820 },
-        { id: 36, name: 'D1-5', queueId: 36, x: 330, y: 880 },
-        { id: 37, name: 'D1-6', queueId: 37, x: 810, y: 880 },
-        { id: 38, name: 'D2-2-进', queueId: 38, x: 1400, y: 880 },
-        { id: 39, name: 'D3-4', queueId: 39, x: 1970, y: 880 },
-        { id: 40, name: 'D3-5', queueId: 40, x: 2440, y: 880 },
-        { id: 41, name: 'E1-2', queueId: 41, x: 330, y: 970 },
-        { id: 42, name: 'E1-3', queueId: 42, x: 810, y: 970 },
-        { id: 43, name: 'E2-1-进', queueId: 43, x: 1400, y: 970 },
-        { id: 44, name: 'E3-1', queueId: 44, x: 1970, y: 970 },
-        { id: 45, name: 'E3-2', queueId: 45, x: 2440, y: 970 },
-        { id: 46, name: 'E1-5', queueId: 46, x: 330, y: 1030 },
-        { id: 47, name: 'E1-6', queueId: 47, x: 810, y: 1030 },
-        { id: 48, name: 'E2-2-进', queueId: 48, x: 1400, y: 1030 },
-        { id: 49, name: 'E3-4', queueId: 49, x: 1970, y: 1030 },
-        { id: 50, name: 'E3-5', queueId: 50, x: 2440, y: 1030 },
-        // { id: 51, name: 'A2-1-进', queueId: 51, x: 330, y: 1120 },
-        { id: 52, name: 'A2-2-出', queueId: 52, x: 1600, y: 420 },
-        { id: 53, name: 'B2-1-出', queueId: 53, x: 1600, y: 518 },
-        { id: 54, name: 'B2-2-出', queueId: 54, x: 1600, y: 578 },
-        { id: 55, name: 'C2-1-出', queueId: 55, x: 1600, y: 670 },
-        { id: 56, name: 'C2-2-出', queueId: 56, x: 1600, y: 730 },
-        { id: 57, name: 'D2-1-出', queueId: 57, x: 1600, y: 820 },
-        { id: 58, name: 'D2-2-出', queueId: 58, x: 1600, y: 880 },
-        { id: 59, name: 'E2-1-出', queueId: 59, x: 1600, y: 970 },
-        { id: 60, name: 'E2-2-出', queueId: 60, x: 1600, y: 1030 }
+        { id: 6, name: 'A1-5', queueId: 6, x: 520, y: 420 },
+        { id: 7, name: 'A1-6', queueId: 7, x: 990, y: 420 },
+        { id: 8, name: 'A2-2-进', queueId: 8, x: 1420, y: 420 },
+        { id: 9, name: 'A3-4', queueId: 9, x: 2170, y: 420 },
+        { id: 10, name: 'A3-5', queueId: 10, x: 2640, y: 420 },
+        { id: 11, name: 'B1-2', queueId: 11, x: 520, y: 518 },
+        { id: 12, name: 'B1-3', queueId: 12, x: 990, y: 518 },
+        { id: 13, name: 'B2-1-进', queueId: 13, x: 1420, y: 518 },
+        { id: 14, name: 'B3-1', queueId: 14, x: 2170, y: 518 },
+        { id: 15, name: 'B3-2', queueId: 15, x: 2640, y: 518 },
+        { id: 16, name: 'B1-5', queueId: 16, x: 520, y: 578 },
+        { id: 17, name: 'B1-6', queueId: 17, x: 990, y: 578 },
+        { id: 18, name: 'B2-2-进', queueId: 18, x: 1420, y: 578 },
+        { id: 19, name: 'B3-4', queueId: 19, x: 2170, y: 578 },
+        { id: 20, name: 'B3-5', queueId: 20, x: 2640, y: 578 },
+        { id: 21, name: 'C1-2', queueId: 21, x: 520, y: 670 },
+        { id: 22, name: 'C1-3', queueId: 22, x: 990, y: 670 },
+        { id: 23, name: 'C2-1-进', queueId: 23, x: 1420, y: 670 },
+        { id: 24, name: 'C3-1', queueId: 24, x: 2170, y: 670 },
+        { id: 25, name: 'C3-2', queueId: 25, x: 2640, y: 670 },
+        { id: 26, name: 'C1-5', queueId: 26, x: 520, y: 730 },
+        { id: 27, name: 'C1-6', queueId: 27, x: 990, y: 730 },
+        { id: 28, name: 'C2-2-进', queueId: 28, x: 1420, y: 730 },
+        { id: 29, name: 'C3-4', queueId: 29, x: 2170, y: 730 },
+        { id: 30, name: 'C3-5', queueId: 30, x: 2640, y: 730 },
+        { id: 31, name: 'D1-2', queueId: 31, x: 520, y: 820 },
+        { id: 32, name: 'D1-3', queueId: 32, x: 990, y: 820 },
+        { id: 33, name: 'D2-1-进', queueId: 33, x: 1420, y: 820 },
+        { id: 34, name: 'D3-1', queueId: 34, x: 2170, y: 820 },
+        { id: 35, name: 'D3-2', queueId: 35, x: 2640, y: 820 },
+        { id: 36, name: 'D1-5', queueId: 36, x: 520, y: 880 },
+        { id: 37, name: 'D1-6', queueId: 37, x: 990, y: 880 },
+        { id: 38, name: 'D2-2-进', queueId: 38, x: 1420, y: 880 },
+        { id: 39, name: 'D3-4', queueId: 39, x: 2170, y: 880 },
+        { id: 40, name: 'D3-5', queueId: 40, x: 2640, y: 880 },
+        { id: 41, name: 'E1-2', queueId: 41, x: 520, y: 970 },
+        { id: 42, name: 'E1-3', queueId: 42, x: 990, y: 970 },
+        { id: 43, name: 'E2-1-进', queueId: 43, x: 1420, y: 970 },
+        { id: 44, name: 'E3-1', queueId: 44, x: 2170, y: 970 },
+        { id: 45, name: 'E3-2', queueId: 45, x: 2640, y: 970 },
+        { id: 46, name: 'E1-5', queueId: 46, x: 520, y: 1030 },
+        { id: 47, name: 'E1-6', queueId: 47, x: 990, y: 1030 },
+        { id: 48, name: 'E2-2-进', queueId: 48, x: 1420, y: 1030 },
+        { id: 49, name: 'E3-4', queueId: 49, x: 2170, y: 1030 },
+        { id: 50, name: 'E3-5', queueId: 50, x: 2640, y: 1030 },
+        // { id: 51, name: 'A2-1-进', queueId: 51, x: 520, y: 1120 },
+        { id: 52, name: 'A2-2-出', queueId: 52, x: 1620, y: 420 },
+        { id: 53, name: 'B2-1-出', queueId: 53, x: 1620, y: 518 },
+        { id: 54, name: 'B2-2-出', queueId: 54, x: 1620, y: 578 },
+        { id: 55, name: 'C2-1-出', queueId: 55, x: 1620, y: 670 },
+        { id: 56, name: 'C2-2-出', queueId: 56, x: 1620, y: 730 },
+        { id: 57, name: 'D2-1-出', queueId: 57, x: 1620, y: 820 },
+        { id: 58, name: 'D2-2-出', queueId: 58, x: 1620, y: 880 },
+        { id: 59, name: 'E2-1-出', queueId: 59, x: 1620, y: 970 },
+        { id: 60, name: 'E2-2-出', queueId: 60, x: 1620, y: 1030 }
       ],
       logId: 1000, // 添加一个日志ID计数器=
       // 输送线当前运行状态-读取PLC
@@ -4096,85 +4096,85 @@ export default {
       },
       // 预热/灭菌完成 - 配置化渲染（位置可直接在此设置）
       preheatDisinfectMarkers: [
-        // {
-        //   key: 'dis_bit0',
-        //   source: 'disinfectionCompleted',
-        //   bit: 'bit0',
-        //   label: 'YR1-1预热完成',
-        //   x: 160,
-        //   y: 170
-        // },
+        {
+          key: 'dis_bit0',
+          source: 'disinfectionCompleted',
+          bit: 'bit0',
+          label: 'YR1-1预热完成',
+          x: 310,
+          y: 470
+        },
         {
           key: 'dis_bit1',
           source: 'disinfectionCompleted',
           bit: 'bit1',
-          label: '预热完成',
-          x: 1015,
-          y: 420
+          label: 'YR1-2预热完成',
+          x: 780,
+          y: 470
         },
         {
           key: 'dis_bit2',
           source: 'disinfectionCompleted',
           bit: 'bit2',
-          label: '预热完成',
-          x: 1015,
-          y: 515
+          label: 'YR2-1预热完成',
+          x: 310,
+          y: 622
         },
         {
           key: 'dis_bit3',
           source: 'disinfectionCompleted',
           bit: 'bit3',
-          label: '预热完成',
-          x: 1015,
-          y: 567
+          label: 'YR2-2预热完成',
+          x: 780,
+          y: 622
         },
         {
           key: 'dis_bit4',
           source: 'disinfectionCompleted',
           bit: 'bit4',
-          label: '预热完成',
-          x: 1015,
-          y: 667
+          label: 'YR3-1预热完成',
+          x: 310,
+          y: 772
         },
         {
           key: 'dis_bit5',
           source: 'disinfectionCompleted',
           bit: 'bit5',
-          label: '预热完成',
-          x: 1015,
-          y: 717
+          label: 'YR3-2预热完成',
+          x: 780,
+          y: 772
         },
         {
           key: 'dis_bit6',
           source: 'disinfectionCompleted',
           bit: 'bit6',
-          label: '预热完成',
-          x: 1015,
-          y: 817
+          label: 'YR4-1预热完成',
+          x: 310,
+          y: 925
         },
         {
           key: 'dis_bit7',
           source: 'disinfectionCompleted',
           bit: 'bit7',
-          label: '预热完成',
-          x: 1015,
-          y: 872
+          label: 'YR4-2预热完成',
+          x: 780,
+          y: 925
         },
         {
           key: 'dis_bit8',
           source: 'disinfectionCompleted',
           bit: 'bit8',
-          label: '预热完成',
-          x: 1015,
-          y: 965
+          label: 'YR5-1预热完成',
+          x: 310,
+          y: 1080
         },
         {
           key: 'dis_bit9',
           source: 'disinfectionCompleted',
           bit: 'bit9',
-          label: '预热完成',
-          x: 1015,
-          y: 1020
+          label: 'YR5-2预热完成',
+          x: 780,
+          y: 1080
         },
         {
           key: 'dis_bit10',
@@ -4219,85 +4219,85 @@ export default {
       ],
       // 解析完成 - 配置化渲染（位置可直接在此设置）
       analysisMarkers: [
-        // {
-        //   key: 'ana_bit0',
-        //   source: 'analysisCompleted',
-        //   bit: 'bit0',
-        //   label: 'JX1-1解析完成',
-        //   x: 0,
-        //   y: 0
-        // },
+        {
+          key: 'ana_bit0',
+          source: 'analysisCompleted',
+          bit: 'bit0',
+          label: 'JX1-1解析完成',
+          x: 1950,
+          y: 470
+        },
         {
           key: 'ana_bit1',
           source: 'analysisCompleted',
           bit: 'bit1',
-          label: '解析完成',
-          x: 2660,
-          y: 420
+          label: 'JX1-2解析完成',
+          x: 2430,
+          y: 470
         },
         {
           key: 'ana_bit2',
           source: 'analysisCompleted',
           bit: 'bit2',
-          label: '解析完成',
-          x: 2660,
-          y: 515
+          label: 'JX2-1解析完成',
+          x: 1950,
+          y: 622
         },
         {
           key: 'ana_bit3',
           source: 'analysisCompleted',
           bit: 'bit3',
-          label: '解析完成',
-          x: 2660,
-          y: 567
+          label: 'JX2-2解析完成',
+          x: 2430,
+          y: 622
         },
         {
           key: 'ana_bit4',
           source: 'analysisCompleted',
           bit: 'bit4',
-          label: '解析完成',
-          x: 2660,
-          y: 667
+          label: 'JX3-1解析完成',
+          x: 1950,
+          y: 772
         },
         {
           key: 'ana_bit5',
           source: 'analysisCompleted',
           bit: 'bit5',
-          label: '解析完成',
-          x: 2660,
-          y: 717
+          label: 'JX3-2解析完成',
+          x: 2430,
+          y: 772
         },
         {
           key: 'ana_bit6',
           source: 'analysisCompleted',
           bit: 'bit6',
-          label: '解析完成',
-          x: 2660,
-          y: 817
+          label: 'JX4-1解析完成',
+          x: 1950,
+          y: 925
         },
         {
           key: 'ana_bit7',
           source: 'analysisCompleted',
           bit: 'bit7',
-          label: '解析完成',
-          x: 2660,
-          y: 872
+          label: 'JX4-2解析完成',
+          x: 2430,
+          y: 925
         },
         {
           key: 'ana_bit8',
           source: 'analysisCompleted',
           bit: 'bit8',
-          label: '解析完成',
-          x: 2660,
-          y: 965
+          label: 'JX5-1解析完成',
+          x: 1950,
+          y: 1080
         },
         {
           key: 'ana_bit9',
           source: 'analysisCompleted',
           bit: 'bit9',
-          label: '解析完成',
-          x: 2660,
-          y: 1020
+          label: 'JX5-2解析完成',
+          x: 2430,
+          y: 1080
         }
       ]
     };
@@ -4389,292 +4389,292 @@ export default {
         });
       });
     });
-    // ipcRenderer.on('receivedMsg', (event, values, values2) => {
-    //   // 使用位运算优化赋值
-    //   const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
+    ipcRenderer.on('receivedMsg', (event, values, values2) => {
+      // 使用位运算优化赋值
+      const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
 
-    //   // A线电机运行信号 (DBW6)
-    //   let word6 = this.convertToWord(values.DBW6);
-    //   this.aLineMotorRunning.bit0 = getBit(word6, 8);
-    //   this.aLineMotorRunning.bit1 = getBit(word6, 9);
-    //   this.aLineMotorRunning.bit2 = getBit(word6, 10);
-    //   this.aLineMotorRunning.bit3 = getBit(word6, 11);
-    //   this.aLineMotorRunning.bit4 = getBit(word6, 12);
-    //   this.aLineMotorRunning.bit5 = getBit(word6, 13);
-    //   this.aLineMotorRunning.bit6 = getBit(word6, 14);
-    //   this.aLineMotorRunning.bit7 = getBit(word6, 15);
-    //   this.aLineMotorRunning.bit8 = getBit(word6, 0);
-    //   this.aLineMotorRunning.bit9 = getBit(word6, 1);
-    //   this.aLineMotorRunning.bit10 = getBit(word6, 2);
-    //   this.aLineMotorRunning.bit11 = getBit(word6, 3);
+      // A线电机运行信号 (DBW6)
+      let word6 = this.convertToWord(values.DBW6);
+      this.aLineMotorRunning.bit0 = getBit(word6, 8);
+      this.aLineMotorRunning.bit1 = getBit(word6, 9);
+      this.aLineMotorRunning.bit2 = getBit(word6, 10);
+      this.aLineMotorRunning.bit3 = getBit(word6, 11);
+      this.aLineMotorRunning.bit4 = getBit(word6, 12);
+      this.aLineMotorRunning.bit5 = getBit(word6, 13);
+      this.aLineMotorRunning.bit6 = getBit(word6, 14);
+      this.aLineMotorRunning.bit7 = getBit(word6, 15);
+      this.aLineMotorRunning.bit8 = getBit(word6, 0);
+      this.aLineMotorRunning.bit9 = getBit(word6, 1);
+      this.aLineMotorRunning.bit10 = getBit(word6, 2);
+      this.aLineMotorRunning.bit11 = getBit(word6, 3);
 
-    //   // A线光电检测信号 (DBW8)
-    //   let word8 = this.convertToWord(values.DBW8);
-    //   this.aLinePhotoelectricSignal.bit0 = getBit(word8, 8);
-    //   this.aLinePhotoelectricSignal.bit1 = getBit(word8, 9);
-    //   this.aLinePhotoelectricSignal.bit2 = getBit(word8, 10);
-    //   this.aLinePhotoelectricSignal.bit3 = getBit(word8, 11);
-    //   this.aLinePhotoelectricSignal.bit4 = getBit(word8, 12);
-    //   this.aLinePhotoelectricSignal.bit5 = getBit(word8, 13);
-    //   this.aLinePhotoelectricSignal.bit6 = getBit(word8, 14);
-    //   this.aLinePhotoelectricSignal.bit7 = getBit(word8, 15);
-    //   this.aLinePhotoelectricSignal.bit8 = getBit(word8, 0);
-    //   this.aLinePhotoelectricSignal.bit9 = getBit(word8, 1);
-    //   this.aLinePhotoelectricSignal.bit10 = getBit(word8, 2);
-    //   this.aLinePhotoelectricSignal.bit11 = getBit(word8, 3);
-    //   this.aLinePhotoelectricSignal.bit12 = getBit(word8, 4);
-    //   this.aLinePhotoelectricSignal.bit13 = getBit(word8, 5);
-    //   this.aLinePhotoelectricSignal.bit14 = getBit(word8, 6);
-    //   this.aLinePhotoelectricSignal.bit15 = getBit(word8, 7);
+      // A线光电检测信号 (DBW8)
+      let word8 = this.convertToWord(values.DBW8);
+      this.aLinePhotoelectricSignal.bit0 = getBit(word8, 8);
+      this.aLinePhotoelectricSignal.bit1 = getBit(word8, 9);
+      this.aLinePhotoelectricSignal.bit2 = getBit(word8, 10);
+      this.aLinePhotoelectricSignal.bit3 = getBit(word8, 11);
+      this.aLinePhotoelectricSignal.bit4 = getBit(word8, 12);
+      this.aLinePhotoelectricSignal.bit5 = getBit(word8, 13);
+      this.aLinePhotoelectricSignal.bit6 = getBit(word8, 14);
+      this.aLinePhotoelectricSignal.bit7 = getBit(word8, 15);
+      this.aLinePhotoelectricSignal.bit8 = getBit(word8, 0);
+      this.aLinePhotoelectricSignal.bit9 = getBit(word8, 1);
+      this.aLinePhotoelectricSignal.bit10 = getBit(word8, 2);
+      this.aLinePhotoelectricSignal.bit11 = getBit(word8, 3);
+      this.aLinePhotoelectricSignal.bit12 = getBit(word8, 4);
+      this.aLinePhotoelectricSignal.bit13 = getBit(word8, 5);
+      this.aLinePhotoelectricSignal.bit14 = getBit(word8, 6);
+      this.aLinePhotoelectricSignal.bit15 = getBit(word8, 7);
 
-    //   // B线电机运行信号 (DBW10)
-    //   let word10 = this.convertToWord(values.DBW10);
-    //   this.bLineMotorRunning.bit0 = getBit(word10, 8);
-    //   this.bLineMotorRunning.bit1 = getBit(word10, 9);
-    //   this.bLineMotorRunning.bit2 = getBit(word10, 10);
-    //   this.bLineMotorRunning.bit3 = getBit(word10, 11);
-    //   this.bLineMotorRunning.bit4 = getBit(word10, 12);
-    //   this.bLineMotorRunning.bit5 = getBit(word10, 13);
-    //   this.bLineMotorRunning.bit6 = getBit(word10, 14);
-    //   this.bLineMotorRunning.bit7 = getBit(word10, 15);
-    //   this.bLineMotorRunning.bit8 = getBit(word10, 0);
-    //   this.bLineMotorRunning.bit9 = getBit(word10, 1);
-    //   this.bLineMotorRunning.bit10 = getBit(word10, 2);
-    //   this.bLineMotorRunning.bit11 = getBit(word10, 3);
+      // B线电机运行信号 (DBW10)
+      let word10 = this.convertToWord(values.DBW10);
+      this.bLineMotorRunning.bit0 = getBit(word10, 8);
+      this.bLineMotorRunning.bit1 = getBit(word10, 9);
+      this.bLineMotorRunning.bit2 = getBit(word10, 10);
+      this.bLineMotorRunning.bit3 = getBit(word10, 11);
+      this.bLineMotorRunning.bit4 = getBit(word10, 12);
+      this.bLineMotorRunning.bit5 = getBit(word10, 13);
+      this.bLineMotorRunning.bit6 = getBit(word10, 14);
+      this.bLineMotorRunning.bit7 = getBit(word10, 15);
+      this.bLineMotorRunning.bit8 = getBit(word10, 0);
+      this.bLineMotorRunning.bit9 = getBit(word10, 1);
+      this.bLineMotorRunning.bit10 = getBit(word10, 2);
+      this.bLineMotorRunning.bit11 = getBit(word10, 3);
 
-    //   // B线光电检测信号 (DBW12)
-    //   let word12 = this.convertToWord(values.DBW12);
-    //   this.bLinePhotoelectricSignal.bit0 = getBit(word12, 8);
-    //   this.bLinePhotoelectricSignal.bit1 = getBit(word12, 9);
-    //   this.bLinePhotoelectricSignal.bit2 = getBit(word12, 10);
-    //   this.bLinePhotoelectricSignal.bit3 = getBit(word12, 11);
-    //   this.bLinePhotoelectricSignal.bit4 = getBit(word12, 12);
-    //   this.bLinePhotoelectricSignal.bit5 = getBit(word12, 13);
-    //   this.bLinePhotoelectricSignal.bit6 = getBit(word12, 14);
-    //   this.bLinePhotoelectricSignal.bit7 = getBit(word12, 15);
-    //   this.bLinePhotoelectricSignal.bit8 = getBit(word12, 0);
-    //   this.bLinePhotoelectricSignal.bit9 = getBit(word12, 1);
-    //   this.bLinePhotoelectricSignal.bit10 = getBit(word12, 2);
-    //   this.bLinePhotoelectricSignal.bit11 = getBit(word12, 3);
-    //   this.bLinePhotoelectricSignal.bit12 = getBit(word12, 4);
-    //   this.bLinePhotoelectricSignal.bit13 = getBit(word12, 5);
-    //   this.bLinePhotoelectricSignal.bit14 = getBit(word12, 6);
-    //   this.bLinePhotoelectricSignal.bit15 = getBit(word12, 7);
+      // B线光电检测信号 (DBW12)
+      let word12 = this.convertToWord(values.DBW12);
+      this.bLinePhotoelectricSignal.bit0 = getBit(word12, 8);
+      this.bLinePhotoelectricSignal.bit1 = getBit(word12, 9);
+      this.bLinePhotoelectricSignal.bit2 = getBit(word12, 10);
+      this.bLinePhotoelectricSignal.bit3 = getBit(word12, 11);
+      this.bLinePhotoelectricSignal.bit4 = getBit(word12, 12);
+      this.bLinePhotoelectricSignal.bit5 = getBit(word12, 13);
+      this.bLinePhotoelectricSignal.bit6 = getBit(word12, 14);
+      this.bLinePhotoelectricSignal.bit7 = getBit(word12, 15);
+      this.bLinePhotoelectricSignal.bit8 = getBit(word12, 0);
+      this.bLinePhotoelectricSignal.bit9 = getBit(word12, 1);
+      this.bLinePhotoelectricSignal.bit10 = getBit(word12, 2);
+      this.bLinePhotoelectricSignal.bit11 = getBit(word12, 3);
+      this.bLinePhotoelectricSignal.bit12 = getBit(word12, 4);
+      this.bLinePhotoelectricSignal.bit13 = getBit(word12, 5);
+      this.bLinePhotoelectricSignal.bit14 = getBit(word12, 6);
+      this.bLinePhotoelectricSignal.bit15 = getBit(word12, 7);
 
-    //   // C线电机运行信号 (DBW14)
-    //   let word14 = this.convertToWord(values.DBW14);
-    //   this.cLineMotorRunning.bit0 = getBit(word14, 8);
-    //   this.cLineMotorRunning.bit1 = getBit(word14, 9);
-    //   this.cLineMotorRunning.bit2 = getBit(word14, 10);
-    //   this.cLineMotorRunning.bit3 = getBit(word14, 11);
-    //   this.cLineMotorRunning.bit4 = getBit(word14, 12);
-    //   this.cLineMotorRunning.bit5 = getBit(word14, 13);
-    //   this.cLineMotorRunning.bit6 = getBit(word14, 14);
-    //   this.cLineMotorRunning.bit7 = getBit(word14, 15);
-    //   this.cLineMotorRunning.bit8 = getBit(word14, 0);
-    //   this.cLineMotorRunning.bit9 = getBit(word14, 1);
-    //   this.cLineMotorRunning.bit10 = getBit(word14, 2);
-    //   this.cLineMotorRunning.bit11 = getBit(word14, 3);
-    //   // C线光电检测信号 (DBW16)
-    //   let word16 = this.convertToWord(values.DBW16);
-    //   this.cLinePhotoelectricSignal.bit0 = getBit(word16, 8);
-    //   this.cLinePhotoelectricSignal.bit1 = getBit(word16, 9);
-    //   this.cLinePhotoelectricSignal.bit2 = getBit(word16, 10);
-    //   this.cLinePhotoelectricSignal.bit3 = getBit(word16, 11);
-    //   this.cLinePhotoelectricSignal.bit4 = getBit(word16, 12);
-    //   this.cLinePhotoelectricSignal.bit5 = getBit(word16, 13);
-    //   this.cLinePhotoelectricSignal.bit6 = getBit(word16, 14);
-    //   this.cLinePhotoelectricSignal.bit7 = getBit(word16, 15);
-    //   this.cLinePhotoelectricSignal.bit8 = getBit(word16, 0);
-    //   this.cLinePhotoelectricSignal.bit9 = getBit(word16, 1);
-    //   this.cLinePhotoelectricSignal.bit10 = getBit(word16, 2);
-    //   this.cLinePhotoelectricSignal.bit11 = getBit(word16, 3);
-    //   this.cLinePhotoelectricSignal.bit12 = getBit(word16, 4);
-    //   this.cLinePhotoelectricSignal.bit13 = getBit(word16, 5);
-    //   this.cLinePhotoelectricSignal.bit14 = getBit(word16, 6);
-    //   this.cLinePhotoelectricSignal.bit15 = getBit(word16, 7);
-    //   // D线电机运行信号-读取PLC
-    //   let word18 = this.convertToWord(values.DBW18);
-    //   this.dLineMotorRunning.bit0 = getBit(word18, 8);
-    //   this.dLineMotorRunning.bit1 = getBit(word18, 9);
-    //   this.dLineMotorRunning.bit2 = getBit(word18, 10);
-    //   this.dLineMotorRunning.bit3 = getBit(word18, 11);
-    //   this.dLineMotorRunning.bit4 = getBit(word18, 12);
-    //   this.dLineMotorRunning.bit5 = getBit(word18, 13);
-    //   this.dLineMotorRunning.bit6 = getBit(word18, 14);
-    //   this.dLineMotorRunning.bit7 = getBit(word18, 15);
-    //   this.dLineMotorRunning.bit8 = getBit(word18, 0);
-    //   this.dLineMotorRunning.bit9 = getBit(word18, 1);
-    //   this.dLineMotorRunning.bit10 = getBit(word18, 2);
-    //   this.dLineMotorRunning.bit11 = getBit(word18, 3);
-    //   // D线光电检测信号-读取PLC
-    //   let word20 = this.convertToWord(values.DBW20);
-    //   this.dLinePhotoelectricSignal.bit1 = getBit(word20, 9);
-    //   this.dLinePhotoelectricSignal.bit2 = getBit(word20, 10);
-    //   this.dLinePhotoelectricSignal.bit3 = getBit(word20, 11);
-    //   this.dLinePhotoelectricSignal.bit4 = getBit(word20, 12);
-    //   this.dLinePhotoelectricSignal.bit5 = getBit(word20, 13);
-    //   this.dLinePhotoelectricSignal.bit6 = getBit(word20, 14);
-    //   this.dLinePhotoelectricSignal.bit7 = getBit(word20, 15);
-    //   this.dLinePhotoelectricSignal.bit8 = getBit(word20, 0);
-    //   this.dLinePhotoelectricSignal.bit9 = getBit(word20, 1);
-    //   this.dLinePhotoelectricSignal.bit10 = getBit(word20, 2);
-    //   this.dLinePhotoelectricSignal.bit11 = getBit(word20, 3);
-    //   this.dLinePhotoelectricSignal.bit12 = getBit(word20, 4);
-    //   this.dLinePhotoelectricSignal.bit13 = getBit(word20, 5);
-    //   this.dLinePhotoelectricSignal.bit14 = getBit(word20, 6);
-    //   this.dLinePhotoelectricSignal.bit15 = getBit(word20, 7);
-    //   // E线电机运行信号-读取PLC
-    //   let word22 = this.convertToWord(values.DBW22);
-    //   this.eLineMotorRunning.bit0 = getBit(word22, 8);
-    //   this.eLineMotorRunning.bit1 = getBit(word22, 9);
-    //   this.eLineMotorRunning.bit2 = getBit(word22, 10);
-    //   this.eLineMotorRunning.bit3 = getBit(word22, 11);
-    //   this.eLineMotorRunning.bit4 = getBit(word22, 12);
-    //   this.eLineMotorRunning.bit5 = getBit(word22, 13);
-    //   this.eLineMotorRunning.bit6 = getBit(word22, 14);
-    //   this.eLineMotorRunning.bit7 = getBit(word22, 15);
-    //   this.eLineMotorRunning.bit8 = getBit(word22, 0);
-    //   this.eLineMotorRunning.bit9 = getBit(word22, 1);
-    //   this.eLineMotorRunning.bit10 = getBit(word22, 2);
-    //   this.eLineMotorRunning.bit11 = getBit(word22, 3);
-    //   // E线光电检测信号-读取PLC
-    //   let word24 = this.convertToWord(values.DBW24);
-    //   this.eLinePhotoelectricSignal.bit1 = getBit(word24, 9);
-    //   this.eLinePhotoelectricSignal.bit2 = getBit(word24, 10);
-    //   this.eLinePhotoelectricSignal.bit3 = getBit(word24, 11);
-    //   this.eLinePhotoelectricSignal.bit4 = getBit(word24, 12);
-    //   this.eLinePhotoelectricSignal.bit5 = getBit(word24, 13);
-    //   this.eLinePhotoelectricSignal.bit6 = getBit(word24, 14);
-    //   this.eLinePhotoelectricSignal.bit7 = getBit(word24, 15);
-    //   this.eLinePhotoelectricSignal.bit8 = getBit(word24, 0);
-    //   this.eLinePhotoelectricSignal.bit9 = getBit(word24, 1);
-    //   this.eLinePhotoelectricSignal.bit10 = getBit(word24, 2);
-    //   this.eLinePhotoelectricSignal.bit11 = getBit(word24, 3);
-    //   this.eLinePhotoelectricSignal.bit12 = getBit(word24, 4);
-    //   this.eLinePhotoelectricSignal.bit13 = getBit(word24, 5);
-    //   this.eLinePhotoelectricSignal.bit14 = getBit(word24, 6);
-    //   this.eLinePhotoelectricSignal.bit15 = getBit(word24, 7);
+      // C线电机运行信号 (DBW14)
+      let word14 = this.convertToWord(values.DBW14);
+      this.cLineMotorRunning.bit0 = getBit(word14, 8);
+      this.cLineMotorRunning.bit1 = getBit(word14, 9);
+      this.cLineMotorRunning.bit2 = getBit(word14, 10);
+      this.cLineMotorRunning.bit3 = getBit(word14, 11);
+      this.cLineMotorRunning.bit4 = getBit(word14, 12);
+      this.cLineMotorRunning.bit5 = getBit(word14, 13);
+      this.cLineMotorRunning.bit6 = getBit(word14, 14);
+      this.cLineMotorRunning.bit7 = getBit(word14, 15);
+      this.cLineMotorRunning.bit8 = getBit(word14, 0);
+      this.cLineMotorRunning.bit9 = getBit(word14, 1);
+      this.cLineMotorRunning.bit10 = getBit(word14, 2);
+      this.cLineMotorRunning.bit11 = getBit(word14, 3);
+      // C线光电检测信号 (DBW16)
+      let word16 = this.convertToWord(values.DBW16);
+      this.cLinePhotoelectricSignal.bit0 = getBit(word16, 8);
+      this.cLinePhotoelectricSignal.bit1 = getBit(word16, 9);
+      this.cLinePhotoelectricSignal.bit2 = getBit(word16, 10);
+      this.cLinePhotoelectricSignal.bit3 = getBit(word16, 11);
+      this.cLinePhotoelectricSignal.bit4 = getBit(word16, 12);
+      this.cLinePhotoelectricSignal.bit5 = getBit(word16, 13);
+      this.cLinePhotoelectricSignal.bit6 = getBit(word16, 14);
+      this.cLinePhotoelectricSignal.bit7 = getBit(word16, 15);
+      this.cLinePhotoelectricSignal.bit8 = getBit(word16, 0);
+      this.cLinePhotoelectricSignal.bit9 = getBit(word16, 1);
+      this.cLinePhotoelectricSignal.bit10 = getBit(word16, 2);
+      this.cLinePhotoelectricSignal.bit11 = getBit(word16, 3);
+      this.cLinePhotoelectricSignal.bit12 = getBit(word16, 4);
+      this.cLinePhotoelectricSignal.bit13 = getBit(word16, 5);
+      this.cLinePhotoelectricSignal.bit14 = getBit(word16, 6);
+      this.cLinePhotoelectricSignal.bit15 = getBit(word16, 7);
+      // D线电机运行信号-读取PLC
+      let word18 = this.convertToWord(values.DBW18);
+      this.dLineMotorRunning.bit0 = getBit(word18, 8);
+      this.dLineMotorRunning.bit1 = getBit(word18, 9);
+      this.dLineMotorRunning.bit2 = getBit(word18, 10);
+      this.dLineMotorRunning.bit3 = getBit(word18, 11);
+      this.dLineMotorRunning.bit4 = getBit(word18, 12);
+      this.dLineMotorRunning.bit5 = getBit(word18, 13);
+      this.dLineMotorRunning.bit6 = getBit(word18, 14);
+      this.dLineMotorRunning.bit7 = getBit(word18, 15);
+      this.dLineMotorRunning.bit8 = getBit(word18, 0);
+      this.dLineMotorRunning.bit9 = getBit(word18, 1);
+      this.dLineMotorRunning.bit10 = getBit(word18, 2);
+      this.dLineMotorRunning.bit11 = getBit(word18, 3);
+      // D线光电检测信号-读取PLC
+      let word20 = this.convertToWord(values.DBW20);
+      this.dLinePhotoelectricSignal.bit1 = getBit(word20, 9);
+      this.dLinePhotoelectricSignal.bit2 = getBit(word20, 10);
+      this.dLinePhotoelectricSignal.bit3 = getBit(word20, 11);
+      this.dLinePhotoelectricSignal.bit4 = getBit(word20, 12);
+      this.dLinePhotoelectricSignal.bit5 = getBit(word20, 13);
+      this.dLinePhotoelectricSignal.bit6 = getBit(word20, 14);
+      this.dLinePhotoelectricSignal.bit7 = getBit(word20, 15);
+      this.dLinePhotoelectricSignal.bit8 = getBit(word20, 0);
+      this.dLinePhotoelectricSignal.bit9 = getBit(word20, 1);
+      this.dLinePhotoelectricSignal.bit10 = getBit(word20, 2);
+      this.dLinePhotoelectricSignal.bit11 = getBit(word20, 3);
+      this.dLinePhotoelectricSignal.bit12 = getBit(word20, 4);
+      this.dLinePhotoelectricSignal.bit13 = getBit(word20, 5);
+      this.dLinePhotoelectricSignal.bit14 = getBit(word20, 6);
+      this.dLinePhotoelectricSignal.bit15 = getBit(word20, 7);
+      // E线电机运行信号-读取PLC
+      let word22 = this.convertToWord(values.DBW22);
+      this.eLineMotorRunning.bit0 = getBit(word22, 8);
+      this.eLineMotorRunning.bit1 = getBit(word22, 9);
+      this.eLineMotorRunning.bit2 = getBit(word22, 10);
+      this.eLineMotorRunning.bit3 = getBit(word22, 11);
+      this.eLineMotorRunning.bit4 = getBit(word22, 12);
+      this.eLineMotorRunning.bit5 = getBit(word22, 13);
+      this.eLineMotorRunning.bit6 = getBit(word22, 14);
+      this.eLineMotorRunning.bit7 = getBit(word22, 15);
+      this.eLineMotorRunning.bit8 = getBit(word22, 0);
+      this.eLineMotorRunning.bit9 = getBit(word22, 1);
+      this.eLineMotorRunning.bit10 = getBit(word22, 2);
+      this.eLineMotorRunning.bit11 = getBit(word22, 3);
+      // E线光电检测信号-读取PLC
+      let word24 = this.convertToWord(values.DBW24);
+      this.eLinePhotoelectricSignal.bit1 = getBit(word24, 9);
+      this.eLinePhotoelectricSignal.bit2 = getBit(word24, 10);
+      this.eLinePhotoelectricSignal.bit3 = getBit(word24, 11);
+      this.eLinePhotoelectricSignal.bit4 = getBit(word24, 12);
+      this.eLinePhotoelectricSignal.bit5 = getBit(word24, 13);
+      this.eLinePhotoelectricSignal.bit6 = getBit(word24, 14);
+      this.eLinePhotoelectricSignal.bit7 = getBit(word24, 15);
+      this.eLinePhotoelectricSignal.bit8 = getBit(word24, 0);
+      this.eLinePhotoelectricSignal.bit9 = getBit(word24, 1);
+      this.eLinePhotoelectricSignal.bit10 = getBit(word24, 2);
+      this.eLinePhotoelectricSignal.bit11 = getBit(word24, 3);
+      this.eLinePhotoelectricSignal.bit12 = getBit(word24, 4);
+      this.eLinePhotoelectricSignal.bit13 = getBit(word24, 5);
+      this.eLinePhotoelectricSignal.bit14 = getBit(word24, 6);
+      this.eLinePhotoelectricSignal.bit15 = getBit(word24, 7);
 
-    //   // A线数量-读取PLC
-    //   this.aLineQuantity.a12 = Number(values.DBW28 ?? 0);
-    //   this.aLineQuantity.a13 = Number(values.DBW30 ?? 0);
-    //   this.aLineQuantity.a21in = Number(values.DBW32 ?? 0);
-    //   this.aLineQuantity.a21out = Number(values.DBW140 ?? 0);
-    //   this.aLineQuantity.a31 = Number(values.DBW34 ?? 0);
-    //   this.aLineQuantity.a32 = Number(values.DBW36 ?? 0);
-    //   this.aLineQuantity.a15 = Number(values.DBW38 ?? 0);
-    //   this.aLineQuantity.a16 = Number(values.DBW40 ?? 0);
-    //   this.aLineQuantity.a22in = Number(values.DBW42 ?? 0);
-    //   this.aLineQuantity.a22out = Number(values.DBW142 ?? 0);
-    //   this.aLineQuantity.a34 = Number(values.DBW44 ?? 0);
-    //   this.aLineQuantity.a35 = Number(values.DBW46 ?? 0);
+      // A线数量-读取PLC
+      this.aLineQuantity.a12 = Number(values.DBW28 ?? 0);
+      this.aLineQuantity.a13 = Number(values.DBW30 ?? 0);
+      this.aLineQuantity.a21in = Number(values.DBW32 ?? 0);
+      this.aLineQuantity.a21out = Number(values.DBW140 ?? 0);
+      this.aLineQuantity.a31 = Number(values.DBW34 ?? 0);
+      this.aLineQuantity.a32 = Number(values.DBW36 ?? 0);
+      this.aLineQuantity.a15 = Number(values.DBW38 ?? 0);
+      this.aLineQuantity.a16 = Number(values.DBW40 ?? 0);
+      this.aLineQuantity.a22in = Number(values.DBW42 ?? 0);
+      this.aLineQuantity.a22out = Number(values.DBW142 ?? 0);
+      this.aLineQuantity.a34 = Number(values.DBW44 ?? 0);
+      this.aLineQuantity.a35 = Number(values.DBW46 ?? 0);
 
-    //   // B线数量-读取PLC
-    //   this.bLineQuantity.b12 = Number(values.DBW48 ?? 0);
-    //   this.bLineQuantity.b13 = Number(values.DBW50 ?? 0);
-    //   this.bLineQuantity.b21in = Number(values.DBW52 ?? 0);
-    //   this.bLineQuantity.b21out = Number(values.DBW144 ?? 0);
-    //   this.bLineQuantity.b31 = Number(values.DBW54 ?? 0);
-    //   this.bLineQuantity.b32 = Number(values.DBW56 ?? 0);
-    //   this.bLineQuantity.b15 = Number(values.DBW58 ?? 0);
-    //   this.bLineQuantity.b16 = Number(values.DBW60 ?? 0);
-    //   this.bLineQuantity.b22in = Number(values.DBW62 ?? 0);
-    //   this.bLineQuantity.b22out = Number(values.DBW146 ?? 0);
-    //   this.bLineQuantity.b34 = Number(values.DBW64 ?? 0);
-    //   this.bLineQuantity.b35 = Number(values.DBW66 ?? 0);
+      // B线数量-读取PLC
+      this.bLineQuantity.b12 = Number(values.DBW48 ?? 0);
+      this.bLineQuantity.b13 = Number(values.DBW50 ?? 0);
+      this.bLineQuantity.b21in = Number(values.DBW52 ?? 0);
+      this.bLineQuantity.b21out = Number(values.DBW144 ?? 0);
+      this.bLineQuantity.b31 = Number(values.DBW54 ?? 0);
+      this.bLineQuantity.b32 = Number(values.DBW56 ?? 0);
+      this.bLineQuantity.b15 = Number(values.DBW58 ?? 0);
+      this.bLineQuantity.b16 = Number(values.DBW60 ?? 0);
+      this.bLineQuantity.b22in = Number(values.DBW62 ?? 0);
+      this.bLineQuantity.b22out = Number(values.DBW146 ?? 0);
+      this.bLineQuantity.b34 = Number(values.DBW64 ?? 0);
+      this.bLineQuantity.b35 = Number(values.DBW66 ?? 0);
 
-    //   // C线数量-读取PLC
-    //   this.cLineQuantity.c12 = Number(values.DBW68 ?? 0);
-    //   this.cLineQuantity.c13 = Number(values.DBW70 ?? 0);
-    //   this.cLineQuantity.c21in = Number(values.DBW72 ?? 0);
-    //   this.cLineQuantity.c21out = Number(values.DBW148 ?? 0);
-    //   this.cLineQuantity.c31 = Number(values.DBW74 ?? 0);
-    //   this.cLineQuantity.c32 = Number(values.DBW76 ?? 0);
-    //   this.cLineQuantity.c15 = Number(values.DBW78 ?? 0);
-    //   this.cLineQuantity.c16 = Number(values.DBW80 ?? 0);
-    //   this.cLineQuantity.c22in = Number(values.DBW82 ?? 0);
-    //   this.cLineQuantity.c22out = Number(values.DBW150 ?? 0);
-    //   this.cLineQuantity.c34 = Number(values.DBW84 ?? 0);
-    //   this.cLineQuantity.c35 = Number(values.DBW86 ?? 0);
+      // C线数量-读取PLC
+      this.cLineQuantity.c12 = Number(values.DBW68 ?? 0);
+      this.cLineQuantity.c13 = Number(values.DBW70 ?? 0);
+      this.cLineQuantity.c21in = Number(values.DBW72 ?? 0);
+      this.cLineQuantity.c21out = Number(values.DBW148 ?? 0);
+      this.cLineQuantity.c31 = Number(values.DBW74 ?? 0);
+      this.cLineQuantity.c32 = Number(values.DBW76 ?? 0);
+      this.cLineQuantity.c15 = Number(values.DBW78 ?? 0);
+      this.cLineQuantity.c16 = Number(values.DBW80 ?? 0);
+      this.cLineQuantity.c22in = Number(values.DBW82 ?? 0);
+      this.cLineQuantity.c22out = Number(values.DBW150 ?? 0);
+      this.cLineQuantity.c34 = Number(values.DBW84 ?? 0);
+      this.cLineQuantity.c35 = Number(values.DBW86 ?? 0);
 
-    //   // D线数量-读取PLC
-    //   this.dLineQuantity.d12 = Number(values.DBW88 ?? 0);
-    //   this.dLineQuantity.d13 = Number(values.DBW90 ?? 0);
-    //   this.dLineQuantity.d21in = Number(values.DBW92 ?? 0);
-    //   this.dLineQuantity.d21out = Number(values.DBW152 ?? 0);
-    //   this.dLineQuantity.d31 = Number(values.DBW94 ?? 0);
-    //   this.dLineQuantity.d32 = Number(values.DBW96 ?? 0);
-    //   this.dLineQuantity.d15 = Number(values.DBW98 ?? 0);
-    //   this.dLineQuantity.d16 = Number(values.DBW100 ?? 0);
-    //   this.dLineQuantity.d22in = Number(values.DBW102 ?? 0);
-    //   this.dLineQuantity.d22out = Number(values.DBW154 ?? 0);
-    //   this.dLineQuantity.d34 = Number(values.DBW104 ?? 0);
-    //   this.dLineQuantity.d35 = Number(values.DBW106 ?? 0);
+      // D线数量-读取PLC
+      this.dLineQuantity.d12 = Number(values.DBW88 ?? 0);
+      this.dLineQuantity.d13 = Number(values.DBW90 ?? 0);
+      this.dLineQuantity.d21in = Number(values.DBW92 ?? 0);
+      this.dLineQuantity.d21out = Number(values.DBW152 ?? 0);
+      this.dLineQuantity.d31 = Number(values.DBW94 ?? 0);
+      this.dLineQuantity.d32 = Number(values.DBW96 ?? 0);
+      this.dLineQuantity.d15 = Number(values.DBW98 ?? 0);
+      this.dLineQuantity.d16 = Number(values.DBW100 ?? 0);
+      this.dLineQuantity.d22in = Number(values.DBW102 ?? 0);
+      this.dLineQuantity.d22out = Number(values.DBW154 ?? 0);
+      this.dLineQuantity.d34 = Number(values.DBW104 ?? 0);
+      this.dLineQuantity.d35 = Number(values.DBW106 ?? 0);
 
-    //   // E线数量-读取PLC
-    //   this.eLineQuantity.e12 = Number(values.DBW108 ?? 0);
-    //   this.eLineQuantity.e13 = Number(values.DBW110 ?? 0);
-    //   this.eLineQuantity.e21in = Number(values.DBW112 ?? 0);
-    //   this.eLineQuantity.e21out = Number(values.DBW156 ?? 0);
-    //   this.eLineQuantity.e31 = Number(values.DBW114 ?? 0);
-    //   this.eLineQuantity.e32 = Number(values.DBW116 ?? 0);
-    //   this.eLineQuantity.e15 = Number(values.DBW118 ?? 0);
-    //   this.eLineQuantity.e16 = Number(values.DBW120 ?? 0);
-    //   this.eLineQuantity.e22in = Number(values.DBW122 ?? 0);
-    //   this.eLineQuantity.e22out = Number(values.DBW158 ?? 0);
-    //   this.eLineQuantity.e34 = Number(values.DBW124 ?? 0);
-    //   this.eLineQuantity.e35 = Number(values.DBW126 ?? 0);
+      // E线数量-读取PLC
+      this.eLineQuantity.e12 = Number(values.DBW108 ?? 0);
+      this.eLineQuantity.e13 = Number(values.DBW110 ?? 0);
+      this.eLineQuantity.e21in = Number(values.DBW112 ?? 0);
+      this.eLineQuantity.e21out = Number(values.DBW156 ?? 0);
+      this.eLineQuantity.e31 = Number(values.DBW114 ?? 0);
+      this.eLineQuantity.e32 = Number(values.DBW116 ?? 0);
+      this.eLineQuantity.e15 = Number(values.DBW118 ?? 0);
+      this.eLineQuantity.e16 = Number(values.DBW120 ?? 0);
+      this.eLineQuantity.e22in = Number(values.DBW122 ?? 0);
+      this.eLineQuantity.e22out = Number(values.DBW158 ?? 0);
+      this.eLineQuantity.e34 = Number(values.DBW124 ?? 0);
+      this.eLineQuantity.e35 = Number(values.DBW126 ?? 0);
 
-    //   // 上货区请求进货信号scanPhotoelectricSignal
-    //   let word128 = this.convertToWord(values.DBW128);
-    //   this.scanPhotoelectricSignal.bit0 = getBit(word128, 8);
-    //   this.scanPhotoelectricSignal.bit1 = getBit(word128, 9);
-    //   this.scanPhotoelectricSignal.bit2 = getBit(word128, 10);
-    //   this.scanPhotoelectricSignal.bit3 = getBit(word128, 11);
-    //   this.scanPhotoelectricSignal.bit4 = getBit(word128, 12);
-    //   this.scanPhotoelectricSignal.bit5 = getBit(word128, 13);
-    //   this.scanPhotoelectricSignal.bit6 = getBit(word128, 14);
-    //   this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
-    //   this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
-    //   this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
+      // 上货区请求进货信号scanPhotoelectricSignal
+      let word128 = this.convertToWord(values.DBW128);
+      this.scanPhotoelectricSignal.bit0 = getBit(word128, 8);
+      this.scanPhotoelectricSignal.bit1 = getBit(word128, 9);
+      this.scanPhotoelectricSignal.bit2 = getBit(word128, 10);
+      this.scanPhotoelectricSignal.bit3 = getBit(word128, 11);
+      this.scanPhotoelectricSignal.bit4 = getBit(word128, 12);
+      this.scanPhotoelectricSignal.bit5 = getBit(word128, 13);
+      this.scanPhotoelectricSignal.bit6 = getBit(word128, 14);
+      this.scanPhotoelectricSignal.bit7 = getBit(word128, 15);
+      this.scanPhotoelectricSignal.bit8 = getBit(word128, 0);
+      this.scanPhotoelectricSignal.bit9 = getBit(word128, 1);
 
-    //   // 预热、灭菌完成信号
-    //   let word160 = this.convertToWord(values.DBW160);
-    //   this.disinfectionCompleted.bit0 = getBit(word160, 8);
-    //   this.disinfectionCompleted.bit1 = getBit(word160, 9);
-    //   this.disinfectionCompleted.bit2 = getBit(word160, 10);
-    //   this.disinfectionCompleted.bit3 = getBit(word160, 11);
-    //   this.disinfectionCompleted.bit4 = getBit(word160, 12);
-    //   this.disinfectionCompleted.bit5 = getBit(word160, 13);
-    //   this.disinfectionCompleted.bit6 = getBit(word160, 14);
-    //   this.disinfectionCompleted.bit7 = getBit(word160, 15);
-    //   this.disinfectionCompleted.bit8 = getBit(word160, 0);
-    //   this.disinfectionCompleted.bit9 = getBit(word160, 1);
-    //   this.disinfectionCompleted.bit10 = getBit(word160, 2);
-    //   this.disinfectionCompleted.bit11 = getBit(word160, 3);
-    //   this.disinfectionCompleted.bit12 = getBit(word160, 4);
-    //   this.disinfectionCompleted.bit13 = getBit(word160, 5);
-    //   this.disinfectionCompleted.bit14 = getBit(word160, 6);
+      // 预热、灭菌完成信号
+      let word160 = this.convertToWord(values.DBW160);
+      this.disinfectionCompleted.bit0 = getBit(word160, 8);
+      this.disinfectionCompleted.bit1 = getBit(word160, 9);
+      this.disinfectionCompleted.bit2 = getBit(word160, 10);
+      this.disinfectionCompleted.bit3 = getBit(word160, 11);
+      this.disinfectionCompleted.bit4 = getBit(word160, 12);
+      this.disinfectionCompleted.bit5 = getBit(word160, 13);
+      this.disinfectionCompleted.bit6 = getBit(word160, 14);
+      this.disinfectionCompleted.bit7 = getBit(word160, 15);
+      this.disinfectionCompleted.bit8 = getBit(word160, 0);
+      this.disinfectionCompleted.bit9 = getBit(word160, 1);
+      this.disinfectionCompleted.bit10 = getBit(word160, 2);
+      this.disinfectionCompleted.bit11 = getBit(word160, 3);
+      this.disinfectionCompleted.bit12 = getBit(word160, 4);
+      this.disinfectionCompleted.bit13 = getBit(word160, 5);
+      this.disinfectionCompleted.bit14 = getBit(word160, 6);
 
-    //   // 解析完成信号
-    //   let word162 = this.convertToWord(values.DBW162);
-    //   this.analysisCompleted.bit0 = getBit(word162, 8);
-    //   this.analysisCompleted.bit1 = getBit(word162, 9);
-    //   this.analysisCompleted.bit2 = getBit(word162, 10);
-    //   this.analysisCompleted.bit3 = getBit(word162, 11);
-    //   this.analysisCompleted.bit4 = getBit(word162, 12);
-    //   this.analysisCompleted.bit5 = getBit(word162, 13);
-    //   this.analysisCompleted.bit6 = getBit(word162, 14);
-    //   this.analysisCompleted.bit7 = getBit(word162, 15);
-    //   this.analysisCompleted.bit8 = getBit(word162, 0);
-    //   this.analysisCompleted.bit9 = getBit(word162, 1);
+      // 解析完成信号
+      let word162 = this.convertToWord(values.DBW162);
+      this.analysisCompleted.bit0 = getBit(word162, 8);
+      this.analysisCompleted.bit1 = getBit(word162, 9);
+      this.analysisCompleted.bit2 = getBit(word162, 10);
+      this.analysisCompleted.bit3 = getBit(word162, 11);
+      this.analysisCompleted.bit4 = getBit(word162, 12);
+      this.analysisCompleted.bit5 = getBit(word162, 13);
+      this.analysisCompleted.bit6 = getBit(word162, 14);
+      this.analysisCompleted.bit7 = getBit(word162, 15);
+      this.analysisCompleted.bit8 = getBit(word162, 0);
+      this.analysisCompleted.bit9 = getBit(word162, 1);
 
-    //   // 灭菌前1#小车位置值
-    //   this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
-    //   // 灭菌前2#小车位置值
-    //   this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
-    // });
+      // 灭菌前1#小车位置值
+      this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
+      // 灭菌前2#小车位置值
+      this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
+    });
     // 给PLC数据加载时间
     setTimeout(() => {
       this.addLog('isDataReady数据加载完成');
