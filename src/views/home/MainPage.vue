@@ -1475,7 +1475,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.A14 }}
                       </div>
                     </div>
@@ -1505,7 +1508,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.B11 }}
                       </div>
                     </div>
@@ -1534,7 +1540,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.B14 }}
                       </div>
                     </div>
@@ -1563,7 +1572,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.C11 }}
                       </div>
                     </div>
@@ -1592,7 +1604,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.C14 }}
                       </div>
                     </div>
@@ -1621,7 +1636,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.D11 }}
                       </div>
                     </div>
@@ -1650,7 +1668,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.D14 }}
                       </div>
                     </div>
@@ -1679,7 +1700,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.E11 }}
                       </div>
                     </div>
@@ -1708,7 +1732,10 @@
                     "
                   >
                     <div class="data-panel-content">
-                      <div class="data-panel-row" style="color: #293849">
+                      <div
+                        class="data-panel-row"
+                        style="color: #293849; white-space: nowrap"
+                      >
                         需进:{{ stockRequiredInfo.E14 }}
                       </div>
                     </div>
@@ -4786,11 +4813,6 @@ export default {
         this.disinfectionRoomSelectedFrom === 'B' &&
         this.disinfectionExecuting
       ) {
-        console.log(
-          '我进来了吗？',
-          this.disinfectionRoomSelectedFrom,
-          this.disinfectionExecuting
-        );
         this.updateDisinfectionNeedAndWrite();
       }
     },
@@ -4805,11 +4827,6 @@ export default {
         this.disinfectionRoomSelectedFrom === 'B' &&
         this.disinfectionExecuting
       ) {
-        console.log(
-          '我进来了吗？',
-          this.disinfectionRoomSelectedFrom,
-          this.disinfectionExecuting
-        );
         this.updateDisinfectionNeedAndWrite();
       }
     },
@@ -5056,7 +5073,20 @@ export default {
           newVal - oldVal
         );
       }
-      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'D' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('D');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地D2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是D时才检查
       if (this.disinfectionRoomSelectedTo === 'D') {
         this.checkDestinationLimit();
       }
@@ -5074,7 +5104,20 @@ export default {
           newVal - oldVal
         );
       }
-      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'D' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('D');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地D2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是D时才检查
       if (this.disinfectionRoomSelectedTo === 'D') {
         this.checkDestinationLimit();
       }
@@ -5092,7 +5135,20 @@ export default {
           newVal - oldVal
         );
       }
-      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'E' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('E');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地E2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是E时才检查
       if (this.disinfectionRoomSelectedTo === 'E') {
         this.checkDestinationLimit();
       }
@@ -5110,7 +5166,20 @@ export default {
           newVal - oldVal
         );
       }
-      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是A时才检查
+      // 检查是否需要停止执行：如果目的地队列数量等于目标总数量
+      if (
+        this.disinfectionRoomSelectedTo === 'E' &&
+        this.disinfectionExecuting
+      ) {
+        const currentTotal = this.getSterilizeCountFor('E');
+        if (currentTotal === this.disinfectionTargetTotal) {
+          this.cancelDisinfectionRoom();
+          this.addLog(
+            `预热房到灭菌柜执行完成，目的地E2队列数量达到目标总数量${this.disinfectionTargetTotal}，已自动停止执行`
+          );
+        }
+      }
+      // 检查目的地限制 - 只有当当前选择的灭菌房目的地是E时才检查
       if (this.disinfectionRoomSelectedTo === 'E') {
         this.checkDestinationLimit();
       }
@@ -5328,7 +5397,7 @@ export default {
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
-          `灭菌柜到解析房执行完成，目的地C3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
+          `灭菌柜到解析房执行完成，目的地D3队列数量达到目标总数量${this.analysisTargetTotal}，已自动停止执行`
         );
       }
       this.checkDestinationLimit();
