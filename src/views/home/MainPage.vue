@@ -4018,6 +4018,8 @@ export default {
           { required: true, message: '请输入管理员密码', trigger: 'blur' }
         ]
       },
+      // 管理员权限通过后的单次授权标记（用于交叉灭菌到解析）
+      crossAnalysisAuthorized: false,
       // 预热到灭菌柜相关
       disinfectionRoomSelectedFrom: null, // 选择的预热房
       disinfectionRoomSelectedTo: null, // 选择的灭菌柜
@@ -5283,6 +5285,9 @@ export default {
           newVal - oldVal
         );
         const currentTotal = this.getAnalysisCountFor('A');
+        this.addLog(
+          `灭菌到解析执行中：A线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+        );
         if (currentTotal === this.analysisTargetTotal) {
           this.cancelAnalysisRoom();
           this.addLog(
@@ -5305,6 +5310,9 @@ export default {
           newVal - oldVal
         );
         const currentTotal = this.getAnalysisCountFor('B');
+        this.addLog(
+          `灭菌到解析执行中：B线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+        );
         if (currentTotal === this.analysisTargetTotal) {
           this.cancelAnalysisRoom();
           this.addLog(
@@ -5328,6 +5336,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('B');
+      this.addLog(
+        `灭菌到解析执行中：B线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5350,6 +5361,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('C');
+      this.addLog(
+        `灭菌到解析执行中：C线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5372,6 +5386,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('C');
+      this.addLog(
+        `灭菌到解析执行中：C线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5394,6 +5411,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('D');
+      this.addLog(
+        `灭菌到解析执行中：D线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5416,6 +5436,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('D');
+      this.addLog(
+        `灭菌到解析执行中：D线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5438,6 +5461,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('E');
+      this.addLog(
+        `灭菌到解析执行中：E线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5460,6 +5486,9 @@ export default {
         );
       }
       const currentTotal = this.getAnalysisCountFor('E');
+      this.addLog(
+        `灭菌到解析执行中：E线当前解析入口数量=${currentTotal}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
       if (currentTotal === this.analysisTargetTotal) {
         this.cancelAnalysisRoom();
         this.addLog(
@@ -5473,6 +5502,16 @@ export default {
     'aLineQuantity.a35'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为A线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'A') {
+          this.addLog(
+            '灭菌到解析执行中，禁止A线解析一段到二段内部移动，本次A3-4→A3-5队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止A线解析一段到二段内部移动，本次A3-4→A3-5队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         this.moveTraysWithinRoom('A', 8, 9, increaseCount);
       } else if (newVal < oldVal) {
@@ -5503,6 +5542,16 @@ export default {
     'bLineQuantity.b32'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为B线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'B') {
+          this.addLog(
+            '灭菌到解析执行中，禁止B线解析一段到二段内部移动，本次B3-1→B3-2队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止B线解析一段到二段内部移动，本次B3-1→B3-2队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // B3-1（索引13）→ B3-2（索引14）
         this.moveTraysWithinRoom('B', 13, 14, increaseCount);
@@ -5536,6 +5585,16 @@ export default {
     'bLineQuantity.b35'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为B线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'B') {
+          this.addLog(
+            '灭菌到解析执行中，禁止B线解析一段到二段内部移动，本次B3-4→B3-5队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止B线解析一段到二段内部移动，本次B3-4→B3-5队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // B3-4（索引18）→ B3-5（索引19）
         this.moveTraysWithinRoom('B', 18, 19, increaseCount);
@@ -5572,6 +5631,16 @@ export default {
     'cLineQuantity.c32'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为C线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'C') {
+          this.addLog(
+            '灭菌到解析执行中，禁止C线解析一段到二段内部移动，本次C3-1→C3-2队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止C线解析一段到二段内部移动，本次C3-1→C3-2队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // C3-1（索引23）→ C3-2（索引24）
         this.moveTraysWithinRoom('C', 23, 24, increaseCount);
@@ -5605,6 +5674,16 @@ export default {
     'cLineQuantity.c35'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析执行中，并且目的地为C线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'C') {
+          this.addLog(
+            '灭菌到解析执行中，禁止C线解析一段到二段内部移动，本次C3-4→C3-5队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止C线解析一段到二段内部移动，本次C3-4→C3-5队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // C3-4（索引28）→ C3-5（索引29）
         this.moveTraysWithinRoom('C', 28, 29, increaseCount);
@@ -5641,6 +5720,16 @@ export default {
     'dLineQuantity.d32'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为D线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'D') {
+          this.addLog(
+            '灭菌到解析执行中，禁止D线解析一段到二段内部移动，本次D3-1→D3-2队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止D线解析一段到二段内部移动，本次D3-1→D3-2队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // D3-1（索引33）→ D3-2（索引34）
         this.moveTraysWithinRoom('D', 33, 34, increaseCount);
@@ -5674,6 +5763,16 @@ export default {
     'dLineQuantity.d35'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为D线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'D') {
+          this.addLog(
+            '灭菌到解析执行中，禁止D线解析一段到二段内部移动，本次D3-4→D3-5队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止D线解析一段到二段内部移动，本次D3-4→D3-5队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // D3-4（索引38）→ D3-5（索引39）
         this.moveTraysWithinRoom('D', 38, 39, increaseCount);
@@ -5710,6 +5809,16 @@ export default {
     'eLineQuantity.e32'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为E线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'E') {
+          this.addLog(
+            '灭菌到解析执行中，禁止E线解析一段到二段内部移动，本次E3-1→E3-2队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止E线解析一段到二段内部移动，本次E3-1→E3-2队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // E3-1（索引43）→ E3-2（索引44）
         this.moveTraysWithinRoom('E', 43, 44, increaseCount);
@@ -5743,6 +5852,16 @@ export default {
     'eLineQuantity.e35'(newVal, oldVal) {
       if (!this.isDataReady) return;
       if (newVal > oldVal) {
+        // 当灭菌到解析在执行，并且目的地为E线时，不允许解析一段到解析二段内部移动
+        if (this.analysisExecuting && this.warehouseSelectedTo === 'E') {
+          this.addLog(
+            '灭菌到解析执行中，禁止E线解析一段到二段内部移动，本次E3-4→E3-5队列移动已忽略'
+          );
+          this.$message.warning(
+            '灭菌到解析执行中，禁止E线解析一段到二段内部移动，本次E3-4→E3-5队列移动已忽略'
+          );
+          return;
+        }
         const increaseCount = newVal - oldVal;
         // E3-4（索引48）→ E3-5（索引49）
         this.moveTraysWithinRoom('E', 48, 49, increaseCount);
@@ -7742,10 +7861,10 @@ export default {
           HttpUtil.post('/login/login', param)
             .then((res) => {
               if (res.data) {
-                // 登录成功，允许修改
+                // 登录成功，根据当前操作类型执行对应逻辑
 
-                // 处理无码模式切换
                 if (this.currentOperation === 'toggleNoCodeUpload') {
+                  // 处理无码模式切换
                   this.noCodeUpload = !this.noCodeUpload;
                   if (this.noCodeUpload) {
                     this.$message.success(
@@ -7762,6 +7881,22 @@ export default {
                     // 有码模式发1
                     ipcRenderer.send('writeValuesToPLC', 'DBW1040', 1);
                   }
+                } else if (this.currentOperation === 'startCrossAnalysis') {
+                  // 交叉灭菌到解析模式授权
+                  this.crossAnalysisAuthorized = true;
+                  const fromLine = this.warehouseSelectedFrom;
+                  const toLine = this.warehouseSelectedTo;
+                  this.addLog(
+                    `管理员权限验证通过，允许执行灭菌柜${fromLine}到解析房${toLine}的交叉模式任务`
+                  );
+                  this.$message.success(
+                    '管理员验证通过，已允许本次交叉灭菌到解析执行'
+                  );
+
+                  // 关闭对话框后重新调用执行方法，由于已授权，将直接执行
+                  this.$nextTick(() => {
+                    this.sendDisinfectionRoomToWarehouse();
+                  });
                 }
 
                 // 关闭对话框
@@ -7774,6 +7909,13 @@ export default {
                     '管理员账号或密码错误，无法切换无码上货模式'
                   );
                   this.addLog('管理员权限验证失败，无码上货模式切换被拒绝');
+                } else if (this.currentOperation === 'startCrossAnalysis') {
+                  this.$message.error(
+                    '管理员账号或密码错误，无法执行交叉灭菌到解析任务'
+                  );
+                  this.addLog(
+                    '管理员权限验证失败，交叉灭菌到解析任务执行被拒绝'
+                  );
                 }
               }
             })
@@ -7783,6 +7925,10 @@ export default {
               if (this.currentOperation === 'toggleNoCodeUpload') {
                 this.addLog(
                   '管理员权限验证接口调用失败，无码上货模式切换被拒绝'
+                );
+              } else if (this.currentOperation === 'startCrossAnalysis') {
+                this.addLog(
+                  '管理员权限验证接口调用失败，交叉灭菌到解析任务执行被拒绝'
                 );
               }
             })
@@ -7796,11 +7942,13 @@ export default {
     // 取消管理员密码验证
     cancelAdminPassword() {
       this.adminPasswordDialogVisible = false;
-      this.currentOperation = null;
       this.adminPasswordForm.password = '';
       if (this.currentOperation === 'toggleNoCodeUpload') {
         this.$message.info('已取消无码上货模式切换');
+      } else if (this.currentOperation === 'startCrossAnalysis') {
+        this.$message.info('已取消交叉灭菌到解析任务执行');
       }
+      this.currentOperation = null;
     },
     // 无码上货 - 直接添加托盘到队列
     addNoCodeTrayToQueue(lineLetter, witchLine) {
@@ -8200,6 +8348,48 @@ export default {
         return;
       }
 
+      const fromLine = this.warehouseSelectedFrom;
+      const toLine = this.warehouseSelectedTo;
+      const isDirect = fromLine === toLine;
+
+      // A线灭菌到解析永远只能直通（A到A），不允许任意形式的交叉
+      if (
+        (fromLine === 'A' && toLine !== 'A') ||
+        (toLine === 'A' && fromLine !== 'A')
+      ) {
+        this.$message.warning('A线灭菌到解析只能A到A，禁止与其他线交叉执行');
+        this.addLog(
+          `尝试执行灭菌柜${fromLine}到解析房${toLine}的任务被拒绝：A线只允许直通模式（A到A）`
+        );
+        return;
+      }
+
+      // 交叉模式（如B到C、C到D等）：需要管理员密码校验后才允许执行
+      if (!isDirect && !this.crossAnalysisAuthorized) {
+        this.currentOperation = 'startCrossAnalysis';
+        this.adminPasswordDialogVisible = true;
+        this.adminPasswordForm.password = '';
+
+        // 聚焦到密码输入框
+        this.$nextTick(() => {
+          if (
+            this.$refs.adminPasswordForm &&
+            this.$refs.adminPasswordForm.$el
+          ) {
+            const input = this.$refs.adminPasswordForm.$el.querySelector(
+              'input[type="password"]'
+            );
+            if (input) {
+              input.focus();
+            }
+          }
+        });
+        return;
+      }
+
+      // 单次授权用完即清空，避免后续误用
+      this.crossAnalysisAuthorized = false;
+
       // 判断起始地数量是否大于0（系统出队列数量和PLC灭菌柜出队列数量都要大于0）
       const systemQueueCount = this.getSterilizeOutCountFor(
         this.warehouseSelectedFrom
@@ -8243,7 +8433,21 @@ export default {
       const destinationQueueCount = this.getAnalysisCountFor(
         this.warehouseSelectedTo
       );
+      // 无论直通模式还是交叉模式，只要目的地解析入口队列数量不为0，都不允许执行灭菌到解析
+      if (destinationQueueCount > 0) {
+        const line = this.warehouseSelectedTo;
+        this.$message.warning(
+          `${line}解析房入口队列当前数量为${destinationQueueCount}，不允许执行灭菌到解析，请先清空目的地队列`
+        );
+        this.addLog(
+          `${line}解析房入口队列当前数量为${destinationQueueCount}，不允许执行灭菌到解析，本次指令已拒绝`
+        );
+        return;
+      }
       this.analysisTargetTotal = sourceQueueCount + destinationQueueCount;
+      this.addLog(
+        `灭菌到解析执行开始：起始灭菌出队列数量=${sourceQueueCount}，目的地当前解析入口数量=${destinationQueueCount}，目标总数量(analysisTargetTotal)=${this.analysisTargetTotal}`
+      );
 
       this.analysisRoomLoading = true;
       this.analysisExecuting = true;
