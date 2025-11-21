@@ -5780,63 +5780,63 @@ export default {
       if (!newVal) {
         this.cancelDisinfectionRoom();
       }
-    },
-    // 监听灭菌柜到解析房选择变化，自动更新需进货数量
-    warehouseSelectedFrom(newVal) {
-      if (!newVal) {
-        this.cancelAnalysisRoom();
-      }
-
-      // 检查灭菌到解析来源冲突：灭菌到解析的灭菌选择A，预热到灭菌的灭菌就不能选择A
-      if (newVal && this.disinfectionRoomSelectedTo === newVal) {
-        this.warehouseSelectedFrom = null;
-        this.addLog(
-          `灭菌房${newVal}已被选择为预热到灭菌的目的地，不能同时设置为灭菌到解析的来源，已自动取消灭菌到解析来源设置`
-        );
-        this.$message({
-          message: `⚠️ 灭菌房${newVal}已被选择为预热到灭菌的目的地，不能同时设置为灭菌到解析的来源，已自动取消灭菌到解析来源设置`,
-          type: 'warning',
-          duration: 5000,
-          showClose: true
-        });
-      }
-    },
-    // 监听灭菌房目的地选择变化
-    disinfectionRoomSelectedTo(newVal) {
-      if (!this.isDataReady) return;
-
-      // 检查预热到灭菌目的地冲突：预热到灭菌的灭菌选择A，灭菌到解析的灭菌就不能选择A
-      if (newVal && this.warehouseSelectedFrom === newVal) {
-        this.disinfectionRoomSelectedTo = null;
-        this.addLog(
-          `灭菌房${newVal}已被选择为灭菌到解析的来源，不能同时设置为预热到灭菌的目的地，已自动取消预热到灭菌目的地设置`
-        );
-        this.$message({
-          message: `⚠️ 灭菌房${newVal}已被选择为灭菌到解析的来源，不能同时设置为预热到灭菌的目的地，已自动取消预热到灭菌目的地设置`,
-          type: 'warning',
-          duration: 5000,
-          showClose: true
-        });
-      }
-    },
-    // 监听解析库目的地选择变化
-    warehouseSelectedTo(newVal) {
-      if (!this.isDataReady) return;
-
-      // 检查灭菌到解析目的地冲突：灭菌到解析的解析选择A，出库就不能选择A
-      if (newVal && this.outWarehouseSelected === newVal) {
-        this.warehouseSelectedTo = null;
-        this.addLog(
-          `解析库${newVal}已被选择为出库来源，不能同时设置为灭菌到解析的目的地，已自动取消灭菌到解析目的地设置`
-        );
-        this.$message({
-          message: `⚠️ 解析库${newVal}已被选择为出库来源，不能同时设置为灭菌到解析的目的地，已自动取消灭菌到解析目的地设置`,
-          type: 'warning',
-          duration: 5000,
-          showClose: true
-        });
-      }
     }
+    // 监听灭菌柜到解析房选择变化，自动更新需进货数量
+    // warehouseSelectedFrom(newVal) {
+    //   if (!newVal) {
+    //     this.cancelAnalysisRoom();
+    //   }
+
+    //   // 检查灭菌到解析来源冲突：灭菌到解析的灭菌选择A，预热到灭菌的灭菌就不能选择A
+    //   if (newVal && this.disinfectionRoomSelectedTo === newVal) {
+    //     this.warehouseSelectedFrom = null;
+    //     this.addLog(
+    //       `灭菌房${newVal}已被选择为预热到灭菌的目的地，不能同时设置为灭菌到解析的来源，已自动取消灭菌到解析来源设置`
+    //     );
+    //     this.$message({
+    //       message: `⚠️ 灭菌房${newVal}已被选择为预热到灭菌的目的地，不能同时设置为灭菌到解析的来源，已自动取消灭菌到解析来源设置`,
+    //       type: 'warning',
+    //       duration: 5000,
+    //       showClose: true
+    //     });
+    //   }
+    // }
+    // 监听灭菌房目的地选择变化
+    // disinfectionRoomSelectedTo(newVal) {
+    //   if (!this.isDataReady) return;
+
+    //   // 检查预热到灭菌目的地冲突：预热到灭菌的灭菌选择A，灭菌到解析的灭菌就不能选择A
+    //   if (newVal && this.warehouseSelectedFrom === newVal) {
+    //     this.disinfectionRoomSelectedTo = null;
+    //     this.addLog(
+    //       `灭菌房${newVal}已被选择为灭菌到解析的来源，不能同时设置为预热到灭菌的目的地，已自动取消预热到灭菌目的地设置`
+    //     );
+    //     this.$message({
+    //       message: `⚠️ 灭菌房${newVal}已被选择为灭菌到解析的来源，不能同时设置为预热到灭菌的目的地，已自动取消预热到灭菌目的地设置`,
+    //       type: 'warning',
+    //       duration: 5000,
+    //       showClose: true
+    //     });
+    //   }
+    // },
+    // 监听解析库目的地选择变化
+    // warehouseSelectedTo(newVal) {
+    //   if (!this.isDataReady) return;
+
+    //   // 检查灭菌到解析目的地冲突：灭菌到解析的解析选择A，出库就不能选择A
+    //   if (newVal && this.outWarehouseSelected === newVal) {
+    //     this.warehouseSelectedTo = null;
+    //     this.addLog(
+    //       `解析库${newVal}已被选择为出库来源，不能同时设置为灭菌到解析的目的地，已自动取消灭菌到解析目的地设置`
+    //     );
+    //     this.$message({
+    //       message: `⚠️ 解析库${newVal}已被选择为出库来源，不能同时设置为灭菌到解析的目的地，已自动取消灭菌到解析目的地设置`,
+    //       type: 'warning',
+    //       duration: 5000,
+    //       showClose: true
+    //     });
+    //   }
+    // }
   },
   methods: {
     // 配置化完成信号可见性判断
