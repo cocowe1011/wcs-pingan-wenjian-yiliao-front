@@ -2274,8 +2274,109 @@
                     </div>
                   </div>
                 </div>
+                <!-- 复位设置按钮 -->
+                <div class="marker-with-button" data-x="150" data-y="1750">
+                  <el-popover placement="top" width="500" trigger="click">
+                    <div>
+                      <div style="font-weight: bold; margin-bottom: 10px">
+                        预热完成复位
+                      </div>
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(4, 1fr);
+                          gap: 10px;
+                          margin-bottom: 15px;
+                        "
+                      >
+                        <button
+                          v-for="btn in resetButtonGroups.preheat"
+                          :key="btn.var"
+                          class="el-button el-button--warning el-button--mini"
+                          style="width: 100%; margin-left: 0"
+                          :class="{
+                            'button-pressed': resetButtonStates[btn.var]
+                          }"
+                          @mousedown="controlLinePress(btn.var, btn.label)"
+                          @mouseup="controlLineRelease(btn.var, btn.label)"
+                          @mouseleave="controlLineRelease(btn.var, btn.label)"
+                        >
+                          {{
+                            resetButtonStates[btn.var] ? '执行中' : btn.label
+                          }}
+                        </button>
+                      </div>
+
+                      <div style="font-weight: bold; margin-bottom: 10px">
+                        灭菌完成复位
+                      </div>
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(4, 1fr);
+                          gap: 10px;
+                          margin-bottom: 15px;
+                        "
+                      >
+                        <button
+                          v-for="btn in resetButtonGroups.sterilize"
+                          :key="btn.var"
+                          class="el-button el-button--danger el-button--mini"
+                          style="width: 100%; margin-left: 0"
+                          :class="{
+                            'button-pressed': resetButtonStates[btn.var]
+                          }"
+                          @mousedown="controlLinePress(btn.var, btn.label)"
+                          @mouseup="controlLineRelease(btn.var, btn.label)"
+                          @mouseleave="controlLineRelease(btn.var, btn.label)"
+                        >
+                          {{
+                            resetButtonStates[btn.var] ? '执行中' : btn.label
+                          }}
+                        </button>
+                      </div>
+
+                      <div style="font-weight: bold; margin-bottom: 10px">
+                        解析完成复位
+                      </div>
+                      <div
+                        style="
+                          display: grid;
+                          grid-template-columns: repeat(4, 1fr);
+                          gap: 10px;
+                          margin-bottom: 10px;
+                        "
+                      >
+                        <button
+                          v-for="btn in resetButtonGroups.aeration"
+                          :key="btn.var"
+                          class="el-button el-button--success el-button--mini"
+                          style="width: 100%; margin-left: 0"
+                          :class="{
+                            'button-pressed': resetButtonStates[btn.var]
+                          }"
+                          @mousedown="controlLinePress(btn.var, btn.label)"
+                          @mouseup="controlLineRelease(btn.var, btn.label)"
+                          @mouseleave="controlLineRelease(btn.var, btn.label)"
+                        >
+                          {{
+                            resetButtonStates[btn.var] ? '执行中' : btn.label
+                          }}
+                        </button>
+                      </div>
+                    </div>
+                    <el-button
+                      slot="reference"
+                      type="warning"
+                      size="mini"
+                      icon="el-icon-refresh"
+                    >
+                      复位设置
+                    </el-button>
+                  </el-popover>
+                </div>
                 <!-- 无码上货按钮 -->
-                <div class="marker-with-button" data-x="480" data-y="1750">
+                <div class="marker-with-button" data-x="680" data-y="1750">
                   <div style="display: flex; align-items: center">
                     <el-button
                       :type="noCodeUpload ? 'success' : 'primary'"
@@ -3179,6 +3280,555 @@ export default {
   data() {
     return {
       nowScanTrayInfo: {},
+      // 复位按钮状态
+      resetButtonStates: {},
+      // 复位按钮分组
+      resetButtonGroups: {
+        preheat: [
+          { label: '1#预热1线', var: 'DBW1058_BIT0' },
+          { label: '1#预热2线', var: 'DBW1058_BIT1' },
+          { label: '2#预热1线', var: 'DBW1058_BIT2' },
+          { label: '2#预热2线', var: 'DBW1058_BIT3' },
+          { label: '3#预热1线', var: 'DBW1058_BIT4' },
+          { label: '3#预热2线', var: 'DBW1058_BIT5' },
+          { label: '4#预热1线', var: 'DBW1058_BIT6' },
+          { label: '4#预热2线', var: 'DBW1058_BIT7' },
+          { label: '5#预热1线', var: 'DBW1058_BIT8' },
+          { label: '5#预热2线', var: 'DBW1058_BIT9' }
+        ],
+        sterilize: [
+          { label: '1#灭菌', var: 'DBW1060_BIT0' },
+          { label: '2#灭菌', var: 'DBW1060_BIT1' },
+          { label: '3#灭菌', var: 'DBW1060_BIT2' },
+          { label: '4#灭菌', var: 'DBW1060_BIT3' },
+          { label: '5#灭菌', var: 'DBW1060_BIT4' }
+        ],
+        aeration: [
+          { label: '1#解析1线', var: 'DBW1062_BIT0' },
+          { label: '1#解析2线', var: 'DBW1062_BIT1' },
+          { label: '2#解析1线', var: 'DBW1062_BIT2' },
+          { label: '2#解析2线', var: 'DBW1062_BIT3' },
+          { label: '3#解析1线', var: 'DBW1062_BIT4' },
+          { label: '3#解析2线', var: 'DBW1062_BIT5' },
+          { label: '4#解析1线', var: 'DBW1062_BIT6' },
+          { label: '4#解析2线', var: 'DBW1062_BIT7' },
+          { label: '5#解析1线', var: 'DBW1062_BIT8' },
+          { label: '5#解析2线', var: 'DBW1062_BIT9' }
+        ]
+      },
+      // 报警点位数据
+      alarmPoints: {
+        DBW490: 0,
+        DBW492: 0,
+        DBW494: 0,
+        DBW496: 0,
+        DBW498: 0,
+        DBW500: 0,
+        DBW502: 0,
+        DBW504: 0,
+        DBW506: 0,
+        DBW508: 0,
+        DBW510: 0,
+        DBW512: 0,
+        DBW514: 0,
+        DBW516: 0,
+        DBW518: 0,
+        DBW520: 0,
+        DBW522: 0,
+        DBW524: 0,
+        DBW526: 0,
+        DBW528: 0,
+        DBW530: 0,
+        DBW532: 0,
+        DBW534: 0,
+        DBW536: 0,
+        DBW538: 0,
+        DBW540: 0,
+        DBW542: 0,
+        DBW544: 0,
+        DBW546: 0,
+        DBW548: 0,
+        DBW550: 0,
+        DBW554: 0,
+        DBW556: 0,
+        DBW558: 0,
+        DBW560: 0,
+        DBW562: 0,
+        DBW564: 0,
+        DBW566: 0,
+        DBW568: 0,
+        DBW570: 0,
+        DBW572: 0,
+        DBW574: 0,
+        DBW576: 0,
+        DBW578: 0,
+        DBW580: 0,
+        DBW582: 0,
+        DBW584: 0,
+        DBW586: 0,
+        DBW588: 0,
+        DBW590: 0,
+        DBW592: 0,
+        DBW594: 0,
+        DBW596: 0,
+        DBW598: 0,
+        DBW600: 0,
+        DBW602: 0,
+        DBW604: 0,
+        DBW606: 0,
+        DBW608: 0,
+        DBW610: 0,
+        DBW612: 0,
+        DBW614: 0,
+        DBW616: 0,
+        DBW618: 0,
+        DBW620: 0,
+        DBW622: 0,
+        DBW624: 0,
+        DBW626: 0
+      },
+      // 报警点位映射表
+      alarmMapping: {
+        'DB101.DBW490': {
+          bit0: '1#预热上线故障-电机启动故障',
+          bit1: '1#预热上线故障-电机运行故障',
+          bit2: '1#预热上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW492': {
+          bit0: '1-1#预热线体故障-电机启动故障',
+          bit1: '1-1#预热线体故障-电机运行故障',
+          bit2: '1-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '1-1#预热线体故障-线体数量超限',
+          bit4: '1-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW494': {
+          bit0: '1-2#预热线体故障-电机启动故障',
+          bit1: '1-2#预热线体故障-电机运行故障',
+          bit2: '1-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '1-2#预热线体故障-线体数量超限',
+          bit4: '1-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW496': {
+          bit0: '1#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW498': {
+          bit0: '1-1#解析线体故障-电机启动故障',
+          bit1: '1-1#解析线体故障-电机运行故障',
+          bit2: '1-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '1-1#解析线体故障-线体数量超限',
+          bit4: '1-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW500': {
+          bit0: '1-2#解析线体故障-电机启动故障',
+          bit1: '1-2#解析线体故障-电机运行故障',
+          bit2: '1-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '1-2#解析线体故障-线体数量超限',
+          bit4: '1-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW502': {
+          bit0: '1-2#解析下线故障-电机启动故障',
+          bit1: '1-2#解析下线故障-电机运行故障',
+          bit2: '1-2#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW504': {
+          bit0: '2-1-1#上线故障-电机启动故障',
+          bit1: '2-1-1#上线故障-电机运行故障',
+          bit2: '2-1-1#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW506': {
+          bit0: '2-1-2#上线故障-电机启动故障',
+          bit1: '2-1-2#上线故障-电机运行故障',
+          bit2: '2-1-2#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW508': {
+          bit0: '2-1-1#预热线体故障-电机启动故障',
+          bit1: '2-1-1#预热线体故障-电机运行故障',
+          bit2: '2-1-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '2-1-1#预热线体故障-线体数量超限',
+          bit4: '2-1-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW510': {
+          bit0: '2-1-2#预热线体故障-电机启动故障',
+          bit1: '2-1-2#预热线体故障-电机运行故障',
+          bit2: '2-1-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '2-1-2#预热线体故障-线体数量超限',
+          bit4: '2-1-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW512': {
+          bit0: '2-2-1#预热线体故障-电机启动故障',
+          bit1: '2-2-1#预热线体故障-电机运行故障',
+          bit2: '2-2-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '2-2-1#预热线体故障-线体数量超限',
+          bit4: '2-2-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW514': {
+          bit0: '2-2-2#预热线体故障-电机启动故障',
+          bit1: '2-2-2#预热线体故障-电机运行故障',
+          bit2: '2-2-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '2-2-2#预热线体故障-线体数量超限',
+          bit4: '2-2-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW516': {
+          bit0: '2-1#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW518': {
+          bit0: '2-2#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW520': {
+          bit0: '2-1-1#解析线体故障-电机启动故障',
+          bit1: '2-1-1#解析线体故障-电机运行故障',
+          bit2: '2-1-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '2-1-1#解析线体故障-线体数量超限',
+          bit4: '2-1-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW522': {
+          bit0: '2-1-2#解析线体故障-电机启动故障',
+          bit1: '2-1-2#解析线体故障-电机运行故障',
+          bit2: '2-1-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '2-1-2#解析线体故障-线体数量超限',
+          bit4: '2-1-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW524': {
+          bit0: '2-2-1#解析线体故障-电机启动故障',
+          bit1: '2-2-1#解析线体故障-电机运行故障',
+          bit2: '2-2-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '2-2-1#解析线体故障-线体数量超限',
+          bit4: '2-2-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW526': {
+          bit0: '2-2-2#解析线体故障-电机启动故障',
+          bit1: '2-2-2#解析线体故障-电机运行故障',
+          bit2: '2-2-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '2-2-2#解析线体故障-线体数量超限',
+          bit4: '2-2-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW528': {
+          bit0: '2-2-1#解析下线故障-电机启动故障',
+          bit1: '2-2-1#解析下线故障-电机运行故障',
+          bit2: '2-2-1#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW530': {
+          bit0: '2-2-2#解析下线故障-电机启动故障',
+          bit1: '2-2-2#解析下线故障-电机运行故障',
+          bit2: '2-2-2#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW532': {
+          bit0: '3-1-1#上线故障-电机启动故障',
+          bit1: '3-1-1#上线故障-电机运行故障',
+          bit2: '3-1-1#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW534': {
+          bit0: '3-1-2#上线故障-电机启动故障',
+          bit1: '3-1-2#上线故障-电机运行故障',
+          bit2: '3-1-2#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW536': {
+          bit0: '3-1-1#预热线体故障-电机启动故障',
+          bit1: '3-1-1#预热线体故障-电机运行故障',
+          bit2: '3-1-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '3-1-1#预热线体故障-线体数量超限',
+          bit4: '3-1-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW538': {
+          bit0: '3-1-2#预热线体故障-电机启动故障',
+          bit1: '3-1-2#预热线体故障-电机运行故障',
+          bit2: '3-1-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '3-1-2#预热线体故障-线体数量超限',
+          bit4: '3-1-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW540': {
+          bit0: '3-2-1#预热线体故障-电机启动故障',
+          bit1: '3-2-1#预热线体故障-电机运行故障',
+          bit2: '3-2-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '3-2-1#预热线体故障-线体数量超限',
+          bit4: '3-2-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW542': {
+          bit0: '3-2-2#预热线体故障-电机启动故障',
+          bit1: '3-2-2#预热线体故障-电机运行故障',
+          bit2: '3-2-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '3-2-2#预热线体故障-线体数量超限',
+          bit4: '3-2-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW544': {
+          bit0: '3-1#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW546': {
+          bit0: '3-2#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW548': {
+          bit0: '3-1-1#解析线体故障-电机启动故障',
+          bit1: '3-1-1#解析线体故障-电机运行故障',
+          bit2: '3-1-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '3-1-1#解析线体故障-线体数量超限',
+          bit4: '3-1-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW550': {
+          bit0: '3-1-2#解析线体故障-电机启动故障',
+          bit1: '3-1-2#解析线体故障-电机运行故障',
+          bit2: '3-1-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '3-1-2#解析线体故障-线体数量超限',
+          bit4: '3-1-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW554': {
+          bit0: '3-2-1#解析线体故障-电机启动故障',
+          bit1: '3-2-1#解析线体故障-电机运行故障',
+          bit2: '3-2-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '3-2-1#解析线体故障-线体数量超限',
+          bit4: '3-2-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW556': {
+          bit0: '3-2-2#解析线体故障-电机启动故障',
+          bit1: '3-2-2#解析线体故障-电机运行故障',
+          bit2: '3-2-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '3-2-2#解析线体故障-线体数量超限',
+          bit4: '3-2-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW558': {
+          bit0: '3-2-1#解析下线故障-电机启动故障',
+          bit1: '3-2-1#解析下线故障-电机运行故障',
+          bit2: '3-2-1#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW560': {
+          bit0: '3-2-2#解析下线故障-电机启动故障',
+          bit1: '3-2-2#解析下线故障-电机运行故障',
+          bit2: '3-2-2#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW562': {
+          bit0: '4-1-1#上线故障-电机启动故障',
+          bit1: '4-1-1#上线故障-电机运行故障',
+          bit2: '4-1-1#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW564': {
+          bit0: '4-1-2#上线故障-电机启动故障',
+          bit1: '4-1-2#上线故障-电机运行故障',
+          bit2: '4-1-2#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW566': {
+          bit0: '4-1-1#预热线体故障-电机启动故障',
+          bit1: '4-1-1#预热线体故障-电机运行故障',
+          bit2: '4-1-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '4-1-1#预热线体故障-线体数量超限',
+          bit4: '4-1-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW568': {
+          bit0: '4-1-2#预热线体故障-电机启动故障',
+          bit1: '4-1-2#预热线体故障-电机运行故障',
+          bit2: '4-1-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '4-1-2#预热线体故障-线体数量超限',
+          bit4: '4-1-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW570': {
+          bit0: '4-2-1#预热线体故障-电机启动故障',
+          bit1: '4-2-1#预热线体故障-电机运行故障',
+          bit2: '4-2-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '4-2-1#预热线体故障-线体数量超限',
+          bit4: '4-2-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW572': {
+          bit0: '4-2-2#预热线体故障-电机启动故障',
+          bit1: '4-2-2#预热线体故障-电机运行故障',
+          bit2: '4-2-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '4-2-2#预热线体故障-线体数量超限',
+          bit4: '4-2-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW574': {
+          bit0: '4-1#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW576': {
+          bit0: '4-2#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW578': {
+          bit0: '4-1-1#解析线体故障-电机启动故障',
+          bit1: '4-1-1#解析线体故障-电机运行故障',
+          bit2: '4-1-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '4-1-1#解析线体故障-线体数量超限',
+          bit4: '4-1-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW580': {
+          bit0: '4-1-2#解析线体故障-电机启动故障',
+          bit1: '4-1-2#解析线体故障-电机运行故障',
+          bit2: '4-1-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '4-1-2#解析线体故障-线体数量超限',
+          bit4: '4-1-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW582': {
+          bit0: '4-2-1#解析线体故障-电机启动故障',
+          bit1: '4-2-1#解析线体故障-电机运行故障',
+          bit2: '4-2-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '4-2-1#解析线体故障-线体数量超限',
+          bit4: '4-2-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW584': {
+          bit0: '4-2-2#解析线体故障-电机启动故障',
+          bit1: '4-2-2#解析线体故障-电机运行故障',
+          bit2: '4-2-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '4-2-2#解析线体故障-线体数量超限',
+          bit4: '4-2-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW586': {
+          bit0: '4-2-1#解析下线故障-电机启动故障',
+          bit1: '4-2-1#解析下线故障-电机运行故障',
+          bit2: '4-2-1#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW588': {
+          bit0: '4-2-2#解析下线故障-电机启动故障',
+          bit1: '4-2-2#解析下线故障-电机运行故障',
+          bit2: '4-2-2#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW590': {
+          bit0: '5-1-1#上线故障-电机启动故障',
+          bit1: '5-1-1#上线故障-电机运行故障',
+          bit2: '5-1-1#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW592': {
+          bit0: '5-1-2#上线故障-电机启动故障',
+          bit1: '5-1-2#上线故障-电机运行故障',
+          bit2: '5-1-2#上线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW594': {
+          bit0: '5-1-1#预热线体故障-电机启动故障',
+          bit1: '5-1-1#预热线体故障-电机运行故障',
+          bit2: '5-1-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '5-1-1#预热线体故障-线体数量超限',
+          bit4: '5-1-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW596': {
+          bit0: '5-1-2#预热线体故障-电机启动故障',
+          bit1: '5-1-2#预热线体故障-电机运行故障',
+          bit2: '5-1-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '5-1-2#预热线体故障-线体数量超限',
+          bit4: '5-1-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW598': {
+          bit0: '5-2-1#预热线体故障-电机启动故障',
+          bit1: '5-2-1#预热线体故障-电机运行故障',
+          bit2: '5-2-1#预热线体故障-自动进出货运行超时故障',
+          bit3: '5-2-1#预热线体故障-线体数量超限',
+          bit4: '5-2-1#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW600': {
+          bit0: '5-2-2#预热线体故障-电机启动故障',
+          bit1: '5-2-2#预热线体故障-电机运行故障',
+          bit2: '5-2-2#预热线体故障-自动进出货运行超时故障',
+          bit3: '5-2-2#预热线体故障-线体数量超限',
+          bit4: '5-2-2#预热线体故障-进口翻转运行故障'
+        },
+        'DB101.DBW602': {
+          bit0: '5-1#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW604': {
+          bit0: '5-2#灭菌线体故障-数量超限'
+        },
+        'DB101.DBW606': {
+          bit0: '5-1-1#解析线体故障-电机启动故障',
+          bit1: '5-1-1#解析线体故障-电机运行故障',
+          bit2: '5-1-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '5-1-1#解析线体故障-线体数量超限',
+          bit4: '5-1-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW608': {
+          bit0: '5-1-2#解析线体故障-电机启动故障',
+          bit1: '5-1-2#解析线体故障-电机运行故障',
+          bit2: '5-1-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '5-1-2#解析线体故障-线体数量超限',
+          bit4: '5-1-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW610': {
+          bit0: '5-2-1#解析线体故障-电机启动故障',
+          bit1: '5-2-1#解析线体故障-电机运行故障',
+          bit2: '5-2-1#解析线体故障-自动进出货运行超时故障',
+          bit3: '5-2-1#解析线体故障-线体数量超限',
+          bit4: '5-2-1#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW612': {
+          bit0: '5-2-2#解析线体故障-电机启动故障',
+          bit1: '5-2-2#解析线体故障-电机运行故障',
+          bit2: '5-2-2#解析线体故障-自动进出货运行超时故障',
+          bit3: '5-2-2#解析线体故障-线体数量超限',
+          bit4: '5-2-2#解析线体故障-出口翻转运行故障'
+        },
+        'DB101.DBW614': {
+          bit0: '5-2-1#解析下线故障-电机启动故障',
+          bit1: '5-2-1#解析下线故障-电机运行故障',
+          bit2: '5-2-1#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW616': {
+          bit0: '5-2-2#解析下线故障-电机启动故障',
+          bit1: '5-2-2#解析下线故障-电机运行故障',
+          bit2: '5-2-2#解析下线故障-自动进出货运行超时故障'
+        },
+        'DB101.DBW618': {
+          bit0: '1#小车故障1-小车操作盒急停故障',
+          bit1: '1#小车故障1-小车暂停故障',
+          bit2: '1#小车故障1-小车前极限故障',
+          bit3: '1#小车故障1-小车后极限故障',
+          bit4: '1#小车故障1-小车进口安全故障',
+          bit5: '1#小车故障1-小车出口安全故障',
+          bit6: '1#小车故障1-小车1#线进货超限',
+          bit7: '1#小车故障1-小车2#线进货超限',
+          bit8: '1#小车故障1-小车接送货停靠位置异常',
+          bit9: '1#小车故障1-小车数据故障',
+          bit11: '1#小车故障1-小车行走电机抱闸启动故障',
+          bit12: '1#小车故障1-小车输送1#电机启动故障',
+          bit13: '1#小车故障1-小车输送1#电机运行超时故障',
+          bit14: '1#小车故障1-小车输送2#电机启动故障',
+          bit15: '1#小车故障1-小车输送2#电机运行超时故障'
+        },
+        'DB101.DBW620': {
+          bit0: '1#小车故障2-小车1#顶升运行故障',
+          bit1: '1#小车故障2-小车2#顶升运行故障',
+          bit2: '1#小车故障2-小车1#推盘运行故障',
+          bit3: '1#小车故障2-小车2#推盘运行故障',
+          bit4: '1#小车故障2-小车1#进口翻转运行故障',
+          bit5: '1#小车故障2-小车2#进口翻转运行故障',
+          bit6: '1#小车故障2-小车1#出口翻转运行故障',
+          bit7: '1#小车故障2-小车2#出口翻转运行故障'
+        },
+        'DB101.DBW622': {
+          bit0: '2#小车故障1-小车数据故障',
+          bit1: '2#小车故障1-小车行走电机启动故障',
+          bit2: '2#小车故障1-小车行走电机抱闸启动故障',
+          bit3: '2#小车故障1-小车输送1#电机启动故障',
+          bit4: '2#小车故障1-小车输送1#电机运行超时故障',
+          bit5: '2#小车故障1-小车输送2#电机启动故障',
+          bit6: '2#小车故障1-小车输送2#电机运行超时故障',
+          bit7: '2#小车故障1-小车前进接货停靠故障',
+          bit8: '2#小车故障1-小车前进送货停靠故障',
+          bit9: '2#小车故障1-小车后退接货停靠故障',
+          bit10: '2#小车故障1-小车后退送货停靠故障',
+          bit11: '2#小车故障1-小车暂停故障',
+          bit12: '2#小车故障1-小车前极限故障',
+          bit13: '2#小车故障1-小车后极限故障',
+          bit14: '2#小车故障1-小车进口安全故障',
+          bit15: '2#小车故障1-小车出口安全故障'
+        },
+        'DB101.DBW624': {
+          bit0: '2#小车故障2-小车1#线进货超限',
+          bit1: '2#小车故障2-小车2#线进货超限',
+          bit2: '2#小车故障2-小车接送货停靠位置异常',
+          bit3: '2#小车故障2-小车行走变频器故障',
+          bit4: '2#小车故障2-小车1#进口翻转运行故障',
+          bit5: '2#小车故障2-小车2#进口翻转运行故障',
+          bit6: '2#小车故障2-小车1#出口翻转运行故障',
+          bit7: '2#小车故障2-小车2#出口翻转运行故障'
+        },
+        'DB101.DBW626': {
+          bit0: '通讯故障 \\急停故障-与优尼科预热1-5#PUT\\GUT通讯异常',
+          bit1: '通讯故障 \\急停故障-与优尼科预热6-10#PUT\\GUT通讯异常',
+          bit2: '通讯故障 \\急停故障-与优尼科灭菌1#PUT\\GUT通讯异常',
+          bit3: '通讯故障 \\急停故障-与优尼科灭菌2#PUT\\GUT通讯异常',
+          bit4: '通讯故障 \\急停故障-与优尼科灭菌3#PUT\\GUT通讯异常',
+          bit5: '通讯故障 \\急停故障-与优尼科灭菌4#PUT\\GUT通讯异常',
+          bit6: '通讯故障 \\急停故障-与优尼科灭菌6#PUT\\GUT通讯异常',
+          bit7: '通讯故障 \\急停故障-与优尼科解析1-5#PUT\\GUT通讯异常',
+          bit8: '通讯故障 \\急停故障-与优尼科解析6-10#PUT\\GUT通讯异常',
+          bit9: '通讯故障 \\急停故障-预热上线操作台急停被按下',
+          bit10: '通讯故障 \\急停故障-1#小车操作台急停被按下',
+          bit11: '通讯故障 \\急停故障-2#小车操作台急停被按下',
+          bit12: '通讯故障 \\急停故障-解析下线操作台急停被按下'
+        }
+      },
       isDataReady: false, // 添加数据准备就绪标志位
       showTestPanel: false,
       orderQueryDialogVisible: false,
@@ -4713,6 +5363,82 @@ export default {
       this.cartPositionValues.cart1 = Number(values.DBW134 ?? 0);
       // 灭菌前2#小车位置值
       this.cartPositionValues.cart2 = Number(values.DBW136 ?? 0);
+
+      // 更新报警点位数据 - 统一使用convertToWord处理word数据
+      // 先保存旧值用于报警检查
+      const oldAlarmPoints = { ...this.alarmPoints };
+
+      this.alarmPoints.DBW490 = this.convertToWord(values.DBW490 ?? 0);
+      this.alarmPoints.DBW492 = this.convertToWord(values.DBW492 ?? 0);
+      this.alarmPoints.DBW494 = this.convertToWord(values.DBW494 ?? 0);
+      this.alarmPoints.DBW496 = this.convertToWord(values.DBW496 ?? 0);
+      this.alarmPoints.DBW498 = this.convertToWord(values.DBW498 ?? 0);
+      this.alarmPoints.DBW500 = this.convertToWord(values.DBW500 ?? 0);
+      this.alarmPoints.DBW502 = this.convertToWord(values.DBW502 ?? 0);
+      this.alarmPoints.DBW504 = this.convertToWord(values.DBW504 ?? 0);
+      this.alarmPoints.DBW506 = this.convertToWord(values.DBW506 ?? 0);
+      this.alarmPoints.DBW508 = this.convertToWord(values.DBW508 ?? 0);
+      this.alarmPoints.DBW510 = this.convertToWord(values.DBW510 ?? 0);
+      this.alarmPoints.DBW512 = this.convertToWord(values.DBW512 ?? 0);
+      this.alarmPoints.DBW514 = this.convertToWord(values.DBW514 ?? 0);
+      this.alarmPoints.DBW516 = this.convertToWord(values.DBW516 ?? 0);
+      this.alarmPoints.DBW518 = this.convertToWord(values.DBW518 ?? 0);
+      this.alarmPoints.DBW520 = this.convertToWord(values.DBW520 ?? 0);
+      this.alarmPoints.DBW522 = this.convertToWord(values.DBW522 ?? 0);
+      this.alarmPoints.DBW524 = this.convertToWord(values.DBW524 ?? 0);
+      this.alarmPoints.DBW526 = this.convertToWord(values.DBW526 ?? 0);
+      this.alarmPoints.DBW528 = this.convertToWord(values.DBW528 ?? 0);
+      this.alarmPoints.DBW530 = this.convertToWord(values.DBW530 ?? 0);
+      this.alarmPoints.DBW532 = this.convertToWord(values.DBW532 ?? 0);
+      this.alarmPoints.DBW534 = this.convertToWord(values.DBW534 ?? 0);
+      this.alarmPoints.DBW536 = this.convertToWord(values.DBW536 ?? 0);
+      this.alarmPoints.DBW538 = this.convertToWord(values.DBW538 ?? 0);
+      this.alarmPoints.DBW540 = this.convertToWord(values.DBW540 ?? 0);
+      this.alarmPoints.DBW542 = this.convertToWord(values.DBW542 ?? 0);
+      this.alarmPoints.DBW544 = this.convertToWord(values.DBW544 ?? 0);
+      this.alarmPoints.DBW546 = this.convertToWord(values.DBW546 ?? 0);
+      this.alarmPoints.DBW548 = this.convertToWord(values.DBW548 ?? 0);
+      this.alarmPoints.DBW550 = this.convertToWord(values.DBW550 ?? 0);
+      this.alarmPoints.DBW554 = this.convertToWord(values.DBW554 ?? 0);
+      this.alarmPoints.DBW556 = this.convertToWord(values.DBW556 ?? 0);
+      this.alarmPoints.DBW558 = this.convertToWord(values.DBW558 ?? 0);
+      this.alarmPoints.DBW560 = this.convertToWord(values.DBW560 ?? 0);
+      this.alarmPoints.DBW562 = this.convertToWord(values.DBW562 ?? 0);
+      this.alarmPoints.DBW564 = this.convertToWord(values.DBW564 ?? 0);
+      this.alarmPoints.DBW566 = this.convertToWord(values.DBW566 ?? 0);
+      this.alarmPoints.DBW568 = this.convertToWord(values.DBW568 ?? 0);
+      this.alarmPoints.DBW570 = this.convertToWord(values.DBW570 ?? 0);
+      this.alarmPoints.DBW572 = this.convertToWord(values.DBW572 ?? 0);
+      this.alarmPoints.DBW574 = this.convertToWord(values.DBW574 ?? 0);
+      this.alarmPoints.DBW576 = this.convertToWord(values.DBW576 ?? 0);
+      this.alarmPoints.DBW578 = this.convertToWord(values.DBW578 ?? 0);
+      this.alarmPoints.DBW580 = this.convertToWord(values.DBW580 ?? 0);
+      this.alarmPoints.DBW582 = this.convertToWord(values.DBW582 ?? 0);
+      this.alarmPoints.DBW584 = this.convertToWord(values.DBW584 ?? 0);
+      this.alarmPoints.DBW586 = this.convertToWord(values.DBW586 ?? 0);
+      this.alarmPoints.DBW588 = this.convertToWord(values.DBW588 ?? 0);
+      this.alarmPoints.DBW590 = this.convertToWord(values.DBW590 ?? 0);
+      this.alarmPoints.DBW592 = this.convertToWord(values.DBW592 ?? 0);
+      this.alarmPoints.DBW594 = this.convertToWord(values.DBW594 ?? 0);
+      this.alarmPoints.DBW596 = this.convertToWord(values.DBW596 ?? 0);
+      this.alarmPoints.DBW598 = this.convertToWord(values.DBW598 ?? 0);
+      this.alarmPoints.DBW600 = this.convertToWord(values.DBW600 ?? 0);
+      this.alarmPoints.DBW602 = this.convertToWord(values.DBW602 ?? 0);
+      this.alarmPoints.DBW604 = this.convertToWord(values.DBW604 ?? 0);
+      this.alarmPoints.DBW606 = this.convertToWord(values.DBW606 ?? 0);
+      this.alarmPoints.DBW608 = this.convertToWord(values.DBW608 ?? 0);
+      this.alarmPoints.DBW610 = this.convertToWord(values.DBW610 ?? 0);
+      this.alarmPoints.DBW612 = this.convertToWord(values.DBW612 ?? 0);
+      this.alarmPoints.DBW614 = this.convertToWord(values.DBW614 ?? 0);
+      this.alarmPoints.DBW616 = this.convertToWord(values.DBW616 ?? 0);
+      this.alarmPoints.DBW618 = this.convertToWord(values.DBW618 ?? 0);
+      this.alarmPoints.DBW620 = this.convertToWord(values.DBW620 ?? 0);
+      this.alarmPoints.DBW622 = this.convertToWord(values.DBW622 ?? 0);
+      this.alarmPoints.DBW624 = this.convertToWord(values.DBW624 ?? 0);
+      this.alarmPoints.DBW626 = this.convertToWord(values.DBW626 ?? 0);
+
+      // 手动检查报警点位变化并触发报警
+      this.checkAlarmPoints(oldAlarmPoints);
     });
     // 给PLC数据加载时间
     setTimeout(() => {
@@ -5958,6 +6684,71 @@ export default {
     // }
   },
   methods: {
+    // 按钮按下时调用（单次发送：置1）
+    controlLinePress(plcVar, actionName) {
+      if (!plcVar) return;
+
+      // 设置按钮按下状态
+      this.$set(this.resetButtonStates, plcVar, true);
+
+      this.addLog(`${actionName}按钮被按下，发送PLC值：${plcVar}=1`);
+      ipcRenderer.send('writeSingleValueToPLC', plcVar, true);
+    },
+
+    // 按钮松开时调用（单次发送：置0）
+    controlLineRelease(plcVar, actionName) {
+      if (!plcVar) return;
+
+      // 如果按钮已经是松开状态，则不重复执行
+      if (!this.resetButtonStates[plcVar]) return;
+
+      this.$set(this.resetButtonStates, plcVar, false);
+
+      this.addLog(`${actionName}按钮松开，发送PLC值：${plcVar}=0`);
+      ipcRenderer.send('writeSingleValueToPLC', plcVar, false);
+    },
+    // 检查报警点位变化并触发报警
+    checkAlarmPoints(oldAlarmPoints) {
+      if (!this.isDataReady) return;
+
+      // 使用与其它点位相同的bit处理逻辑
+      const getBit = (word, bitIndex) => ((word >> bitIndex) & 1).toString();
+
+      // 遍历所有报警点位，检查位变化
+      Object.keys(this.alarmPoints).forEach((address) => {
+        const newValue = this.alarmPoints[address];
+        const oldValue = oldAlarmPoints[address];
+
+        // 比较具体的值而不是对象引用
+        if (newValue !== oldValue) {
+          // 检查每一位的变化 (按照其他点位的bit映射规则)
+          for (let bit = 0; bit < 16; bit++) {
+            let bitIndex;
+            if (bit < 8) {
+              // bit0-bit7: 使用bitIndex=8-15
+              bitIndex = bit + 8;
+            } else {
+              // bit8-bit15: 使用bitIndex=0-7
+              bitIndex = bit - 8;
+            }
+
+            const newBit = getBit(newValue, bitIndex);
+            const oldBit = getBit(oldValue, bitIndex);
+
+            // 如果位从0变为1，触发报警
+            if (oldBit === '0' && newBit === '1') {
+              const dbAddress = `DB101.${address}`;
+              const bitKey = `bit${bitIndex}`;
+              const alarmMessage = this.alarmMapping[dbAddress]?.[bitKey];
+
+              if (alarmMessage && alarmMessage.trim() !== '') {
+                this.addLog(`报警: ${alarmMessage}`, 'alarm');
+              }
+            }
+          }
+        }
+      });
+    },
     // 配置化完成信号可见性判断
     getMarkerVisible(marker) {
       const sourceName = marker && marker.source;
@@ -10947,5 +11738,9 @@ export default {
       }
     }
   }
+}
+.button-pressed {
+  opacity: 0.7;
+  transform: scale(0.95);
 }
 </style>
